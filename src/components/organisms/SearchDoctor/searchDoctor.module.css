@@ -1,0 +1,22 @@
+.input_form_control1 fieldset,
+.input_form_control2 fieldset {
+  border-color: transparent !important;
+}
+.input_form_control1 fieldset:hover,
+.input_form_control1 fieldset:active,
+.input_form_control1 fieldset:focus {
+  border-color: transparent !important;
+}
+.input_form_control1 fieldset {
+  border-width: 0 1px 0 0 !important;
+  border-color: #dadce0 !important;
+  border-radius: 0px;
+}
+@media screen and (max-width: 500px) {
+  .container_location_input {
+    padding: 0 !important;
+  }
+  .container_location_input fieldset {
+    border-width: 0 0px 1px 0 !important;
+  }
+}

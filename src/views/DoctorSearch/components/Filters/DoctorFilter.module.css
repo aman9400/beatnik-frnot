@@ -1,0 +1,45 @@
+.doctor_filterBox {
+    position: relative;
+}
+.doctor_filterBox label span{
+    font-size:13px !important;
+    font-weight: 600 !important;
+    color: var(--sub-heading-color) !important;
+}
+.doctor_filterBox{
+    box-shadow: none !important;
+    background: #fff !important;
+    border-radius: 5px !important;
+    border: var(--border) !important;
+    margin-bottom: 10px !important;
+}
+.doctor_filte_list {
+    position: relative;
+    padding:0 20px 20px ;
+}
+.doctor_filte_list label {
+    margin-bottom: 5px;
+}
+.doctor_card_detail h5{
+    font-size:20px;
+    font-weight: 700;
+}
+.doctor_filte_Title {
+    border-left: var(--border);
+    padding: 5px 0px 5px 10px;
+    border-bottom: var(--border);
+    border-radius: 0 0 0px 0px;
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    color: var(--heading-color) !important;
+}
+.doctor_check_bx {
+    padding: 0px !important;
+}
+.doctor_multi_select .dropdown-heading{
+   width:340px !important;
+}
+.doctor_check_bx svg {
+    width:.8em !important;
+    height:.8em !important;
+}

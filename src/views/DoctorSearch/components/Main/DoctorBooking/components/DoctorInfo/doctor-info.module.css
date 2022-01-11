@@ -1,0 +1,167 @@
+.appoint_for {
+  position: relative;
+  display: flex;
+  padding: 10px 20px;
+  border-bottom: var(--border);
+}
+.doctor_details{
+    position: relative;
+    padding: 20px 20px;
+    border-bottom: var(--border);
+}
+.appoint_for h5 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--heading-color);
+  line-height: 35px;
+}
+
+.appoint_for img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: #ff000026;
+  padding: 8px;
+  margin-right: 15px;
+}
+.appoint_doctor_for {
+  position: relative;
+  padding: 10px 20px;
+  border-bottom: var(--border);
+}
+.date_time_book {
+  display: flex;
+  justify-content: space-between;
+}
+.appoint_date,
+.appoint_time {
+  position: relative;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--sub-heading-color);
+}
+.appoint_date b,
+.appoint_time b {
+  color: var(--heading-color);
+}
+.appoint_date svg,
+.appoint_time svg {
+  fill: var(--theme-color);
+  width: 0.7em;
+  height: 0.7em;
+  margin-right: 10px;
+  position: relative;
+  top: 3px;
+}
+.changes_date a {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--sub-heading-color);
+  margin: 6px 0;
+  display: block;
+}
+.changes_date a:hover {
+  color: var(--theme-color);
+}
+.doctor_card_header {
+    position: relative;
+    display: flex;
+}
+.doctor_card_avatar {
+    width:30%;
+    margin-right: 15px;
+}
+.doctor_avatar {
+    width: 125px;
+    border: var(--border);
+    height: 130px;
+    border-radius: 10px !important;
+}
+.doctor_name {
+    position: relative;
+    padding:0px !important;
+}
+.doctor_name span {
+    font-size:18px;
+    font-weight: 600;
+    color: var(--heading-color);
+}
+.doctor_specialization img {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    padding: 1.5px;
+    border: 1px solid #efefef;
+    margin-right: 10px;
+    background: #fff;
+    -webkit-box-shadow: 0 1px 4px hsl(0deg 0% 0% / 9%), 0 3px 8px hsl(0deg 0% 0% / 9%), 0 4px 13px hsl(0deg 0% 0% / 13%);
+    box-shadow: 0 1px 4px hsl(0deg 0% 0% / 9%), 0 3px 8px hsl(0deg 0% 0% / 9%), 0 4px 13px hsl(0deg 0% 0% / 13%);
+}
+.doctor_specialization{
+    display: flex;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--theme-color);
+    margin: 5px 0px;
+    align-items: center;
+}
+.doctor_expriance{
+    font-size: 13px;
+    font-weight: 500;
+    color: #00abdf;
+    line-height: 25px;
+}
+.section_1 p {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--heading-color);
+    margin-bottom: 10px;
+}
+.pdf_proggress {
+    display: flex;
+    font-size: 13px;
+    color: #2d2d32;
+    font-weight: 500;
+    line-height: 22px;
+    justify-content: space-between;
+}
+.pdf_proggress div{
+    display: flex;
+    font-size: 13px;
+    color: var(--sub-heading-color);
+    font-weight: 600;
+    line-height: 22px;
+    margin-top: 15px;
+}
+.pdf_proggress div p {
+    line-height: 15px;
+    margin-left: 10px;
+}
+.doctor_details_address {
+    position: relative;
+    padding: 20px 20px;
+}
+.pdf_proggress label {
+    font-size: 15px;
+}
+.direction {
+    display: flex;
+    font-size: 15px;
+    color: #2d2d32;
+    font-weight: 500;
+    line-height: 22px;
+}
+.direction svg{
+    width: 15px;
+    margin-top: -4px;
+    fill: var(--theme-color);
+}
+.direction p {
+    color: #ff2301;
+}
+.doctor_details_address .doctor_card_header {
+    display: block;
+}
+.direction a {
+    display: flex;
+}

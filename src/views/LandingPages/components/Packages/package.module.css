@@ -1,0 +1,94 @@
+.packages_container_first {
+    position: relative;
+    display: block !important;
+}
+.packages_container_second{
+    position: relative;
+}
+.packages_container_third {
+    position: relative;
+}
+
+.packages_cut_price_tag {
+    text-decoration: line-through;
+    color: var(--sub-heading-color);
+    font-size: 12px !important;
+    margin-right: 10px;
+}
+.packages_original_tag {
+    color: var(--heading-color);
+    font-size: 15px !important;
+}
+.packages_save {
+    font-size: 15px !important;
+    color: var(--theme-color);
+    font-weight: 600;
+}
+.packages_billed {
+    color: #414141;
+    margin-bottom: 15px;
+}
+.packages_buy_plan {
+    background: var(--theme-color) !important;
+    color: #fff !important;
+}
+.packages_span {
+    width: 40px;
+    height: 40px;
+    background: #fce8e6;
+    border-radius: 50%;
+    display: block;
+    padding: 8px;
+    text-align: center;
+    margin: 0 auto;
+}
+.packages_span svg {
+    fill: var(--theme-color) !important;
+}
+.packages_section {
+    position: relative;
+}
+.packages_mainTitle {
+    position: relative;
+    z-index: 99;
+}
+.packages_mainTitle h3 {
+    color: var(--heading-color);
+    font-size: 32px !important;
+    font-weight: 700 !important;
+    
+}
+.packages_section_bg{
+    position: absolute;
+    top: -44px;
+    left: -66px;
+    width: 120%;
+    height: 260px;
+    background-image: url(./Images/package_bg.jpg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+.packages_table_paper{
+    border-radius: 15px !important;
+    box-shadow: 0 2px 14px 0 rgb(0 0 0 / 12%) !important;
+    border-top: 6px solid var(--theme-color);
+    padding:20px 20px 20px 20px;
+    position: relative;
+    background: #fff;
+    overflow: hidden !important;
+}
+.packages_table_paper th, .packages_table_paper td {
+    border: 1px solid #ebf5ea75;
+    width:250px;
+}
+.packages_table_title {
+    color:var(--heading-color) !important;
+    font-weight: 600 !important;
+    font-size: 20px !important;
+}
+.subtitle {
+    color: var(--inner-heading);
+    font-weight: 500 !important;
+    font-size: 15px !important;
+    margin-bottom: 30px !important;
+}

@@ -1,0 +1,16 @@
+.card_main {
+    border:var(--border);
+    box-shadow: var(--bs-lg);
+    background:#fff;
+    border-radius:10px;
+    overflow:hidden;
+}
+.cardProduct {
+    position: relative;
+    padding: 25px;
+    width:auto !important;
+    height:auto !important;
+    box-shadow: none !important;
+    margin: auto !important;
+    text-align: center !important;
+}

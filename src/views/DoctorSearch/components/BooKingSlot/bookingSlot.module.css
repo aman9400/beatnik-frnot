@@ -1,0 +1,455 @@
+.wrapper {
+  margin: 20px 10px;
+}
+
+.wrapper .box {
+  padding: 15px !important;
+  background: var(--white) !important;
+  border-radius: 5px!important;
+  border: var(--border) !important;
+}
+
+.box .section-1 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.box .hr {
+  width: 100px;
+}
+
+.box .hr {
+  border-top: 1px solid #ff23010d;
+  border-radius: 5px;
+  width: 100%;
+  margin: 3px 0;
+}
+
+.box .pdfs {
+  position: relative;
+}
+
+.box .pdfs div {
+  display: flex;
+  font-size: 13px;
+  color: var(--height-color);
+  font-weight: 500;
+  line-height: 22px;
+}
+
+.box .pdfs div p.cv {
+  margin-right: 214px;
+}
+
+.section_1 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.p_1 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--height-color);
+}
+
+.pdf_proggress {
+  margin-top: 5px;
+}
+
+.pdf_proggress label {
+  font-size: 14px;
+}
+
+.pdf_proggress p {
+  color: var(--sub-heading-color);
+  margin-left: 5px;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.pdf_proggress {
+  display: flex;
+  justify-content: space-between;
+}
+
+.direction svg {
+  width: 15px;
+  margin-top: -4px;
+  fill: var(--theme-color);
+}
+
+.direction p {
+  color: var(--theme-color);
+}
+
+.check_box {
+  cursor: pointer;
+}
+.quiz_card_area {
+  position: relative;
+}
+.single_quiz_card {
+  border: var(--border);
+  background: #fff;
+  border-radius: 10px;
+  padding:5px;
+  transition: all 0.3s linear;
+  overflow: hidden;
+}
+.quiz_card_title {
+    padding: 4px;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    border-bottom: var(--border);
+}
+.quiz_card_title h3 i {
+  margin-right: 10px;
+}
+.quiz_card_title h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--sub-heading-color);
+  margin-bottom: 0;
+  transition: all 0.3s linear;
+}
+.quiz_card_title h3 i {
+  opacity: 0;
+}
+.quiz_card_icon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.quiz_icon {
+  position: relative;
+  transition: all 0.3s linear;
+}
+.quiz_icon b {
+  font-size: 14px;
+  line-height: 30px;
+}
+.quiz_checkbox:checked ~ .single_quiz_card .quiz_card_content .quiz_card_icon .quiz_icon b   {
+  color: var(--white);
+}
+.quiz_checkbox:checked ~ .single_quiz_card .quiz_card_content .quiz_card_icon .time_selector {
+  background:var(--white);
+}
+.time_selector {
+  border: var(--border);
+  padding: 4px;
+  font-size: 11px;
+  border-radius: 5px;
+  color: var(--height-color);
+  font-weight: 600;
+  margin-top: 5px;
+}
+.quiz_checkbox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  cursor: pointer;
+}
+.quiz_checkbox:checked ~ .single_quiz_card {
+  border: 1px solid hsl(0deg 97% 73%);
+  background:hsl(0deg 97% 73%);
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 20%), 0 2px 10px 0 rgb(0 0 0 / 10%) !important;
+}
+.quiz_checkbox:checked:hover ~ .single_quiz_card {
+  border: 1px solid hsl(0deg 97% 73%);
+  background:hsl(0deg 97% 73%);
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 20%), 0 2px 10px 0 rgb(0 0 0 / 10%) !important;
+}
+
+.quiz_checkbox:checked ~ .single_quiz_card .quiz_card_content .quiz_card_title {
+  color: #ffffff;
+}
+.quiz_checkbox:checked
+  ~ .single_quiz_card
+  .quiz_card_content
+  .quiz_card_title
+  h3 {
+  color: #ffffff;
+}
+.quiz_checkbox:checked
+  ~ .single_quiz_card
+  .quiz_card_content
+  .quiz_card_title
+  h3
+  i {
+  opacity: 1;
+}
+.quiz_checkbox:checked:hover ~ .quiz_card_title {
+  border: 1px solid #2575fc;
+}
+
+.shift_indecation > span {
+  border: var(--border);
+  padding: 2px;
+  border-radius: 5px;
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+.shift_indecation > span > i {
+  position: relative;
+  font-size: 12px;
+  display: block;
+  color: var(--white);
+}
+.carousel_container ul {
+  display: inline-flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.doctor_inner {
+  position: relative !important;
+  box-shadow: none !important;
+  padding: 8px !important;
+  border: var(--border) !important;
+  background: var(--white) !important;
+  margin: 0 10px !important;
+  border-radius: 5px !important;
+}
+.doctor_inner .MuiPaper-rounded {
+  box-shadow: none !important;
+}
+.available_data_style {
+  position: relative;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  text-align: center;
+  color: var(--height-color);
+}
+.available_available_slot p b {
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  text-align: center;
+  color: #3e9238;
+}
+.doctor_inner .content {
+  padding: 0;
+}
+.tab_scroll_bar {
+  position: relative;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+.doctor_specialization img {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  padding: 1.5px;
+  border: var(--border);
+  margin-right: 10px;
+  background: #fff;
+  box-shadow: var(--bs-md);
+}
+.content_tabs .content {
+  display: none;
+}
+.bloc_tabs {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+.box .hr {
+  border-top: 1px solid #ff23010d;
+  border-radius: 5px;
+  width: 100%;
+  margin: 3px 0;
+}
+
+.box .pdfs {
+  position: relative;
+}
+
+.box .pdfs div {
+  display: flex;
+  font-size: 13px;
+  color: #2d2d32;
+  font-weight: 500;
+  line-height: 22px;
+}
+
+
+
+
+.direction p {
+  color: #ff2301;
+}
+
+.check_box {
+  cursor: pointer;
+}
+.quiz_card_area {
+  position: relative;
+}
+.single_quiz_card {
+  border: var(--border);
+  background: var(--white);
+  border-radius: 10px;
+  padding: 5px;
+  transition: all 0.3s linear;
+  overflow: hidden;
+}
+.quiz_card_title {
+  padding: 4px;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  border-bottom: var(--border);
+}
+.quiz_card_title h3 i {
+  margin-right: 10px;
+}
+.quiz_card_title h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 0;
+  transition: all 0.3s linear;
+}
+.quiz_card_title h3 i {
+  opacity: 0;
+}
+.quiz_card_icon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.quiz_icon {
+  position: relative;
+  transition: all 0.3s linear;
+}
+.quiz_icon b {
+  font-size: 14px;
+  line-height: 30px;
+}
+.quiz_checkbox:checked
+  ~ .single_quiz_card
+  .quiz_card_content
+  .quiz_card_icon
+  .quiz_icon
+  b {
+  color: var(--white);
+}
+.quiz_checkbox:checked
+  ~ .single_quiz_card
+  .quiz_card_content
+  .quiz_card_icon
+  .time_selector {
+  background:  var(--white);
+}
+.time_selector {
+  border: var(--border);
+  padding: 4px;
+  font-size: 11px;
+  border-radius: 5px;
+  color: #4c4c4c;
+  font-weight: 600;
+  margin-top: 5px;
+}
+.quiz_checkbox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  cursor: pointer;
+}
+.quiz_checkbox:checked ~ .single_quiz_card {
+  border: 1px solid hsl(0deg 97% 73%);
+  background: hsl(0deg 97% 73%);
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 20%), 0 2px 10px 0 rgb(0 0 0 / 10%) !important;
+}
+.quiz_checkbox:checked:hover ~ .single_quiz_card {
+  border: 1px solid hsl(0deg 97% 73%);
+  background: hsl(0deg 97% 73%);
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 20%), 0 2px 10px 0 rgb(0 0 0 / 10%) !important;
+}
+
+.quiz_checkbox:checked ~ .single_quiz_card .quiz_card_content .quiz_card_title {
+  color: #ffffff;
+}
+.quiz_checkbox:checked
+  ~ .single_quiz_card
+  .quiz_card_content
+  .quiz_card_title
+  h3 {
+  color: #ffffff;
+}
+.quiz_checkbox:checked
+  ~ .single_quiz_card
+  .quiz_card_content
+  .quiz_card_title
+  h3
+  i {
+  opacity: 1;
+}
+.quiz_checkbox:checked:hover ~ .quiz_card_title {
+  border: 1px solid #2575fc;
+}
+
+.shift_indecation > span {
+  border: 1.5px solid #dbdbdb;
+  padding: 2px;
+  border-radius: 5px;
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+.shift_indecation > span > i {
+  position: relative;
+  font-size: 12px;
+  display: block;
+  color: #fff;
+}
+.conultation_heading {
+  margin-top: 20px;
+  border-top: 1.5px dashed #f5d0cb;
+  padding-top: 12px;
+}
+.conultation_heading h4 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+.consultation_content_part {
+  position: relative;
+  padding: 10px 0;
+}
+.content_part {
+  position: relative;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+.tab_scroll_bar svg {
+  fill: red;
+}
+.doctor_inner.selected {
+  background-color: red;
+}
+.content {
+  padding: 0 !important;
+}
+.close {
+  position: relative;
+  top: -5px;
+  display: grid;
+}
+.close  svg {
+  fill:lightgrey;
+}

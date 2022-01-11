@@ -1,0 +1,70 @@
+.banner_container {
+  position: relative;
+  display: block;
+  height: 400px;
+  background:#fff;
+}
+.video_consult_banner {
+  background-image: url(../Images/video-consult.jpg);
+  background-size: 100% ;
+    background-repeat: no-repeat;
+    transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+.video_consult_inner {
+  padding: 0 0 0 0 !important;
+}
+.video_title {
+  color: var(--heading-color);
+  font-size: 32px;
+  font-weight: 700;
+}
+.inner_heading {
+  color: var(--heading-color);
+  font-size: 32px;
+  font-weight: 700;
+}
+.avatar_badge {
+  position: relative;
+  border-radius: 50%;
+}
+
+.badge_imfo_container {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+}
+.badge_imfo_container p {
+  color: var(--heading-color);
+  font-size: 15px;
+  font-weight: 600;
+  margin-left: 10px;
+}
+.consult_now {
+  margin-top: 15px !important;
+  color: var(--white) !important;
+  background-color: var(--theme-color) !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  box-shadow: var(--bs-lg);
+}
+.video_consult_inner section {
+    padding: 35px 80px !important;
+}
+.video_consult_inner .facility {
+    font-size: 14px !important;
+    font-weight: 500;
+    color: var(--heading-color);
+    margin-top: 20px;
+}
+.video_consult_inner .facility svg {
+    fill: var(--theme-color);
+    width:.7em !important;
+    height: .7em !important;
+    position: relative;
+    top: 3px;
+    margin-left: 10px;
+}

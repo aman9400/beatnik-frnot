@@ -1,0 +1,141 @@
+.doctor_over_view_data {
+  position: relative;
+  z-index: 1;
+}
+
+.doctor_over_view_data:after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  height: 100%;
+  width: 2px;
+  left: 4.1%;
+  top: 0;
+  margin-left: -1px;
+  border: 1px dashed #2d3748;
+}
+
+.time_line_item {
+  position: relative;
+  display: block;
+  align-items: center;
+  margin-bottom: 40px;
+  transition: opacity 0.5s;
+}
+
+.time_line_date_wrap {
+  position: relative;
+}
+
+.doc_hexagon {
+  opacity: 1;
+  position: absolute;
+  z-index: 0;
+  left: 3px;
+  top: 5px;
+  height: 40px;
+  width: 40px;
+  background: #fff;
+  border-radius: 50%;
+  transition: opacity 0.8s;
+  box-shadow: 0 1px 2px hsla(0, 0%, 0%, 0.05), 0 1px 4px hsla(0, 0%, 0%, 0.05),
+    0 2px 8px hsla(0, 0%, 0%, 0.05);
+  border: 1px solid rgb(245, 245, 245);
+}
+
+.doc_hexagon img {
+  width: 23px;
+  object-fit: cover;
+  margin: 6px 6px 6px 7px;
+}
+
+.doc_hexagon:nth-child(2) {
+  top: 66px;
+  position: absolute;
+  z-index: -1;
+  width: 30px;
+  height: 30px;
+  left: 5px;
+}
+
+.time_line_content {
+  opacity: 1;
+  transform: translateX(0);
+  position: relative;
+  z-index: 1;
+  padding: 20px;
+  width: 88%;
+  box-shadow: 7px 5px 30px 0 rgb(72 73 121 / 15%);
+  border-radius: 10px;
+  background: #fff;
+  overflow: hidden;
+  transition: 0.4s;
+  margin-left: 65px;
+}
+
+.time_line_content .doctor_avatar {
+  width: 100px !important;
+  height: 100px !important;
+  border-radius: 10px !important;
+}
+
+.time_line_content .doctor_card_avatar {
+  margin-right: 15px !important;
+}
+
+.time_line_content .doctor_specialization img {
+  margin-right: 5px;
+
+  height: 20px;
+}
+
+.time_line_content .doctor_specialization {
+  margin-bottom: 5px !important;
+}
+
+.time_line_content .doctor_name span {
+  font-size: 18px !important;
+  margin-bottom: 10px !important;
+}
+
+.doctor_card_header {
+  display: flex;
+}
+
+.doctor_card_detail {
+  width: 100%;
+}
+
+.doctor_name {
+  padding: 0 !important;
+}
+
+.doctor_expriance {
+  font-size: 13px;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.doctor_name span {
+  font-size: 22px;
+  font-weight: 600;
+  color: #000;
+}
+
+.doctor_specialization {
+  display: flex;
+  font-size: 13px;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.doctor_specialization .doctor_para {
+  font-size: 13px;
+  font-weight: 600;
+  color: #ef423c;
+}
+
+.doctor_specialization div svg {
+  width: 0.6em;
+  height: 0.6em;
+}

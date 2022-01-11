@@ -1,0 +1,41 @@
+.download_container {
+    position: relative;
+}
+.download_img_holder img{
+    width: 100%;
+    height: auto;
+}
+.download_title {
+    font-size:30px;
+    color:#fff;
+    font-weight:700 !important;
+}
+.download_para {
+    color:#fff;
+    font-weight: 500 !important;
+}
+.download_down_info b{
+color:#fff;
+}
+.download_down_input label, .download_down_input input{
+color:#fff;
+}
+.download_title{
+    color: var(--heading-color);
+    font-size: 32px !important;
+    font-weight: 700 !important;
+}
+.download_sub_title {
+    color: var(--inner-heading);
+    font-weight: 500 !important;
+    font-size: 15px !important;
+    margin-bottom: 30px !important;
+}
+.download_btn{
+    background: var(--theme-color) !important;
+    color: var(--white) !important;
+}
+.download_btn:hover{
+    background: var(--theme-color) !important;
+    color: var(--white) !important;
+}

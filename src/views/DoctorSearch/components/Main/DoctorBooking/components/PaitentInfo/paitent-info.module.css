@@ -1,0 +1,64 @@
+.patient_info {
+  position: relative;
+  display: grid;
+  padding: 12px 20px;
+}
+
+.patient_info_data {
+  margin-bottom: 5px !important;
+}
+
+.patient_info_data label {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: var(--inner-heading) !important;
+  line-height: 30px !important;
+}
+
+.patient_info_data p {
+  font-size: 13px;
+  color: var(--sub-heading-color);
+}
+
+.patient_info_data label span {
+  font-size: 13px;
+  color: var(--inner-heading);
+}
+.view_history {
+  background: var(--theme-color) !important;
+  width: 80px;
+  font-size: 13px !important;
+  color: var(--white) !important;
+  font-weight: 600 !important;
+}
+.root_patient_info_data {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+}
+.root_patient_info_data button {
+  padding:0px !important;
+}
+.appoinment_for span{
+  position: relative;
+  padding: 0 0 0 10px!important;
+  display: block !important;
+}
+.appoinment_for span svg {
+  width:.7em !important;
+  height:.7em !important;
+}
+.upload_data {
+  position: relative;
+}
+.upload_data span{
+  position: absolute;
+  color: #fff !important;
+  padding: 15px 30px;
+  font-size: 14px;
+  font-weight: 600;
+  top: -26px;
+  width: 88px !important;
+  line-height: 50px;
+
+}
