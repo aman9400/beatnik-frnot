@@ -29,6 +29,7 @@ const WorkingProcess = props => {
                   noWrap: false,
                 }}
                 // Style None
+                // Latest
                 className={styles.descriptionCta}
                 data-aos="fade-up"
               />
