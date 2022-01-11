@@ -10,32 +10,32 @@ const Hero = props => {
     {
       title: 'Find Doctor',
       content: 'Choose best doctor of your choice in your locality',
-      img: process.env.NEXT_PUBLIC_BASE_URL + '/assets/images/finddoctor.png',
+      img: process.env.NEXT_PUBLIC_BASE_URL + '/assets/Images/finddoctor.png',
       pathHref: '/find-doctor',
     },
     {
       title: 'Video Consultation',
       content: 'Join pain arthitis',
-      img: process.env.NEXT_PUBLIC_BASE_URL + '/assets/images/instant.png',
+      img: process.env.NEXT_PUBLIC_BASE_URL + '/assets/Images/instant.png',
       pathHref: '/video-consultation',
     },
     {
       title: 'In-Clinic Consultation',
       content: 'Head Aaches, Migrane',
-      img: process.env.NEXT_PUBLIC_BASE_URL + '/assets/images/consultation.png',
+      img: process.env.NEXT_PUBLIC_BASE_URL + '/assets/Images/consultation.png',
       pathHref: '/clinic-consultation',
     },
     {
       title: 'Package',
       content: 'Eye problem, paid, watery, dryness',
-      img: process.env.NEXT_PUBLIC_BASE_URL + '/assets/images/package.png',
+      img: process.env.NEXT_PUBLIC_BASE_URL + '/assets/Images/package.png',
       pathHref: '/package',
     },
     {
       title: 'Medifiles',
       content: 'Diahorrea, stomach upset, digestion problem',
       img:
-        process.env.NEXT_PUBLIC_BASE_URL + '/assets/images/medical-report.png',
+        process.env.NEXT_PUBLIC_BASE_URL + '/assets/Images/medical-report.png',
       pathHref: '/medifiles',
     },
   ];
