@@ -1,27 +1,35 @@
-import React, { Suspense, lazy, useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import {Typography,Paper,Box,Divider,Grid,Button,MenuItem,} from '@material-ui/core';
-import Avatar from '@material-ui/core/Avatar';
-import Imag1 from './Imag1.png';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import {
+  Typography,
+  Box,
+  Grid,
+  Button,
+  Avatar,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from '@material-ui/core';
+import { getPatientProfile } from '../../../components/helper/PatientApi';
+import Breadcrumb from '../Reusable/MediBreadcrumb';
+import MetaTitle from '../../../components/helper/MetaTitle';
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 // Picker
 import Link from 'next/link';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import {getPatientLogin} from '../../../components/helper/PatientApi'
-import {getFamilyDependentByUid} from '../../../components/helper/PatientApi'
-import {checkToken} from '../../../components/helper/LoginCheck'
+import { getFamilyDependentByUid } from '../../../components/helper/PatientApi';
+import { checkToken } from '../../../components/helper/LoginCheck';
 import MedicalHistory from '../UserProfile/components/GetMedicalHistory/MedicalHistory';
-
+import { useRouter } from 'next/router';
+import NoRecordFound from 'components/organisms/NoRecordFound';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -70,49 +78,57 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function UserProfile() {
- 
+function UserProfile(props) {
   // Code for load API Data into a table
 
   const [data, setData] = React.useState([]);
 
-  const getFamilyDependent = async () =>
-  {
+  const getFamilyDependent = async () => {
     var doctorData = await getFamilyDependentByUid();
-    console.log("Name:",doctorData);
-     setData(doctorData.dependents);
-  }
-
+    console.log('Name:', doctorData);
+    setData(doctorData.dependents);
+  };
+  const router = useRouter();
   useEffect(() => {
     const loginToken = checkToken();
-      if(loginToken)
-      {
-        getFamilyDependent();
-      }
-      else
-      {
-        getFamilyDependent();
-      }
+    if (loginToken) {
+      getFamilyDependent();
+    } else {
+      router.push('/signin', undefined, { shallow: true });
+    }
     // fetchData();
   }, [0]);
 
   // To get Logged User Details
- 
-    const [user, setUser] = React.useState('');
 
-  const getPatientLoginss =  async () =>
-  {
+  const [user, setUser] = React.useState('');
+
+  const getPatientLoginss = async () => {
     var doctorDatas = await checkToken();
-    console.log("User Detail:",doctorDatas);
+    console.log('User Detail:', doctorDatas);
     setUser(doctorDatas.user);
-  }
-  
+  };
+
   React.useEffect(() => {
     //console.log('ssssssssssssssss',user)
-    getPatientLoginss();
-  },[]);
+    // getPatientLoginss();
+  }, []);
 
+  // code for Patient Profile List
 
+  const [patientDetails, setPatientDetails] = useState([]);
+
+  const getPatientProfileDetails = async () => {
+    var doctorDatas = await getPatientProfile();
+    console.log('User Details', doctorDatas.patient_info.name);
+    setPatientDetails(doctorDatas.patient_info);
+  };
+
+  React.useEffect(() => {
+    //console.log('ssssssssssssssss',user)
+    getPatientProfileDetails();
+    console.log('ssssssssssssssss');
+  }, []);
   // Code for Progress bar
 
   const [completed, setCompleted] = React.useState('');
@@ -126,118 +142,81 @@ function UserProfile() {
     }, 1000);
   }, []);
 
-
   // Code for Open Model Box for Viewing Medical History
 
-    const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
 
-    const handleClickOpen = () => {
-      setOpen(true);
-    };
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
-    const handleClose = () => {
-      setOpen(false);
-    };
+  const handleClose = () => {
+    setOpen(false);
+  };
 
+  //
+
+  // // Set Cookies
+  // var profile_completion_progress = Cookies.get('profile_completion_progress');
+  // var newStr = Cookies.get('profile_completion_progress');
+  // var  profile_completion_progress = newStr.replace(/%/g,'');
+  // =====================================
 
   return (
-    <div style={{ padding: 46 }}>
-      {/* <Box mb={2}><Typography inline variant="h6" align="center">User Profile</Typography></Box> */}
-      <Grid container>
-        <Grid item xs={12}  sm={6}  lg={5}>
-          {/* <div className={classess.root}>
-             Hello I am jain Hakum
-           </div> */}
-           
-          <div className="profile-detials" style={{ width: '320px' }}>
-            <Box p={4} boxShadow={3} mb={2}>
-              <Paper elevation={0}>
-                {/* <img src={Imag1}  height="160px" width="200px" style={{marginLeft:"20px"}}/> */}
-                <Avatar
-                  variant="rounded"
-                  src="https://img.icons8.com/bubbles/2x/user.png"
-                  style={{
-                    marginLeft: '20px',
-                    height: '160px',
-                    width: '195px',
-                  }}
-                ></Avatar>
-              </Paper>
-              <Typography align="center" variant="h6">
-                <b>{user.name}</b>
-              </Typography>
-              <Box mt={1} mb={1}></Box>
-              <Grid container wrap="nowrap" spacing={2}>
-                <Grid item>
-                  <Typography>Email:</Typography>
-                </Grid>
-                <Grid item xs>
-                  <Typography>{user.email}</Typography>
-                </Grid>
-              </Grid>
-              <Box mt={1} mb={1}></Box>
-              <Grid container wrap="nowrap" spacing={2}>
-                <Grid item>
-                  <Typography>Mobile :</Typography>
-                </Grid>
-                <Grid item xs>
-                  <Typography>{user.mobile}</Typography>
-                </Grid>
-              </Grid>
-            
-              <Box mt={1} mb={1}></Box>
-              <Grid container wrap="nowrap" spacing={2}>
-                <Grid item>
-                  <Typography>Address :</Typography>
-                </Grid>
-                <Grid item xs>
-                  <Typography>Andheri (Mumbai)</Typography>
-                 
-                </Grid>
-              </Grid>
-              {/* <Button onClick={getPatientLogins} color="primary" autoFocus>
-                 Close
-            </Button> */}
-              <Box mt={1} mb={1}></Box>
-              <Grid container wrap="nowrap" spacing={2}>
-                <Grid item>
-                  <Typography>Active :</Typography>
-                </Grid>
-                <Grid item xs>
-                  <Typography>
-                    {' '}
-                    <div
-                      style={{
-                        height: '15px',
-                        width: '15px',
-                        backgroundColor: 'green',
-                        borderRadius: '25px',
-                        marginTop: '5px',
-                      }}
-                    ></div>
-                  </Typography>
-                </Grid>
-              </Grid>
+    <div className="medifile_profie">
+      <MetaTitle
+        title={`Medifile User Profile  | Online Aarogya`}
+        metaKeyWord=""
+        metaDescription=""
+      />
 
-              <Box mt={4} mb={0}>
-                  <Button
-                    size="small"
-                    onClick={handleClickOpen}
-                    color="primary"
-                    style={{ marginLeft: '40px' }}
-                   >
-                    View Medical History
-                  </Button>
+      <div className="medifiles_pannel">
+        <div className="medifile_dashboard">
+          <h3 className="medifile_head">Hi! Welcome to Medifiles </h3>
+          <Breadcrumb url="User Profile" />
+        </div>
+      </div>
+      <Grid container style={{ justifyContent: 'space-between' }}>
+        <Grid spacing={3} item xs={4}>
+          <div className="profile_details">
+            <Box p={3}>
+              <div elevation={0}>
+                <Avatar
+                  className="profile_avatar"
+                  variant="rounded"
+                  src={patientDetails.avatar_url}
+                  alt="User Profile "
+                ></Avatar>
+              </div>
+              <Typography align="center" variant="h6"></Typography>
+              <TableRow>
+                <TableCell colSpan={2}>
+                  <b>Name : </b>
+                </TableCell>
+                <TableCell>{patientDetails.name}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell colSpan={2}>
+                  <b>Email ID : </b>
+                </TableCell>
+                <TableCell>{patientDetails.email}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell colSpan={2}>
+                  <b>Mobile No. : </b>
+                </TableCell>
+                <TableCell>{patientDetails.mobile}</TableCell>
+              </TableRow>
+
+              <Box className="profile_view_history">
+                <Button size="small" onClick={handleClickOpen} color="primary">
+                  View Medical History
+                </Button>
               </Box>
 
-              <Box mt={2} mb={0}>
+              <Box className="profile_edit_user">
                 <Link href="account/account-info">
-                  <Button
-                    size="small"
-                    variant="contained"
-                    color="primary"
-                    style={{ marginLeft: '60px' }}
-                  >
+                  <Button size="small" variant="contained" color="primary">
                     Edit Profile
                   </Button>
                 </Link>
@@ -245,47 +224,44 @@ function UserProfile() {
             </Box>
           </div>
         </Grid>
-        {/* <Grid item xs={12} lg={1}></Grid> */}
 
-        <Grid item xs={12}  sm={6}  lg={7}>
-          <Box boxShadow={0} p={0}>
-            <Box
-              alignContent="flex-end"
-              boxShadow={2}
-              style={{ backgroundColor: '#f7f7f7' }}
-              mb={2}
-              p={2}
-            >
+        <Grid spacing={3} item xs={8}>
+          <Box className="profile_progress" p={0}>
+            <Box alignContent="flex-end" mb={2}>
               <Grid container>
                 <Grid item xs={12} lg={2}>
-                   <div
-                    className="progressBar"
-                    style={{ marginTop: '-98px', marginLeft: '10px' }}
-                    >
-                    <div className={classess.percentage}>
-                      {completed ? <p>{user.profile_completion_progress}</p> :null}
-                    </div>
-                    <CircularProgress
-                      className={classess.progress}
-                      variant="static"
-                      value={completed}
-                      size={80}
-                      thickness={5}
-                    />
-                  </div>
+                  <CircularProgressbar
+                    value={patientDetails.profile_completion}
+                    text={`${patientDetails.profile_completion}%`}
+                    styles={buildStyles({
+                      rotation: 0.25,
+                      strokeLinecap: 'red',
+                      textSize: '18px',
+                      pathTransitionDuration: 0.5,
+                      pathColor: `rgb(255 34 0), ${patientDetails.profile_completion /
+                        100})`,
+                      textColor: 'red',
+                      trailColor: 'rgb(255 34 0 / 20%)',
+                      backgroundColor: 'rgb(255 34 0 / 20%)',
+                    })}
+                  />
                 </Grid>
-                <Grid item xs={12} lg={10}>
-                  <Box mt={2} ml={3}>
-                    <Typography align="left" variant="h6">
+                <Grid xs={12} lg={10}>
+                  <Box ml={3}>
+                    <Typography
+                      align="left"
+                      variant="h6"
+                      className="profile_progress_head"
+                    >
                       <b>Profile Progress</b>
                     </Typography>
                   </Box>
                   <p
                     color="secondary"
                     align="left"
-                    style={{ marginLeft: '38px', marginTop: '-3px' }}
+                    style={{ marginLeft: '24px' }}
                   >
-                    {user.profile_completion_progress} Completed
+                    {patientDetails.profile_completion}% Completed
                   </p>
                 </Grid>
               </Grid>
@@ -296,8 +272,11 @@ function UserProfile() {
                 <b>Dependent Details</b>
               </Typography>
             </Box>
-            <TableContainer component={Paper}>
-              <Table className={classess.table} aria-label="simple table">
+            <TableContainer>
+              <Table
+                className="user_medical_history_table"
+                aria-label="simple table"
+              >
                 <TableHead>
                   <TableRow>
                     <TableCell component="th">Image</TableCell>
@@ -308,53 +287,56 @@ function UserProfile() {
                     <TableCell>Address</TableCell>
                   </TableRow>
                 </TableHead>
-                <TableBody>
-                  {data.map(row => (
-                    <TableRow key={row.id}>
-                      <TableCell>
-                        {' '}
-                        <Avatar variant="square" className={classess.square}>
-                          P
-                        </Avatar>
-                      </TableCell>
-                      <TableCell>{row.first_name}</TableCell>
-                      <TableCell>{row.last_name}</TableCell>
-                      <TableCell>{row.gender}</TableCell>
-                      <TableCell>{row.dob}</TableCell>
-                      <TableCell>{row.address}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
+
+                {data == '' ? (
+                  <NoRecordFound />
+                ) : (
+                  
+                  <TableBody>
+                    {data.map(row => (
+                      <TableRow key={row.id}>
+                        <TableCell>
+                          <Avatar
+                            variant="square"
+                            className={classess.square}
+                          ></Avatar>
+                        </TableCell>
+                        <TableCell>{row.first_name}</TableCell>
+                        <TableCell>{row.last_name}</TableCell>
+                        <TableCell>{row.gender}</TableCell>
+                        <TableCell>{row.dob}</TableCell>
+                        <TableCell>{row.address}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                )}
               </Table>
             </TableContainer>
           </Box>
         </Grid>
       </Grid>
 
-       {/* Model Box to view Medical History */}
+      {/* Model Box to view Medical History */}
 
-        <Dialog
-          maxWidth={'md'} // 'sm' || 'md' || 'lg' || 'xl'
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-        >
-          <DialogTitle id="alert-dialog-title">{""}</DialogTitle>
-          <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-              <MedicalHistory/>
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose} color="primary">
-              {/* Disagree */}
-            </Button>
-            <Button onClick={handleClose} color="primary" autoFocus>
-              Close
-            </Button>
-          </DialogActions>
-        </Dialog>
+      <Dialog
+        maxWidth={'md'} // 'sm' || 'md' || 'lg' || 'xl'
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{''}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            <MedicalHistory />
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary" autoFocus>
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }

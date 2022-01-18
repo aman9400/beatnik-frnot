@@ -1,0 +1,23 @@
+.faq_section_title h4 {
+    font-size:32px;
+    font-weight: 700;
+    color: var(--heading-color);
+}
+.accordion_main {
+    position: relative !important;
+    box-shadow: none !important;
+    border: var(--border);
+    margin-bottom: 10px !important;
+    border-radius:5px !important;
+    overflow: hidden !important;
+}
+.accordion_question {
+    font-size:16px  !important;
+    font-weight: 600 !important;
+    color: var(--inner-heading) !important;
+}
+.accordion_answer p {
+    font-size:15px  !important;
+    font-weight: 500 !important;
+    color: var(--sub-heading-color) !important;
+}

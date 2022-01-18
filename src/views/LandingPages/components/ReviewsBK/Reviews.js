@@ -55,7 +55,7 @@ const useStyles = makeStyles(theme => ({
     boxShadow: 'none',
     borderRadius: 6,
     '& .card-product__content': {
-      padding: theme.spacing(2, 0, 0, 0),
+      padding: theme.spacing(0, 0, 0, 0),
     },
     '& .card-product__media': {
       height: 160,
@@ -66,10 +66,10 @@ const useStyles = makeStyles(theme => ({
   },
   image: {
     objectFit: 'cover',
-    width:110,
-    height:110,
+    width: 110,
+    height: 110,
     border: 'var(--border)',
-    borderRadius:'50%',
+    borderRadius: '50%',
   },
   blogContent: {
     display: 'flex',
@@ -87,6 +87,9 @@ const useStyles = makeStyles(theme => ({
       marginBottom: theme.spacing(3),
     },
   },
+  media: {
+    height: 'auto',
+  },
 }));
 
 const Reviews = props => {
@@ -102,7 +105,7 @@ const Reviews = props => {
 
   React.useEffect(() => {
     new Swiper('.swiper-container', {
-      slidesPerView: 4,
+      slidesPerView: 5,
       spaceBetween: isXs ? 16 : 0,
       pagination: {
         el: '.swiper-container .swiper-pagination',
@@ -123,7 +126,7 @@ const Reviews = props => {
         srcSet:
           'https://www.practostatic.com/consumer-home/desktop/images/1558283618/sp-dentist@2x.jpg 2x',
       },
-      title: "Allergists/Immunologists",
+      title: 'Allergists/Immunologists',
       author: {
         photo: {
           src:
@@ -131,10 +134,7 @@ const Reviews = props => {
           srcSet:
             'https://www.practostatic.com/consumer-home/desktop/images/1558283618/sp-gynecologist@2x.jpg 2x',
         },
-        name: 'RK Sharma',
       },
-      date: '04 Aug',
-      tags: ['larq', 'bottle', 'shop', 'drinks', 'eco', 'self washing'],
     },
     {
       cover: {
@@ -151,10 +151,7 @@ const Reviews = props => {
           srcSet:
             'https://assets.maccarianagency.com/the-front/photos/people/jack-smith@2x.jpg 2x',
         },
-        name: 'RK Sharma',
       },
-      date: '04 Aug',
-      tags: ['nike', 'sport', 'shop', 'training'],
     },
     {
       cover: {
@@ -171,10 +168,7 @@ const Reviews = props => {
           srcSet:
             'https://assets.maccarianagency.com/the-front/photos/people/akachi-luccini@2x.jpg 2x',
         },
-        name: 'RK Sharma',
       },
-      date: '04 Aug',
-      tags: ['adidas', 'sport', 'shop', 'training'],
     },
     {
       cover: {
@@ -191,10 +185,7 @@ const Reviews = props => {
           srcSet:
             'https://assets.maccarianagency.com/the-front/photos/people/veronica-adams@2x.jpg 2x',
         },
-        name: 'Veronica Adams',
       },
-      date: '04 Aug',
-      tags: ['coffee', 'cups', 'morning coffee', 'breakfast'],
     },
     {
       cover: {
@@ -211,10 +202,7 @@ const Reviews = props => {
           srcSet:
             'https://assets.maccarianagency.com/the-front/photos/people/veronica-adams@2x.jpg 2x',
         },
-        name: 'Veronica Adams',
       },
-      date: '04 Aug',
-      tags: ['coffee', 'cups', 'morning coffee', 'breakfast'],
     },
     {
       cover: {
@@ -231,10 +219,7 @@ const Reviews = props => {
           srcSet:
             'https://assets.maccarianagency.com/the-front/photos/people/veronica-adams@2x.jpg 2x',
         },
-        name: 'Veronica Adams',
       },
-      date: '04 Aug',
-      tags: ['coffee', 'cups', 'morning coffee', 'breakfast'],
     },
   ];
   const BlogContent = props => (
@@ -247,10 +232,16 @@ const Reviews = props => {
       >
         {props.title}
       </Typography>
-      <Typography variant="caption" color="textPrimary">
-        <i>
-          {props.author.name} - {props.date}
-        </i>
+      <Typography className="animated-arrow" variant="caption" color="textPrimary">
+      <span class="the-arrow -left">
+<span class="shaft"></span>
+</span>
+      <span class="main">
+                    <span class="text">Consult Now</span>
+                    <span class="the-arrow -right">
+                      <span class="shaft"></span>
+                    </span>
+                  </span>
       </Typography>
     </div>
   );
@@ -269,8 +260,8 @@ const Reviews = props => {
       <div className={clsx('swiper-container', classes.swiperContainer)}>
         <div className={clsx('swiper-wrapper', classes.swiperWrapper)}>
           {dataArticle.map((item, index) => (
-            <div className="swiper-slide" key={index}>
-              <Grid className={styles.card_main} spacing={2} key={index} data-aos="fade-up">
+            <div spacing={2} className="swiper-slide" key={index}>
+              <Grid className={styles.card_main} key={index} data-aos="fade-up">
                 <CardProduct
                   className={styles.cardProduct}
                   mediaContent={
@@ -279,13 +270,12 @@ const Reviews = props => {
                   cardContent={
                     <BlogContent
                       title={item.title}
-                      subtitle={item.subtitle}
+                     
                       author={item.author}
-                      date={item.date}
-                      tags={item.tags}
                     />
                   }
                 />
+            
               </Grid>
             </div>
           ))}

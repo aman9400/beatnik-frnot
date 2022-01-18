@@ -3,7 +3,7 @@ import { parse } from 'query-string';
 import { makeStyles } from '@material-ui/core/styles';
 import { Section } from 'components/organisms';
 import { Loading, General } from './components';
-import  Breadcrumb  from '../Reusable/Breadcrumb';
+import Breadcrumb from '../Reusable/Breadcrumb';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -15,24 +15,24 @@ const useStyles = makeStyles(theme => ({
     paddingTop: theme.spacing(2),
     [theme.breakpoints.up('md')]: {
       paddingTop: theme.spacing(4),
-    }
+    },
   },
 }));
-
-// const getComponentId = () => parse(window.location.search).component || 'introduction';
-// const renderComponent = () => {
-//   let Component = null;
-//   const componentId = getComponentId();
-// }
 
 const AccountInfo = () => {
   const classes = useStyles();
   return (
-    <div className={classes.root}>
-     <Breadcrumb url="Account Info"/> 
-      <Section className={classes.section}>
+    <div className="medifile_profie">
+      <div className="medifiles_pannel">
+        <div className="medifile_dashboard">
+          <h3 className="medifile_head">Hi! Welcome to Medifiles </h3>
+          <Breadcrumb url="Account Info" />
+        </div>
+      </div>
+      
+      <Section className="medifile_profile_data">
         <Suspense fallback={<Loading />}>
-      <General/>
+          <General />
         </Suspense>
       </Section>
     </div>
