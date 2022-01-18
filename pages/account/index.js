@@ -22,6 +22,7 @@
  const UserProfiless = () => {
    return (
      <WithLayout
+     className="som"
        component={Component}
        layout={DocsLayout}
      />

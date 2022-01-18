@@ -1,0 +1,56 @@
+.app_card_con {
+    position: relative;
+    text-align:center;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+.app_card_img  {
+    position: relative;
+    border:2px solid rgb(255 196 186);
+    padding:6px;
+    border-radius: 5px;
+    background:#fff;
+}
+.app_card_img img{
+    width:280px;
+    height:auto;
+    object-fit: contain;
+    border-radius: 5px;
+}
+.download_app_title h3 {
+    color: var(--heading-color);
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+.download_app_title p {
+    color: var(--sub-heading-color);
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+.download_app_list{
+    list-style: disc;
+    margin-left: 15px;
+}
+.download_app_list li {
+    font-size:14px;
+    font-weight: 500;
+    color:var(--inner-heading);
+    line-height:27px;
+}
+.download_section {
+    margin-top:15px;
+}
+.download_section p{
+    color: var(--heading-color);
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+.download_qr_code{
+    width:200px !important;
+    height:200px !important;
+    margin-bottom:20px !important;
+}

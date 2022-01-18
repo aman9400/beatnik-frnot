@@ -4,14 +4,14 @@ import {
   Typography,
   Paper,
   Box,
-  TextField, 
-   Grid,
-   Divider ,
+  TextField,
+  Grid,
+  Divider,
   Button,
   MenuItem,
 } from '@material-ui/core';
 // Picker
-import { Formik,Field, Form } from 'formik';
+import { Formik, Field, Form } from 'formik';
 import MaterialTable, { MTableBodyRow } from 'material-table';
 import { forwardRef } from 'react';
 import * as Yup from 'yup';
@@ -29,8 +29,8 @@ import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import axios from 'axios';
-import {getSupportTicket} from '../../../../../components/helper/PatientApi'
-import {checkToken} from '../../../../../components/helper/LoginCheck'
+import { getSupportTicket } from '../../../../../components/helper/PatientApi';
+import { checkToken } from '../../../../../components/helper/LoginCheck';
 import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
 import Dialog from '@material-ui/core/Dialog';
@@ -38,12 +38,12 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import InputBase from "@material-ui/core/InputBase";
+import InputBase from '@material-ui/core/InputBase';
 import { withStyles } from '@material-ui/core/styles';
 import CreateTicket from './CreateTicket';
 import validate from 'validate.js';
 import { RadioGroup } from 'formik-material-ui';
-import {raiseSupportTicket} from '../../../../../components/helper/PatientApi'
+import { raiseSupportTicket } from '../../../../../components/helper/PatientApi';
 
 function MemberDetails() {
   const tableIcons = {
@@ -80,70 +80,8 @@ function MemberDetails() {
     baseURL: `http://localhost:8000/api`,
   });
 
-
   const useStyles = makeStyles(theme => ({
-    // root: {
-    //   '& > *': {
-    //     margin: theme.spacing(0),
-    //     overflow: 'hidden',
-    //     // width:"960px",
-    //   },
-    // },
-    // tableButton: {
-    //   backgroundColor: '#e0e0e0',
-    //   fontWeight: 600,
-    //   padding: theme.spacing(1),
-    //   '&:hover': {
-    //     backgroundColor: '#FF0010',
-    //     color: 'white',
-    //   },
-    //   height: '27px',
-    //   fontSize: '13px',
-    // },
-    // icon: {
-    //   fontSize: '13px',
-    // },
-    // headerWidth: {
-    //   width: '170px',
-    // },
-    // dailogTextField:
-    // {
-    //   marginTop:"10px",
-    //   width:"550px"
-    // },
-    // dilogBoxTypo:
-    // {
-    //   fontWeight: 600,
-    //   fontSize: "15px"
-    // },
-    // searchBoxBgCol:
-    // {
-    //   backgroundColor:"rgb(222 222 222 / 38%)",
-     
-    // },
-    // searchBox:
-    // {
-    //   backgroundColor:"white",
-    //   border: "none",
-    //   padding:"14px",
-    //   width:"550px",
-    //   marginLeft:"60px",
-    //   marginTop:"50px",
-    //   boxShadow: "1px 2px 11px 2px rgb(0 0 0 / 20%)",
-    //   height:"40px"
-    // },
-    // searchBoxBtn:
-    // {
-    //   marginTop:"50px",
-    //   backgroundColor:"#f20",
-    //   boxShadow: "1px 2px 11px 2px rgb(0 0 0 / 20%)",
-    //   height:"40px",
-    //   color:"white"
-    // },
-    // serachBoxText:{
-    //    marginLeft:"250px",
-    //    position:"absolute"
-    // }
+
     root: {
       '& > *': {
         margin: theme.spacing(0),
@@ -157,160 +95,162 @@ function MemberDetails() {
     headerWidth: {
       width: '170px',
     },
-    dailogTextField:
-    {
-      marginTop:"5px",
-      width:"550px"
+    dailogTextField: {
+      marginTop: '5px',
+      width: '550px',
     },
-    dilogBoxTypo:
-    {
+    dilogBoxTypo: {
       fontWeight: 600,
-      fontSize: "15px"
+      fontSize: '15px',
     },
-    searchBoxBgCol:
-    {
-      backgroundColor:"rgb(222 222 222 / 38%)",
+    searchBoxBgCol: {
+      backgroundColor: 'rgb(222 222 222 / 38%)',
     },
-    searchBox:
-    {
-      backgroundColor:"white",
-      border: "none",
-      padding:"14px",
-      width:"550px",
-      marginLeft:"60px",
-      marginTop:"50px",
-      boxShadow: "1px 2px 11px 2px rgb(0 0 0 / 20%)",
-      height:"40px"
+    searchBox: {
+      backgroundColor: 'white',
+      border: 'none',
+      padding: '14px',
+      width: '550px',
+      marginLeft: '60px',
+      marginTop: '50px',
+      boxShadow: '1px 2px 11px 2px rgb(0 0 0 / 20%)',
+      height: '40px',
     },
-    searchBoxBtn:
-    {
-      marginTop:"50px",
-      backgroundColor:"#ff2200",
-      boxShadow: "1px 2px 11px 2px rgb(0 0 0 / 20%)",
-      height:"40px",
-      color:"white"
+    searchBoxBtn: {
+      marginTop: '50px',
+      backgroundColor: '#ff2200',
+      boxShadow: '1px 2px 11px 2px rgb(0 0 0 / 20%)',
+      height: '40px',
+      color: 'white',
     },
-    serachBoxText:{
-       marginLeft:"250px",
-       position:"absolute"
-    }
+    serachBoxText: {
+      marginLeft: '250px',
+      position: 'absolute',
+    },
   }));
 
-    //const classes = useStyless();
- 
-    const [datass, setDatass] = useState([]);
+  //const classes = useStyless();
 
-    const supportTickets = async () =>
-    {
-      var showTicketData = await getSupportTicket();
-      console.log("Data:",showTicketData.support_categories);
-      setDatass(showTicketData.support_categories);
+  const [datass, setDatass] = useState([]);
+
+  const supportTickets = async () => {
+    var showTicketData = await getSupportTicket();
+    console.log('Data:', showTicketData.support_categories);
+    setDatass(showTicketData.support_categories);
+  };
+
+  useEffect(() => {
+    const loginToken = checkToken();
+    if (loginToken) {
+      supportTickets();
+    } else {
+      Router.push('/signin', undefined, { shallow: true });
     }
+  }, []);
 
-    useEffect(() => {
-        const loginToken = checkToken();
-        if(loginToken)
-        {
-          supportTickets();
-        }
-        else
-        {
-          Router.push('/signin', undefined, { shallow: true })
-        }
-    }, [])
-  
+  const classes = useStyles();
 
-    const classes = useStyles();
- 
-  
-    const DialogContent = withStyles((theme) => ({
-      root: {
-        padding: theme.spacing(2),
-      },
-    }))(MuiDialogContent);
-    
-    const DialogActions = withStyles((theme) => ({
-      root: {
-        margin: 0,
-        padding: theme.spacing(1),
-      },
-    }))(MuiDialogActions);
-    
-  
-      const [open, setOpen] = React.useState(false);
-    
-      const handleClickOpen = () => {
-        setOpen(true);
-      };
-      const handleClose = () => {
-        setOpen(false);
-      };
-    
-     // Code for model box Select box 
-  
-     const [age, setAge] = React.useState('');
-   
-     const handleChanges = (event) => {
-       setAge(event.target.value);
-     };
-   
-     // Code for show category data in dropdown
-     
-     const [datas, setDatas] = useState([]);
-     const [updateRecord,setUpdateRecord] = ([])
-  
-      const supportTicket = async () =>
-      {
-        var showTicketData = await getSupportTicket();
-        console.log("Data:",showTicketData.tickets);
-        setDatas(showTicketData.tickets);
+  const DialogContent = withStyles(theme => ({
+    root: {
+      padding: theme.spacing(2),
+    },
+  }))(MuiDialogContent);
 
-      }
-  
-      useEffect(() => {
-          const loginToken = checkToken();
-          if(loginToken)
-          {
-            supportTicket();
-          }
-          else
-          {
-            Router.push('/signin', undefined, { shallow: true })
-          }
-      }, [])
-  
-      // Code for Submit the Model Form Data
-  
+  const DialogActions = withStyles(theme => ({
+    root: {
+      margin: 0,
+      padding: theme.spacing(1),
+    },
+  }))(MuiDialogActions);
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  // Code for model box Select box
+
+  const [age, setAge] = React.useState('');
+
+  const handleChanges = event => {
+    setAge(event.target.value);
+  };
+
+  // Code for show category data in dropdown
+
+  const [datas, setDatas] = useState([]);
+  const [updateRecord, setUpdateRecord] = [];
+
+  const supportTicket = async () => {
+    var showTicketData = await getSupportTicket();
+    console.log('Data:', showTicketData.tickets);
+    setDatas(showTicketData.tickets);
+  };
+
+  useEffect(() => {
+    const loginToken = checkToken();
+    if (loginToken) {
+      supportTicket();
+    } else {
+      Router.push('/signin', undefined, { shallow: true });
+    }
+  }, []);
+
+  // Code for Submit the Model Form Data
+
   return (
-  <div className="member-detail">
-  
-    <div>
-      <Grid container>
-        <Grid item xs={12}>
-          <div className={classes.root}>
-            <Paper elevation={0}>
-              <Grid container>
-               
-                <Box alignItems="end">   
-                 <Button variant="outlined" color="primary" onClick={handleClickOpen} style={{border: "0px solid rgba(236, 56, 50, 0.5)"}}>
-                 <b>Create New Ticket</b>
-                 </Button>
+    <div className="member-detail">
+      <div>
+        <Grid container>
+          <Grid item xs={12}>
+            <div className={classes.root}>
+              <Paper elevation={0}>
+                <Grid container>
+                  <Box alignItems="end">
+                    <Button
+                      variant="outlined"
+                      color="primary"
+                      onClick={handleClickOpen}
+                      style={{ border: '0px solid rgba(236, 56, 50, 0.5)' }}
+                    >
+                      <b>Create New Ticket</b>
+                    </Button>
                   </Box>
                   <Grid item md={12} xs={12}>
-                      <Box mb={2} p={3} className={classes.searchBoxBgCol}  display="flex">
-                      <Typography variant="h5"  className={classes.serachBoxText}><b>How do we help you ?</b></Typography>
+                    <Box
+                      mb={2}
+                      p={3}
+                      className={classes.searchBoxBgCol}
+                      display="flex"
+                    >
+                      <Typography
+                        variant="h5"
+                        className={classes.serachBoxText}
+                      >
+                        <b>How do we help you ?</b>
+                      </Typography>
                       <InputBase
                         size="small"
                         className={classes.searchBox}
-                       // onChange={setVal}
-                         placeholder="Search"
-                         inputProps={{ "aria-label": "search google maps" }}
+                        // onChange={setVal}
+                        placeholder="Search"
+                        inputProps={{ 'aria-label': 'search google maps' }}
                       />
-                      <Button  variant="contained" color="secondary"  className={classes.searchBoxBtn} >Search Query</Button>
-                      </Box>
-                    </Grid>
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        className={classes.searchBoxBtn}
+                      >
+                        Search Query
+                      </Button>
+                    </Box>
+                  </Grid>
 
-                  <Grid item xs={12} >
+                  <Grid item xs={12}>
                     <MaterialTable
                       icons={tableIcons}
                       options={{
@@ -326,196 +266,237 @@ function MemberDetails() {
                       data={datas}
                     />
 
-            
-                <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
-                  <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-                    <Typography color="primary"><b> Create New Ticket </b></Typography>
-                  </DialogTitle>
-                
-                  <DialogContent dividers>
-                  <div style={{width:"60px"}}> <Box bgcolor="primary.main" mt={-2} style={{height:"4px"}}></Box></div>
-                  <Formik
-                    initialValues={{
-                      title: '',
-                      category: '',
-                      bookingID: '',
-                      subject:'',
-                      message:'',
-                    }}
+                    <Dialog
+                      onClose={handleClose}
+                      aria-labelledby="customized-dialog-title"
+                      open={open}
+                    >
+                      <DialogTitle
+                        id="customized-dialog-title"
+                        onClose={handleClose}
+                      >
+                        <Typography color="primary">
+                          <b> Create New Ticket </b>
+                        </Typography>
+                      </DialogTitle>
 
-                    validationSchema={Yup.object().shape({
-                      category: Yup.string()
-                        .max(255)
-                        .required('Category is required'),
-                      bookingID: Yup.string()
-                        .max(255)
-                        .required('Booking ID is required'),
-                      subject: Yup.string()
-                        .max(255)
-                        .required('Subject is required'),
-                      message: Yup.string()
-                        .max(255)
-                        .required('Message is required'),
-                    })}
-                   
-                    onSubmit={async (values, { setSubmitting, isSubmitting}) => {
-                    setTimeout(() => {
-                        setSubmitting(false);
-                        console.log(JSON.stringify(values, null, 2));
-                      }, 2000);
-                      const res = await raiseSupportTicket(values, null, 2);
+                      <DialogContent dividers>
+                        <div style={{ width: '60px' }}>
+                          {' '}
+                          <Box
+                            bgcolor="primary.main"
+                            mt={-2}
+                            style={{ height: '4px' }}
+                          ></Box>
+                        </div>
+                        <Formik
+                          initialValues={{
+                            title: '',
+                            category: '',
+                            bookingID: '',
+                            subject: '',
+                            message: '',
+                          }}
+                          validationSchema={Yup.object().shape({
+                            category: Yup.string()
+                              .max(255)
+                              .required('Category is required'),
+                            bookingID: Yup.string()
+                              .max(255)
+                              .required('Booking ID is required'),
+                            subject: Yup.string()
+                              .max(255)
+                              .required('Subject is required'),
+                            message: Yup.string()
+                              .max(255)
+                              .required('Message is required'),
+                          })}
+                          onSubmit={async (
+                            values,
+                            { setSubmitting, isSubmitting },
+                          ) => {
+                            setTimeout(() => {
+                              setSubmitting(false);
+                              console.log(JSON.stringify(values, null, 2));
+                            }, 2000);
+                            const res = await raiseSupportTicket(
+                              values,
+                              null,
+                              2,
+                            );
 
-                     
-                      
-           
-                      if (res.success)
-                       {
-                         alert('Ticket has been raised')
-                         setOpen(false);
-                      
-                      } 
-                      else 
-                      {
-                        alert('Form cant be filled')
-                      }
-                      // console.log(res);
-                    }}
-                  >
-                    {({
-                      errors,
-                      handleBlur,
-                      handleChange,
-                      handleSubmit,
-                      isSubmitting,
-                      setFieldValue,
-                      isValid,
-                      touched,
-                      values,
-                      resetForm,
-                    }) => (
-                      <form onSubmit={handleSubmit} id="my-form">
-                        {/* our custom form */}
-                        <Grid
-                          container
-                          className="mobileContainer"
-                          spacing={3}
-                          style={{ paddingTop: 10 }}
-                          > 
-                        
-                          <Grid item md={12} xs={12}>
-                          <Typography className={classes.dilogBoxTypo}>Category</Typography>
-                           <TextField
-                              id="Category"
-                              //error={Boolean(touched.state && errors.state)}
-                              fullWidth
-                            // helperText={touched.state && errors.state}
-                              label="Category *"
-                              name="category"
-                              size="small"
-                              onBlur={handleBlur}
-                              onChange={handleChange}
-                              value={values.category}
-                              variant="outlined"
-                              select
-                            >
-                            {datass.map((records,index)=> 
-                              <MenuItem key={index} value="4460">{records.name}</MenuItem>
-                            )}
-                            </TextField>
+                            if (res.success) {
+                              alert('Ticket has been raised');
+                              setOpen(false);
+                            } else {
+                              alert('Form cant be filled');
+                            }
+                            // console.log(res);
+                          }}
+                        >
+                          {({
+                            errors,
+                            handleBlur,
+                            handleChange,
+                            handleSubmit,
+                            isSubmitting,
+                            setFieldValue,
+                            isValid,
+                            touched,
+                            values,
+                            resetForm,
+                          }) => (
+                            <form onSubmit={handleSubmit} id="my-form">
+                              {/* our custom form */}
+                              <Grid
+                                container
+                                className="mobileContainer"
+                                spacing={3}
+                                style={{ paddingTop: 10 }}
+                              >
+                                <Grid item md={12} xs={12}>
+                                  <Typography className={classes.dilogBoxTypo}>
+                                    Category
+                                  </Typography>
+                                  <TextField
+                                    id="Category"
+                                    //error={Boolean(touched.state && errors.state)}
+                                    fullWidth
+                                    // helperText={touched.state && errors.state}
+                                    label="Category *"
+                                    name="category"
+                                    size="small"
+                                    onBlur={handleBlur}
+                                    onChange={handleChange}
+                                    value={values.category}
+                                    variant="outlined"
+                                    select
+                                  >
+                                    {datass.map((records, index) => (
+                                      <MenuItem key={index} value="4460">
+                                        {records.name}
+                                      </MenuItem>
+                                    ))}
+                                  </TextField>
+                                </Grid>
+                                <Grid item md={12} xs={12}>
+                                  <Typography className={classes.dilogBoxTypo}>
+                                    Booking ID
+                                  </Typography>
+                                  <TextField
+                                    fullWidth
+                                    className={classes.dailogTextField}
+                                    id="select"
+                                    size="small"
+                                    error={Boolean(
+                                      touched.bookingID && errors.bookingID,
+                                    )}
+                                    fullWidth
+                                    helperText={
+                                      touched.bookingID && errors.bookingID
+                                    }
+                                    label="Booking ID *"
+                                    name="bookingID"
+                                    onBlur={handleBlur}
+                                    onChange={handleChange}
+                                    value={values.bookingID}
+                                    variant="outlined"
+                                  />
+                                </Grid>
+                                <Grid item md={12} xs={12}>
+                                  <Typography className={classes.dilogBoxTypo}>
+                                    Subject
+                                  </Typography>
+                                  <TextField
+                                    fullWidth
+                                    className={classes.dailogTextField}
+                                    id="select"
+                                    size="small"
+                                    error={Boolean(
+                                      touched.subject && errors.subject,
+                                    )}
+                                    fullWidth
+                                    helperText={
+                                      touched.subject && errors.subject
+                                    }
+                                    label="Subject *"
+                                    name="subject"
+                                    onBlur={handleBlur}
+                                    onChange={handleChange}
+                                    value={values.subject}
+                                    variant="outlined"
+                                  />
+                                </Grid>
+                                <Grid item md={12} xs={12}>
+                                  <Typography className={classes.dilogBoxTypo}>
+                                    Message
+                                  </Typography>
+                                  <TextField
+                                    fullWidth
+                                    className={classes.dailogTextField}
+                                    id="message"
+                                    size="small"
+                                    error={Boolean(
+                                      touched.message && errors.message,
+                                    )}
+                                    fullWidth
+                                    helperText={
+                                      touched.message && errors.message
+                                    }
+                                    label="Message *"
+                                    name="message"
+                                    onBlur={handleBlur}
+                                    onChange={handleChange}
+                                    value={values.message}
+                                    variant="outlined"
+                                    multiline
+                                    rows={2}
+                                  />
+                                </Grid>
+                              </Grid>
+                              {/* Custom form end */}
+                            </form>
+                          )}
+                        </Formik>
+                      </DialogContent>
+
+                      <DialogActions style={{ backgroundColor: '#ececec' }}>
+                        <Grid container>
+                          <Grid item md={8} xs={12}>
+                            <Box p={1}>
+                              {' '}
+                              <Typography>
+                                Once You Submit our support tream will reach you
+                                through call
+                              </Typography>
+                            </Box>
                           </Grid>
-                          <Grid item md={12} xs={12}>
-                          <Typography className={classes.dilogBoxTypo}>Booking ID</Typography>
-                             <TextField
-                              fullWidth
-                              className={classes.dailogTextField}
-                              id="select"
-                              size="small"
-                              error={Boolean(touched.bookingID && errors.bookingID)}
-                              fullWidth
-                              helperText={touched.bookingID && errors.bookingID}
-                              label="Booking ID *"
-                              name="bookingID"
-                              onBlur={handleBlur}
-                              onChange={handleChange}
-                              value={values.bookingID}
-                              variant="outlined"
-                              />
-                          </Grid>
-                          <Grid item md={12} xs={12}>
-                          <Typography className={classes.dilogBoxTypo}>Subject</Typography>
-                             <TextField
-                              fullWidth
-                              className={classes.dailogTextField}
-                              id="select"
-                              size="small"
-                              error={Boolean(touched.subject && errors.subject)}
-                              fullWidth
-                              helperText={touched.subject && errors.subject}
-                              label="Subject *"
-                              name="subject"
-                              onBlur={handleBlur}
-                              onChange={handleChange}
-                              value={values.subject}
-                              variant="outlined"
-                              />
-                          </Grid>
-                          <Grid item md={12} xs={12}>
-                          <Typography className={classes.dilogBoxTypo}>Message</Typography>
-                             <TextField
-                              fullWidth
-                              className={classes.dailogTextField}
-                              id="message"
-                              size="small"
-                              error={Boolean(touched.message && errors.message)}
-                              fullWidth
-                              helperText={touched.message && errors.message}
-                              label="Message *"
-                              name="message"
-                              onBlur={handleBlur}
-                              onChange={handleChange}
-                              value={values.message}
-                              variant="outlined"
-                              multiline
-                              rows={2}
-                              />
+
+                          <Grid item md={4} xs={12}>
+                            <Box p={1} style={{ marginLeft: '20px' }}>
+                              <Button onClick={handleClose} color="primary">
+                                Cancel
+                              </Button>
+                              <Button
+                                type="submit"
+                                form="my-form"
+                                variant="contained"
+                                color="primary"
+                              >
+                                Submit
+                              </Button>
+                            </Box>
                           </Grid>
                         </Grid>
-                        {/* Custom form end */}
-                      </form>
-                    )}
-                  </Formik>
-                  </DialogContent>
-
-                  <DialogActions style={{backgroundColor:"#ececec"}}>
-                   <Grid container>
-                      <Grid item md={8} xs={12}>
-                         <Box p={1} >  <Typography>Once You Submit our support tream will reach you through call</Typography></Box>
-                      </Grid>   
-
-                    <Grid item md={4} xs={12}>
-                     <Box p={1} style={{marginLeft:"20px"}}  > 
-                        <Button  onClick={handleClose} color="primary">
-                          Cancel
-                        </Button>
-                        <Button type="submit"  form='my-form'  variant="contained" color="primary">
-                           Submit
-                        </Button>
-                      </Box>
-                     </Grid>
-                     
-                    </Grid> 
-                   
-                  </DialogActions>
-                </Dialog>
-          
+                      </DialogActions>
+                    </Dialog>
+                  </Grid>
                 </Grid>
-              </Grid>
-            </Paper>
-          </div>
+              </Paper>
+            </div>
+          </Grid>
         </Grid>
-      </Grid>
-      
-     </div>
+      </div>
     </div>
   );
 }

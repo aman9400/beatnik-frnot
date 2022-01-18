@@ -1,0 +1,9 @@
+.som_account_info {
+    position: relative;
+}
+.som_account_info header {
+    box-shadow: none !important;
+    border:var(--border);
+    border-radius: 5px;
+    background: #ebeef138;
+}

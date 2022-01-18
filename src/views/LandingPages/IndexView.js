@@ -10,19 +10,9 @@ import {
   Packages,
   CustomerRatings,
   News,
-  Appointment,
-  Articles,
-  Categories,
-  Products,
-  Search,
-  SearchLocation,
-  ProductBox,
 } from './components';
 import MetaTitle from 'components/helper/MetaTitle';
 import Container from '@material-ui/core/Container';
-import About from './components/About';
-import DoctorsSay from './components/DoctorsSay';
-import ReviewsBK from './components/ReviewsBK';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -77,22 +67,7 @@ const IndexView = ({ themeMode }) => {
           <Hero />
         </Container>
       </Section>
-      {/* <Section className={classes.sectionTop}>
-        <Container fixed>
-          <About />
-          <Appointment/>
-          <Articles/>
-          <BannerPage />
 
-          <DoctorsSay/>
-          <ProductBox/>
-          <Search/>
-          <SearchLocation/>
-
-          <ReviewsBK/>
-
-        </Container>
-      </Section> */}
       <Section className={classes.sectionTop}>
         <Container fixed>
           <PatientConsult />
@@ -101,7 +76,10 @@ const IndexView = ({ themeMode }) => {
 
       <Section
         className={classes.sectionTop}
-        style={{ backgroundColor: '#f8f8fb' }}
+        style={{ backgroundColor: '#fff',    
+        backgroundImage: 'url(http://localhost:3000/_next/static/media/package_bg.0ac84d6e537095706a0a8c8a7d5a29bf.jpg)',
+        backgroundSize:' 100%',
+        backgroundRepeat: 'no-repeat' }}
       >
         <Container fixed>
           <Packages />
@@ -123,15 +101,16 @@ const IndexView = ({ themeMode }) => {
         </Container>
       </Section>
 
-      <Section
-        className={classes.sectionTop}
-      >
+      <Section className={classes.sectionTop}>
         <Container fixed>
           <UserSay />
         </Container>
       </Section>
 
-      <Section className={classes.sectionTop} style={{backgroundColor:'#fff'}}>
+      <Section
+        className={classes.sectionTop}
+        style={{ backgroundColor: '#fff' }}
+      >
         <Container fixed>
           <CustomerRatings />
         </Container>

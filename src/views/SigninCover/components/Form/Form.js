@@ -24,12 +24,6 @@ const schema = {
       message: 'must be 10 digit',
     },
   },
-  // password: {
-  //   presence: { allowEmpty: false, message: 'is required' },
-  //   length: {
-  //     minimum: 8,
-  //   },
-  // },
 };
 
 const Form = () => {
@@ -133,8 +127,10 @@ const Form = () => {
               variant="outlined"
               size="medium"
               name="mobile"
-              onInput={(e)=>{ 
-                e.target.value = Math.max(0, parseInt(e.target.value) ).toString().slice(0,10)
+              onInput={e => {
+                e.target.value = Math.max(0, parseInt(e.target.value))
+                  .toString()
+                  .slice(0, 10);
               }}
               fullWidth
               helperText={
@@ -164,23 +160,6 @@ const Form = () => {
             >
               Sign in
             </Button>
-          </Grid>
-          <Grid item xs={12}>
-            {/* <Typography
-              variant="subtitle1"
-              color="textSecondary"
-              align="center"
-            >
-              Forgot your password?{' '}
-              <Link href="/password-reset">
-                <a>
-                  <LearnMoreLink
-                    title="Reset password"
-                    // href="/password-reset-cover"
-                  />
-                </a>
-              </Link>
-            </Typography> */}
           </Grid>
         </Grid>
       </form>

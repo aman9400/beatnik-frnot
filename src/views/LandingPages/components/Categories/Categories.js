@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Button, Grid } from '@material-ui/core';
 import { Image, LearnMoreLink } from 'components/atoms';
 import Link from 'next/link';
-import { SectionHeader, DescriptionCta } from 'components/molecules';
+import {  DescriptionCta } from 'components/molecules';
 import { DescriptionListIcon, CardBase } from 'components/organisms';
 
 const useStyles = makeStyles(theme => ({
@@ -41,13 +41,9 @@ const Categories = props => {
 
   return (
     <div className={className} {...rest}>
-      {/* <SectionHeader
-        title="Consult top doctors online for any health concern"
-        subtitle="Private online consultations with verified doctors in all specialists"
-        align="left"
-      /> */}
+
       <DescriptionCta
-        title="Consult top doctors online for any health concern "
+        title=" top doctors online for any health concern "
         subtitle="Private online consultations with verified doctors in all specialists"
         primaryCta={
           <Button variant="outlined" color="primary" size="large">

@@ -10,12 +10,10 @@ import {
   List,
   ListItem,
   Typography,
-  IconButton,
   Box,
   Grid,
 } from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
-import { Image, DarkModeToggler } from 'components/atoms';
+import { Image } from 'components/atoms';
 import { useMediaQuery } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
@@ -86,11 +84,7 @@ const useStyles = makeStyles(theme => ({
     fontWeight: 600,
     fontSize: '15px',
   },
-  topHeaderItem: {
-    // padding: '5px 0',
-    // borderBottom: '1px solid #ff2200',
-    // background: '#fff4f2',
-  },
+
   listItemButton: {
     whiteSpace: 'nowrap',
   },
@@ -120,7 +114,7 @@ const useStyles = makeStyles(theme => ({
     height: 'auto',
     width: '160px',
     display: 'block',
-    top:'-14px',
+    top: '-14px',
   },
   menu: {
     display: 'flex',
@@ -152,23 +146,17 @@ const Topbar = ({
   ...rest
 }) => {
   const classes = useStyles();
-
   const [anchorEl, setAnchorEl] = useState(null);
   const [openedPopoverId, setOpenedPopoverId] = useState(null);
-
-  const handleClick = (event, popoverId) => {
-    setAnchorEl(event.target);
-    setOpenedPopoverId(popoverId);
-  };
+  const router = useRouter();
+  const landings = pages.landings;
+  const supportedPages = pages.pages;
+  const account = pages.account;
 
   const handleClose = () => {
     setAnchorEl(null);
     setOpenedPopoverId(null);
   };
-  const router = useRouter();
-  const landings = pages.landings;
-  const supportedPages = pages.pages;
-  const account = pages.account;
 
   const MenuGroup = props => {
     const { item } = props;
@@ -352,11 +340,11 @@ const Topbar = ({
       <Grid
         container
         justify="flex-end"
-        className={clsx(classes.topHeaderItem, 'topHeaderItem ')}
+        className={clsx(classes.toolbar, ' top_menu')}
       >
         {isMd ? (
           <Box mr={4}>
-            <List disablePadding className={classes.upMenu}>
+            <List disablePadding className={clsx(classes.toolbar)}>
               {nameTopMenuBar.map(menuTopName => (
                 <Link
                   key={menuTopName._id}
@@ -452,19 +440,6 @@ const Topbar = ({
               </Link>
             ))}
           </List>
-        </Hidden>
-        <Hidden mdUp>
-          <DarkModeToggler
-            themeMode={themeMode}
-            onClick={() => themeToggler()}
-          />
-          <IconButton
-            className={classes.iconButton}
-            onClick={onSidebarOpen}
-            aria-label="Menu"
-          >
-            <MenuIcon />
-          </IconButton>
         </Hidden>
       </Toolbar>
     </div>
