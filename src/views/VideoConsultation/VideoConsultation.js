@@ -6,6 +6,9 @@ import { makeStyles } from '@material-ui/core';
 import WorkingProcess from './components/WorkingProcess';
 import ReviewsBK from 'views/LandingPages/components/ReviewsBK';
 import { ProductBox } from 'views/LandingPages/components';
+import WhyUseAarogya from './components/WhyUseAarogya';
+import DownloadApp from './components/DownloadApp';
+import FAQConsult from './components/FAQConsult';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -31,18 +34,31 @@ const VideoConsultation = () => {
 
       <VideoConsultBanner />
       <Section
-        style={{
-
-          padding: '20px 64px',
-        }}
       >
         <WorkingProcess />
       </Section>
-      <Section>
+      <Section style={{backgroundColor: '#fff'}}>
         <ReviewsBK />
       </Section>
       <Section>
         <ProductBox />
+      </Section>
+      <Section style={{backgroundColor: '#fff'}}>
+        <WhyUseAarogya/>
+      </Section>
+      <Section>
+        <FAQConsult/>
+      </Section>
+      <Section
+      style={{
+        backgroundImage:
+          'linear-gradient(45deg,#ff23010f 25%,transparent 25% ),linear-gradient(135deg,#ff23010f 25%,transparent 25% ),linear-gradient(45deg,transparent 75%,#ff23010f 75% ),linear-gradient( 135deg,transparent 75%,#ff23010f 75% )',
+        backgroundSize: '-4px 9px',
+        backgroundPosition: '0px 0px, 0px 0px, 0 0px, 0px 0px',
+        borderRadius: '0px 0px 0px 0px',
+      }}
+      >
+       <DownloadApp/>
       </Section>
     </div>
   );

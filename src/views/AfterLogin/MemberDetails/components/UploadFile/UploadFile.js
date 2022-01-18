@@ -61,10 +61,8 @@ const stylesss = makeStyles((theme) => ({
 ));
 
 export default function CustomizedDialogs(props) {
-    // const [open, setOpen] = React.useState(false);
     const classes = stylesss();
 
-    // Code for Dropzone File
     const [open, setOpen] = React.useState(false);
       const [fileObjects, setFileObjects] = React.useState([]);
 
@@ -78,9 +76,6 @@ export default function CustomizedDialogs(props) {
           </IconButton>
         </>
       );
-      // Code for DropZone File Ends
-
-      // Code for Another Dialog Box 
    
       const [opens, setOpens] = React.useState(false);
       const [filess, setFiless] = React.useState();
@@ -97,33 +92,7 @@ export default function CustomizedDialogs(props) {
           var dt =  document.getElementById('myInput').textContent;  
           alert(dt)
       }
-      // Record Store in Array 
-      
-      
-    
-    
 
-   
-         //setArray(oldArray => [...oldArray,empArray]);
-   
-      //  const  empArrays = [
-      //     {"name":filess ? filess.[0].file.name : null},
-      //     {"type":filess ? filess.[0].file.type : null},
-      //     {"fileSize":filess ? filess.[0].file.size : null}]
-
-     
-     
-     
-     
-     // fruits.push("Kiwi");
-
-      // const myObjStr = JSON.stringify(reactJson);
-   
-      // console.log("My All Images are ",array);
-
-      // console.log("My Json Response",array);
-      //  const myObjStr = JSON.stringify(empArray);
-      //  console.log(myObjStr);
 
        const documentUpload = (values) =>
        {
@@ -140,41 +109,21 @@ export default function CustomizedDialogs(props) {
           `${process.env.NEXT_PUBLIC_DB_HOST}/api/post-contact`,
           {
             method: 'post',
-            // mode: 'no-cors',
-            // headers: new Headers({
-            //   Accept: 'application/json',
-            // }),
+ 
             body: data,
           },
         )
           .then(response => response.json())
           .then(result => {
             console.log('Success:', result);
-            // console.log(result);
 
-            // setStatusBase({
-            //   key: 22,
-            //   status: 'success',
-            //   msg:
-            //     'Your application for the' +
-            //     values.jobName +
-            //     'job has been successfully submitted.',
-            // });
-            // setSubmitting(false);
-            // resetForm(values);
           })
           .catch(error => {
-            // setStatusBase({
-            //   key: 22,
-            //   status: 'error',
-            //   msg: error,
-            // });
+  
             console.log(error)
           });
        }
 
-
-       /// Code for maing array 
 
       const [mystatess,setMystate] = useState([]);
 
@@ -194,38 +143,12 @@ export default function CustomizedDialogs(props) {
            
         ])
 
-        
-       
-      
-
-
-        
-        // console.log("Given new array",mystatess);
          console.log("This is Big Array",mystatess);
-
-        // const myObjStr = JSON.stringify(bigarray);
-        // console.log("JSON Array Data is here",myObjStr);
-
-       // alert(myObjStr)
 
       }
         
    
        const [mystatesss,setMystates] = useState([]);
-      //  setMystate([...autodata,autodata]);
-
-        // const autoShowing = () =>
-        //     {
-        //        setMystates([...autodata,autodata]);
-        //        console.log("my array can be",mystatess)
-        //     }
-     
-
-      //  const autoShowing = () =>
-      //  {
-      //    alert(autodata)
-      //    console.log("Hello I am ",autodata)
-      //  }
 
        console.log("Hello I am ",autodata)
 
@@ -240,10 +163,20 @@ export default function CustomizedDialogs(props) {
   return (
  <div>
   <Grid item xs={12} lg={12}>
-    <Button variant="contained" color="primary" onClick={() => setOpen(true)}>
+    <p style={{float: 'left',
+    padding: '10px 20px',
+    backgroundColor: '#f1f1f1 !important',
+    width: '100%',
+    border: 'var(--border)',
+    borderRadius: '5px',
+    cursor: 'pointer',
+    marginTop: '10px',
+    marginBottom: '20px',
+    fontWeight:'600',
+    }} variant="contained" color="primary" onClick={() => setOpen(true)}>
       Add New Medical Record 
-      {/* {filess ? filess.[0].file.name : null } */}
-    </Button>
+
+    </p>
     
     <DropzoneDialogBase
         dialogTitle={dialogTitle()}
@@ -251,7 +184,8 @@ export default function CustomizedDialogs(props) {
         fileObjects={fileObjects}
         cancelButtonText={"cancel"}
         submitButtonText={"submit"}
-        maxFileSize={5000000}
+        filesLimit={10}
+        maxFileSize={50000000}
         open={open}
         dropzoneClass={classes.dropZones}
         onAdd={newFileObjs => {

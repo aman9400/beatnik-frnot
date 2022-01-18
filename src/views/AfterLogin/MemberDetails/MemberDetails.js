@@ -1,349 +1,585 @@
-import React, { Suspense, lazy, useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Table,
+  IconButton,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  TextField,
   Typography,
   Paper,
   Box,
   Grid,
-  Button,
+  Menu,
   MenuItem,
+  Select,
+  Avatar,
 } from '@material-ui/core';
-// Picker
-
-import MaterialTable, { MTableBodyRow } from 'material-table';
-import { forwardRef } from 'react';
-
-import AddBox from '@material-ui/icons/AddBox';
-import ArrowDownward from '@material-ui/icons/ArrowDownward';
-import Check from '@material-ui/icons/Check';
-import ChevronLeft from '@material-ui/icons/ChevronLeft';
-import ChevronRight from '@material-ui/icons/ChevronRight';
-import Clear from '@material-ui/icons/Clear';
-import FilterList from '@material-ui/icons/FilterList';
-import FirstPage from '@material-ui/icons/FirstPage';
-import LastPage from '@material-ui/icons/LastPage';
-import Remove from '@material-ui/icons/Remove';
-import SaveAlt from '@material-ui/icons/SaveAlt';
-import Search from '@material-ui/icons/Search';
-import ViewColumn from '@material-ui/icons/ViewColumn';
-import axios from 'axios';
-import Select from '@material-ui/core/Select';
-import WhatsAppIcon from '@material-ui/icons/WhatsApp';
-import VisibilityIcon from '@material-ui/icons/Visibility';
-import ShareIcon from '@material-ui/icons/Share';
-import Menu from '@material-ui/core/Menu';
-import UploadFile from './components/UploadFile';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import GetAppIcon from '@material-ui/icons/GetApp';
-import EmailIcon from '@material-ui/icons/Email';
-import  Breadcrumb  from '../Reusable/MediBreadcrumb';
-import { FileIcon, defaultStyles } from 'react-file-icon';
+import AvatarGroup from '@material-ui/lab/AvatarGroup';
+import AddIcon from '@material-ui/icons/Add';
+import Breadcrumb from '../Reusable/MediBreadcrumb';
+import validator from 'validator';
 import MetaTitle from '../../../components/helper/MetaTitle';
+import UploadFile from './components/UploadFile';
+import ShareIcon from '@material-ui/icons/Share';
+import styles from './MemberDetails.module.css';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+import WhatsAppIcon from '@material-ui/icons/WhatsApp';
+import OpenInNewIcon from '@material-ui/icons/OpenInNew';
+import Swal from "sweetalert2"; 
+import { checkToken } from '../../../components/helper/LoginCheck';
+const useStyles = makeStyles(theme => ({
+  root: {
+    '& > *': {
+      margin: theme.spacing(0),
+      overflow: 'hidden',
+      // width:"960px",
+    },
+  },
+  tableButton: {
+    backgroundColor: '#e0e0e0',
+    fontWeight: 600,
+    padding: theme.spacing(1),
+    '&:hover': {
+      backgroundColor: '#FF0010',
+      color: 'white',
+    },
+    height: '27px',
+    fontSize: '13px',
+  },
+  search: {
+    background: '#ebeef1',
+    padding: '3px 10px',
+    borderRadius: '5px',
+  },
+  icon: {
+    fontSize: '13px',
+  },
+  headerWidth: {
+    width: '150px',
+    backgroundColor: '#ebeef1',
+    padding: '10px !important',
+  },
+}));
 
+class MemberDetails extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      users: [],
+      isDeleteUserDialogOpen: false,
+      scroll: true,
+      isUserFormDialogOpen: false,
+      indexToDeleteOrUpdate: '',
+      act: 0, //0-Create_User || 1-Update_User
+    };
+    this.userFormSubmit = this.userFormSubmit.bind(this);
+    this.deleteUser = this.deleteUser.bind(this);
+    this.setAnchorEl = this.setAnchorEl.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+  }
 
-function MemberDetails() {
-  const tableIcons = {
-    Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
-    Clear: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
-    // Delete: forwardRef((props, ref) => <VisibilityIcon onClick={clickMe} style={{color:"#2d91a7"}} {...props} ref={ref} />),
-    // View: forwardRef((props, ref) => <DeleteOutline {...props} ref={ref} />),
-    DetailPanel: forwardRef((props, ref) => (
-      <ChevronRight {...props} ref={ref} />
-    )),
-    Edit: forwardRef((props, ref) => (
-      <ShareIcon style={{ color: 'green' }} {...props} ref={ref} />
-    )),
-    Export: forwardRef((props, ref) => <SaveAlt {...props} ref={ref} />),
-    Filter: forwardRef((props, ref) => <FilterList {...props} ref={ref} />),
-    FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
-    LastPage: forwardRef((props, ref) => <LastPage {...props} ref={ref} />),
-    NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
-    PreviousPage: forwardRef((props, ref) => (
-      <ChevronLeft {...props} ref={ref} />
-    )),
-    ResetSearch: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
-    Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
-    SortArrow: forwardRef((props, ref) => (
-      <ArrowDownward {...props} ref={ref} />
-    )),
-    ThirdStateCheck: forwardRef((props, ref) => (
-      <Remove {...props} ref={ref} />
-    )),
-    ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
+  // Create User Section Starts //
+
+  handleOpenCreateUserDialog = () => {
+    this.setState({ isUserFormDialogOpen: true });
   };
 
-  const api = axios.create({
-    baseURL: `http://localhost:8000/api`,
-  });
-
-  const useStyles = makeStyles(theme => ({
-    root: {
-      '& > *': {
-        margin: theme.spacing(0),
-        overflow: 'hidden',
-        // width:"960px",
-      },
-    },
-    tableButton: {
-      backgroundColor: '#e0e0e0',
-      fontWeight: 600,
-      padding: theme.spacing(1),
-      '&:hover': {
-        backgroundColor: '#FF0010',
-        color: 'white',
-      },
-      height: '27px',
-      fontSize: '13px',
-    },
-    icon: {
-      fontSize: '13px',
-    },
-    headerWidth: {
-      width: '170px',
-    },
-  }));
-
-  const classes = useStyles();
-  var columns = [
-     {
-     // field: 'name',
-     render: row => (
-
-         <div className="fileIcon">
-          <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}><ShareIcon/></Button>
-         </div>
-     ),},
-
-    { title: 'id', field: 'id', hidden: true },
-    {
-      title: <h4 class={classes.headerWidth}>File Name</h4>,
-      // field: 'name',
-      render: row => (
-        <Box>
-          <div className="fileIcon">
-            <FileIcon
-              size={10}
-              labelTextColor="#fff"
-              labelColor="#ec3832"
-              type={row.type}
-              extension={row.extension}
-            />
-          </div>
-          {row.name}
-        </Box>
-      ),
-    },
-    {
-      title: <h4 class={classes.headerWidth}>File Caption</h4>,
-      field: 'caption',
-    },
-    {
-      title: <h4 class={classes.headerWidth}>File Size</h4>,
-      field: 'fileSize',
-    },
-    {
-      title: <h4 class={classes.headerWidth}>Upload Date</h4>,
-      field: 'uploadDate',
-    },
-    {
-      title: <h4 class={classes.headerWidth}>Uploaded By</h4>,
-      field: 'uploadedBy',
-    },
-
-    {
-      title: <h4 class={classes.headerWidth}>Verification Status</h4>,
-      field: 'verification',
-    },
-  ];
-
-  const datas = [
-    {
-      id: 1,
-      name: 'blood-sugar-tests.pdf',
-      fileSize: '10 MB',
-      uploadDate: '22/03/2021',
-      uploadedBy: 'Arjun',
-      verification: 'Pending',
-      caption: 'blood sugar tests',
-      type: 'acrobat',
-      extension: 'pdf',
-    },
-    {
-      id: 1,
-      name: 'liver-function-tests.png',
-      fileSize: '20 MB',
-      uploadDate: '12/11/2020',
-      uploadedBy: 'Rulap',
-      verification: 'Processing',
-      caption: 'liver function tests',
-      type: 'image',
-      extension: 'png',
-    },
-    {
-      id: 1,
-      name: 'kidney-function-tests.doc',
-      fileSize: '32 MB',
-      uploadDate: '22/02/1990',
-      uploadedBy: 'Arjun',
-      verification: 'Completed',
-      caption: 'kidney function tests',
-      type: 'document',
-      extension: 'doc',
-    },
-    {
-      id: 1,
-      name: 'blood-sugar-tests.pdf',
-      fileSize: '222 KB',
-      uploadDate: '22/21/2021',
-      uploadedBy: 'Hemant',
-      verification: 'Pending',
-      caption: 'blood sugar tests',
-      type: 'acrobat',
-      extension: 'pdf',
-    },
-    {
-      id: 1,
-      name: 'blood-sugar-tests.pdf',
-      fileSize: '120 KB',
-      uploadDate: '22/21/2021',
-      uploadedBy: 'Arjun',
-      verification: 'Pending',
-      caption: 'blood sugar tests',
-      type: 'acrobat',
-      extension: 'pdf',
-    },
-    {
-      id: 1,
-      name: 'blood-sugar-tests.pdf',
-      fileSize: '10 MB',
-      uploadDate: '22/21/2021',
-      uploadedBy: 'Johny',
-      verification: 'Processing',
-      caption: 'blood sugar tests',
-      type: 'acrobat',
-      extension: 'pdf',
-    },
-    {
-      id: 1,
-      name: 'blood-sugar-tests.pdf',
-      fileSize: '10 MB',
-      uploadDate: '22/21/2021',
-      uploadedBy: 'Deba',
-      verification: 'Processing',
-      caption: 'blood sugar tests',
-      type: 'acrobat',
-      extension: 'pdf',
-    },
-    {
-      id: 1,
-      name: 'blood-sugar-tests.pdf',
-      fileSize: '10 MB',
-      uploadDate: '22/21/2011',
-      uploadedBy: 'Deband',
-      verification: 'Pending',
-      caption: 'blood sugar tests',
-      type: 'acrobat',
-      extension: 'pdf',
-    },
-  ];
-
-  const [data, setData] = useState([]); //table data
-
-  const [selected, setSelected] = useState('Dropdown');
-
-  const [value, setValue] = React.useState(2);
-
-  // Record Filter on Select Member
-  const [filterdata, setFilterdata] = useState(datas);
-  const [filter, setFilter] = useState(false);
-  const [name, setName] = React.useState('showall');
-
-  const handleChange = event => {
-    setFilter(!filter);
+  handleCloseCreateUserDialog = () => {
+    this.setState({ isUserFormDialogOpen: false, act: 0 });
   };
 
-  useEffect(() => {
-    setFilterdata(
-      name === 'showall' ? datas : datas.filter(dt => dt.uploadedBy === name),
-    );
-  }, [name]);
+  userFormSubmit(event) {
+    event.preventDefault();
+    const act = this.state.act;
+    const form = event.target;
 
-  // Tab of Table
+    const patient_name = form.elements['patient_name'].value;
+    const file_description = form.elements['file_description'].value;
+    const source_of_file = form.elements['source_of_file'].value;
+    const date_of_upload = form.elements['date_of_upload'].value;
+    if (
+      validator.trim(patient_name) === '' ||
+      validator.trim(file_description) === '' ||
+      validator.trim(source_of_file) === '' ||
+      validator.trim(date_of_upload) === ''
+    ) {
+      alert('Please fill the Required Fields');
+    } else {
+      if (act === 0) {
+        let users = this.state.users;
+        let data = {
+          patient_name,
+          file_description,
+          source_of_file,
+          date_of_upload,
+        };
+        users.push(data);
+        this.setState({ users: users, isUserFormDialogOpen: false });
+      }
+      if (act === 1) {
+        let index = this.state.indexToDeleteOrUpdate;
+        let users = this.state.users;
+        const form = event.target;
+        users[index].patient_name = form.elements['patient_name'].value;
+        users[index].file_description = form.elements['file_description'].value;
+        users[index].source_of_file = form.elements['source_of_file'].value;
+        users[index].date_of_upload = form.elements['date_of_upload'].value;
+        this.handleCloseCreateUserDialog();
+      }
+    }
+  }
 
+  renderCreateUserForm = () => {
+    const act = this.state.act;
+    let patient_name = '';
+    let title = '';
+    let buttonText = '';
+    let file_description = '';
+    let source_of_file = '';
+    let date_of_upload = '';
+    let disabled = false;
+    if (act === 0) {
+      title = 'Create User';
+      buttonText = 'Create';
+    }
+    if (act === 1) {
+      title = 'Update User';
+      buttonText = 'Update';
+      const index = this.state.indexToDeleteOrUpdate;
+      let users = this.state.users[index];
+      disabled = true;
+      patient_name = users.patient_name;
+      file_description = users.file_description;
+      source_of_file = users.source_of_file;
+      date_of_upload = users.date_of_upload;
+    }
 
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    return (
+      <Dialog
+        className={(styles.member_record_dialog, 'member_record_dialog')}
+        scroll={this.scroll}
+        open={this.state.isUserFormDialogOpen}
+        onClose={this.handleCloseCreateUserDialog}
+      >
+        <DialogTitle className={styles.user_record_data} id="form-dialog-title">
+          {title}
+        </DialogTitle>
+        <form onSubmit={this.userFormSubmit} noValidate autoComplete="off">
+          <DialogContent dividers={this.scroll === 'paper'}>
+            <DialogContentText>Enter User Details</DialogContentText>
 
-    const handleClick = (event) => {
-      setAnchorEl(event.currentTarget);
-    };
-  
-    const handleClose = () => {
-      setAnchorEl(null);
-    };
-  
-
-  return (
-  <div className="member-detail">
-    <MetaTitle title={`Medifile Member Details | OnlineAarogya`} metaKeyWord="" metaDescription="" />
-    <Breadcrumb url="Member Details"/>
-    <div style={{ padding: 26 }}>
-      <Grid container>
-        <Grid item xs={12}>
-          <div className={classes.root}>
-            <Paper elevation={0}>
-              <Grid container>
+            <div className="textFieldContainer">
+              <Grid container spacing={3}>
                 <Grid item xs={12}>
-                  <Box mt={2} mb={4} display="flex">
-                    <UploadFile />
-                    <Select
-                      labelId="demo-simple-select-label"
-                      id="demo-simple-select"
-                      value={name}
-                      onChange={e => setName(e.target.value)}
-                      style={{ marginLeft: '-240px' }}
-                    >
-                      <MenuItem value="showall">Select Member</MenuItem>
-                      <MenuItem value="Johny">Johny</MenuItem>
-                      <MenuItem value="Deba">Deba</MenuItem>
-                      <MenuItem value="Ranju">Ranju</MenuItem>
-                      <MenuItem value="Arjun">Arjun</MenuItem>
-                    </Select>
-                  </Box>
-
-                 </Grid>
-                <Grid item xs={12}>
-                  <MaterialTable
-                    icons={tableIcons}
-                    title="Member Details"
-                    options={{
-                      search: true,
-                    }}
-                    columns={columns}
-                    data={filterdata}
-                    
+                  <TextField
+                    className={styles.input_field}
+                    id="patient_name"
+                    label="Patient Name"
+                    variant="outlined"
+                    defaultValue={patient_name}
+                    disabled={disabled}
+                    required
                   />
-                 
+
+                  <div className={styles.input_field}>
+                    <p>Upload Reports </p>
+                    <UploadFile />
+                  </div>
+                  <TextField
+                    className={styles.input_field}
+                    id="file_description"
+                    label="File Description"
+                    variant="outlined"
+                    defaultValue={file_description}
+                    required
+                  />
+
+                  <TextField
+                    className={styles.input_field}
+                    id="source_of_file"
+                    label="Source Of File"
+                    variant="outlined"
+                    type="number"
+                    defaultValue={source_of_file}
+                    required
+                  />
+
+                  <TextField
+                    className={styles.input_field}
+                    id="date_of_upload"
+                    label="Date Of Upload"
+                    variant="outlined"
+                    defaultValue={date_of_upload}
+                    required
+                  />
                 </Grid>
               </Grid>
-            </Paper>
-          </div>
-        </Grid>
-      </Grid>
+            </div>
+          </DialogContent>
+          <DialogActions className={styles.user_record_data_action}>
+            <Button
+              onClick={this.handleCloseCreateUserDialog}
+              color="primary"
+              variant="outlined"
+            >
+              Cancel
+            </Button>
+            <Button color="primary" type="submit" variant="contained">
+              {buttonText}
+            </Button>
+          </DialogActions>
+        </form>
+      </Dialog>
+    );
+  };
+
+  // Create User Section Ends //
+
+  // Show User Details Section Starts //
+
+  renderTableHead = () => {
+    return (
+      <TableHead>
+        <TableRow className={styles.table_head}>
+          <TableCell>Sr. No.</TableCell>
+          <TableCell>Patient Name</TableCell>
+          <TableCell>File Description</TableCell>
+          <TableCell>Source of File</TableCell>
+          <TableCell>Date Of Upload </TableCell>
+          <TableCell>Status</TableCell>
+          <TableCell>Share</TableCell>
+          <TableCell>Actions</TableCell>
+        </TableRow>
+      </TableHead>
+    );
+  };
+  handleClick(event) {
+    this.setAnchorEl(event.currentTarget);
+  }
+  setAnchorEl(value) {
+    this.setState({
+      anchorEl: value,
+      open: !this.state.open,
+    });
+  }
+  handleClose() {
+    this.setAnchorEl(null);
+  }
+  HandleClick() {  
+    Swal.fire({  
+      title: 'Are you sure?',  
+      text: 'Your order has been placed.',  
+      icon: 'warning',  
+      showCancelButton: true,  
+      confirmButtonColor: '#3085d6',  
+      cancelButtonColor: '#d33',  
+      confirmButtonText: 'Yes!'  
+    });  
+  }  
+  renderMenu() {
+    return (
       <Menu
-          id="simple-menu"
-          anchorEl={anchorEl}
-          keepMounted
-          open={Boolean(anchorEl)}
-          onClose={handleClose}
-        >
-          <MenuItem onClick={handleClose}><Typography color="primary">  <WhatsAppIcon style={{color:"green",fontSize:"19px",marginTop:"4px"}}/> </Typography><Button  >WhatsApp</Button></MenuItem>
-          <MenuItem onClick={handleClose}><Typography color="primary"><GetAppIcon  style={{color:"#4b4bb2",fontSize:"19px",marginTop:"4px"}} /> </Typography><Button  >Download</Button></MenuItem>
-          <MenuItem onClick={handleClose}><Typography color="primary"> <EmailIcon  style={{color:"#957982",fontSize:"19px",marginTop:"4px"}} /> </Typography><Button  >Download</Button></MenuItem>
-     </Menu>
-     </div>
-    </div>
-  );
+        id="fade-menu"
+        className={styles.share_sub_menu}
+        anchorEl={this.state.anchorEl}
+        open={this.state.open}
+        onClose={this.handleClose}
+      >
+        <MenuItem target="_blank" onClick={this.handleClose}>
+          <WhatsAppIcon />
+          What's App
+        </MenuItem>
+        <MenuItem target="_blank" onClick={this.handleClose}>
+          <WhatsAppIcon />
+          What's App
+        </MenuItem>
+        <MenuItem target="_blank" onClick={this.handleClose}>
+          <WhatsAppIcon />
+          What's App
+        </MenuItem>
+        <MenuItem target="_blank" onClick={this.handleClose}>
+          <WhatsAppIcon />
+          What's App
+        </MenuItem>
+      </Menu>
+    );
+  }
+  renderTableBody = () => {
+    return (
+      <TableBody>
+        {this.state.users.map((user, index) => {
+          return (
+            <TableRow key={user.id}>
+              <TableCell component="th" scope="row">
+                {' '}
+                {index + 1}{' '}
+              </TableCell>
+              <TableCell>{user.patient_name}</TableCell>
+              <TableCell>{user.file_description}</TableCell>
+              <TableCell>{user.source_of_file}</TableCell>
+              <TableCell>{user.date_of_upload}</TableCell>
+              <TableCell>
+                <b>Pending</b>
+              </TableCell>
+              <TableCell>
+                <IconButton onClick={this.handleClick} aria-label="share">
+                  <ShareIcon />
+                </IconButton>
+                {this.renderMenu()}
+              </TableCell>
+              <TableCell>
+                <IconButton
+                  onClick={this.handleOpenUpdateUserDialog.bind(this, index)}
+                  variant="outlined"
+                  color="secondary"
+                  aria-label="Edit"
+                >
+                  <EditIcon />
+                </IconButton>
+                <IconButton
+                  onClick={this.handleOpenDeleteUserDialog.bind(this, index)}
+                  variant="outlined"
+                  color="primary"
+                  aria-label="delete"
+                >
+                  <DeleteIcon />
+                </IconButton>
+                <IconButton
+                  onClick={this.HandleClick}
+                  variant="outlined"
+                  color="primary"
+                  aria-label="delete"
+                >
+                  <OpenInNewIcon />
+                </IconButton>
+             
+              </TableCell>
+            </TableRow>
+          );
+        })}
+        <TableRow>
+          <TableCell component="th" scope="row">
+            1
+          </TableCell>
+          <TableCell>Som Nath Gupta</TableCell>
+          <TableCell>
+            <div className={styles.preview_img}>
+              <AvatarGroup max={4}>
+                <Avatar
+                  alt="Remy Sharp"
+                  src="https://tipsmake.com/data1/thumbs/how-to-extract-img-files-in-windows-10-thumb-bzxI4IDgg.jpg"
+                />
+                <Avatar
+                  alt="Travis Howard"
+                  src="https://tipsmake.com/data1/thumbs/how-to-extract-img-files-in-windows-10-thumb-bzxI4IDgg.jpg"
+                />
+                <Avatar
+                  alt="Cindy Baker"
+                  src="https://tipsmake.com/data1/thumbs/how-to-extract-img-files-in-windows-10-thumb-bzxI4IDgg.jpg"
+                />
+                <Avatar
+                  alt="Agnes Walker"
+                  src="https://tipsmake.com/data1/thumbs/how-to-extract-img-files-in-windows-10-thumb-bzxI4IDgg.jpg"
+                />
+                <Avatar
+                  alt="Trevor Henderson"
+                  src="https://tipsmake.com/data1/thumbs/how-to-extract-img-files-in-windows-10-thumb-bzxI4IDgg.jpg"
+                />
+              </AvatarGroup>
+            </div>
+          </TableCell>
+          <TableCell>som-nath-gupta-blood-suger-report</TableCell>
+          <TableCell>20/01/2022</TableCell>
+          <TableCell>
+            <b>Pending</b>
+          </TableCell>
+          <TableCell>
+            <IconButton onClick={this.handleClick} aria-label="share">
+              <ShareIcon />
+            </IconButton>
+            {this.renderMenu()}
+          </TableCell>
+          <TableCell>
+            <IconButton variant="outlined" color="secondary" aria-label="Edit">
+              <EditIcon />
+            </IconButton>
+            <IconButton variant="outlined" color="primary" aria-label="delete">
+              <DeleteIcon />
+            </IconButton>
+            <IconButton
+                  
+                  variant="outlined"
+                  color="primary"
+                  aria-label="delete"
+                >
+                  <OpenInNewIcon />
+                </IconButton>
+          </TableCell>
+        </TableRow>
+      </TableBody>
+    );
+  };
+
+  // Show User Details Section Ends //
+
+  //Update User Section Starts //
+
+  handleOpenUpdateUserDialog = (index, event) => {
+    this.setState({
+      isUserFormDialogOpen: true,
+      indexToDeleteOrUpdate: index,
+      act: 1,
+    });
+  };
+
+  // Update User Section Ends //
+
+  // Delete User Section Starts //
+
+  handleOpenDeleteUserDialog = (index, event) => {
+    this.setState({
+      isDeleteUserDialogOpen: true,
+      indexToDeleteOrUpdate: index,
+    });
+  };
+
+  handleCloseDeleteUserDialog = () => {
+    this.setState({ isDeleteUserDialogOpen: false });
+  };
+
+  renderDeleteUserDialog = index => {
+    return (
+      <Dialog
+        open={this.state.isDeleteUserDialogOpen}
+        onClose={this.isDeleteUserDialogOpen}
+        aria-labelledby="form-dialog-title"
+      >
+        <DialogTitle id="form-dialog-title">Delete User</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Are you sure you want to delete this user ?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={this.handleCloseDeleteUserDialog}
+            color="primary"
+            variant="outlined"
+          >
+            Cancel
+          </Button>
+          <Button
+            color="primary"
+            type="submit"
+            variant="contained"
+            onClick={this.deleteUser.bind(this, index)}
+          >
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
+    );
+  };
+
+  deleteUser = index => {
+    let users = this.state.users;
+    users.splice(index, 1);
+    this.setState({ users: users });
+    this.handleCloseDeleteUserDialog();
+  };
+
+  //Delete User Section Ends //
+
+  render() {
+    const { isUserFormDialogOpen } = this.state;
+    const { isDeleteUserDialogOpen } = this.state;
+    const { indexToDeleteOrUpdate } = this.state;
+    const { isUpdateUserDialogOpen } = this.state;
+    return (
+      <div className={styles.mdeifile_dashboard}>
+        <div className="member-detail">
+          <MetaTitle
+            title={`Medifile Member Details | OnlineAarogya`}
+            metaKeyWord=""
+            metaDescription=""
+          />
+
+          <div className={styles.medifiles_pannel}>
+            <div className={styles.medifile_dashboard}>
+              <h3 className={styles.medifile_head}>
+                Hi! Welcome to Medifiles{' '}
+              </h3>
+              <Breadcrumb url="Member Details" />
+            </div>
+
+            <Grid container className={styles.medifile_table_data}>
+              <Grid item xs={12}>
+                <div className={styles.root}>
+                  <Paper elevation={0}>
+                    <Grid container>
+                      <Grid item xs={12}>
+                        <Box className={styles.table_name} display="flex">
+                          <Typography variant="43" color="primary">
+                            Members Details
+                          </Typography>
+                        </Box>
+                      </Grid>
+                      <Grid item xs={12}>
+                        <Box className={styles.table_feature} display="flex">
+                          <Select
+                            labelId="demo-simple-select-label"
+                            className={styles.select_member}
+                            id="demo-simple-select"
+                            // value={name}
+                            // onChange={e => setName(e.target.value)}
+                          >
+                            <MenuItem value="showall">Select Member</MenuItem>
+                            <MenuItem value="Johny">Johny</MenuItem>
+                            <MenuItem value="Deba">Deba</MenuItem>
+                            <MenuItem value="Ranju">Ranju</MenuItem>
+                            <MenuItem value="Arjun">Arjun</MenuItem>
+                          </Select>
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={this.handleOpenCreateUserDialog}
+                          >
+                            <AddIcon /> Add User
+                          </Button>
+                        </Box>
+                      </Grid>
+                      <Grid className={styles.table_container}>
+                        {isUserFormDialogOpen && this.renderCreateUserForm()}
+                        <br /> <br />
+                        <Table className="UserTable">
+                          {this.renderTableHead()}
+                          {this.renderTableBody()}
+                        </Table>
+                        {isDeleteUserDialogOpen &&
+                          this.renderDeleteUserDialog(indexToDeleteOrUpdate)}
+                        {isUpdateUserDialogOpen &&
+                          this.renderCreateUserForm(indexToDeleteOrUpdate)}
+                      </Grid>
+                    </Grid>
+                  </Paper>
+                </div>
+              </Grid>
+            </Grid>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 export default MemberDetails;

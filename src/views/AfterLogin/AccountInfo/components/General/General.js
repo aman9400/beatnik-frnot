@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+import styles from './General.module.css';
 import {
   useMediaQuery,
   Grid,
@@ -113,7 +114,7 @@ const General = props => {
 
   return (
     // <div className={className} {...rest}>
-    <div className="praveenk">
+    <div className={styles.som_account_info}>
        <MetaTitle title={`Account Info | OnlineAarogya`} metaKeyWord="" metaDescription="" />
       <AppBar position="static" color="" className={classes.tabHeader}>
         <Tabs
@@ -124,6 +125,7 @@ const General = props => {
           variant="scrollable"
           scrollButtons="auto"
           aria-label="scrollable auto tabs example"
+          className="account_info_profile"
         >
           <Tab label="Profile" {...a11yProps(0)} />
           <Tab label="Medial" {...a11yProps(1)} />

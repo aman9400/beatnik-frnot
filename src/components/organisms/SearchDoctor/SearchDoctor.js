@@ -242,10 +242,10 @@ const SearchDoctor = props => {
                 variant="contained"
                 style={{
                   height: '3.8em',
-                  width: '100%',
+                  width: '150px',
                   borderRadius: '0px',
-                  position: 'relative',
-                  left: '40px',
+                  position: 'absolute',
+                  right: '0px',
                 }}
                 size="large"
                 color="primary"

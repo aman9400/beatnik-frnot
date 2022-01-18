@@ -6,12 +6,11 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const styless = makeStyles((theme) => ({
   breadCrum: {
-    backgroundColor:"aliceblue",
     padding: "5px",
     position:"relative",
     top:"0px",
     '& ol':{
-      marginLeft:"58px"
+      marginLeft:"0px"
     }
   },
  
@@ -24,17 +23,7 @@ const Breadcrumb = props => {
 
   return (
     <div className={className} {...rest}>
-      <Breadcrumbs aria-label="breadcrumb" className={classes.breadCrum}>
-        {/* {data.map((item, index) => (
-          <span key={index}>
-            {item.isActive ? (
-              <Typography color="textPrimary">{item.title}</Typography>
-            ) : (
-              <Link href={item.href}>{item.title}</Link>
-            )}
-          </span>
-        ))} */}
-      
+      <Breadcrumbs className="breadcrumb_medefile">
         <Link href="/">Home</Link>
         <Link href="/account">Account</Link>
         <Typography color="textPrimary">{props.url}</Typography>

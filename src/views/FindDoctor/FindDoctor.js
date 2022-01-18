@@ -2,7 +2,15 @@ import React from 'react';
 import FindDoctorsBanner from './components/FindDoctorBanner';
 import { Section } from 'components/organisms';
 import MetaTitle from 'components/helper/MetaTitle';
-import WorkingProcess from './components/WorkingProcess';
+import PatientConsult from './../LandingPages/components/PatientConsult';
+import Hero from './../LandingPages/components/Hero';
+import Packages from './../LandingPages/components/Packages';
+import DownloadApp from './../LandingPages/components/DownloadApp';
+import UserSay from './../LandingPages/components/UserSay';
+import CustomerRatings from './../LandingPages/components/CustomerRatings';
+import News from './../LandingPages/components/News';
+
+import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles(theme => ({
   root: {
@@ -32,11 +40,58 @@ const FindDoctor = () => {
       />
 
       <FindDoctorsBanner />
+      <Section>
+        <Hero />
+      </Section>
+      <Section className={classes.sectionTop}>
+        <Container fixed>
+          <PatientConsult />
+        </Container>
+      </Section>
+
+      <Section
+        className={classes.sectionTop}
+        style={{ backgroundColor: '#f8f8fb' }}
+      >
+        <Container fixed>
+          <Packages />
+        </Container>
+      </Section>
+
+      <Section
+        className={classes.sectionTop}
+        style={{
+          backgroundImage:
+            'linear-gradient(45deg,#ff23010f 25%,transparent 25% ),linear-gradient(135deg,#ff23010f 25%,transparent 25% ),linear-gradient(45deg,transparent 75%,#ff23010f 75% ),linear-gradient( 135deg,transparent 75%,#ff23010f 75% )',
+          backgroundSize: '-4px 9px',
+          backgroundPosition: '0px 0px, 0px 0px, 0 0px, 0px 0px',
+          borderRadius: '0px 0px 0px 0px',
+        }}
+      >
+        <Container fixed>
+          <DownloadApp />
+        </Container>
+      </Section>
+
+      <Section className={classes.sectionTop}>
+        <Container fixed>
+          <UserSay />
+        </Container>
+      </Section>
+
       <Section
         className={classes.sectionTop}
         style={{ backgroundColor: '#fff' }}
       >
-        <WorkingProcess />
+        <Container fixed>
+          <CustomerRatings />
+        </Container>
+      </Section>
+
+      <Section className={classes.sectionTop}>
+        <Container fixed>
+          <News />
+        </Container>
       </Section>
     </div>
   );

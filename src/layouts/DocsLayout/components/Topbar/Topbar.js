@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import clsx from 'clsx';
+import { getPatientProfile } from '../../../../components/helper/PatientApi';
+
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import {
@@ -23,17 +25,26 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Badge from '@material-ui/core/Badge';
 import NotificationsIcon from '@material-ui/icons/Notifications';
+import Encodr from 'encodr';
+import Cookies from 'js-cookie';
+import { checkToken } from '../../../../components/helper/LoginCheck';
+import Topbar from '../../../Main/components/Topbar/Topbar';
+import { useRouter } from 'next/router';
+import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 
 const useStyles = makeStyles(theme => ({
   root_som: {
-    borderBottom: 'var(--border)',
     padding: '10px',
+    boxShadow: '1px 1px 15px rgb(0 0 0 / 10%)',
   },
   loginAvatar: {
     marginLeft: '9px',
     width: '30px',
     height: '30px',
     borderRadius: 4,
+    '& img ': {
+      objectFit: 'contain !important',
+    },
   },
   logoContainer: {
     width: 100,
@@ -46,8 +57,8 @@ const useStyles = makeStyles(theme => ({
   logoImage: {
     position: 'relative',
     height: 'auto',
-    top: '-17px',
-    width: '130px',
+    top: '-6px',
+    width: '85px',
   },
   navigationContainer: {
     display: 'flex',
@@ -60,7 +71,6 @@ const useStyles = makeStyles(theme => ({
   listItemText: {
     flex: '0 0 auto',
     whiteSpace: 'nowrap',
-
   },
   listItemButton: {
     whiteSpace: 'nowrap',
@@ -71,11 +81,24 @@ const useStyles = makeStyles(theme => ({
       background: 'transparent',
     },
   },
-  inner_header:{
-position: 'relative',
-height: '40px',
-minHeight:'40px',
-overflow: 'hidden',
+  inner_header: {
+    position: 'relative',
+    height: '40px',
+    minHeight: '40px',
+    overflow: 'hidden',
+  },
+  notification: {
+    width: '.55em',
+    height: '.55em',
+  },
+  listItem: {
+    padding: '0px !important',
+    boxShadow: 'var(--bs-md)',
+  },
+  listItemText: {
+    padding: '4px 10px !important',
+    border: 'var(--border)',
+    backgroundColor: '#e5e5e5',
   },
 }));
 
@@ -87,9 +110,20 @@ const TopBar = ({
   ...rest
 }) => {
   const classes = useStyles();
-//Code For Dashboard
+  //Code For Dashboard
   // Code for Right Dropdown  Menu
-
+  const [patientDetails, setPatientDetails] = useState([]);
+  const router = useRouter();
+  const getPatientProfileDetails = async () => {
+    var doctorDatas = await getPatientProfile();
+    console.log('User Details', doctorDatas.patient_info.name);
+    setPatientDetails(doctorDatas.patient_info);
+  };
+  React.useEffect(() => {
+    //console.log('ssssssssssssssss',user)
+    getPatientProfileDetails();
+    console.log('ssssssssssssssss');
+  }, []);
   const StyledMenu = withStyles({
     paper: {
       border: '1px solid #d3d4d5',
@@ -124,10 +158,6 @@ const TopBar = ({
         },
       },
     },
-    // notification1: {
-    //   fontSize: 36,
-    //   color: '#2d3748',
-    // },
   }))(MenuItem);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -139,6 +169,16 @@ const TopBar = ({
   };
   // Code for Right Dropdown menu ends
 
+  const logoutData = () => {
+    Cookies.remove('token');
+    const loginToken = checkToken();
+    if (loginToken) {
+      alert('Login Set');
+    } else {
+      router.push('/signin', undefined, { shallow: true });
+    }
+  };
+
   return (
     <AppBar
       className={clsx(classes.root_som, className)}
@@ -146,6 +186,7 @@ const TopBar = ({
       color="inherit"
       {...rest}
     >
+      {/* <Topbar/> */}
       <Toolbar className={classes.inner_header}>
         <div className={classes.logoContainer}>
           <a href="/" title="OnlineAarogya">
@@ -165,10 +206,9 @@ const TopBar = ({
         <Box flexGrow={1} />
         <IconButton className="notification">
           <Badge color="primary" badgeContent={0} showZero>
-            <NotificationsIcon />
+            <NotificationsIcon className={classes.notification} />
           </Badge>
         </IconButton>
-        {/* <DarkModeToggler themeMode={themeMode} onClick={() => themeToggler()} /> */}
         <Hidden smDown>
           <List disablePadding className={classes.navigationContainer}>
             <ListItem
@@ -177,34 +217,21 @@ const TopBar = ({
               <Button
                 className={classes.listItemText}
                 component="a"
-                variant="outlined"
                 onClick={handleClick}
               >
-                Praveen Singh
+                {patientDetails.name}
                 <Avatar
                   variant="square"
                   className={classes.loginAvatar}
-                  src="/broken-image.jpg"
+                  src={patientDetails.avatar_url}
                 />
               </Button>
             </ListItem>
-            <Box mt={2}>
-              <StyledMenu
-                id="customized-menu"
-                anchorEl={anchorEl}
-                keepMounted
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-              >
-                <StyledMenuItem>
-                  <ListItemIcon>
-                    <ExitToAppIcon fontSize="small" />
-                  </ListItemIcon>
-                  <ListItemText primary="Logout" />
-                </StyledMenuItem>
-              </StyledMenu>
-            </Box>
+          
           </List>
+          <IconButton  className="log_out_button" onClick={logoutData} variant="outlined" color="primary" aria-label="delete">
+            <ExitToAppIcon />
+          </IconButton>
         </Hidden>
         <Hidden mdUp>
           <IconButton

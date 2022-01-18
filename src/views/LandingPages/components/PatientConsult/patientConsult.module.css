@@ -17,6 +17,7 @@
     height: 190px;
     transition: 0.6s;
     text-align: center;
+    width: 100%;
 }
 .patientConsult_inner_card:hover {
     transform: translateY(-5px);

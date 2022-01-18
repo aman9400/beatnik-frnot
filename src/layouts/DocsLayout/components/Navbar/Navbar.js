@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   Box,
@@ -10,7 +10,9 @@ import {
   ListItemIcon,
   ListItemText,
   Divider,
+  Tooltip,
 } from '@material-ui/core';
+import { getPatientProfile } from '../../../../components/helper/PatientApi';
 
 import Collapse from '@material-ui/core/Collapse';
 import ExpandLess from '@material-ui/icons/ExpandLess';
@@ -22,9 +24,14 @@ const useStyles = makeStyles(theme => ({
     width: 256,
   },
   desktopDrawer: {
-    width: 256,
-    top: 64,
+    width: 240,
+    top: 60,
     height: 'calc(100% - 64px)',
+    borderRight: '0px solid var(--heading-color)',
+    backgroundColor: '#fff',
+    boxShadow: '0 5px 5px rgb(0 0 0 / 35%)',
+    overflow: 'hidden',
+    height: '100%',
   },
   title: {
     fontWeight: 700,
@@ -33,7 +40,7 @@ const useStyles = makeStyles(theme => ({
   },
   iconWidth: {
     minWidth: '32px',
-    color: '#ec3832',
+    color: 'var(--theme-color)',
     fontSize: '16px',
   },
   navGroup: {
@@ -45,94 +52,66 @@ const useStyles = makeStyles(theme => ({
   navGroupTitle: {
     paddingBottom: 0,
   },
-  medifile_sideBar:{
+  medifile_sideBar: {
     position: 'relative',
+  },
+  nav_link: {
+    color: 'var(--heading-color)',
+    padding: '3px 15px !important',
+  },
+  nav_link_name: {
+    '& span ': {
+      fontSize: '14.5px',
+      fontWeight: '600',
+    },
   },
 }));
 
 const Navbar = ({ onMobileClose, openMobile }) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-
+  const [patientDetails, setPatientDetails] = useState([]);
   const handleClick = () => {
     setOpen(!open);
   };
-
+  const getPatientProfileDetails = async () => {
+    var doctorDatas = await getPatientProfile();
+    console.log('User Details', doctorDatas.patient_info.name);
+    setPatientDetails(doctorDatas.patient_info);
+  };
+  React.useEffect(() => {
+    //console.log('ssssssssssssssss',user)
+    getPatientProfileDetails();
+    console.log('ssssssssssssssss');
+  }, []);
   // Set Sidebar Menu Icon Color
   // MEdifiles Data sta
 
   const content = (
-    <Box className={classes.medifile_sideBar} height="100%" display="flex" flexDirection="column">
-      <Box p={2} paddingBottom={0}>
+    <Box
+      className={classes.medifile_sideBar}
+      height="100%"
+      display="flex"
+      flexDirection="column"
+    >
+      <Box className={classes.side_bar_menu} paddingBottom={0}>
+        <div className="dropdown user-pro-body text-center">
+          <div className="user-pic">
+            <img
+              src={patientDetails.avatar_url}
+              alt="user-img"
+              className="avatar-xl rounded-circle mb-1"
+            />
+            <Tooltip title="You are Online." arrow placement="top">
+              <div className="pulse"></div>
+            </Tooltip>
+          </div>
+          <div className="user-info">
+            <h5 className="mb-1">{patientDetails.name} </h5>
+          </div>
+        </div>
         <List>
-          <Link
-            href={`${process.env.NEXT_PUBLIC_BASE_URL}/account/account-info`}
-          >
-            <ListItem button>
-              <ListItemIcon className={classes.iconWidth}>
-                <i class="fas fa-user-alt"></i>
-              </ListItemIcon>
-              <ListItemText className="accountInfo" primary="Account Profile" />
-            </ListItem>
-          </Link>
-
-          {/* <Link
-            href={`${process.env.NEXT_PUBLIC_BASE_URL}/medifiles/plans-subscriptions`}
-          >
-            <ListItem button>
-              <ListItemIcon className={classes.iconWidth}>
-                <i class="fas fa-handshake-slash"></i>
-              </ListItemIcon>
-              <ListItemText primary="Subscription" />
-            </ListItem>
-          </Link> */}
-
-          <a href={`${process.env.NEXT_PUBLIC_BASE_URL}/account/family-member`}>
-            <ListItem button>
-              <ListItemIcon className={classes.iconWidth}>
-                <i class="fas fa-users"></i>
-              </ListItemIcon>
-              <ListItemText primary="Family Members" />
-            </ListItem>
-          </a>
-
-          <a href={`${process.env.NEXT_PUBLIC_BASE_URL}/account/family-doctor`}>
-            <ListItem button>
-              <ListItemIcon className={classes.iconWidth}>
-                <i class="fas fa-user-md"></i>
-              </ListItemIcon>
-              <ListItemText primary="Family Doctor" />
-            </ListItem>
-          </a>
-
-          <Link href={`${process.env.NEXT_PUBLIC_BASE_URL}/account/our-doctor`}>
-            <ListItem button>
-              <ListItemIcon className={classes.iconWidth}>
-                <i class="fas fa-user-md"></i>
-              </ListItemIcon>
-              <ListItemText primary="Our Doctor" />
-            </ListItem>
-          </Link>
-
-          <Link
-            href={`${process.env.NEXT_PUBLIC_BASE_URL}/account/all-consultations`}
-          >
-            <ListItem button>
-              <ListItemIcon className={classes.iconWidth}>
-                <i class="fas fa-calendar-check"></i>
-              </ListItemIcon>
-              <ListItemText primary="Consultation" />
-            </ListItem>
-          </Link>
-
-          <ListItem button>
-            <ListItemIcon className={classes.iconWidth}>
-              <i class="fas fa-divide"></i>
-            </ListItemIcon>
-            <ListItemText primary="Offer" />
-          </ListItem>
-
-          <ListItem button onClick={handleClick}>
+          <ListItem className={classes.nav_link} button onClick={handleClick}>
             <ListItemIcon className={classes.iconWidth}>
               <i class="fas fa-file-download"></i>
             </ListItemIcon>
@@ -142,89 +121,76 @@ const Navbar = ({ onMobileClose, openMobile }) => {
 
           <Collapse in={open} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
-              <Link href={`${process.env.NEXT_PUBLIC_BASE_URL}/medifiles`}>
+              <Link href={`${process.env.NEXT_PUBLIC_BASE_URL}medifiles`}>
                 <ListItem
                   button
-                  className={classes.nested}
+                  className={classes.nav_link}
                   style={{ marginLeft: '14px' }}
                 >
                   <ListItemIcon className={classes.iconWidth}>
                     <i class="far fa-file-alt"></i>
                   </ListItemIcon>
-                  <ListItemText primary="Record" />
+                  <ListItemText
+                    className={classes.nav_link_name}
+                    primary="Record"
+                  />
                 </ListItem>
               </Link>
-
-              <a href={`${process.env.NEXT_PUBLIC_BASE_URL}/medifiles/setting`}>
+              <Link
+                href={`${process.env.NEXT_PUBLIC_BASE_URL}account/account-info`}
+              >
+                <ListItem
+                  className={classes.nav_link}
+                  style={{ marginLeft: '14px' }}
+                  button
+                >
+                  <ListItemIcon className={classes.iconWidth}>
+                    <i class="fas fa-user-alt"></i>
+                  </ListItemIcon>
+                  <ListItemText
+                    className={classes.nav_link_name}
+                    primary="Account Profile"
+                  />
+                </ListItem>
+              </Link>
+              <Link href={`${process.env.NEXT_PUBLIC_BASE_URL}medifiles/offer`}>
                 <ListItem
                   button
-                  className={classes.nested}
+                  className={classes.nav_link}
                   style={{ marginLeft: '14px' }}
                 >
                   <ListItemIcon className={classes.iconWidth}>
                     <i class="fas fa-cog"></i>
                   </ListItemIcon>
-                  <ListItemText primary="Setting" />
+                  <ListItemText
+                    className={classes.nav_link_name}
+                    primary="Offer"
+                  />
                 </ListItem>
-              </a>
+              </Link>
 
               <Link
-                href={`${process.env.NEXT_PUBLIC_BASE_URL}/medifiles/plans-subscriptions`}
+                className={classes.nav_link}
+                href={`${process.env.NEXT_PUBLIC_BASE_URL}medifiles/plans-subscriptions`}
               >
                 <ListItem
                   button
-                  className={classes.nested}
+                  className={classes.nav_link}
                   style={{ marginLeft: '14px' }}
                 >
                   <ListItemIcon className={classes.iconWidth}>
                     <i class="fas fa-handshake-slash"></i>
                   </ListItemIcon>
-                  <ListItemText primary="Subscription" />
+                  <ListItemText
+                    className={classes.nav_link_name}
+                    primary="Subscription"
+                  />
                 </ListItem>
               </Link>
             </List>
           </Collapse>
 
           <Divider />
-
-          {/* <div>
-            {' '}
-            <Typography
-              variant="button"
-              color="textSecondary"
-              className={classes.title}
-            >
-              Support
-            </Typography>
-          </div> */}
-          {/* <Link
-            href={`${process.env.NEXT_PUBLIC_BASE_URL}/account/customer-support`}
-          >
-            <ListItem button>
-              <ListItemIcon className={classes.iconWidth}>
-                <i class="fa fa-envelope" aria-hidden="true"></i>
-              </ListItemIcon>
-              <ListItemText primary="Log Complaint" />
-            </ListItem>
-          </Link> */}
-
-          {/* <Link href="#">
-            <ListItem button>
-              <ListItemIcon className={classes.iconWidth}>
-                <i class="fa fa-gavel" aria-hidden="true"></i>
-              </ListItemIcon>
-              <ListItemText primary="Legal Information" />
-            </ListItem>
-          </Link> */}
-
-          {/* <Link href="#">
-            <ListItem button>
-              <ListItemIcon className={classes.iconWidth}>
-                <i class="fa fa-question-circle" aria-hidden="true"></i>
-              </ListItemIcon>
-              <ListItemText primary="FAQ's" />
-            </ListItem>
-          </Link> */}
         </List>
       </Box>
       <Box flexGrow={1} />

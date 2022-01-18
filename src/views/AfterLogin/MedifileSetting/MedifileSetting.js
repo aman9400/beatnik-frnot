@@ -1,4 +1,3 @@
-
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
@@ -22,14 +21,19 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
-import  Breadcrumb  from '../Reusable/MediBreadcrumb';
+import Breadcrumb from '../Reusable/MediBreadcrumb';
 import MetaTitle from '../../../components/helper/MetaTitle';
-import { useMediaQuery, Grid,Menu,MenuItem, FormControlLabel } from '@material-ui/core';
-import {checkToken} from '../../../components/helper/LoginCheck'
-import {getFamilyDependentByUid} from '../../../components/helper/PatientApi'
+import {
+  useMediaQuery,
+  Grid,
+  Menu,
+  MenuItem,
+  FormControlLabel,
+} from '@material-ui/core';
+import { checkToken } from '../../../components/helper/LoginCheck';
+import { getFamilyDependentByUid } from '../../../components/helper/PatientApi';
 
-import React, { useState,useEffect } from 'react';
-
+import React, { useState, useEffect } from 'react';
 
 const useRowStyles = makeStyles({
   root: {
@@ -39,7 +43,14 @@ const useRowStyles = makeStyles({
   },
 });
 
-function createData(name, fileSize, uploadDate, uploadedBy, verification, price) {
+function createData(
+  name,
+  fileSize,
+  uploadDate,
+  uploadedBy,
+  verification,
+  price,
+) {
   return {
     name,
     fileSize,
@@ -63,19 +74,16 @@ function createData(name, fileSize, uploadDate, uploadedBy, verification, price)
 //       { id: 1, name: 'Depad', fileSize: '10 MB', uploadDate: '22/21/2021', uploadedBy: 'Arjun',  verification: 'Processing'},
 //       { id: 1, name: 'Shrpad', fileSize: '10 MB', uploadDate: '22/21/2021', uploadedBy: 'Pankaj',  verification: 'Processing'},
 //       { id: 1, name: 'Hampesh', fileSize: '10 MB', uploadDate: '22/21/2011', uploadedBy: 'Deband',  verification: 'Pending'},
-   
 
 // ];
 
-function Row(props) 
-
-{
+function Row(props) {
   const [state, setState] = React.useState(false);
 
-function handleSwitchChange (e) {
-  setState(e.target.checked);
-  // Add actions here for when the switch is triggered
-};
+  function handleSwitchChange(e) {
+    setState(e.target.checked);
+    // Add actions here for when the switch is triggered
+  }
 
   const { row } = props;
   const [open, setOpen] = React.useState(false);
@@ -92,26 +100,20 @@ function handleSwitchChange (e) {
   };
 
   const [fileAcces, setFileAccess] = React.useState(false);
-  
 
-  const otpCheck = () =>
-  {
-     if(fileAcces==true)
-     {
-        setFileAccess(false);
-     }
-     else
-     {
-        setFileAccess(true);
-     }
-    
-     handleCloses();
-     console.log("Hello");
-     console.log("My file",fileAcces);
-  }
+  const otpCheck = () => {
+    if (fileAcces == true) {
+      setFileAccess(false);
+    } else {
+      setFileAccess(true);
+    }
 
-  
-//  code for fetching data from api 
+    handleCloses();
+    console.log('Hello');
+    console.log('My file', fileAcces);
+  };
+
+  //  code for fetching data from api
 
   // const [datas, setDatas] = useState([]);
   // const getFamilyDoctor = async () =>
@@ -133,38 +135,33 @@ function handleSwitchChange (e) {
   //     }
   // }, [])
 
-
   return (
     <React.Fragment>
-      
-    
-          <Switch
-          checked={fileAcces}
-          onChange={handleClickOpens}
-          color="primary"
-        />
-       
+      <Switch checked={fileAcces} onChange={handleClickOpens} color="primary" />
 
-      <Dialog open={opens} onClose={handleCloses} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
-        <DialogTitle id="alert-dialog-title">{"Enter OTP for Verification"}</DialogTitle>
+      <Dialog
+        open={opens}
+        onClose={handleCloses}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {'Enter OTP for Verification'}
+        </DialogTitle>
         <DialogContent>
-             
-
           <DialogContentText id="alert-dialog-description">
-          <form className={classes.root} noValidate autoComplete="off">
-            <TextField id="outlined-basic" label="Enter OTP" variant="outlined" />
-          </form>
-          
+            <form className={classes.root} noValidate autoComplete="off">
+              <TextField
+                id="outlined-basic"
+                label="Enter OTP"
+                variant="outlined"
+              />
+            </form>
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCloses} >
-            Close
-          </Button>
-          <Button onClick={otpCheck} >
-            Submit 
-          </Button>
-         
+          <Button onClick={handleCloses}>Close</Button>
+          <Button onClick={otpCheck}>Submit</Button>
         </DialogActions>
       </Dialog>
     </React.Fragment>
@@ -189,85 +186,81 @@ Row.propTypes = {
   }).isRequired,
 };
 
-
 export default function CollapsibleTable() {
-
   const [datas, setDatas] = useState([]);
-  const getFamilyDoctor = async () =>
-  {
+  const getFamilyDoctor = async () => {
     var doctorData = await getFamilyDependentByUid();
-    console.log("Name:",doctorData);
-      setDatas(doctorData.dependents);
-  }
+    console.log('Name:', doctorData);
+    setDatas(doctorData.dependents);
+  };
 
   useEffect(() => {
-      const loginToken = checkToken();
-      if(loginToken)
-      {
-        getFamilyDoctor();
-      }
-      else
-      {
-        Router.push('/signin', undefined, { shallow: true })
-      }
-  }, [])
-    //   const [datas, setData] = useState([]);
+    const loginToken = checkToken();
+    if (loginToken) {
+      getFamilyDoctor();
+    } else {
+      Router.push('/signin', undefined, { shallow: true });
+    }
+  }, []);
+  //   const [datas, setData] = useState([]);
 
-    // const fetchData = async () => {
-    //     const res = await fetch(
-    //     'https://jsonplaceholder.typicode.com/users',
-    //     );
-    //     const json = await res.json();
-    //     setData(json);
-    // };
+  // const fetchData = async () => {
+  //     const res = await fetch(
+  //     'https://jsonplaceholder.typicode.com/users',
+  //     );
+  //     const json = await res.json();
+  //     setData(json);
+  // };
 
-    // useEffect(() => {
-    //     fetchData()
-    // },)
-
+  // useEffect(() => {
+  //     fetchData()
+  // },)
 
   return (
     <div>
-       <MetaTitle title={`Medifile Setting | OnlineAarogya`} metaKeyWord="" metaDescription="" />
-      <Breadcrumb url="Setting"/>
-      <div style={{ overflow:"hidden",padding:39}}>
-       <Grid container>
-       <Grid item md={12}>
-       <TableContainer component={Paper}>
-       <Table aria-label="collapsible table">
-        <TableHead>
-          <TableRow>
-           
-            <TableCell> First Name</TableCell>
-            <TableCell >Last Name</TableCell>
-            <TableCell >Gender</TableCell>
-            <TableCell >DOB</TableCell>
-            <TableCell >Address</TableCell>
-            <TableCell >Action</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {datas.map((row) => (
-              <TableRow>
-                 <TableCell >{row.first_name}</TableCell>
-                 <TableCell >{row.last_name}</TableCell>
-                 <TableCell >{row.gender}</TableCell>
-                 <TableCell >{row.dob}</TableCell>
-                 <TableCell >{row.address}</TableCell>
-                 <TableCell ><Row key={row.name} row={row} /></TableCell>
-               </TableRow>
-           ))}
-        </TableBody>
-      </Table>
-       </TableContainer>
-       </Grid>
-       </Grid>
-       </div>
-     </div>
+      <MetaTitle
+        title={`Medifile Setting | OnlineAarogya`}
+        metaKeyWord=""
+        metaDescription=""
+      />
+      <Breadcrumb url="Setting" />
+      <div style={{ overflow: 'hidden', padding: 39 }}>
+        <Grid container>
+          <Grid item md={12}>
+            <TableContainer component={Paper}>
+              <Table aria-label="collapsible table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell> First Name</TableCell>
+                    <TableCell>Last Name</TableCell>
+                    <TableCell>Gender</TableCell>
+                    <TableCell>DOB</TableCell>
+                    <TableCell>Address</TableCell>
+                    <TableCell>Action</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {datas.map(row => (
+                    <TableRow>
+                      <TableCell>{row.first_name}</TableCell>
+                      <TableCell>{row.last_name}</TableCell>
+                      <TableCell>{row.gender}</TableCell>
+                      <TableCell>{row.dob}</TableCell>
+                      <TableCell>{row.address}</TableCell>
+                      <TableCell>
+                        <Row key={row.name} row={row} />
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Grid>
+        </Grid>
+      </div>
+    </div>
   );
 }
-
-
 
 // import React, { useState,useEffect } from 'react';
 // import PropTypes from 'prop-types';
@@ -300,12 +293,12 @@ export default function CollapsibleTable() {
 // import MetaTitle from '../../../components/helper/MetaTitle';
 
 // const useStyles = makeStyles(theme => ({
- 
+
 //   tableWidth:
 //   {
 //     padding:45,
 //   },
-  
+
 // }));
 
 // const Data = props => {
@@ -346,17 +339,14 @@ export default function CollapsibleTable() {
 //       }
 //   }, [])
 
-  
 //   // Open Dialog Box on Otp click
 
-
-//   // 
+//   //
 
 //   const [state, setState] = React.useState({
 //     checkedB: true,
 //   });
 
-  
 // const handleChange = (event) => {
 //   // setState({ ...state, [event.target.name]: event.target.checked });
 
@@ -365,15 +355,14 @@ export default function CollapsibleTable() {
 //   if(state.checkedB == true)
 //   {
 //     alert("click B")
-    
+
 //   }
 //   else
 //   {
 //     alert("click A")
-  
+
 //   }
 // };
-
 
 // const [opens, setOpens] = React.useState(false);
 
@@ -385,22 +374,18 @@ export default function CollapsibleTable() {
 //   setOpens(false);
 // };
 
-
-
-
 //   const [fileAcces, setFileAccess] = React.useState(true);
 
-//  // 
+//  //
 
 //   const otpCheck = () =>
 //   {
-   
+
 //      setState({ ...state, [event.target.name]: event.target.checked });
 //      handleCloses();
 //      console.log("Hello");
 //      console.log("My file",fileAcces);
 //   }
-  
 
 //   return (
 //   <div className="medifle-setting">
@@ -429,24 +414,23 @@ export default function CollapsibleTable() {
 //                   <TableCell align="center">{row.gender}</TableCell>
 //                   <TableCell align="center">{row.dob}</TableCell>
 //                   <TableCell align="center">{row.address}</TableCell>
-                 
-                            
+
 //                     <TableCell component="th" scope="row">
 //                       {/* <Switch
 //                       checked={fileAcces}
 //                       onChange={handleClickOpens}
 //                       color="primary"
 //                     /> */}
-                  
+
 //                     <Switch
 //                         checked={row.state.checkedB}
 //                         onChange={handleChange}
 //                         name="checkedB"
 //                         color="primary"
 //                     />
-                  
+
 //                     </TableCell>
-              
+
 //                 </TableRow>
 //               ))}
 //             </TableBody>
@@ -455,17 +439,15 @@ export default function CollapsibleTable() {
 //         </Grid>
 //         <Grid item md={1}></Grid>
 
-
 //        <Dialog open={opens} onClose={handleCloses} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
 //         <DialogTitle id="alert-dialog-title">{"Enter OTP for Verification"}</DialogTitle>
 //         <DialogContent>
-             
 
 //           <DialogContentText id="alert-dialog-description">
 //           <form className={classes.root} noValidate autoComplete="off">
 //             <TextField id="outlined-basic" label="Enter OTP" variant="outlined" />
 //           </form>
-          
+
 //           </DialogContentText>
 //         </DialogContent>
 //         <DialogActions>
@@ -473,9 +455,9 @@ export default function CollapsibleTable() {
 //             Close
 //           </Button>
 //           <Button onClick={otpCheck} >
-//             Submit 
+//             Submit
 //           </Button>
-         
+
 //         </DialogActions>
 //       </Dialog>
 //       </Grid>

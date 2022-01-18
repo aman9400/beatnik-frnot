@@ -1,0 +1,30 @@
+.why_use_aarogya_single {
+    display: flex;
+    padding: 10px;
+}
+.why_use_aarogya_img {
+    width: 85px;
+    margin-right: 10px;
+}
+.why_use_aarogya_img img {
+    width:65px;
+    height:65px;
+    object-fit:contain;
+}
+.why_use_aarogya_title {
+    text-align: left;
+}
+.why_use_aarogya_title h5{
+    color: var(--heading-color);
+    display: block;
+    font-size: 18px ;
+    font-weight: 700 ;
+}
+.why_use_aarogya_title p{
+    color: var(--sub-heading-color);
+    display: block;
+    font-size: 14px ;
+    font-weight: 500 ;
+    margin-bottom: 30px ;
+    text-align:justify ;
+} 

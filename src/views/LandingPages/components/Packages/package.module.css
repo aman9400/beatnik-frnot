@@ -58,7 +58,7 @@
     font-weight: 700 !important;
     
 }
-.packages_section_bg{
+/* .packages_section_bg{
     position: absolute;
     top: -44px;
     left: -66px;
@@ -67,7 +67,7 @@
     background-image: url(./Images/package_bg.jpg);
     background-size: 100%;
     background-repeat: no-repeat;
-}
+} */
 .packages_table_paper{
     border-radius: 15px !important;
     box-shadow: 0 2px 14px 0 rgb(0 0 0 / 12%) !important;

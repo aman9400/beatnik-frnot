@@ -3,32 +3,35 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core';
 import { Topbar, Navbar } from './components';
 import { ScrollTop } from 'components/atoms';
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
     height: '100%',
     overflow: 'hidden',
-    width: '100%'
+    width: '100%',
+    background: '#ebeef1',
   },
   wrapper: {
     display: 'flex',
     flex: '1 1 auto',
     overflow: 'hidden',
-    paddingTop: 64,
+    paddingTop: 60,
     [theme.breakpoints.up('md')]: {
-      paddingLeft: 256
-    }
+      paddingLeft: 240,
+      paddingTop: 100,
+      paddingBottom: 50,
+    },
   },
   contentContainer: {
     display: 'flex',
     flex: '1 1 auto',
-    overflow: 'hidden'
+    overflow: 'hidden',
   },
   content: {
     flex: '1 1 auto',
     height: '100%',
-    overflow: 'auto'
-  }
+    overflow: 'auto',
+  },
 }));
 
 const DocsLayout = ({ children, themeToggler, themeMode }) => {
@@ -48,9 +51,7 @@ const DocsLayout = ({ children, themeToggler, themeMode }) => {
       />
       <div className={classes.wrapper}>
         <div className={classes.contentContainer}>
-          <div className={classes.content}>
-            {children}
-          </div>
+          <div className={classes.content}>{children}</div>
         </div>
       </div>
       <ScrollTop />

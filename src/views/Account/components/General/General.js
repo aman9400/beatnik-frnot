@@ -31,7 +31,6 @@ import {
   KeyboardDatePicker,
   DateTimePicker,
 } from '@material-ui/pickers';
-// import Medical from './medical';
 import FamilyMembers from '../Reusable/FamilyMembers';
 
 const useStyles = makeStyles(theme => ({
@@ -260,7 +259,10 @@ const General = props => {
                       select
                     >
                       <MenuItem value="Dr.">Dr.</MenuItem>
-                      <MenuItem value="Mr.">Mr.</MenuItem>
+                      <MenuItem value="Ms.">Ms.</MenuItem>
+                      <MenuItem value="Mrs.">Mrs.</MenuItem>
+                      <MenuItem value="Dr.">Dr.</MenuItem>
+                      <MenuItem value="Dr(Mrs)">Dr(Mrs)</MenuItem>
                     </TextField>
                   </Grid>
                   <Grid item md={5} xs={12}>

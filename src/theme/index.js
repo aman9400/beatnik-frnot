@@ -6,7 +6,7 @@ const getTheme = mode =>
     createMuiTheme({
       palette: mode === 'light' ? light : dark,
       layout: {
-        contentWidth: 1336,
+        contentWidth:'100%',
       },
       typography: {
         fontFamily: 'Lato',
