@@ -1,31 +1,28 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Form } from './components';
-import { Image } from 'components/atoms';
 import { SectionHeader } from 'components/molecules';
-import { HeroShaped } from 'components/organisms';
-
+import MetaTitle from 'components/helper/MetaTitle';
+import BrandLogo from './../../../public/assets/Images/logo/online-aarogya-logo.png';
+import Link from 'next/link';
 const useStyles = makeStyles(theme => ({
   root: {
-    '& .hero-shaped': {
-      borderBottom: 0,
-    },
-    '& .hero-shaped__wrapper': {
-      [theme.breakpoints.up('md')]: {
-        minHeight: `calc(100vh - ${theme.mixins.toolbar['@media (min-width:600px)'].minHeight}px)`,
-      },
-    },
+    display: 'grid',
+    minHeight: '100vh',
+    alignItems: 'center',
+    justifyContent:' center',
+    placeItems:'center',
+    textAlign: 'center',
   },
   formContainer: {
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    [theme.breakpoints.down('sm')]: {
-      maxWidth: 500,
-      margin: `0 auto`,
-    },
+    width: '500px',
+    height: '480px',
+    padding: '40px 30px',
+    overflow: 'hidden',
+    position: 'relative',
+    background: '#f9f9f9',
+    boxShadow: '0px 0px 6px #00000047',
+    borderRadius: '10px',
   },
   image: {
     objectFit: 'cover',
@@ -37,27 +34,38 @@ const SignupCover = () => {
 
   return (
     <div className={classes.root}>
-      <HeroShaped
-        leftSide={
-          <div className={classes.formContainer}>
-            <SectionHeader
-              title="Sign up"
-              subtitle="Create account using these field name"
-              titleProps={{
-                variant: 'h3',
-              }}
-            />
-            <Form />
-          </div>
-        }
-        rightSide={
-          <Image
-            src="assets/logon_bg.jpg"
-            className={classes.image}
-            lazy={false}
-          />
-        }
+        <MetaTitle
+        title={`Online Aarogya | Sign Up`}
+        metaKeyWord="Online Consultation, Doctor Appointment Booing Online Aarogya"
+        metaDescription="ACPL is a start-up in the field of medical healthcare including tele-medicine. The software platform will enable patients to search doctors for various specialties, check their profile, book appointment, and take consultation. The company is going to start the pilot launch by end of Aug 2021 and a full-scale launch of services by end of Oct 2021. The company’s mission is to create medical healthcare eco-system accessible, easier and better in terms of quality especially serving to the rural and non-metro geographies, which constitutes more than 75% of the population."
       />
+      <div className="login_page" style={{marginBottom:'30px'}}>
+        <Link href="/">
+        
+            <img src={BrandLogo} alt="" />
+        
+        </Link>
+      </div>
+      <div className={classes.formContainer}>
+        <SectionHeader
+        className="formContainerMain"
+          title="Sign Up"
+          titleProps={{
+            variant: 'h3',
+          }}
+        />
+        <Form />
+      </div>
+      <div  style={{marginTop:'30px'}} className="login_info">
+        <div className="login_contact">
+          <p>Contact Support <Link href="tel:+91 992829232">+91 992829232</Link></p>
+          <Link href="mailto::support@onlineaarogya.com">support@onlineaarogya.com</Link>
+          <div className="copy_right">
+            <p>OAarogya</p>
+            <p>Copyright &copy;2022. All right reserved</p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

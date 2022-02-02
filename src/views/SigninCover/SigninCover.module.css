@@ -1,0 +1,125 @@
+.sign_in_cover {
+    width:100%;
+    height:100vh;
+}
+
+
+.entry_cover_left {
+  position: relative;
+}
+.entry_cover_inner {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  padding: 60px;
+}
+.entry_cover_inner .cover_bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+.head_title > h1 {
+  color: var(--heading-color);
+  font-size: 32px ;
+  font-weight: 700 ;
+  position: relative;
+  margin-bottom: 15px;
+}
+.head_title > h6 {
+  color: var(--heading-color);
+  font-size: 18px ;
+  font-weight: 600 ;
+  opacity: 0.8;
+}
+.head_title {
+  margin-top: 85%;
+}
+.page_title {
+  position: relative;
+  border-bottom: var(--border);
+  width: 100%;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+}
+.page_title_inner > h5 {
+  color: var(--theme-color);
+  font-size: 22px ;
+  font-weight: 800 ;
+}
+
+.page_title_inner a > span {
+  color: var(--heading-color);
+  font-size: 14px ;
+  font-weight: 600 ;
+  opacity: 0.7;
+}
+.page_title_inner a > button > span > svg {
+  fill: var(--heading-color);
+  opacity: 0.7;
+}
+.page_title_inner {
+  display: flex;
+  justify-content: space-between;
+}
+.link_up {
+  position: relative;
+  font-size: 12px ;
+}
+.login_board {
+  padding: 20%;
+}
+.formContainer {
+  position: relative;
+  width: 100%;
+}
+.login_container {
+  padding: 20px 30px 50px 30px;
+  background: #fff;
+  border-radius: 5px;
+  border: var(--border);
+}
+.company_info {
+  width: 70%;
+  bottom: 15px;
+  border-radius: 10px;
+  left: 15%;
+  position: absolute;
+  background-color: rgb(246, 246, 246);
+  padding: 20px;
+  text-align: center;
+  display: grid;
+}
+.login_contact p {
+  color: var(--heading-color);
+  font-size: 15px ;
+  font-weight: 600 ;
+  margin-bottom: 10px;
+}
+.login_info_support {
+  display: flex;
+  justify-content: space-evenly;
+}
+.login_info_support > p > svg {
+  width: 0.8em ;
+  height: 0.8em ;
+  opacity: 0.9;
+  fill: var(--heading-color);
+  position: relative;
+  top: 5px;
+  margin-right: 6px;
+}
+.login_info_support > p {
+  color: var(--theme-color);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.main_account{
+  display: flex;
+}
+.brand_logo {
+  position: relative;
+  z-index: 99;
+}

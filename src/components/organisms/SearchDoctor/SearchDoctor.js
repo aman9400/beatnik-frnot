@@ -84,22 +84,7 @@ const SearchDoctor = props => {
     >
       <Grid
         container
-        className="padng"
-        style={{
-          padding: '0px',
-          position: 'relative',
-          zIndex: '99',
-          background: '#fff',
-          display: 'flex',
-          justifyContent: 'center',
-          border: '0px solid red',
-          borderRadius: ' 15px',
-          width: '75%',
-          boxShadow:
-            '0 1px 3px rgb(60 63 66 / 32%), 0 4px 12px rgb(60 63 66 / 15%)',
-          overflow: 'hidden',
-          margin: '0 auto',
-        }}
+        className="search_form"
       >
         <Grid style={isMd ? { padding: '0px' } : { padding: '0px' }}>
           {isMd ? (

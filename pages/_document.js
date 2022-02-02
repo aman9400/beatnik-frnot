@@ -13,11 +13,11 @@ export default class MyDocument extends Document {
       <Html lang="en">
         <Head>
           <meta charSet="utf-8" />
-          <link rel="shortcut icon" href="/assets/favicon.ico" />
+          <link rel="shortcut icon" href="/assets/Images/logo/favicon.ico" />
           <meta name="theme-color" content="#ffffff" />
           <meta
             name="description"
-            content="A modern design system for your new landing and web pages."
+            content="ACPL is a start-up in the field of medical healthcare including tele-medicine. The software platform will enable patients to search doctors for various specialties, check their profile, book appointment, and take consultation. The company is going to start the pilot launch by end of Aug 2021 and a full-scale launch of services by end of Oct 2021. The company’s mission is to create medical healthcare eco-system accessible, easier and better in terms of quality especially serving to the rural and non-metro geographies, which constitutes more than 75% of the population."
           />
           <meta
             name="robots"
@@ -26,20 +26,8 @@ export default class MyDocument extends Document {
           <meta property="og:locale" content="en_US" />
           <meta property="og:type" content="website" />
           <meta
-            property="og:image"
-            content="https://thefront.maccarianagency.com/assets/social.png"
-          />
-          <meta
-            property="og:title"
-            content="theFront | UI Kit by Maccarian Agency."
-          />
-          <meta
-            property="og:description"
-            content="A modern design system for your new landing and web pages."
-          />
-          <meta
-            property="og:url"
-            content="https://thefront.maccarianagency.com/"
+            name="author"
+            content="Som Gupta"
           />
           <link
             href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i&display=swap"

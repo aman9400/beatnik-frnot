@@ -151,75 +151,7 @@ export default function BookingSlots() {
             }
             {...a11yProps(0)}
           ></Tab>
-          <Tab
-            className={(styles.doctor_inner, `${classes.datatab}`)}
-            label={
-              <Card className={styles.content_part}>
-                <CardContent className={styles.content}>
-                  <Typography
-                    style={{ fontSize: '16px' }}
-                    className={styles.available_data_style}
-                  >
-                    Today
-                  </Typography>
-                </CardContent>
-                <Box className={styles.available_available_slot}>
-                  <Typography>
-                    <center>
-                      <b>5 Slots Available</b>
-                    </center>
-                  </Typography>
-                </Box>
-              </Card>
-            }
-            {...a11yProps(1)}
-          />
-          <Tab
-            className={(styles.doctor_inner, `${classes.datatab}`)}
-            label={
-              <Card className={styles.content_part}>
-                <CardContent className={styles.content}>
-                  <Typography
-                    style={{ fontSize: '16px' }}
-                    className={styles.available_data_style}
-                  >
-                    Today
-                  </Typography>
-                </CardContent>
-                <Box className={styles.available_available_slot}>
-                  <Typography>
-                    <center>
-                      <b>5 Slots Available</b>
-                    </center>
-                  </Typography>
-                </Box>
-              </Card>
-            }
-            {...a11yProps(2)}
-          />
-          <Tab
-            className={(styles.doctor_inner, `${classes.datatab}`)}
-            label={
-              <Card className={styles.content_part}>
-                <CardContent className={styles.content}>
-                  <Typography
-                    style={{ fontSize: '16px' }}
-                    className={styles.available_data_style}
-                  >
-                    Today
-                  </Typography>
-                </CardContent>
-                <Box className={styles.available_available_slot}>
-                  <Typography>
-                    <center>
-                      <b>5 Slots Available</b>
-                    </center>
-                  </Typography>
-                </Box>
-              </Card>
-            }
-            {...a11yProps(3)}
-          />
+        
         </Tabs>
       </AppBar>
 

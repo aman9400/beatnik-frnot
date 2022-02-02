@@ -1,44 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import Link from 'next/link';
+import { useTheme } from '@material-ui/core/styles';
 import {
   useMediaQuery,
-  List,
   ListItem,
   ListItemAvatar,
   ListItemText,
-  Avatar,
+  Grid,
 } from '@material-ui/core';
 import { SectionHeader } from 'components/molecules';
-
-const useStyles = makeStyles(theme => ({
-  list: {
-    display: 'flex',
-    flexDirection: 'column',
-    [theme.breakpoints.up('md')]: {
-      flexDirection: 'row',
-    },
-  },
-  listItemText: {
-    display: 'flex',
-    flexDirection: 'column',
-    flex: '0 0 auto',
-  },
-  listItem: {
-    justifyContent: 'flex-start',
-    [theme.breakpoints.up('md')]: {
-      justifyContent: 'center',
-    },
-  },
-  icon: {
-    background: 'transparent',
-    borderRadius: 0,
-  },
-}));
+import PhoneIcon from '@material-ui/icons/Phone';
+import MailIcon from '@material-ui/icons/Mail';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
+import styles from './Contact.module.css';
 
 const Contact = props => {
   const { className, ...rest } = props;
-  const classes = useStyles();
 
   const theme = useTheme();
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
@@ -48,92 +26,101 @@ const Contact = props => {
   return (
     <div className={className} {...rest}>
       <SectionHeader
+        className={styles.contact_info_title}
         title="Contact details"
         subtitle="Our contact details. We carefully read and answer to all your questions."
         data-aos="fade-up"
         align={isMd ? 'center' : 'left'}
       />
-      <List disablePadding className={classes.list}>
-        <ListItem
-          disableGutters
-          data-aos="fade-up"
-          className={classes.listItem}
-        >
-          <ListItemAvatar>
-            <Avatar
-              src="https://assets.maccarianagency.com/the-front/illustrations/contact-icon-phone.png"
-              srcSet="https://assets.maccarianagency.com/the-front/illustrations/contact-icon-phone@2x.png 2x"
-              className={classes.icon}
-            />
-          </ListItemAvatar>
-          <ListItemText
-            className={classes.listItemText}
-            primary="Phone"
-            secondary="+91 8866126777"
-            primaryTypographyProps={{
-              variant: 'subtitle1',
-              color: 'textSecondary',
-            }}
-            secondaryTypographyProps={{
-              variant: 'subtitle1',
-              color: 'textPrimary',
-              component: 'span',
-            }}
-          />
-        </ListItem>
-        <ListItem
-          disableGutters
-          data-aos="fade-up"
-          className={classes.listItem}
-        >
-          <ListItemAvatar>
-            <Avatar
-              src="https://assets.maccarianagency.com/the-front/illustrations/contact-icon-mail.png"
-              srcSet="https://assets.maccarianagency.com/the-front/illustrations/contact-icon-mail@2x.png 2x"
-              className={classes.icon}
-            />
-          </ListItemAvatar>
-          <ListItemText
-            className={classes.listItemText}
-            primary="Email"
-            secondary="hr@oaarogya.com"
-            primaryTypographyProps={{
-              variant: 'subtitle1',
-              color: 'textSecondary',
-            }}
-            secondaryTypographyProps={{
-              variant: 'subtitle1',
-              color: 'textPrimary',
-            }}
-          />
-        </ListItem>
-        <ListItem
-          disableGutters
-          data-aos="fade-up"
-          className={classes.listItem}
-        >
-          <ListItemAvatar>
-            <Avatar
-              src="https://assets.maccarianagency.com/the-front/illustrations/contact-icon-pin.png"
-              srcSet="https://assets.maccarianagency.com/the-front/illustrations/contact-icon-pin@2x.png 2x"
-              className={classes.icon}
-            />
-          </ListItemAvatar>
-          <ListItemText
-            className={classes.listItemText}
-            primary="Head Office"
-            secondary="802 Landmark Business Hub Silvassa, 396230"
-            primaryTypographyProps={{
-              variant: 'subtitle1',
-              color: 'textSecondary',
-            }}
-            secondaryTypographyProps={{
-              variant: 'subtitle1',
-              color: 'textPrimary',
-            }}
-          />
-        </ListItem>
-      </List>
+      <Grid container spacing={1}>
+        <Grid item xs={4} spacing={4}>
+          <ListItem
+            disableGutters
+            data-aos="fade-up"
+            className={styles.listItem}
+          >
+            <Link href="tel:+919760078301">
+              <div className={styles.Contact_data}>
+                <ListItemAvatar className={styles.contact_icon}>
+                  <PhoneIcon />
+                </ListItemAvatar>
+                <ListItemText
+                  className={styles.listItemText}
+                  primary="Phone"
+                  secondary="+91 8866126777"
+                  primaryTypographyProps={{
+                    variant: 'subtitle1',
+                    color: 'textSecondary',
+                  }}
+                  secondaryTypographyProps={{
+                    variant: 'subtitle1',
+                    color: 'textPrimary',
+                    component: 'p',
+                  }}
+                />
+              </div>
+            </Link>
+          </ListItem>
+        </Grid>
+        <Grid item xs={4} spacing={4}>
+          <ListItem
+            disableGutters
+            data-aos="fade-up"
+            className={styles.listItem}
+          >
+            <Link href="mailto:hr@oaarogya.com">
+              <div className={styles.Contact_data}>
+                <ListItemAvatar className={styles.contact_icon}>
+                  <MailIcon />
+                </ListItemAvatar>
+                <ListItemText
+                  className={styles.listItemText}
+                  primary="Email"
+                  secondary="hr@oaarogya.com"
+                  primaryTypographyProps={{
+                    variant: 'subtitle1',
+                    color: 'textSecondary',
+                  }}
+                  secondaryTypographyProps={{
+                    variant: 'subtitle1',
+                    color: 'textPrimary',
+                    component: 'p',
+                  }}
+                />
+              </div>
+            </Link>
+          </ListItem>
+        </Grid>
+        <Grid item xs={4} spacing={4}>
+          <ListItem
+            disableGutters
+            data-aos="fade-up"
+            className={styles.listItem}
+          >
+            <a target="_blank" href="https://goo.gl/maps/RqWBYhdrsZGUSjPh6">
+              <div className={styles.Contact_data}>
+                <ListItemAvatar className={styles.contact_icon}>
+                  <LocationOnIcon />
+                </ListItemAvatar>
+                <ListItemText
+                  className={styles.listItemText}
+                  primary="Head Office"
+                  secondary="802 Landmark Business Hub Silvassa, 396230"
+                  primaryTypographyProps={{
+                    variant: 'subtitle1',
+                    color: 'textSecondary',
+                  }}
+                  secondaryTypographyProps={{
+                    variant: 'subtitle1',
+                    color: 'textPrimary',
+                    component: 'p',
+                  }}
+                />
+              </div>
+            </a>
+          </ListItem>
+        </Grid>
+      </Grid>
     </div>
   );
 };

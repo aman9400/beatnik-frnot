@@ -41,7 +41,7 @@ const useStyles = makeStyles(theme => ({
   hero_para: {
     color: '#787887',
   },
-  news_title:{
+  news_title: {
     color: 'var(--heading-color)',
     display: 'block',
     fontSize: '32px !important',
@@ -91,43 +91,39 @@ const Hero = props => {
 
   return (
     <div className={className} {...rest}>
-      <Grid container spacing={isMd ? 4 : 2} justifyContent="space-between">
+      <Grid container  justifyContent="space-between">
         <Grid container justifyContent="center">
-          {isMd ? (
-            <Box>
-              <Typography variant="h2" className={classes.news_title}>
-                We are in the News
-              </Typography>
-            </Box>
-          ) : (
-            <Box >
-              <Typography variant="h2" className={classes.news_title}>
-                We are in the News
-              </Typography>
-            </Box>
-          )}
+          <Box>
+            <Typography variant="h2" className={classes.news_title}>
+              We are in the News
+            </Typography>
+          </Box>
         </Grid>
 
         {data.map(name => (
           <Grid
-          data-aos="fade-up"
-            item
+            data-aos="fade-up"
             xs={12}
+            sm={6}
             md={2}
+            lg={2}
+            xl={2}
             style={{
               padding: '16px',
               border: 'var(--border)',
               borderRadius: '10px',
               backgroundColor: 'var(--white)',
+              marginBottom:'10px',
             }}
           >
-            <Box mt={0}>
+            <Box style={{ textAlign: 'center' }}>
               <a onClick={handleClickOpen} style={{ cursor: 'pointer' }}>
                 <img
                   src={name.img}
                   className={classes.card_color}
                   height={60}
                   width={150}
+                  alt="#"
                 />
               </a>
             </Box>

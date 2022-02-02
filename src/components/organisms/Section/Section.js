@@ -8,12 +8,12 @@ const useStyles = makeStyles(theme => ({
     maxWidth: theme.layout.contentWidth,
     width: '100%',
     margin: '0 auto',
-    padding: theme.spacing(6, 2),
+    padding: theme.spacing(4, 0),
     [theme.breakpoints.up('sm')]: {
-      padding: theme.spacing(8, 8),
+      padding: theme.spacing(5, 0),
     },
     [theme.breakpoints.up('md')]: {
-      padding: theme.spacing(12, 8),
+      padding: theme.spacing(6, 0),
     },
   },
   fullWidth: {

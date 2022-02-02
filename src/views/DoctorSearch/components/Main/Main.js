@@ -3,40 +3,42 @@ import PropTypes from 'prop-types';
 import styles from './main.module.css';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { useMediaQuery, Grid, Box, Button } from '@material-ui/core';
+import { useMediaQuery, Grid, Button } from '@material-ui/core';
 import SearchDoctor from 'components/organisms/SearchDoctor';
+import { useRouter } from 'next/router';
 import {
   Card,
   CardHeader,
   CardMedia,
   IconButton,
   Dialog,
+  FormGroup,
+  TextField,
   DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
-  Tab,
-  Tabs,
-  CardContent,
-  AppBar,
+  Box,
   Typography,
 } from '@material-ui/core';
 import { red } from '@material-ui/core/colors';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import DoctorFilter from '../Filters/Filters';
-import DoctorDialogBox from '../DoctorDialog/DoctorDialog';
 import VideoCall from '../Images/video.png';
 import AudioCall from '../Images/phone-call.png';
 import WalkIN from '../Images/home.png';
 import ChatSer from '../Images/chat.png';
 import DoctorStethoscope from '../Images/doctor-stethoscope.jpg';
-import DoctorConsultSlider from '../DoctorConsultSlider';
-import BookingSlots from '../BooKingSlot/BookingSlot';
-import { useLocation } from 'react-router-dom';
-import DoctorRatingForm from '../DoctorRating/DoctorRating';
-import Rating from '@material-ui/lab/Rating';
-import MapIcon from '@material-ui/icons/Map';
-import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+import { checkToken } from '../../../../components/helper/LoginCheck';
+import DoctorUser from './../Images/doctor-user.png';
+import DoctorBox from './../Images/doctor-box.png';
+import DoctorLocation from './../Images/doctor-location.png';
+import DoctorConsult from './../Images/doctor-consult.png';
+import CheckMArk from './../Images/draw-check-mark.png';
+
+import DateFnsUtils from '@date-io/date-fns';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import PriceTag from './../../../../../public/assets/Images/r-icon/priceTag.png';
 const useStyles = makeStyles(theme => ({
   root: {
     background: 'hsl(0deg 0% 95%)',
@@ -197,26 +199,118 @@ const Main = props => {
   const [isActive, setActive] = useState(false);
   const [toggleState, setToggleState] = useState(1);
   const [language, setLanguage] = useState('');
-
+  const router = useRouter();
+  const [hiddens, setHiddens] = useState({});
   const [doctordetails, setDoctorDetails] = useState([]);
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
   const [star, setStar] = React.useState(3);
   const [hidden, setHidden] = useState(false);
+  const [getid, setGetid] = useState();
   const [showResults, setShowResults] = React.useState(false);
+
   const onClick = () => setShowResults(true);
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  // Code for Show Slot detail
+  const [getslot, setSlotDetail] = useState([]);
+  const [getslotdata, setGetslotdata] = useState([]);
+  const [errMsg, setErrMsg] = useState([]);
+  const [getAppointmentId, setAppointmentId] = useState([]);
+
+  const toggleHide = async (index, appointmentTypeID, doctorID) => {
+    // Passing appointment_type_id = id  and DoctorID = id of Doctor
+
+    setAppointmentId(appointmentTypeID);
+    // Checking if llogin or not and sending beaer token to URL
+    const loginToken = checkToken();
+    var myHeaders = new Headers();
+    if (loginToken) {
+      var bearerTokern = loginToken;
+    } else {
+      return 1;
+    }
+
+    var myHeaders = new Headers();
+
+    myHeaders.append('Content-Type', 'application/json');
+    myHeaders.append('Authorization', `Bearer ${bearerTokern}`);
+
+    var raw = JSON.stringify({
+      appointment_type_id: appointmentTypeID,
+      doctor_id: doctorID,
+    });
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      // redirect: 'follow'
+    };
+
+    var datas = await fetch(
+      'https://oaarogyabetaportal.mirakidigital.in/api/patient/appointments/getSchedules',
+      requestOptions,
+    )
+      .then(response => response.json())
+      .catch(error => console.log('error', error));
+
+    setSlotDetail(datas.slots);
+    // setSlotDetail(datas == datas.message ? '' : datas.slots )
+    console.log('ssssssdaaaadadaadaads', datas);
+    setGetslotdata(datas);
+
+    setHiddens({ ...hidden, [index]: !hidden[index] }); // Code for Button index
+  };
+
   const toggleTab = index => {
     setToggleState(index);
     setIsOpened(wasOpened => !wasOpened);
     setActive(!isActive);
   };
-  const handleClickOpen = scrollType => () => {
+
+  // Function for Model Box Open and Dispaly Single Doctor Records
+
+  const [modelbx, setModelbx] = useState([]);
+  const [getdispaly, setDisplay] = useState([]);
+  const [consultType, setConsultType] = useState([]);
+  const [modelboxspecialization, setModelboxspecialization] = useState([]);
+  const [clinic, setClinic] = useState([]);
+
+  const handleClickOpen = async doctorID => {
     setOpen(true);
-    setScroll(scrollType);
+    setScroll();
+
+    const loginToken = checkToken();
+    var myHeaders = new Headers();
+
+    myHeaders.append('Content-Type', 'application/json');
+    myHeaders.append('Authorization', `Bearer ${loginToken}`);
+
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow',
+    };
+
+    var data = await fetch(
+      `https://oaarogyabetaportal.mirakidigital.in/api/patient/home/doctor-details/${doctorID}`,
+      requestOptions,
+    )
+      .then(response => response.json())
+      .catch(error => console.log('error', error));
+
+    setModelbx(data.doctor);
+    setConsultType(data.doctor.consultation_types);
+    setModelboxspecialization(data.doctor.specialization);
+    setClinic(data.doctor.clinics);
   };
+
+  // End Model Box
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -245,7 +339,7 @@ const Main = props => {
     setLanguage(getData);
   }, []);
 
-  // To Load Doctor form API
+  // To Load Doctor List form API
   const loadDoctorDetails = () => {
     var myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
@@ -275,6 +369,50 @@ const Main = props => {
   useEffect(() => {
     loadDoctorDetails();
   }, []);
+
+  // On Date select
+  const [myValue, setMyValue] = useState('');
+  const [startTime, setStartTime] = useState('');
+  const [checkedSelectBox, setCheckedSelectBox] = useState(false);
+  const [checkDateSelected, setCheckDateSelected] = useState(false);
+  const [consultationAmount, setConsultationAmount] = useState('');
+  //setting Slot ID here and aving in state nad passing to Button Continue
+
+  const [slotID, setSlotId] = useState('');
+
+  const chooseDate = (slotId, startTime, consultationAmount) => {
+    alert(startTime);
+    setSlotId(slotId);
+    setStartTime(startTime);
+    setConsultationAmount(consultationAmount);
+    // If Slot box is not selected then Button will be hidden
+    setCheckedSelectBox(true);
+    setCheckDateSelected(true);
+  };
+
+  // Select data and pass to Contiune Page
+
+  const [choosedata, setChooseDate] = useState('');
+
+  //  const chooseData = (e) =>
+  //  {
+  //     setMyValue(e.target.value)
+  //  }
+
+  const getInputValue = event => {
+    // show the user input value to console
+    const userValue = event.target.value;
+
+    console.log(userValue);
+  };
+
+  const [selectedDate, setSelectedDate] = React.useState(new Date(Date.now()));
+
+  const handleDateChange = date => {
+    setSelectedDate(date);
+    // alert(date);
+  };
+
   return (
     <div className={clsx(classes.root, className)} {...rest}>
       <div className={styles.SearchDoctor_search}>
@@ -283,8 +421,9 @@ const Main = props => {
 
       <Grid container style={{ justifyContent: 'space-around' }}>
         <DoctorFilter />
+
         <Grid item xs={12} sm={6} md={4} lg={8} xl={8}>
-          {doctordetails.map(recordData => (
+          {doctordetails.map((recordData, index) => (
             <Card className={styles.doctor_card_root}>
               <Box component="div" className={styles.doctor_card_header}>
                 <Box component="div" className={styles.doctor_card_avatar}>
@@ -302,7 +441,10 @@ const Main = props => {
                     className={styles.doctor_name}
                     action={
                       <IconButton aria-label="settings">
-                        <ErrorOutlineIcon onClick={handleClickOpen('paper')} />
+                        <ErrorOutlineIcon
+                          onClick={e => handleClickOpen(recordData.id)}
+                        />
+                        {/* onClick={(e) => toggleHide(index,service.appointment_type_id,recordData.id)} */}
                       </IconButton>
                     }
                   />
@@ -329,7 +471,14 @@ const Main = props => {
                           className={
                             toggleState === 1 ? 'tabs active-tabs' : 'tabs'
                           }
-                          onClick={() => toggleTab(1)}
+                          id={service.appointment_type_id}
+                          onClick={e =>
+                            toggleHide(
+                              index,
+                              service.appointment_type_id,
+                              recordData.id,
+                            )
+                          }
                         >
                           <div className={styles.button_holder}>
                             <Button variant="contained">
@@ -369,1174 +518,241 @@ const Main = props => {
                 </Box>
               </Box>
 
-              {isOpened && (
+              {!!hiddens[index] ? (
                 <div className={styles.boxContent_collapsed}>
                   <div className="content-tabs">
-                    <div
-                      className={
-                        toggleState === 1
-                          ? 'content  active-content'
-                          : 'content'
-                      }
-                    >
-                      <div className={styles.conultation_heading}>
-                        <h4>Select Clinic </h4>
-                      </div>
-                      <AppBar
-                        position="static"
-                        className={styles.tab_scroll_bar}
-                      >
-                        <Tabs
-                          value={value}
-                          onChange={handleChange}
-                          variant="scrollable"
-                          scrollButtons="auto"
-                          aria-label="scrollable auto tabs"
-                          className={classes.tab_scroll_header}
-                        >
-                          <Tab
-                            className={
-                              (styles.doctor_inner, `${classes.datatab}`)
-                            }
-                            label={
-                              <Card className={styles.content_part}>
-                                <CardContent className={styles.content}>
-                                  <Typography
-                                    style={{ fontSize: '16px' }}
-                                    className={styles.available_data_style}
-                                  >
-                                    Today
-                                  </Typography>
-                                </CardContent>
-                                <Box
-                                  className={styles.available_available_slot}
-                                >
-                                  <Typography>
-                                    <center>
-                                      <b>5 Slots Available</b>
-                                    </center>
-                                  </Typography>
-                                </Box>
-                              </Card>
-                            }
-                            {...a11yProps(0)}
-                          ></Tab>
-                          <Tab
-                            className={
-                              (styles.doctor_inner, `${classes.datatab}`)
-                            }
-                            label={
-                              <Card className={styles.content_part}>
-                                <CardContent className={styles.content}>
-                                  <Typography
-                                    style={{ fontSize: '16px' }}
-                                    className={styles.available_data_style}
-                                  >
-                                    Today
-                                  </Typography>
-                                </CardContent>
-                                <Box
-                                  className={styles.available_available_slot}
-                                >
-                                  <Typography>
-                                    <center>
-                                      <b>5 Slots Available</b>
-                                    </center>
-                                  </Typography>
-                                </Box>
-                              </Card>
-                            }
-                            {...a11yProps(1)}
-                          />
-                    
-                        </Tabs>
-                      </AppBar>
+                    <div>
+                      <div className={styles.conultation_heading}></div>
 
-                      <TabPanel
-                        value={value}
-                        index={0}
-                        className={classes.tab_main_holder}
-                      >
-                        <div className={styles.wrapper}>
-                          <Grid container spacing={2}>
-                          <Grid
-                          container
-                          spacing={2}
-                          className={styles.consultation_content_part}
-                        >
-                          <Grid item xs={3}>
-                            <div className={styles.check_box}>
-                              <div className={styles.quiz_card_area}>
-                                <input
-                                  className={styles.quiz_checkbox}
-                                  type="radio"
-                                  id="1"
-                                  name="slot"
-                                  value="1"
-                                />
-                                <div className={styles.single_quiz_card}>
-                                  <div className={styles.quiz_card_content}>
-                                    <div className={styles.quiz_card_title}>
-                                      <div className={styles.shift_indecation}>
-                                        <h3>Shifts</h3>
-                                      </div>
-                                      <div className={styles.shift_indecation}>
-                                        <span>
-                                          <i
-                                            className="fa fa-check"
-                                            aria-hidden="true"
-                                          ></i>
-                                        </span>
-                                      </div>
-                                    </div>
-                                    <div className={styles.quiz_card_icon}>
-                                      <div className={styles.quiz_icon}>
-                                        <b>From</b>
-                                        <br />
-                                        <div className={styles.time_selector}>
-                                          <span>8:30 PM</span>
-                                        </div>
-                                      </div>
-                                      <div className={styles.quiz_icon}>
-                                        <b>To</b>
-                                        <br />
-                                        <div className={styles.time_selector}>
-                                          <span>8:30 PM</span>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </Grid>
-                          <Grid item xs={3}>
-                            <div className={styles.check_box}>
-                              <div className={styles.quiz_card_area}>
-                                <input
-                                  className={styles.quiz_checkbox}
-                                  type="radio"
-                                  id="2"
-                                  name="slot"
-                                  value="2"
-                                />
-                                <div className={styles.single_quiz_card}>
-                                  <div className={styles.quiz_card_content}>
-                                    <div className={styles.quiz_card_title}>
-                                      <div className={styles.shift_indecation}>
-                                        <h3>Shifts</h3>
-                                      </div>
-                                      <div className={styles.shift_indecation}>
-                                        <span>
-                                          <i
-                                            className="fa fa-check"
-                                            aria-hidden="true"
-                                          ></i>
-                                        </span>
-                                      </div>
-                                    </div>
-                                    <div className={styles.quiz_card_icon}>
-                                      <div className={styles.quiz_icon}>
-                                        <b>From</b>
-                                        <br />
-                                        <div className={styles.time_selector}>
-                                          <span>8:30 PM</span>
-                                        </div>
-                                      </div>
-                                      <div className={styles.quiz_icon}>
-                                        <b>To</b>
-                                        <br />
-                                        <div className={styles.time_selector}>
-                                          <span>8:30 PM</span>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </Grid>
-                          <Grid item xs={3}>
-                            <div className={styles.check_box}>
-                              <div className={styles.quiz_card_area}>
-                                <input
-                                  className={styles.quiz_checkbox}
-                                  type="radio"
-                                  id="3"
-                                  name="slot"
-                                  value="3"
-                                />
-                                <div className={styles.single_quiz_card}>
-                                  <div className={styles.quiz_card_content}>
-                                    <div className={styles.quiz_card_title}>
-                                      <div className={styles.shift_indecation}>
-                                        <h3>Shifts</h3>
-                                      </div>
-                                      <div className={styles.shift_indecation}>
-                                        <span>
-                                          <i
-                                            className="fa fa-check"
-                                            aria-hidden="true"
-                                          ></i>
-                                        </span>
-                                      </div>
-                                    </div>
-                                    <div className={styles.quiz_card_icon}>
-                                      <div className={styles.quiz_icon}>
-                                        <b>From</b>
-                                        <br />
-                                        <div className={styles.time_selector}>
-                                          <span>8:30 PM</span>
-                                        </div>
-                                      </div>
-                                      <div className={styles.quiz_icon}>
-                                        <b>To</b>
-                                        <br />
-                                        <div className={styles.time_selector}>
-                                          <span>8:30 PM</span>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </Grid>
-                          <Grid item xs={3}>
-                            <div className={styles.check_box}>
-                              <div className={styles.quiz_card_area}>
-                                <input
-                                  className={styles.quiz_checkbox}
-                                  type="radio"
-                                  id="3"
-                                  name="slot"
-                                  value="3"
-                                />
-                                <div className={styles.single_quiz_card}>
-                                  <div className={styles.quiz_card_content}>
-                                    <div className={styles.quiz_card_title}>
-                                      <div className={styles.shift_indecation}>
-                                        <h3>Shifts</h3>
-                                      </div>
-                                      <div className={styles.shift_indecation}>
-                                        <span>
-                                          <i
-                                            className="fa fa-check"
-                                            aria-hidden="true"
-                                          ></i>
-                                        </span>
-                                      </div>
-                                    </div>
-                                    <div className={styles.quiz_card_icon}>
-                                      <div className={styles.quiz_icon}>
-                                        <b>From</b>
-                                        <br />
-                                        <div className={styles.time_selector}>
-                                          <span>8:30 PM</span>
-                                        </div>
-                                      </div>
-                                      <div className={styles.quiz_icon}>
-                                        <b>To</b>
-                                        <br />
-                                        <div className={styles.time_selector}>
-                                          <span>8:30 PM</span>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </Grid>
-                          <Grid item xs={3}>
-                            <div className={styles.check_box}>
-                              <div className={styles.quiz_card_area}>
-                                <input
-                                  className={styles.quiz_checkbox}
-                                  type="radio"
-                                  id="5"
-                                  name="slot"
-                                  value="5"
-                                />
-                                <div className={styles.single_quiz_card}>
-                                  <div className={styles.quiz_card_content}>
-                                    <div className={styles.quiz_card_title}>
-                                      <div className={styles.shift_indecation}>
-                                        <h3>Shifts</h3>
-                                      </div>
-                                      <div className={styles.shift_indecation}>
-                                        <span>
-                                          <i
-                                            className="fa fa-check"
-                                            aria-hidden="true"
-                                          ></i>
-                                        </span>
-                                      </div>
-                                    </div>
-                                    <div className={styles.quiz_card_icon}>
-                                      <div className={styles.quiz_icon}>
-                                        <b>From</b>
-                                        <br />
-                                        <div className={styles.time_selector}>
-                                          <span>8:30 PM</span>
-                                        </div>
-                                      </div>
-                                      <div className={styles.quiz_icon}>
-                                        <b>To</b>
-                                        <br />
-                                        <div className={styles.time_selector}>
-                                          <span>8:30 PM</span>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </Grid>
-                        </Grid>
-                            {/* <Grid hidden={hidden} item xs={6}>
-                              <div className={styles.box} onClick={onClick}>
-                                <div className={styles.section_1}>
-                                  <p className={styles.p_1}>Chisel Dental</p>
-                                  <div
-                                    className={styles.close}
-                                    onClick={() => setHidden(!hidden)}
-                                  >
-                                    <HighlightOffIcon />
-                                  </div>
-                                </div>
-
-                                <div className={styles.hr}></div>
-                                <div className={styles.pdfs}>
-                                  <div className={styles.pdf_one}>
-                                    <p>
-                                      18, 1st Main, Koramangala 1st Block,
-                                      Jakkasandra Extension, Bangalore
-                                    </p>
-                                  </div>
-                                  <div className={styles.pdf_two}>
-                                    <b>Price -&nbsp; </b>
-                                    <p>
-                                      <b>₹</b> 300 to <b>₹</b> 300
-                                    </p>
-                                  </div>
-                                  <div className={styles.pdf_proggress}>
-                                    <Box sx={{ textAlign: 'center' }}>
-                                      <Rating
-                                        onClick={handleClickOpen}
-                                        name="simple-controlled"
-                                        value={star}
-                                        max={5}
-                                        onChange={(event, newValue) => {
-                                          setStar(newValue);
-                                        }}
-                                      />
-                                      <p>(3) Ratings</p>
-                                      <Dialog
-                                        open={open}
-                                        onClose={handleClose}
-                                        aria-labelledby="form-dialog-title"
-                                      >
-                                        <DoctorRatingForm />
-                                        <DialogActions>
-                                          <Button
-                                            onClick={handleClose}
-                                            color="primary"
-                                          >
-                                            Cancel
-                                          </Button>
-                                          <Button
-                                            onClick={handleClose}
-                                            color="primary"
-                                          >
-                                            Subscribe
-                                          </Button>
-                                        </DialogActions>
-                                      </Dialog>
-                                    </Box>
-                                    <Box className={styles.direction}>
-                                      <MapIcon />
-                                      <p> Get Direction</p>
-                                    </Box>
-                                  </div>
-                                </div>
-                              </div>
-                            </Grid> */}
-                        
-                          </Grid>
-                          {showResults ? (
+                      {/* 
+                        Check if no data is coming from API then show NO DATA Available */}
+                      {getslot ? (
+                        <>
+                          <MuiPickersUtilsProvider utils={DateFnsUtils}>
                             <Grid
                               container
-                              spacing={2}
-                              className={styles.consultation_content_part}
-                            >
-                              <Grid item xs={3}>
-                                <div className={styles.check_box}>
-                                  <div className={styles.quiz_card_area}>
-                                    <input
-                                      className={styles.quiz_checkbox}
-                                      type="radio"
-                                      id="1"
-                                      name="slot"
-                                      value="1"
-                                    />
-                                    <div className={styles.single_quiz_card}>
-                                      <div className={styles.quiz_card_content}>
-                                        <div className={styles.quiz_card_title}>
+                              justifyContent="space-around"
+                            ></Grid>
+                          </MuiPickersUtilsProvider>
+                          <FormGroup style={{ marginBottom: '20px' }}>
+                            <TextField
+                              mt={2}
+                              id="date"
+                              label="Appointment Date"
+                              type="date"
+                              disablePast
+                              onChange={e => setMyValue(e.target.value)}
+                              value={
+                                myValue
+                                  ? myValue
+                                  : getslotdata.next_available_date
+                              }
+                              className={styles.textField}
+                              InputLabelProps={{
+                                disablePast: true,
+                              }}
+                            />
+                          </FormGroup>{' '}
+                        </>
+                      ) : (
+                        ''
+                      )}
+
+                      <div className={styles.wrapper}>
+                        <Grid container spacing={2}>
+                          <Grid
+                            container
+                            spacing={2}
+                            className={styles.consultation_content_part}
+                          >
+                            {getslot ? (
+                              getslot.map(showslot => (
+                                <Grid item xs={3}>
+                                  <div className={styles.check_box}>
+                                    <div className={styles.quiz_card_area}>
+                                      <input
+                                        className={styles.quiz_checkbox}
+                                        type="radio"
+                                        id="1"
+                                        name="slot"
+                                        onClick={e =>
+                                          chooseDate(
+                                            showslot.id,
+                                            showslot.start_time,
+                                            showslot.amount,
+                                          )
+                                        }
+                                        // Passing Slot id ,Start time on chooseDate button
+                                      />
+                                      <div className={styles.single_quiz_card}>
+                                        <div
+                                          className={styles.quiz_card_content}
+                                        >
                                           <div
-                                            className={styles.shift_indecation}
+                                            className={styles.quiz_card_title}
                                           >
-                                            <h3>Shifts</h3>
-                                          </div>
-                                          <div
-                                            className={styles.shift_indecation}
-                                          >
-                                            <span>
-                                              <i
-                                                className="fa fa-check"
-                                                aria-hidden="true"
-                                              ></i>
-                                            </span>
-                                          </div>
-                                        </div>
-                                        <div className={styles.quiz_card_icon}>
-                                          <div className={styles.quiz_icon}>
-                                            <b>From</b>
-                                            <br />
                                             <div
-                                              className={styles.time_selector}
+                                              className={
+                                                styles.shift_indecation
+                                              }
                                             >
-                                              <span>8:30 PM</span>
+                                              <h3>Shifts</h3>
+                                            </div>
+                                            <div
+                                              className={
+                                                styles.shift_indecation
+                                              }
+                                            >
+                                              <span>
+                                                <i
+                                                  className="fa fa-check"
+                                                  aria-hidden="true"
+                                                ></i>
+                                              </span>
                                             </div>
                                           </div>
-                                          <div className={styles.quiz_icon}>
-                                            <b>To</b>
-                                            <br />
-                                            <div
-                                              className={styles.time_selector}
-                                            >
-                                              <span>8:30 PM</span>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </Grid>
-                              <Grid item xs={3}>
-                                <div className={styles.check_box}>
-                                  <div className={styles.quiz_card_area}>
-                                    <input
-                                      className={styles.quiz_checkbox}
-                                      type="radio"
-                                      id="2"
-                                      name="slot"
-                                      value="2"
-                                    />
-                                    <div className={styles.single_quiz_card}>
-                                      <div className={styles.quiz_card_content}>
-                                        <div className={styles.quiz_card_title}>
                                           <div
-                                            className={styles.shift_indecation}
+                                            className={styles.quiz_card_icon}
                                           >
-                                            <h3>Shifts</h3>
-                                          </div>
-                                          <div
-                                            className={styles.shift_indecation}
-                                          >
-                                            <span>
-                                              <i
-                                                className="fa fa-check"
-                                                aria-hidden="true"
-                                              ></i>
-                                            </span>
-                                          </div>
-                                        </div>
-                                        <div className={styles.quiz_card_icon}>
-                                          <div className={styles.quiz_icon}>
-                                            <b>From</b>
-                                            <br />
-                                            <div
-                                              className={styles.time_selector}
-                                            >
-                                              <span>8:30 PM</span>
+                                            <div className={styles.quiz_icon}>
+                                              <b>From</b>
+                                              <br />
+                                              <div
+                                                className={styles.time_selector}
+                                              >
+                                                <span>
+                                                  {showslot.start_time}
+                                                </span>
+                                              </div>
+                                            </div>
+                                            <div className={styles.quiz_icon}>
+                                              <b>To</b>
+                                              <br />
+                                              <div
+                                                className={styles.time_selector}
+                                              >
+                                                <span>{showslot.end_time}</span>
+                                              </div>
                                             </div>
                                           </div>
-                                          <div className={styles.quiz_icon}>
-                                            <b>To</b>
-                                            <br />
+                                          <div className={styles.prace_tag}>
                                             <div
-                                              className={styles.time_selector}
+                                              className={styles.prive_tag_img}
                                             >
-                                              <span>8:30 PM</span>
+                                              <img alt="#" src={PriceTag} />
+                                              <p> Fee : {showslot.amount}</p>
                                             </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </Grid>
-                              <Grid item xs={3}>
-                                <div className={styles.check_box}>
-                                  <div className={styles.quiz_card_area}>
-                                    <input
-                                      className={styles.quiz_checkbox}
-                                      type="radio"
-                                      id="3"
-                                      name="slot"
-                                      value="3"
-                                    />
-                                    <div className={styles.single_quiz_card}>
-                                      <div className={styles.quiz_card_content}>
-                                        <div className={styles.quiz_card_title}>
-                                          <div
-                                            className={styles.shift_indecation}
-                                          >
-                                            <h3>Shifts</h3>
-                                          </div>
-                                          <div
-                                            className={styles.shift_indecation}
-                                          >
-                                            <span>
-                                              <i
-                                                className="fa fa-check"
-                                                aria-hidden="true"
-                                              ></i>
-                                            </span>
-                                          </div>
-                                        </div>
-                                        <div className={styles.quiz_card_icon}>
-                                          <div className={styles.quiz_icon}>
-                                            <b>From</b>
-                                            <br />
-                                            <div
-                                              className={styles.time_selector}
-                                            >
-                                              <span>8:30 PM</span>
-                                            </div>
-                                          </div>
-                                          <div className={styles.quiz_icon}>
-                                            <b>To</b>
-                                            <br />
-                                            <div
-                                              className={styles.time_selector}
-                                            >
-                                              <span>8:30 PM</span>
-                                            </div>
+                                            <p></p>
                                           </div>
                                         </div>
                                       </div>
                                     </div>
                                   </div>
-                                </div>
-                              </Grid>
-                              <Grid item xs={3}>
-                                <div className={styles.check_box}>
-                                  <div className={styles.quiz_card_area}>
-                                    <input
-                                      className={styles.quiz_checkbox}
-                                      type="radio"
-                                      id="3"
-                                      name="slot"
-                                      value="3"
-                                    />
-                                    <div className={styles.single_quiz_card}>
-                                      <div className={styles.quiz_card_content}>
-                                        <div className={styles.quiz_card_title}>
-                                          <div
-                                            className={styles.shift_indecation}
-                                          >
-                                            <h3>Shifts</h3>
-                                          </div>
-                                          <div
-                                            className={styles.shift_indecation}
-                                          >
-                                            <span>
-                                              <i
-                                                className="fa fa-check"
-                                                aria-hidden="true"
-                                              ></i>
-                                            </span>
-                                          </div>
-                                        </div>
-                                        <div className={styles.quiz_card_icon}>
-                                          <div className={styles.quiz_icon}>
-                                            <b>From</b>
-                                            <br />
-                                            <div
-                                              className={styles.time_selector}
-                                            >
-                                              <span>8:30 PM</span>
-                                            </div>
-                                          </div>
-                                          <div className={styles.quiz_icon}>
-                                            <b>To</b>
-                                            <br />
-                                            <div
-                                              className={styles.time_selector}
-                                            >
-                                              <span>8:30 PM</span>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </Grid>
-                              <Grid item xs={3}>
-                                <div className={styles.check_box}>
-                                  <div className={styles.quiz_card_area}>
-                                    <input
-                                      className={styles.quiz_checkbox}
-                                      type="radio"
-                                      id="5"
-                                      name="slot"
-                                      value="5"
-                                    />
-                                    <div className={styles.single_quiz_card}>
-                                      <div className={styles.quiz_card_content}>
-                                        <div className={styles.quiz_card_title}>
-                                          <div
-                                            className={styles.shift_indecation}
-                                          >
-                                            <h3>Shifts</h3>
-                                          </div>
-                                          <div
-                                            className={styles.shift_indecation}
-                                          >
-                                            <span>
-                                              <i
-                                                className="fa fa-check"
-                                                aria-hidden="true"
-                                              ></i>
-                                            </span>
-                                          </div>
-                                        </div>
-                                        <div className={styles.quiz_card_icon}>
-                                          <div className={styles.quiz_icon}>
-                                            <b>From</b>
-                                            <br />
-                                            <div
-                                              className={styles.time_selector}
-                                            >
-                                              <span>8:30 PM</span>
-                                            </div>
-                                          </div>
-                                          <div className={styles.quiz_icon}>
-                                            <b>To</b>
-                                            <br />
-                                            <div
-                                              className={styles.time_selector}
-                                            >
-                                              <span>8:30 PM</span>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </Grid>
+                                </Grid>
+                              ))
+                            ) : (
+                              <div style={{ marginLeft: '330px' }}>
+                                <b>No Slot Availble</b>
+                              </div>
+                            )}
+
+                            <Grid item xs={12} style={{ textAlign: 'right' }}>
+                              {/* Button wont show if getSlot has not data  */}
+                              {getslot ? (
+                                checkedSelectBox == true ? (
+                                  <Button
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={() =>
+                                      router.push(
+                                        `/search/book-slot?doctor_id=${recordData.id}&&slot_id=${slotID}&&appointmentDate=${myValue}&&appointmentType=${getAppointmentId}&&startTime=${startTime}&consultAmount=${consultationAmount}`,
+                                      )
+                                    }
+                                  >
+                                    {' '}
+                                    Continue{' '}
+                                  </Button> // Check if Box is not checked then button wont show here
+                                ) : (
+                                  ''
+                                )
+                              ) : (
+                                ''
+                              )}
                             </Grid>
-                          ) : null}
-                        </div>
-                      </TabPanel>
-                      <TabPanel
-                        value={value}
-                        index={1}
-                        className={classes.tab_main_holder}
-                      >
-                        <Grid
-                          container
-                          spacing={2}
-                          className={styles.consultation_content_part}
-                        >
-                          <Grid item xs={3}>
-                            <div className={styles.check_box}>
-                              <div className={styles.quiz_card_area}>
-                                <input
-                                  className={styles.quiz_checkbox}
-                                  type="radio"
-                                  id="1"
-                                  name="slot"
-                                  value="1"
-                                />
-                                <div className={styles.single_quiz_card}>
-                                  <div className={styles.quiz_card_content}>
-                                    <div className={styles.quiz_card_title}>
-                                      <div className={styles.shift_indecation}>
-                                        <h3>Shifts</h3>
-                                      </div>
-                                      <div className={styles.shift_indecation}>
-                                        <span>
-                                          <i
-                                            className="fa fa-check"
-                                            aria-hidden="true"
-                                          ></i>
-                                        </span>
-                                      </div>
-                                    </div>
-                                    <div className={styles.quiz_card_icon}>
-                                      <div className={styles.quiz_icon}>
-                                        <b>From</b>
-                                        <br />
-                                        <div className={styles.time_selector}>
-                                          <span>8:30 PM</span>
-                                        </div>
-                                      </div>
-                                      <div className={styles.quiz_icon}>
-                                        <b>To</b>
-                                        <br />
-                                        <div className={styles.time_selector}>
-                                          <span>8:30 PM</span>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </Grid>
-                          <Grid item xs={3}>
-                            <div className={styles.check_box}>
-                              <div className={styles.quiz_card_area}>
-                                <input
-                                  className={styles.quiz_checkbox}
-                                  type="radio"
-                                  id="2"
-                                  name="slot"
-                                  value="2"
-                                />
-                                <div className={styles.single_quiz_card}>
-                                  <div className={styles.quiz_card_content}>
-                                    <div className={styles.quiz_card_title}>
-                                      <div className={styles.shift_indecation}>
-                                        <h3>Shifts</h3>
-                                      </div>
-                                      <div className={styles.shift_indecation}>
-                                        <span>
-                                          <i
-                                            className="fa fa-check"
-                                            aria-hidden="true"
-                                          ></i>
-                                        </span>
-                                      </div>
-                                    </div>
-                                    <div className={styles.quiz_card_icon}>
-                                      <div className={styles.quiz_icon}>
-                                        <b>From</b>
-                                        <br />
-                                        <div className={styles.time_selector}>
-                                          <span>8:30 PM</span>
-                                        </div>
-                                      </div>
-                                      <div className={styles.quiz_icon}>
-                                        <b>To</b>
-                                        <br />
-                                        <div className={styles.time_selector}>
-                                          <span>8:30 PM</span>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </Grid>
-                          <Grid item xs={3}>
-                            <div className={styles.check_box}>
-                              <div className={styles.quiz_card_area}>
-                                <input
-                                  className={styles.quiz_checkbox}
-                                  type="radio"
-                                  id="3"
-                                  name="slot"
-                                  value="3"
-                                />
-                                <div className={styles.single_quiz_card}>
-                                  <div className={styles.quiz_card_content}>
-                                    <div className={styles.quiz_card_title}>
-                                      <div className={styles.shift_indecation}>
-                                        <h3>Shifts</h3>
-                                      </div>
-                                      <div className={styles.shift_indecation}>
-                                        <span>
-                                          <i
-                                            className="fa fa-check"
-                                            aria-hidden="true"
-                                          ></i>
-                                        </span>
-                                      </div>
-                                    </div>
-                                    <div className={styles.quiz_card_icon}>
-                                      <div className={styles.quiz_icon}>
-                                        <b>From</b>
-                                        <br />
-                                        <div className={styles.time_selector}>
-                                          <span>8:30 PM</span>
-                                        </div>
-                                      </div>
-                                      <div className={styles.quiz_icon}>
-                                        <b>To</b>
-                                        <br />
-                                        <div className={styles.time_selector}>
-                                          <span>8:30 PM</span>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </Grid>
-                          <Grid item xs={3}>
-                            <div className={styles.check_box}>
-                              <div className={styles.quiz_card_area}>
-                                <input
-                                  className={styles.quiz_checkbox}
-                                  type="radio"
-                                  id="3"
-                                  name="slot"
-                                  value="3"
-                                />
-                                <div className={styles.single_quiz_card}>
-                                  <div className={styles.quiz_card_content}>
-                                    <div className={styles.quiz_card_title}>
-                                      <div className={styles.shift_indecation}>
-                                        <h3>Shifts</h3>
-                                      </div>
-                                      <div className={styles.shift_indecation}>
-                                        <span>
-                                          <i
-                                            className="fa fa-check"
-                                            aria-hidden="true"
-                                          ></i>
-                                        </span>
-                                      </div>
-                                    </div>
-                                    <div className={styles.quiz_card_icon}>
-                                      <div className={styles.quiz_icon}>
-                                        <b>From</b>
-                                        <br />
-                                        <div className={styles.time_selector}>
-                                          <span>8:30 PM</span>
-                                        </div>
-                                      </div>
-                                      <div className={styles.quiz_icon}>
-                                        <b>To</b>
-                                        <br />
-                                        <div className={styles.time_selector}>
-                                          <span>8:30 PM</span>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </Grid>
-                          <Grid item xs={3}>
-                            <div className={styles.check_box}>
-                              <div className={styles.quiz_card_area}>
-                                <input
-                                  className={styles.quiz_checkbox}
-                                  type="radio"
-                                  id="5"
-                                  name="slot"
-                                  value="5"
-                                />
-                                <div className={styles.single_quiz_card}>
-                                  <div className={styles.quiz_card_content}>
-                                    <div className={styles.quiz_card_title}>
-                                      <div className={styles.shift_indecation}>
-                                        <h3>Shifts</h3>
-                                      </div>
-                                      <div className={styles.shift_indecation}>
-                                        <span>
-                                          <i
-                                            className="fa fa-check"
-                                            aria-hidden="true"
-                                          ></i>
-                                        </span>
-                                      </div>
-                                    </div>
-                                    <div className={styles.quiz_card_icon}>
-                                      <div className={styles.quiz_icon}>
-                                        <b>From</b>
-                                        <br />
-                                        <div className={styles.time_selector}>
-                                          <span>8:30 PM</span>
-                                        </div>
-                                      </div>
-                                      <div className={styles.quiz_icon}>
-                                        <b>To</b>
-                                        <br />
-                                        <div className={styles.time_selector}>
-                                          <span>8:30 PM</span>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
                           </Grid>
                         </Grid>
-                      </TabPanel>
-                      <TabPanel
-                        value={value}
-                        index={2}
-                        className={classes.tab_main_holder}
-                      >
-                        <Grid
-                          container
-                          spacing={2}
-                          className={styles.consultation_content_part}
-                        >
-                          <Grid item xs={3}>
-                            <div className={styles.check_box}>
-                              <div className={styles.quiz_card_area}>
-                                <input
-                                  className={styles.quiz_checkbox}
-                                  type="radio"
-                                  id="1"
-                                  name="slot"
-                                  value="1"
-                                />
-                                <div className={styles.single_quiz_card}>
-                                  <div className={styles.quiz_card_content}>
-                                    <div className={styles.quiz_card_title}>
-                                      <div className={styles.shift_indecation}>
-                                        <h3>Shifts</h3>
-                                      </div>
-                                      <div className={styles.shift_indecation}>
-                                        <span>
-                                          <i
-                                            className="fa fa-check"
-                                            aria-hidden="true"
-                                          ></i>
-                                        </span>
-                                      </div>
-                                    </div>
-                                    <div className={styles.quiz_card_icon}>
-                                      <div className={styles.quiz_icon}>
-                                        <b>From</b>
-                                        <br />
-                                        <div className={styles.time_selector}>
-                                          <span>8:30 PM</span>
+                        {showResults ? (
+                          <Grid
+                            container
+                            spacing={2}
+                            className={styles.consultation_content_part}
+                          >
+                            <Grid item xs={3}>
+                              <div className={styles.check_box}>
+                                <div className={styles.quiz_card_area}>
+                                  <input
+                                    className={styles.quiz_checkbox}
+                                    type="radio"
+                                    id="1"
+                                    name="slot"
+                                    value="1"
+                                  />
+                                  <div className={styles.single_quiz_card}>
+                                    <div className={styles.quiz_card_content}>
+                                      <div className={styles.quiz_card_title}>
+                                        <div
+                                          className={styles.shift_indecation}
+                                        >
+                                          <h3>Shifts</h3>
+                                        </div>
+                                        <div
+                                          className={styles.shift_indecation}
+                                        >
+                                          <span>
+                                            <i
+                                              className="fa fa-check"
+                                              aria-hidden="true"
+                                            ></i>
+                                          </span>
                                         </div>
                                       </div>
-                                      <div className={styles.quiz_icon}>
-                                        <b>To</b>
-                                        <br />
-                                        <div className={styles.time_selector}>
-                                          <span>8:30 PM</span>
+                                      <div className={styles.quiz_card_icon}>
+                                        <div className={styles.quiz_icon}>
+                                          <b>From</b>
+                                          <br />
+                                          <div className={styles.time_selector}>
+                                            <span>8:30 PM</span>
+                                          </div>
                                         </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </Grid>
-                          <Grid item xs={3}>
-                            <div className={styles.check_box}>
-                              <div className={styles.quiz_card_area}>
-                                <input
-                                  className={styles.quiz_checkbox}
-                                  type="radio"
-                                  id="2"
-                                  name="slot"
-                                  value="2"
-                                />
-                                <div className={styles.single_quiz_card}>
-                                  <div className={styles.quiz_card_content}>
-                                    <div className={styles.quiz_card_title}>
-                                      <div className={styles.shift_indecation}>
-                                        <h3>Shifts</h3>
-                                      </div>
-                                      <div className={styles.shift_indecation}>
-                                        <span>
-                                          <i
-                                            className="fa fa-check"
-                                            aria-hidden="true"
-                                          ></i>
-                                        </span>
-                                      </div>
-                                    </div>
-                                    <div className={styles.quiz_card_icon}>
-                                      <div className={styles.quiz_icon}>
-                                        <b>From</b>
-                                        <br />
-                                        <div className={styles.time_selector}>
-                                          <span>8:30 PM</span>
-                                        </div>
-                                      </div>
-                                      <div className={styles.quiz_icon}>
-                                        <b>To</b>
-                                        <br />
-                                        <div className={styles.time_selector}>
-                                          <span>8:30 PM</span>
+                                        <div className={styles.quiz_icon}>
+                                          <b>To</b>
+                                          <br />
+                                          <div className={styles.time_selector}>
+                                            <span>8:30 PM</span>
+                                          </div>
                                         </div>
                                       </div>
                                     </div>
                                   </div>
                                 </div>
                               </div>
-                            </div>
+                            </Grid>
                           </Grid>
-                          <Grid item xs={3}>
-                            <div className={styles.check_box}>
-                              <div className={styles.quiz_card_area}>
-                                <input
-                                  className={styles.quiz_checkbox}
-                                  type="radio"
-                                  id="3"
-                                  name="slot"
-                                  value="3"
-                                />
-                                <div className={styles.single_quiz_card}>
-                                  <div className={styles.quiz_card_content}>
-                                    <div className={styles.quiz_card_title}>
-                                      <div className={styles.shift_indecation}>
-                                        <h3>Shifts</h3>
-                                      </div>
-                                      <div className={styles.shift_indecation}>
-                                        <span>
-                                          <i
-                                            className="fa fa-check"
-                                            aria-hidden="true"
-                                          ></i>
-                                        </span>
-                                      </div>
-                                    </div>
-                                    <div className={styles.quiz_card_icon}>
-                                      <div className={styles.quiz_icon}>
-                                        <b>From</b>
-                                        <br />
-                                        <div className={styles.time_selector}>
-                                          <span>8:30 PM</span>
-                                        </div>
-                                      </div>
-                                      <div className={styles.quiz_icon}>
-                                        <b>To</b>
-                                        <br />
-                                        <div className={styles.time_selector}>
-                                          <span>8:30 PM</span>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </Grid>
-                          <Grid item xs={3}>
-                            <div className={styles.check_box}>
-                              <div className={styles.quiz_card_area}>
-                                <input
-                                  className={styles.quiz_checkbox}
-                                  type="radio"
-                                  id="3"
-                                  name="slot"
-                                  value="3"
-                                />
-                                <div className={styles.single_quiz_card}>
-                                  <div className={styles.quiz_card_content}>
-                                    <div className={styles.quiz_card_title}>
-                                      <div className={styles.shift_indecation}>
-                                        <h3>Shifts</h3>
-                                      </div>
-                                      <div className={styles.shift_indecation}>
-                                        <span>
-                                          <i
-                                            className="fa fa-check"
-                                            aria-hidden="true"
-                                          ></i>
-                                        </span>
-                                      </div>
-                                    </div>
-                                    <div className={styles.quiz_card_icon}>
-                                      <div className={styles.quiz_icon}>
-                                        <b>From</b>
-                                        <br />
-                                        <div className={styles.time_selector}>
-                                          <span>8:30 PM</span>
-                                        </div>
-                                      </div>
-                                      <div className={styles.quiz_icon}>
-                                        <b>To</b>
-                                        <br />
-                                        <div className={styles.time_selector}>
-                                          <span>8:30 PM</span>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </Grid>
-                          <Grid item xs={3}>
-                            <div className={styles.check_box}>
-                              <div className={styles.quiz_card_area}>
-                                <input
-                                  className={styles.quiz_checkbox}
-                                  type="radio"
-                                  id="5"
-                                  name="slot"
-                                  value="5"
-                                />
-                                <div className={styles.single_quiz_card}>
-                                  <div className={styles.quiz_card_content}>
-                                    <div className={styles.quiz_card_title}>
-                                      <div className={styles.shift_indecation}>
-                                        <h3>Shifts</h3>
-                                      </div>
-                                      <div className={styles.shift_indecation}>
-                                        <span>
-                                          <i
-                                            className="fa fa-check"
-                                            aria-hidden="true"
-                                          ></i>
-                                        </span>
-                                      </div>
-                                    </div>
-                                    <div className={styles.quiz_card_icon}>
-                                      <div className={styles.quiz_icon}>
-                                        <b>From</b>
-                                        <br />
-                                        <div className={styles.time_selector}>
-                                          <span>8:30 PM</span>
-                                        </div>
-                                      </div>
-                                      <div className={styles.quiz_icon}>
-                                        <b>To</b>
-                                        <br />
-                                        <div className={styles.time_selector}>
-                                          <span>8:30 PM</span>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </Grid>
-                        </Grid>
-                      </TabPanel>
+                        ) : null}
+                      </div>
+                      {/* </TabPanel> */}
                     </div>
                   </div>
                 </div>
+              ) : (
+                ''
               )}
             </Card>
           ))}
         </Grid>
       </Grid>
+
+      {/* Code for Dialog Box */}
 
       <Dialog
         open={open}
@@ -1555,7 +771,126 @@ const Main = props => {
             ref={descriptionElementRef}
             tabIndex={-1}
           >
-            <DoctorDialogBox />
+            <div className={styles.doctor_over_view_data}>
+              <div className={styles.time_line_item}>
+                <div className={styles.time_line_date_wrap}>
+                  <div className={styles.doc_hexagon}>
+                    <img src={DoctorUser} alt="Doctor Name" />
+                  </div>
+                </div>
+                <div className={styles.time_line_content}>
+                  <Box component="div" className={styles.doctor_card_header}>
+                    <Box component="div" className={styles.doctor_card_avatar}>
+                      <CardMedia
+                        className={styles.doctor_avatar}
+                        image={modelbx.avatar_url}
+                        title="Som Nath Gupta"
+                      />
+                    </Box>
+                    <Box
+                      container
+                      component="div"
+                      className={styles.doctor_card_detail}
+                    >
+                      <div className={styles.doctor_name}>
+                        {modelbx.title} {modelbx.first_name} {modelbx.last_name}
+                      </div>
+                      <p className={styles.doctor_specialization}>
+                        {modelboxspecialization.name}
+                      </p>
+                      <p className={styles.doctor_expriance}>
+                        {modelbx.yrs_of_practice} years experience overall
+                      </p>
+                      <p className={styles.doctor_para}>
+                        A nephrologist treats diseases and infections of the
+                        kidneys and urinary system.
+                      </p>
+                    </Box>
+                  </Box>
+                </div>
+              </div>
+              <div className={styles.time_line_item}>
+                <div className={styles.time_line_date_wrap}>
+                  <div className={styles.doc_hexagon}>
+                    <img src={DoctorConsult} alt="Doctor Consultation" />
+                  </div>
+                </div>
+                <div className={styles.time_line_content}>
+                  <Box component="div" className={styles.doctor_card_header}>
+                    <Box
+                      container
+                      component="div"
+                      className={styles.doctor_card_detail}
+                    >
+                      <CardHeader
+                        className={styles.doctor_name}
+                        title="Consultation Services"
+                      />
+
+                      {consultType.map(details => (
+                        <p className={styles.doctor_specialization}>
+                          <img src={CheckMArk} alt="#" />
+                          {details} Consultation
+                        </p>
+                      ))}
+                    </Box>
+                  </Box>
+                </div>
+              </div>
+              <div className={styles.time_line_item}>
+                <div className={styles.time_line_date_wrap}>
+                  <div className={styles.doc_hexagon}>
+                    <img src={DoctorBox} alt="Doctor Specialization" />
+                  </div>
+                </div>
+                <div className={styles.time_line_content}>
+                  <Box component="div" className={styles.doctor_card_header}>
+                    <Box
+                      container
+                      component="div"
+                      className={styles.doctor_card_detail}
+                    >
+                      <CardHeader
+                        className={styles.doctor_name}
+                        title="Specialization"
+                      />
+
+                      <p className={styles.doctor_specialization}>
+                        <img src={CheckMArk} alt="#" />
+                        {modelboxspecialization.name}
+                      </p>
+                    </Box>
+                  </Box>
+                </div>
+              </div>
+              <div className={styles.time_line_item}>
+                <div className={styles.time_line_date_wrap}>
+                  <div className={styles.doc_hexagon}>
+                    <img src={DoctorLocation} alt="Doctor Location" />
+                  </div>
+                </div>
+                <div className={styles.time_line_content}>
+                  <Box component="div" className={styles.doctor_card_header}>
+                    <Box
+                      container
+                      component="div"
+                      className={styles.doctor_card_detail}
+                    >
+                      <CardHeader
+                        className={styles.doctor_name}
+                        title="Clinics"
+                      />
+                      {clinic.map(details => (
+                        <p className={styles.doctor_specialization}>
+                          <img src={CheckMArk} alt="#" />
+                          {details.name}
+                        </p>
+                      ))}
+                    </Box>
+                  </Box>
+                </div>
+              </div>
+            </div>
           </DialogContentText>
         </DialogContent>
         <DialogActions>

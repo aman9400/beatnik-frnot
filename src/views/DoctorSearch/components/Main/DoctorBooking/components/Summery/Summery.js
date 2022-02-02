@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect,useState} from 'react';
 import styles from './summery.module.css';
 import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
@@ -18,21 +18,71 @@ import {
   CardHeader,
   Button,
 } from '@material-ui/core';
+
 const useStyles = makeStyles(theme => ({}));
 
 const PatientSummery = props => {
   const [value, setValue] = React.useState('female');
-
+  const [language, setLanguage] = React.useState();
   const handleChange = event => {
     setValue(event.target.value);
   };
   const classes = useStyles();
   const { data, className, ...rest } = props;
+ 
+    // To get URL parameter
+    useEffect(() => {
+      const params = new URLSearchParams(location.search);
+      const getData = params.get('doctor_id');
+      setLanguage(getData);
+    }, []);
+
+
+    // code to show data of doctor 
+
+     
+    // To Load Doctor form API
+
+    const [doctordetails, setDoctorDetails] = useState([]);
+    
+  const loadDoctorDetails = () => {
+    var myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+
+    var raw = JSON.stringify({
+      location: [20.2604132, 44.43947],
+      term: language,
+    });
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow',
+    };
+
+    fetch(
+      `https://oaarogyabetaportal.mirakidigital.in/api/patient/home/doctor-details/${language}`,
+    )
+      .then(response => response.json())
+      .then(result => setDoctorDetails(result.doctor))
+
+      .catch(error => console.log('error', error));
+  };
+
+  useEffect(() => {
+    loadDoctorDetails();
+  }, []);
+
+
+
+
   return (
     <div className={clsx(classes.root, className)} {...rest}>
       <div className={styles.patient_info}>
         <div className={styles.doctor_details}>
           <Box className={styles.doctor_card_header}>
+           
             <Box component="div" className={styles.doctor_card_avatar}>
               <CardMedia
                 className={styles.doctor_avatar}
@@ -48,7 +98,7 @@ const PatientSummery = props => {
               <p className={styles.doctor_specialization}>
                 {' '}
                 <img src={DoctorStethoscope} alt="" />
-                General Physicians{' '}
+                General Physiciansdsfsd{' '} {language}dfsdfsd
               </p>
             </Box>
           </Box>
@@ -113,7 +163,9 @@ const PatientSummery = props => {
             <FormLabel className={styles.patient_info_inn}>
               Total Amount
             </FormLabel>
-            <p className={styles.patient_info_inn_p}><b>₹ 212.3 /-</b>  </p>
+            <p className={styles.patient_info_inn_p}>
+              <b>₹ 212.3 /-</b>{' '}
+            </p>
           </FormControl>
         </div>
       </div>

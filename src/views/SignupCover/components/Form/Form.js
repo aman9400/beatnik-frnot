@@ -42,16 +42,7 @@ const schema = {
   },
   title: {
     presence: { allowEmpty: false, message: 'is required' },
-    // length: {
-    //   minimum: 8,
-    // },
   },
-  // email: {
-  //   presence: { allowEmpty: false, message: 'is required', email: true },
-  //   length: {
-  //     maximum: 120,
-  //   },
-  // },
 };
 
 const Form = () => {
@@ -87,14 +78,14 @@ const Form = () => {
 
   const [subming, setSubiting] = React.useState(false);
   const [status, setStatusBase] = React.useState('');
-  const [progress,setProgress] = React.useState(false);
+  const [progress, setProgress] = React.useState(false);
   const [disable, setDisable] = React.useState(true);
   const [clearform, setClearform] = React.useState('');
-  const [submitbtn,setSubmitbtn] = React.useState(false);
-  const timer = React.useRef();  // For calling timer on Progressbar
+  const [submitbtn, setSubmitbtn] = React.useState(false);
+  const timer = React.useRef(); // For calling timer on Progressbar
 
   React.useEffect(() => {
-    const errors = validate(formState.values,schema);
+    const errors = validate(formState.values, schema);
 
     setFormState(formState => ({
       ...formState,
@@ -123,41 +114,43 @@ const Form = () => {
     setSubiting(false);
     setDisable(event.target.value === '');
   };
-  
+
   const handleSubmit = async event => {
     event.preventDefault();
-     setSubiting(true);
-     if (formState.isValid) 
-     {
-       // Code for Progressbar timer
-      if (!progress)
-       {  
-        setProgress(<LinearProgress/>)
-        timer.current = setTimeout(() => {  
-          setProgress(false);  
-        }, 1000);  
-       }  
-       // Ends here
+    setSubiting(true);
+    if (formState.isValid) {
+      // Code for Progressbar timer
+      if (!progress) {
+        setProgress(<LinearProgress />);
+        timer.current = setTimeout(() => {
+          setProgress(false);
+        }, 1000);
+      }
+      // Ends here
 
-      var data = JSON.stringify({"title":formState.values.title,"first_name":formState.values.firstName,"middle_name":"","last_name":formState.values.lastName,"mobile":formState.values.mobile,"email":formState.values.email});
-     
-         const res = await getPatientRegister(data);
-         if(res.success){
+      var data = JSON.stringify({
+        title: formState.values.title,
+        first_name: formState.values.firstName,
+        middle_name: '',
+        last_name: formState.values.lastName,
+        mobile: formState.values.mobile,
+        email: formState.values.email,
+      });
+
+      const res = await getPatientRegister(data);
+      if (res.success) {
         //  setClearform(formState.values.title='',formState.values.firstName='',formState.values.lastName='',formState.values.mobile='',formState.values.email='',)
         //  setSubmitbtn(true)
-          setStatusBase('')
-          setStatusBase({
+        setStatusBase('');
+        setStatusBase({
           key: 22,
           status: 'success',
-          msg:
-            'Account has been created successfully.',
+          msg: 'Account has been created successfully.',
         });
-        setTimeout(() => {  
-          Router.push('/signin') 
-        }, 3000);  
-    
-       
-      }else{
+        setTimeout(() => {
+          Router.push('/signin');
+        }, 3000);
+      } else {
         // setStatusBase('');
         // // console.log('hello error else');
         // setStatusBase({
@@ -166,22 +159,22 @@ const Form = () => {
         //   msg:res.message,
         // });
 
-        setStatusBase('')
-          setStatusBase({
-            key: 22,
-            status: 'error',
-            
-            msg: res.errors.email ? res.errors.email : '' + res.errors.mobile ? ' ' + res.errors.mobile:'',
-             
+        setStatusBase('');
+        setStatusBase({
+          key: 22,
+          status: 'error',
+
+          msg: res.errors.email
+            ? res.errors.email
+            : '' + res.errors.mobile
+            ? ' ' + res.errors.mobile
+            : '',
         });
-      
       }
 
-
       // console.log('res', res);
-
     }
-     
+
     setFormState(formState => ({
       ...formState,
       touched: {
@@ -189,25 +182,23 @@ const Form = () => {
         ...formState.errors,
       },
     }));
-   
- 
   };
- 
+
   const hasError = field =>
     formState.touched[field] && formState.errors[field] ? true : false;
   // console.log('api Url', process.env.NEXT_PUBLIC_PATIENT_API_URL);
   return (
-    <div className={classes.root}>
-    {status ? (
-      <AlertMassage
-        key={status.key}
-        message={status.msg}
-        status={status.status}
-      />
-    ) : null}
+    <div className={classes.root} className="formContainerMain">
+      {status ? (
+        <AlertMassage
+          key={status.key}
+          message={status.msg}
+          status={status.status}
+        />
+      ) : null}
       <form name="password-reset-form" method="post" onSubmit={handleSubmit}>
         <Grid container spacing={2}>
-          <Grid item xs={3}>
+          <Grid item xs={4}>
             <TextField
               // placeholder="Firs"
               label="Title *"
@@ -222,14 +213,15 @@ const Form = () => {
               // type="title"
               value={formState.values.title || ''}
             >
-              <MenuItem value="Mr">Mr</MenuItem>
-              <MenuItem value="Miss">Miss</MenuItem>
-              {/* <MenuItem value="2">Enterprise</MenuItem> */}
+              <MenuItem value="Mr.">Mr.</MenuItem>
+              <MenuItem value="Mrs.">Mrs.</MenuItem>
+              <MenuItem value="Dr.">Dr.</MenuItem>
+              <MenuItem value="Mr">Dr(Mrs)</MenuItem>
             </TextField>
           </Grid>
           {/* <Grid item xs={1}></Grid> */}
 
-          <Grid item xs={5}>
+          <Grid item xs={8}>
             <TextField
               placeholder="First name"
               label="First name *"
@@ -246,7 +238,7 @@ const Form = () => {
               value={formState.values.firstName || ''}
             />
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={12}>
             <TextField
               placeholder="Last name"
               label="Last name *"
@@ -264,32 +256,16 @@ const Form = () => {
             />
           </Grid>
           <Grid item xs={12}>
-            {/* <TextField
-              placeholder="Mobile"
-              label="Mobile *"
-              variant="outlined"
-              size="medium"
-              onInput={(e)=>{ 
-                e.target.value = Math.max(0, parseInt(e.target.value) ).toString().slice(0,10)
-              }}
-              name="mobile"
-              fullWidth
-              helperText={
-                hasError('mobile') ? formState.errors.mobile[0] : null
-              }
-              error={hasError('mobile')}
-              onChange={handleChange}
-              type="number"
-              value={formState.values.mobile || ''}
-            /> */}
-             <TextField
-              placeholder="Mobile"
-              label="Mobile *"
+            <TextField
+              placeholder="eg. 9876543210"
+              label="Mobile Number *"
               variant="outlined"
               size="medium"
               name="mobile"
-              onInput={(e)=>{ 
-                e.target.value = Math.max(0, parseInt(e.target.value) ).toString().slice(0,10)
+              onInput={e => {
+                e.target.value = Math.max(0, parseInt(e.target.value))
+                  .toString()
+                  .slice(0, 10);
               }}
               fullWidth
               helperText={
@@ -301,14 +277,13 @@ const Form = () => {
               value={formState.values.mobile || ''}
             />
           </Grid>
-          <Grid item xs={12}>
+          {/* <Grid item xs={12}>
             <TextField
               placeholder="Email"
               label="Email"
               variant="outlined"
               size="medium"
               name="email"
-
               fullWidth
               helperText={hasError('email') ? formState.errors.email[0] : null}
               error={hasError('email')}
@@ -316,53 +291,43 @@ const Form = () => {
               type="email"
               value={formState.values.email || ''}
             />
-          </Grid>
+          </Grid> */}
           <Grid item xs={12}>
-            <i>
-              <Typography variant="subtitle2">
-                Fields that are marked with * sign are required.
-              </Typography>
-            </i>
-          </Grid>
-          <Grid item xs={12}>
-            
-           <Button size="large" variant="contained" type="submit" color="primary" disabled={disable} fullWidth> Submit </Button>
-            {progress !== false ? <LinearProgress /> : null  }
-           
-            {/* <Button
+            <Button
               size="large"
               variant="contained"
               type="submit"
               color="primary"
+              disabled={disable}
               fullWidth
-              
             >
-              Submit
-            </Button> */}
-            {/* { subming == false ? 
-            <Button size="large" variant="contained" type="submit" color="primary" fullWidth>
-             Submit
-           </Button>
-             : 
-             <div>
-             <Button size="large" variant="contained" type="submit" color="primary" disabled fullWidth>
-              Submit 
+              {' '}
+              Submit{' '}
             </Button>
-       
-           
-            </div>
-           }
-             */} 
+            {progress !== false ? <LinearProgress /> : null}
           </Grid>
           <Grid item xs={12}>
             <Typography
               variant="subtitle1"
               color="textSecondary"
               align="center"
+              className="Privacy_policy_tag"
             >
-              Already have an account?
-              <Link href={`${process.env.NEXT_PUBLIC_BASE_URL}/signin`}>
-                <LearnMoreLink title="Sign in" />
+              By signing up you agree to the <Link href="#">Terms & Conditions</Link>{' '}
+              and our <Link href="#">Privacy Policy</Link>
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography
+              variant="subtitle1"
+              color="textSecondary"
+              align="center"
+              className="have_an_account"
+            >
+              Have an account ?
+              <Link href="/signin">
+               <LearnMoreLink title="Login" />
+                
               </Link>
             </Typography>
           </Grid>

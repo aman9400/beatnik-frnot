@@ -150,6 +150,12 @@ const Form = () => {
   // Code for Resend OTP Starts here
 
   const handleStart = async () => {
+
+    var data = JSON.stringify({
+      mobile: mobNumber,
+      vtype: 'register_otp',
+    });
+
     const res = await resendOtpRequest();
     if (res.success) {
       setStatusBase('');
@@ -166,12 +172,15 @@ const Form = () => {
   const STATUS = {
     STARTED: 'Started',
     STOPPED: (
-      <Typography variant="subtitle1" color="textSecondary" align="center">
-        Didn't recieve code ?
+      <Typography className="dont_reacive_code" variant="subtitle1" color="textSecondary" align="center">
+        Didn't recieve code ? &nbsp;&nbsp;
         <LearnMoreLink title="Resent OTP" onClick={handleStart} />
       </Typography>
     ),
   };
+// For Taking mobile no from urlParams
+const params = new URLSearchParams(window.location.search);
+  const mobNumber = params.get('mob');
 
   const INITIAL_COUNT = 10;
   const twoDigits = num => String(num).padStart(2, '0');
@@ -247,13 +256,6 @@ const Form = () => {
               type="number"
               value={formState.values.otp || ''}
             />
-          </Grid>
-          <Grid item xs={12}>
-            <i>
-              <Typography variant="subtitle2">
-                Fields that are marked with * sign are required.
-              </Typography>
-            </i>
           </Grid>
           <Grid item xs={12}>
             <Button

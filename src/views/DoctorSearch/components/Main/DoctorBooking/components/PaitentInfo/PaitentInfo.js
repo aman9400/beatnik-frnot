@@ -23,6 +23,10 @@ import {
   FormLabel,
   Button,
 } from '@material-ui/core';
+import VideoCall from '../../../../Images/video.png';
+import AudioCall from '../../../../Images/phone-call.png';
+import WalkIN from '../../../../Images/home.png';
+import ChatSer from '../../../../Images/chat.png';
 
 const lists = [
   {
@@ -140,21 +144,35 @@ const PatientInfo = props => {
     setOpen(false);
   };
 
+  // Code to get URL Parameter in var 
+
+  const params = new URLSearchParams(location.search);
+  const getData = params.get('doctor_id');
+  const appointmentID =  params.get('appointmentType');
+  
+  const appointmentDate =  params.get('appointmentDate');
+  const consultAmount =  params.get('consultAmount');
+
+  const startTime =  params.get('startTime');
+
   return (
     <div className={clsx(classes.root, className)} {...rest}>
       <div className={styles.patient_info}>
         <FormControl className={styles.patient_info_data}>
           <FormLabel>Appointment Date & Time</FormLabel>
-          <p>09 Jan 2022, 6:30 PM</p>
+          <p>{appointmentDate}, {startTime}</p>
         </FormControl>
         <FormControl className={styles.patient_info_data}>
           <FormLabel>Consultation Type</FormLabel>
-          <p>Walk-In</p>
+          {appointmentID == '1' ? <p>Video </p> : '' }
+          {appointmentID == '2' ? <p>Audio</p> : '' }
+          {appointmentID == '3' ? <p>Chat</p> : '' }
+          {appointmentID == '4' ? <p>Walk In</p> : '' }
         </FormControl>
         <FormControl className={styles.patient_info_data}>
           <FormLabel>Consultation Fee</FormLabel>
           <p>
-            <b>₹</b> 200
+            <b>₹</b> {consultAmount}
           </p>
         </FormControl>
 
@@ -211,6 +229,7 @@ const PatientInfo = props => {
           </label>
         </FormControl>
       </div>
+     
       <Dialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"

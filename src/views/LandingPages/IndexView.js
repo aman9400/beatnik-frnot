@@ -4,7 +4,6 @@ import { Section } from 'components/organisms';
 import {
   Hero,
   UserSay,
-  DownloadApp,
   PatientConsult,
   BannerPage,
   Packages,
@@ -13,7 +12,9 @@ import {
 } from './components';
 import MetaTitle from 'components/helper/MetaTitle';
 import Container from '@material-ui/core/Container';
-
+import Background from './../../../public/assets/Images/banner/package-banner.jpg';
+import DownloadBackground from './../../../public/assets/Images/banner/download-aap-bg.png';
+import DownloadApp from 'views/VideoConsultation/components/DownloadApp';
 const useStyles = makeStyles(theme => ({
   root: {
     background: '#f5f5f5',
@@ -26,7 +27,7 @@ const useStyles = makeStyles(theme => ({
   },
 
   sectionTop: {
-    padding: '60px 40px',
+    padding: '60px 0px',
     [theme.breakpoints.down('sm')]: {
       padding: '50px 0px',
     },
@@ -34,7 +35,7 @@ const useStyles = makeStyles(theme => ({
       padding: '50px 0px',
     },
     [theme.breakpoints.up('lg')]: {
-      padding: '50px 50px',
+      padding: '50px 0px',
     },
   },
 
@@ -76,10 +77,13 @@ const IndexView = ({ themeMode }) => {
 
       <Section
         className={classes.sectionTop}
-        style={{ backgroundColor: '#fff',    
-        backgroundImage: 'url(http://localhost:3000/_next/static/media/package_bg.0ac84d6e537095706a0a8c8a7d5a29bf.jpg)',
-        backgroundSize:' 100%',
-        backgroundRepeat: 'no-repeat' }}
+        style={{
+          backgroundColor: '#fff',
+          backgroundImage: `url(${Background})`,
+          backgroundSize: ' 100%',
+          backgroundRepeat: 'no-repeat',
+          paddingTop: '100px',
+        }}
       >
         <Container fixed>
           <Packages />
@@ -89,11 +93,10 @@ const IndexView = ({ themeMode }) => {
       <Section
         className={classes.sectionTop}
         style={{
-          backgroundImage:
-            'linear-gradient(45deg,#ff23010f 25%,transparent 25% ),linear-gradient(135deg,#ff23010f 25%,transparent 25% ),linear-gradient(45deg,transparent 75%,#ff23010f 75% ),linear-gradient( 135deg,transparent 75%,#ff23010f 75% )',
-          backgroundSize: '-4px 9px',
-          backgroundPosition: '0px 0px, 0px 0px, 0 0px, 0px 0px',
-          borderRadius: '0px 0px 0px 0px',
+        
+            backgroundImage: `url(${DownloadBackground})`,
+          backgroundSize: '100% 100%',
+          backgroundRepeat: 'no-repeat',
         }}
       >
         <Container fixed>

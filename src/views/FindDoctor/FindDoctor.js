@@ -9,7 +9,6 @@ import DownloadApp from './../LandingPages/components/DownloadApp';
 import UserSay from './../LandingPages/components/UserSay';
 import CustomerRatings from './../LandingPages/components/CustomerRatings';
 import News from './../LandingPages/components/News';
-
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles(theme => ({
@@ -41,7 +40,9 @@ const FindDoctor = () => {
 
       <FindDoctorsBanner />
       <Section>
-        <Hero />
+        <Container fixed>
+          <Hero />
+        </Container>
       </Section>
       <Section className={classes.sectionTop}>
         <Container fixed>

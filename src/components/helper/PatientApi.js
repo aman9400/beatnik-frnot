@@ -284,15 +284,12 @@ const getSubscriptionDetails = async data => {
 // Code for Resend OTP
 
 const resendOtpRequest = async data => {
-  var raw = JSON.stringify({
-    mobile: '8121272954',
-    vtype: 'register_otp',
-  });
+ 
 
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: raw,
+    body: data,
   };
   const response = await fetch(
     process.env.NEXT_PUBLIC_PATIENT_API_URL + 'auth/resendOtp',

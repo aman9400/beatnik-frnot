@@ -93,6 +93,39 @@
     width:100%;
   }
 }
+@media(min-width: 601px) and (max-width: 800px) {
+  .card_holder {
+    width: 32%;
+    text-align: center;
+    margin: 0 auto 25px !important;
+  }
+  .img_part {
+    width:100%;
+  }
+  .card_color {
+    height: 290px;
+  }
+}
+@media(min-width: 801px) and (max-width: 900px) {
+
+  .img_part {
+    width:100%;
+  }
+  .card_color {
+    height: 290px;
+  }
+}
+
+@media(min-width: 901px) and (max-width: 1279px) {
+
+  .img_part {
+    width:100%;
+  }
+  .card_color {
+    height: 290px;
+  }
+}
+
 
 .inner_title {
   color: var(--heading-color);
@@ -102,4 +135,10 @@
 .content {
   margin-top: 5px;font-size:14px;
   color: var(--inner-heading);
+}
+
+@media only screen and (max-width: 450px) {
+  .card_color {
+      height: 295px;
+    }
 }

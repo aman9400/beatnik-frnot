@@ -110,7 +110,7 @@ const Form = () => {
     formState.touched[field] && formState.errors[field] ? true : false;
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} className="formContainerMain">
       {status ? (
         <AlertMassage
           key={status.key}
@@ -122,8 +122,8 @@ const Form = () => {
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <TextField
-              placeholder="Mobile"
-              label="Mobile *"
+              placeholder="eg. 9760078301"
+              label="Mobile Number"
               variant="outlined"
               size="medium"
               name="mobile"
@@ -142,23 +142,16 @@ const Form = () => {
               value={formState.values.mobile || ''}
             />
           </Grid>
-
-          <Grid item xs={12}>
-            <i>
-              <Typography variant="subtitle2">
-                Fields that are marked with * sign are required.
-              </Typography>
-            </i>
-          </Grid>
           <Grid item xs={12}>
             <Button
+              style={{marginTop:'20px'}}
               size="large"
               variant="contained"
               type="submit"
               color="primary"
               fullWidth
             >
-              Sign in
+              LOGIN
             </Button>
           </Grid>
         </Grid>

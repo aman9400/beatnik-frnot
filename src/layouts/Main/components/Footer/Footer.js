@@ -11,7 +11,13 @@ import {
   ListItem,
   List,
   Box,
+  Container,
 } from '@material-ui/core';
+import BrandLogo from './../../../../../public/assets/Images/logo/online-aarogya-logo.png';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
+import MailIcon from '@material-ui/icons/Mail';
+import PhoneIcon from '@material-ui/icons/Phone';
+import FooterBG from './../../../../../public/assets/Images/banner/download-aap-bg.png'
 const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(0, 0),
@@ -20,7 +26,6 @@ const useStyles = makeStyles(theme => ({
     },
     background: 'var(--white)',
   },
-  // url(./assets/Images/Footer_waves.svg)
   rootMode: {
     padding: theme.spacing(6, 0),
     [theme.breakpoints.up('md')]: {
@@ -70,14 +75,9 @@ const useStyles = makeStyles(theme => ({
   menuListContainer: {
     padding: '0 !important',
   },
-  menu: {
-    display: 'flex',
-  },
+
   menuItem: {
-    margin: theme.spacing(2),
-    '&:last-child': {
-      marginBottom: 0,
-    },
+    margin: '0 0 0 15px !important',
   },
 
   menuGroupItem: {
@@ -89,20 +89,26 @@ const useStyles = makeStyles(theme => ({
   },
   menuGroupTitle: {
     textTransform: 'uppercase',
-    color: '#ec3832',
+    color: 'var(--heading-color)',
     fontWeight: '600',
-    fontSize: '15px',
+    fontSize: '18px',
   },
   divider: {
     width: '100%',
   },
   navLink: {
-    color: 'rgb(78 77 84)',
+    color: 'var(--heading-color)',
+    fontSize: '14px !important',
+    fontWeight: '500',
+    lineHeight:'18px',
+    transition: '0.6s',
+    '&:hover' :{
+      transform: 'translateX(5px)',
+    }
   },
   navLinkMode: {
     color: 'rgb(231 231 232)',
   },
-
 }));
 
 const Footer = props => {
@@ -117,7 +123,8 @@ const Footer = props => {
 
   const landings = pages.landings;
   const supportedPages = pages.pages;
-  const account = pages.account;
+  const supportedPagesOthers = pages.pages;
+  const account = pages.landings;
 
   const MenuGroup = props => {
     const { item } = props;
@@ -147,237 +154,290 @@ const Footer = props => {
     );
   };
 
+  const CompanyDetails = () => {
+    return (
+      <div className={styles.company_details}>
+        <div className={styles.company_info}>
+          <Link href="/">
+            <p>
+              <img
+                src={BrandLogo}
+                alt="Online Aarogya Consultant Private Limited"
+              />
+            </p>
+          </Link>
+          <Typography variant="body2">
+            ACPL is a start-up in the field of medical healthcare including
+            tele-medicine.
+          </Typography>
+          <div className={styles.company_add}>
+            <Typography variant="body2">
+              <LocationOnIcon />
+            </Typography>
+            <Typography variant="body2">
+              <a href="https://goo.gl/maps/yn4HWig6t2tCMF8n9" target="_blank">
+                <p>
+                  175/108, Landmark Business Hub, 1st floor,Tokarkhada Silvassa,
+                  Dadra & Nagar and Daman & Diu, 396230
+                </p>
+              </a>
+            </Typography>
+          </div>
+          <div className={styles.company_add}>
+            <Typography variant="body2">
+              <MailIcon />
+            </Typography>
+            <Typography variant="body2">
+              <Link href="mailto:hr@oaarogya.com">
+                <p> hr@oaarogya.com</p>
+              </Link>
+            </Typography>
+          </div>
+          <div className={styles.company_add}>
+            <Typography variant="body2">
+              <PhoneIcon />
+            </Typography>
+            <Typography variant="body2">
+              <Link href="tel:+91 9574882777">
+                <p>+91 9574882777</p>
+              </Link>
+            </Typography>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   const LandingPages = () => {
-    const { services, company, apps, web } = landings.children;
+    const { services } = landings.children;
     return (
       <div className={classes.menu}>
-        <div>
+        <div className={styles.fotter_menu_item}>
           <MenuGroup item={services} />
-          <MenuGroup item={company} />
-        </div>
-        {/* <div style={isMd ? { marginLeft: '0px' } : { marginLeft: '40px' }}>
-          <MenuGroup item={company} />
-        </div> */}
-        <div>
-          <MenuGroup item={web} />
-          <MenuGroup item={company} />
         </div>
       </div>
     );
   };
 
   const SupportedPages = () => {
-    const {
-      career,
-      helpCenter,
-      company,
-      contact,
-      blog,
-      portfolio,
-    } = supportedPages.children;
+    const { career } = supportedPages.children;
     return (
       <div className={classes.menu}>
-        <div>
+        <div className={styles.fotter_menu_item}>
           <MenuGroup item={career} />
-          <MenuGroup item={helpCenter} />
         </div>
-        <div>
-          <MenuGroup item={company} />
-        </div>
-        <div>
+      </div>
+    );
+  };
+  const SupportedPagesOthers = () => {
+    const { blog, portfolio } = supportedPagesOthers.children;
+    return (
+      <div className={classes.menu}>
+        <div className={styles.fotter_menu_item}>
           <MenuGroup item={portfolio} />
           <MenuGroup item={blog} />
         </div>
       </div>
     );
   };
-
   const AccountPages = () => {
-    const { settings, signup, signin, password, error } = account.children;
+    const { web } = landings.children;
     return (
       <div className={classes.menu}>
-        <div>
-          <MenuGroup item={settings} />
-          <MenuGroup item={signup} />
-        </div>
-        <div>
-          <MenuGroup item={signin} />
-          <MenuGroup item={password} />
-          <MenuGroup item={error} />
+        <div className={styles.fotter_menu_item}>
+          <MenuGroup item={web} />
         </div>
       </div>
     );
   };
 
   return (
-    <div
-      container
-      {...rest}
-      className={clsx(
-        themeMode === 'light' ? classes.root : classes.rootMode,
-        className,
-      )}
-    >
-      <div container className={styles.footerContainer}>
-        <Grid container spacing={4} className={styles.footerInnerContainer}>
-          <Grid  xs={12} md={4}>
-            <LandingPages />
+    <div container {...rest} className={styles.footerContainer} style={{backgroundImage:`url(${FooterBG})`}}>
+      <Container fixed>
+        <div container>
+          <Grid container spacing={4} className={styles.footerInnerContainer}>
+            <Grid xs={6} sm={3} lg={2} xl={2} md={4} mb={4}>
+              <CompanyDetails />
+            </Grid>
+            <Grid xs={6} sm={3} lg={2} xl={2} md={4}>
+              <LandingPages />
+            </Grid>
+            <Grid xs={6} sm={3} lg={2} xl={2} md={4}>
+              <SupportedPages />
+            </Grid>
+            <Grid xs={6} sm={3} lg={2} xl={2} md={4}>
+              <SupportedPagesOthers />
+            </Grid>
+            <Grid xs={6} sm={3} lg={2} xl={2} md={4}>
+              <AccountPages />
+            </Grid>
+            <Grid xs={6} sm={3} lg={2} xl={2} md={4}>
+              <Box
+                mt={3}
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                style={{marginTop:'0px',}}
+              >
+                <div
+                  style={{
+                    padding: '8px',
+                    backgroundColor: '#ffdede',
+                    color: 'brown',
+                    fontSize: 'medium',
+                  }}
+                >
+                  {' '}
+                  <span style={{ marginRight: '8px' }}>Offer</span>
+                  <i class="fas fa-gift"></i>
+                </div>
+              </Box>
+
+              <Box
+                mt={3}
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+              >
+                <Typography style={{   textTransform: 'uppercase',color: 'var(--heading-color)',fontWeight: '600',fontSize: '18px',}}>Download App</Typography>
+                <br />
+              </Box>
+
+              <Box
+                mt={1}
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+              >
+                <a
+                  style={{
+                    height: '25px',
+                    width: '25px',
+                    padding: '',
+                    borderRadius: '50%',
+                    display: 'inline-block',
+                    border: '1px solid #a3a3a3',
+
+                    marginRight: '5px',
+                  }}
+                  href="https://play.google.com/store/apps/details?id=com.aarogya"
+                  target="_blank"
+                >
+                  <center>
+                    <i style={{color: 'var(--heading-color)'}} class="fab fa-apple"></i>
+                  </center>
+                </a>
+                <a
+                  style={{
+                    height: '25px',
+                    width: '25px',
+                    padding: '',
+                    borderRadius: '50%',
+                    display: 'inline-block',
+                    border: '1px solid #a3a3a3',
+                  }}
+                  href="https://play.google.com/store/apps/details?id=com.aarogya"
+                >
+                  <center>
+                    <i style={{color: 'var(--heading-color)'}} class="fab fa-google-play"></i>
+                  </center>
+                </a>
+              </Box>
+
+              <Box
+                mt={2}
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+              >
+                <Typography style={{   textTransform: 'uppercase',color: 'var(--heading-color)',fontWeight: '600',fontSize: '18px',}} >FOLLOW US</Typography>
+                <br />
+              </Box>
+
+              <Box
+                mt={1}
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+              >
+                <a
+                  style={{
+                    height: '25px',
+                    width: '25px',
+                    padding: '',
+                    borderRadius: '50%',
+                    display: 'inline-block',
+                    border: '1px solid #a3a3a3',
+                    marginRight: '5px',
+                  }}
+                
+                  href="https://play.google.com/store/apps/details?id=com.aarogya"
+                  target="_blank"
+                >
+                  <center>
+                    <i style={{color: 'var(--heading-color)'}} class="fab fa-facebook-f"></i>
+                  </center>
+                </a>
+                <div
+                  style={{
+                    height: '25px',
+                    width: '25px',
+                    padding: '',
+                    borderRadius: '50%',
+                    display: 'inline-block',
+                    border: '1px solid #a3a3a3',
+                    marginRight: '5px',
+                  }}
+                >
+                  <center>
+                    <i style={{color: 'var(--heading-color)'}} class="fab fa-instagram-square"></i>
+                  </center>
+                </div>
+                <div
+                  style={{
+                    height: '25px',
+                    width: '25px',
+                    padding: '',
+                    borderRadius: '50%',
+                    display: 'inline-block',
+                    border: '1px solid #a3a3a3',
+                    marginRight: '5px',
+                  }}
+                >
+                  <center>
+                    <i class="fab fa-twitter"></i>
+                  </center>
+                </div>
+                <div
+                  style={{
+                    height: '25px',
+                    width: '25px',
+                    padding: '',
+                    borderRadius: '50%',
+                    display: 'inline-block',
+                    border: '1px solid #a3a3a3',
+                  }}
+                >
+                  <center>
+                    <i style={{color: 'var(--heading-color)'}} class="fab fa-google-play"></i>
+                  </center>
+                </div>
+              </Box>
+            </Grid>
           </Grid>
-          <Grid xs={12} md={4}>
-            <SupportedPages />
-          </Grid>
-          <Grid xs={12} md={2}>
-            <Box
-              mt={3}
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-            >
-              <div
-                style={{
-                  padding: '8px',
-                  backgroundColor: '#ffdede',
-                  color: 'brown',
-                  fontSize: 'medium',
-                }}
-              >
-                {' '}
-                <span style={{ marginRight: '8px' }}>Offer</span>
-                <i class="fas fa-gift"></i>
-              </div>
-            </Box>
-
-            <Box
-              mt={3}
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-            >
-              <Typography>Download App</Typography>
-              <br />
-            </Box>
-
-            <Box
-              mt={1}
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-            >
-              <div
-                style={{
-                  height: '25px',
-                  width: '25px',
-                  padding: '',
-                  borderRadius: '50%',
-                  display: 'inline-block',
-                  border: '1px solid #a3a3a3',
-                  marginRight: '5px',
-                }}
-              >
-                <center>
-                  <i class="fab fa-apple"></i>
-                </center>
-              </div>
-              <div
-                style={{
-                  height: '25px',
-                  width: '25px',
-                  padding: '',
-                  borderRadius: '50%',
-                  display: 'inline-block',
-                  border: '1px solid #a3a3a3',
-                }}
-              >
-                <center>
-                  <i class="fab fa-google-play"></i>
-                </center>
-              </div>
-            </Box>
-
-            <Box
-              mt={2}
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-            >
-              <Typography>FOLLOW US</Typography>
-              <br />
-            </Box>
-
-            <Box
-              mt={1}
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-            >
-              <div
-                style={{
-                  height: '25px',
-                  width: '25px',
-                  padding: '',
-                  borderRadius: '50%',
-                  display: 'inline-block',
-                  border: '1px solid #a3a3a3',
-                  marginRight: '5px',
-                }}
-              >
-                <center>
-                  <i class="fab fa-facebook-f"></i>
-                </center>
-              </div>
-              <div
-                style={{
-                  height: '25px',
-                  width: '25px',
-                  padding: '',
-                  borderRadius: '50%',
-                  display: 'inline-block',
-                  border: '1px solid #a3a3a3',
-                  marginRight: '5px',
-                }}
-              >
-                <center>
-                  <i class="fab fa-instagram-square"></i>
-                </center>
-              </div>
-              <div
-                style={{
-                  height: '25px',
-                  width: '25px',
-                  padding: '',
-                  borderRadius: '50%',
-                  display: 'inline-block',
-                  border: '1px solid #a3a3a3',
-                  marginRight: '5px',
-                }}
-              >
-                <center>
-                  <i class="fab fa-twitter"></i>
-                </center>
-              </div>
-              <div
-                style={{
-                  height: '25px',
-                  width: '25px',
-                  padding: '',
-                  borderRadius: '50%',
-                  display: 'inline-block',
-                  border: '1px solid #a3a3a3',
-                }}
-              >
-                <center>
-                  <i class="fab fa-google-play"></i>
-                </center>
-              </div>
-            </Box>
-          </Grid>
-        </Grid>
-      </div>
+        </div>
+      </Container>
       <div className={styles.bottom_footer}>
         <Grid item xl={12}>
           <p>
             Copyright @ 2021 All rights reserved.{' '}
-            <Link href="#">Aarogya Consult Pvt. Ltd.</Link>{' '}
+            <Link
+              target="_blank"
+              rel="noopener noreferrer"
+              href="http://onlineaarogya.com/"
+            >
+              Aarogya Consult Pvt. Ltd.
+            </Link>{' '}
           </p>
         </Grid>
       </div>

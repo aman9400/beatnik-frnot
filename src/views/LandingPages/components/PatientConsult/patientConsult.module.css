@@ -1,63 +1,63 @@
 .patientConsult_container {
-    position: relative;
+  position: relative;
 }
 .patientConsult_inner {
-    position: relative;
-
-}
-.patientConsult_inner_con {
-
+  position: relative;
 }
 .patientConsult_inner_card {
-    position: relative;
-    border: 1px solid #dadce0;
-    border-radius: 10px;
-    cursor: pointer;
-    background: #fff;
-    height: 190px;
-    transition: 0.6s;
-    text-align: center;
-    width: 100%;
+  position: relative;
+  border: 1px solid #dadce0;
+  border-radius: 10px;
+  cursor: pointer;
+  background: #fff;
+  height: 190px;
+  transition: 0.6s;
+  text-align: center;
+  width: 100%;
 }
 .patientConsult_inner_card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 1px 3px hsla(0,0%,0%,0.06),0 2px 6px hsla(0,0%,0%,0.06),0 3px 8px hsla(0,0%,0%,0.09);
+  transform: translateY(-5px);
+  box-shadow: 0 1px 3px hsla(0, 0%, 0%, 0.06), 0 2px 6px hsla(0, 0%, 0%, 0.06),
+    0 3px 8px hsla(0, 0%, 0%, 0.09);
 }
 .patientConsult_card_holder {
-    position: relative;
+  position: relative;
 }
 .card_color {
-    position: relative;
-   
+  position: relative;
 }
 .img_card {
-    position: relative;
-   
+  position: relative;
 }
 .img_card img {
-    width: 160px;
-    height: 110px;
-    padding:15px;
-    object-fit: contain;
+  width: 160px;
+  height: 110px;
+  padding: 15px;
+  object-fit: contain;
 }
 .patient_content {
-    font-size: 14px;
-    font-weight: 600;
-    padding: 5px 15px;
-    color: #2d2d32;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 5px 15px;
+  color: #2d2d32;
 }
 .patientConsult_title {
-    color: var(--heading-color);
-    font-size: 32px !important;
-    font-weight: 700 !important;
+  color: var(--heading-color);
+  font-size: 32px !important;
+  font-weight: 700 !important;
 }
 .patientConsult_subtitle {
-    color: var(--inner-heading);
-    font-weight: 500 !important;
-    font-size:15px !important;
+  color: var(--inner-heading);
+  font-weight: 500 !important;
+  font-size: 15px !important;
 }
 .patientConsult_main_title {
-    position: relative;
-    text-align: center;
-    margin-bottom: 20px;
+  position: relative;
+  text-align: center;
+  margin-bottom: 20px;
 }
+@media only screen and (max-width: 450px) {
+    .patientConsult_inner_card {
+        height: 210px;
+      }
+  }

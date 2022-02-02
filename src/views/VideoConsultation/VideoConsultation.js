@@ -2,7 +2,7 @@ import React from 'react';
 import { Section } from 'components/organisms';
 import MetaTitle from 'components/helper/MetaTitle';
 import VideoConsultBanner from './components/Banner/Banner';
-import { makeStyles } from '@material-ui/core';
+import { Container, makeStyles } from '@material-ui/core';
 import WorkingProcess from './components/WorkingProcess';
 import ReviewsBK from 'views/LandingPages/components/ReviewsBK';
 import { ProductBox } from 'views/LandingPages/components';
@@ -31,34 +31,53 @@ const VideoConsultation = () => {
         metaKeyWord="Online Consultation, Doctor Appointment Booing Online Aarogya"
         metaDescription="ACPL is a start-up in the field of medical healthcare including tele-medicine. The software platform will enable patients to search doctors for various specialties, check their profile, book appointment, and take consultation. The company is going to start the pilot launch by end of Aug 2021 and a full-scale launch of services by end of Oct 2021. The company’s mission is to create medical healthcare eco-system accessible, easier and better in terms of quality especially serving to the rural and non-metro geographies, which constitutes more than 75% of the population."
       />
+      <Section style={{ backgroundColor: '#fff',borderTop:'var(--border)' }}>
+        <Container fixed>
+          <VideoConsultBanner />
+        </Container>
+      </Section>
 
-      <VideoConsultBanner />
-      <Section
-      >
-        <WorkingProcess />
+      <Section>
+        <Container fixed>
+          <WorkingProcess />
+        </Container>
       </Section>
-      <Section style={{backgroundColor: '#fff'}}>
-        <ReviewsBK />
+      <Section style={{ backgroundColor: '#fff' }}>
+        <Container fixed>
+          <ReviewsBK />
+        </Container>
       </Section>
       <Section>
-        <ProductBox />
+        <Container fixed>
+          {' '}
+          <ProductBox />
+        </Container>
       </Section>
-      <Section style={{backgroundColor: '#fff'}}>
-        <WhyUseAarogya/>
+      <Section style={{ backgroundColor: '#fff' }}>
+        <Container fixed>
+          {' '}
+          <WhyUseAarogya />
+        </Container>
       </Section>
       <Section>
-        <FAQConsult/>
+        <Container fixed>
+          {' '}
+          <FAQConsult />
+        </Container>
       </Section>
       <Section
-      style={{
-        backgroundImage:
-          'linear-gradient(45deg,#ff23010f 25%,transparent 25% ),linear-gradient(135deg,#ff23010f 25%,transparent 25% ),linear-gradient(45deg,transparent 75%,#ff23010f 75% ),linear-gradient( 135deg,transparent 75%,#ff23010f 75% )',
-        backgroundSize: '-4px 9px',
-        backgroundPosition: '0px 0px, 0px 0px, 0 0px, 0px 0px',
-        borderRadius: '0px 0px 0px 0px',
-      }}
+        style={{
+          backgroundImage:
+            'linear-gradient(45deg,#ff23010f 25%,transparent 25% ),linear-gradient(135deg,#ff23010f 25%,transparent 25% ),linear-gradient(45deg,transparent 75%,#ff23010f 75% ),linear-gradient( 135deg,transparent 75%,#ff23010f 75% )',
+          backgroundSize: '-4px 9px',
+          backgroundPosition: '0px 0px, 0px 0px, 0 0px, 0px 0px',
+          borderRadius: '0px 0px 0px 0px',
+        }}
       >
-       <DownloadApp/>
+        <Container fixed>
+          {' '}
+          <DownloadApp />
+        </Container>
       </Section>
     </div>
   );

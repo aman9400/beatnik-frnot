@@ -39,22 +39,20 @@ const Topbar = ({ themeMode, className, ...rest }) => {
   const classes = useStyles();
 
   return (
-    <Toolbar className={clsx(classes.toolbar, className)} {...rest}>
-      <div className={classes.logoContainer}>
-        <a href="/" title="thefront">
-          <Image
-            className={classes.logoImage}
-            src={
-              themeMode === 'light'
-                ? process.env.NEXT_PUBLIC_BASE_URL + '/assets/logo-blue.png'
-                : process.env.NEXT_PUBLIC_BASE_URL + '/assets/logo-blue.png'
-            }
-            alt="Oaarogya Logo"
-            lazy={false}
-          />
-        </a>
-      </div>
-    </Toolbar>
+    // <Toolbar className={clsx(classes.toolbar, className)} {...rest}>
+    //   <div className={classes.logoContainer}>
+    //     <a href="/" title="Online Aarogya ">
+    //       <Image
+    //         className={classes.logoImage}
+    //         src={}
+    //         alt="Oaarogya Logo"
+    //         lazy={false}
+    //       />
+    //     </a>
+    //   </div>
+    // </Toolbar>
+    <>
+    </>
   );
 };
 

@@ -1,0 +1,48 @@
+.listItem {
+    position: relative;
+    /* box-shadow: 0px 0px 25px 0px rgb(0 0 0 / 8%); */
+    padding: 30px 50px 30px 95px !important;
+    border-radius: 10px;
+    height: 100%;
+    position: relative;
+    /* background-color: #ff23010f; */
+    border: var(--border);
+    transition: .4s all ease-in-out;
+}
+.contact_icon {
+    position: absolute;
+    left: 0px;
+    top: 50%;
+    font-size: 30px;
+    color: #fff;
+    width: 70px;
+    height: 70px;
+    border-radius: 0 100% 100% 0;
+    text-align: center;
+    padding-top: 15px;
+    margin-top: -36px;
+    background-color: var(--heading-color);
+    border: var(--theme-color);
+    border-left: none;
+    transition: all 0.4s ease-in-out;
+}
+.contact_icon svg {
+    fill: var(--white);
+}
+.listItemText {
+    position: relative;
+}
+.listItemText > span {
+    color: var(--heading-color);
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    
+}
+.Contact_data {
+    cursor: pointer;
+}
+.contact_info_title >div > h4 {
+    color: var(--heading-color);
+    font-size: 32px !important;
+    font-weight: 700 !important;
+}

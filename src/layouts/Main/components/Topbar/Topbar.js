@@ -10,12 +10,20 @@ import {
   List,
   ListItem,
   Typography,
+  IconButton,
   Box,
   Grid,
+  Container,
+
 } from '@material-ui/core';
 import { Image } from 'components/atoms';
+import MenuIcon from '@material-ui/icons/Menu';
 import { useMediaQuery } from '@material-ui/core';
 
+import Cookies from 'js-cookie';
+import { checkToken } from '../../../../components/helper/LoginCheck';
+import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
+import BrandLogo from './../../../../../public/assets/Images/logo/online-aarogya-logo.png';
 const useStyles = makeStyles(theme => ({
   flexGrow: {
     flexGrow: 4,
@@ -41,9 +49,9 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     margin: '0 auto',
     height: '55px',
-    padding: theme.spacing('10px', 2),
+    padding: theme.spacing('10px', 0),
     [theme.breakpoints.up('sm')]: {
-      padding: theme.spacing('10px', 8),
+      padding: theme.spacing('10px', 0),
     },
   },
   menuSubheading: {
@@ -160,6 +168,9 @@ const Topbar = ({
 
   const MenuGroup = props => {
     const { item } = props;
+
+    // Get user Name
+
     return (
       <List disablePadding>
         {item.pages.map((page, i) => (
@@ -281,18 +292,22 @@ const Topbar = ({
       _id: 1,
       navTitle: 'For Corporates',
       navPath: '/corporate',
+      pageName: 'corporates',
     },
     {
       _id: 2,
       navTitle: 'For Doctors',
       navPath: '/doctor',
+      pageName: 'doctors',
     },
     {
       _id: 3,
       navTitle: 'For Patients',
       navPath: '/patients',
+      pageName: 'patients',
     },
   ];
+
   const namMenuBar = [
     {
       _id: 1,
@@ -329,119 +344,174 @@ const Topbar = ({
       navTitle: 'Contact us',
       navPath: '/contact-us',
     },
-    {
-      _id: 8,
-      navTitle: 'Login/Sign-up',
-      navPath: '/sign-up',
-    },
   ];
+
+  const myToken = Cookies.get('token');
+  const userName = Cookies.get('first_name');
+  const userAvatar = Cookies.get('avatar');
+  // Code for Right Dropdown menu ends
+
+  const logoutData = () => {
+    Cookies.remove('token');
+    const loginToken = checkToken();
+    if (loginToken) {
+      alert('Login Set');
+    } else {
+      router.push('/signin', undefined, { shallow: true });
+    }
+  };
   return (
     <div>
-      <Grid
-        container
-        justify="flex-end"
-        className={clsx(classes.toolbar, ' top_menu')}
-      >
-        {isMd ? (
-          <Box mr={4}>
-            <List disablePadding className={clsx(classes.toolbar)}>
-              {nameTopMenuBar.map(menuTopName => (
+      <Container fixed>
+        <Grid
+          container
+          justify="flex-end"
+          className={clsx(classes.toolbar, ' top_menu')}
+        >
+          {isMd ? (
+            <Box mr={4}>
+              <List disablePadding className={clsx(classes.toolbar)}>
+                {nameTopMenuBar.map(menuTopName => (
+                  <Link
+                    key={menuTopName._id}
+                    href={menuTopName.navPath}
+                    color="textPrimary"
+                    variant="body1"
+                    className={clsx(classes.listItemText, 'menu-item')}
+                  >
+                    <Typography
+                      variant="body1"
+                      style={{
+                        padding: '5px',
+                        borderRadius: '2px',
+                      }}
+                      color="textPrimary"
+                      className={menuTopName.pageName}
+                    >
+                      {menuTopName.navTitle}
+                    </Typography>
+                  </Link>
+                ))}
+              </List>
+            </Box>
+          ) : (
+            <p></p>
+          )}
+        </Grid>
+        <Toolbar
+          disableGutters
+          className={clsx(classes.toolbar, 'toolbar')}
+          {...rest}
+        >
+          <div className={classes.logoContainer}>
+            <Link href="/">
+              <Image
+                className={classes.logoImage}
+                src={BrandLogo}
+                alt="OnlineAarogya"
+                lazy={false}
+              />
+            </Link>
+          </div>
+          <div className={classes.flexGrow} />
+          <Hidden smDown>
+            <List disablePadding className={classes.navigationContainer}>
+              {namMenuBar.map(menuName => (
                 <Link
-                  key={menuTopName._id}
-                  href={menuTopName.navPath}
+                  href={menuName.navPath}
+                  key={menuName._id}
                   color="textPrimary"
                   variant="body1"
-                  className={clsx(classes.listItemText, 'menu-item')}
+                  className={clsx(classes.listItemTextMenu, 'menu-item')}
                 >
                   <Typography
                     variant="body1"
-                    style={{
-                      padding: '5px',
-                      borderRadius: '2px',
-                    }}
                     color="textPrimary"
                     className={clsx(
-                      classes.listItemText,
+                      classes.listItemTextMenu,
                       'menu-item',
                       classes.pointer,
-                      classes.navLink,
                     )}
                   >
-                    {menuTopName.navTitle}
+                    {router.pathname == `${menuName.navPath}` ? (
+                      <p
+                        className={clsx(classes.listName)}
+                        style={{
+                          borderBottom: '2px solid red ',
+                          padding: '20px 10px',
+                          color: 'red',
+                          background: '#fff4f2',
+                        }}
+                      >
+                        {menuName.navTitle}
+                      </p>
+                    ) : (
+                      <p
+                        className={clsx(classes.listName)}
+                        style={{ color: 'black' }}
+                      >
+                        {menuName.navTitle}
+                      </p>
+                    )}
                   </Typography>
                 </Link>
               ))}
-            </List>
-          </Box>
-        ) : (
-          <p></p>
-        )}
-      </Grid>
-      <Toolbar
-        disableGutters
-        className={clsx(classes.toolbar, 'toolbar')}
-        {...rest}
-      >
-        <div className={classes.logoContainer}>
-          <Link href="/">
-            <Image
-              className={classes.logoImage}
-              src={
-                themeMode === 'light'
-                  ? process.env.NEXT_PUBLIC_BASE_URL + '/assets/logo-blue.png'
-                  : process.env.NEXT_PUBLIC_BASE_URL + '/assets/logo-blue.png'
-              }
-              alt="OnlineAarogya"
-              lazy={false}
-            />
-          </Link>
-        </div>
-        <div className={classes.flexGrow} />
-        <Hidden smDown>
-          <List disablePadding className={classes.navigationContainer}>
-            {namMenuBar.map(menuName => (
-              <Link
-                href={menuName.navPath}
-                key={menuName._id}
-                color="textPrimary"
-                variant="body1"
-                className={clsx(classes.listItemTextMenu, 'menu-item')}
-              >
-                <Typography
-                  variant="body1"
-                  color="textPrimary"
+
+              {/* Show user name if user logged in */}
+
+              {myToken ? (
+                <div className="after_login">
+                  <Typography
+                  style={{ color: 'red' }}
                   className={clsx(
                     classes.listItemTextMenu,
                     'menu-item',
                     classes.pointer,
                   )}
                 >
-                  {router.pathname == `${menuName.navPath}` ? (
-                    <p
-                      className={clsx(classes.listName)}
-                      style={{
-                        borderBottom: '2px solid red ',
-                        padding: '20px 10px',
-                        color: 'red',
-                        background: '#fff4f2',
-                      }}
-                    >
-                      {menuName.navTitle}
-                    </p>
-                  ) : (
-                    <p
-                      className={clsx(classes.listName)}
-                      style={{ color: 'black' }}
-                    >
-                      {menuName.navTitle}
-                    </p>
-                  )}
+                
+                 
+                  <IconButton >
+                    <img src={userAvatar} alt={userName}/>
+                  </IconButton>
+                  {userName}
                 </Typography>
-              </Link>
-            ))}
-          </List>
-        </Hidden>
-      </Toolbar>
+               <Typography><IconButton onClick={logoutData}> <PowerSettingsNewIcon/> </IconButton></Typography>
+                </div>
+              
+              ) : (
+                <Link
+                  href="/signin"
+                  color="textPrimary"
+                  variant="body1"
+                  className={clsx(classes.listItemTextMenu, 'menu-item')}
+                >
+                  <Typography
+                    className={clsx(
+                      classes.listItemTextMenu,
+                      'menu-item',
+                      classes.pointer,
+                    )}
+                  >
+                    Login/Signup{' '}
+                  </Typography>
+                </Link>
+              )}
+
+              {/* End user logged in here  */}
+            </List>
+          </Hidden>
+          <Hidden mdUp>
+            <IconButton
+              className={classes.iconButton}
+              onClick={onSidebarOpen}
+              aria-label="Menu"
+            >
+              <MenuIcon />
+            </IconButton>
+          </Hidden>
+        </Toolbar>
+      </Container>
     </div>
   );
 };
