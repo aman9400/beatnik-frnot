@@ -10,6 +10,7 @@
     "build": "cross-env GENERATE_SOURCEMAP=false next build",
     "prettier": "prettier --write '**/*.{js,css,html}'",
     "clear-all": "rimraf ./.cache ./.next ./node_modules"
+    
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -46,6 +47,7 @@
     "leaflet": "^1.6.0",
     "material-table": "^1.69.3",
     "material-ui-dropzone": "^3.5.0",
+    "moment": "^2.29.1",
     "next": "^10.2.3",
     "next-images": "^1.6.2",
     "npm": "^7.24.2",

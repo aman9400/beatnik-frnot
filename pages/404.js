@@ -10,10 +10,11 @@ import WithLayout from 'WithLayout';
 
 const FourOFourPage = () => {
   return (
-    <WithLayout
-      component={NotFoundCover}
-      layout={Minimal}
-    />
+    // <WithLayout
+    //   component={NotFoundCover}
+    //   layout={Minimal}
+    // />
+    <NotFoundCover/>
   )
 };
 

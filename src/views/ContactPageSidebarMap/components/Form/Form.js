@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core';
 import { SectionHeader } from 'components/molecules';
 import { HeroShaped, Map } from 'components/organisms';
-
+import styles from './Form.module.css';
 const useStyles = makeStyles(theme => ({
   map: {
     zIndex: 9,
@@ -32,6 +32,7 @@ const useStyles = makeStyles(theme => ({
       marginRight: theme.spacing(6),
     },
   },
+
 }));
 
 const Form = props => {
@@ -48,7 +49,7 @@ const Form = props => {
       <HeroShaped
         leftSide={
           <div className={classes.heroleftSide}>
-            <SectionHeader
+            <SectionHeader className={styles.contactTitle}
               title="Contact us for anything"
               subtitle="Our goal is to be as helpful as possible."
               data-aos="fade-up"

@@ -10,7 +10,6 @@ const useStyles = makeStyles(theme => ({
   image: {
     position: 'absolute',
     objectFit: 'cover',
-    /* support for plugin https://github.com/bfred-it/object-fit-images */
     fontFamily: 'object-fit: cover;',
     top: 0,
     left: 0,

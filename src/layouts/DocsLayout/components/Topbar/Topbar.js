@@ -16,22 +16,17 @@ import {
   makeStyles,
   Avatar,
 } from '@material-ui/core';
-import { Image, DarkModeToggler } from 'components/atoms';
+import { Image } from 'components/atoms';
 import MenuIcon from '@material-ui/icons/Menu';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Badge from '@material-ui/core/Badge';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import Encodr from 'encodr';
 import Cookies from 'js-cookie';
 import { checkToken } from '../../../../components/helper/LoginCheck';
-import Topbar from '../../../Main/components/Topbar/Topbar';
 import { useRouter } from 'next/router';
-import OpenInNewIcon from '@material-ui/icons/OpenInNew';
-
+import BrandLogo from './../../../../../public/assets/Images/logo/online-aarogya-logo.png';
 const useStyles = makeStyles(theme => ({
   root_som: {
     padding: '10px',
@@ -192,11 +187,7 @@ const TopBar = ({
           <a href="/" title="OnlineAarogya">
             <Image
               className={classes.logoImage}
-              src={
-                themeMode === 'light'
-                  ? process.env.NEXT_PUBLIC_BASE_URL + '/assets/logo-blue.png'
-                  : process.env.NEXT_PUBLIC_BASE_URL + '/assets/logo-blue.png'
-              }
+              src={BrandLogo}
               alt="OnlineAarogya"
               lazy={false}
             />
@@ -227,9 +218,14 @@ const TopBar = ({
                 />
               </Button>
             </ListItem>
-          
           </List>
-          <IconButton  className="log_out_button" onClick={logoutData} variant="outlined" color="primary" aria-label="delete">
+          <IconButton
+            className="log_out_button"
+            onClick={logoutData}
+            variant="outlined"
+            color="primary"
+            aria-label="delete"
+          >
             <ExitToAppIcon />
           </IconButton>
         </Hidden>

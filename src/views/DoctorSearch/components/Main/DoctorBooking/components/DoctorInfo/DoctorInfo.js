@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './doctor-info.module.css';
 import { makeStyles } from '@material-ui/core/styles';
 import AppointIcon from '../../../../Images/video.png';
@@ -13,66 +13,116 @@ import {
   Typography,
   CardMedia,
   CardHeader,
+  Button,
 } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
+import VideoCall from '../../../../Images/video.png';
+import AudioCall from '../../../../Images/phone-call.png';
+import WalkIN from '../../../../Images/home.png';
+import ChatSer from '../../../../Images/chat.png';
+import moment from 'moment';
 
-const useStyles = makeStyles(theme => ({
-  
-}));
+const useStyles = makeStyles(theme => ({}));
 const DoctorInformation = props => {
   const [value, setValue] = React.useState(0);
   const [star, setStar] = React.useState(3);
   const classes = useStyles();
+  const [language, setLanguage] = React.useState();
   const { data, className, ...rest } = props;
+
+  // To get URL parameter
+
+  const params = new URLSearchParams(location.search);
+  const getData = params.get('doctor_id');
+  const appointmentID =  params.get('appointmentType');
+  const appointmentDate =  params.get('appointmentDate');
+  
+  const sss =  moment(appointmentDate).format('MMM DD, YYYY')
+
+   const startTime =  params.get('startTime');
+
+  // useEffect(() => {
+
+  //   setLanguage(getData);
+  // }, []);
+
+  // To get data from API to load single Doctor
+  const [doctordetails, setDoctorDetails] = useState([]);
+
+  const loadDoctorDetails = () => {
+    fetch(
+      `https://oaarogyabetaportal.mirakidigital.in/api/patient/home/doctor-details/${getData}`,
+    )
+      .then(response => response.json())
+      .then(result => setDoctorDetails(result.doctor))
+      .catch(error => console.log('errssssssssor', error));
+  };
+
+  useEffect(() => {
+    loadDoctorDetails();
+  }, []);
+
+  // To Load Doctor form API
 
   return (
     <div className={clsx(classes.root, className)} {...rest}>
       <div className={styles.docotor_info}>
         <div className={styles.appoint_for}>
-          <img
+          {/* <img
             className="appoint_info_icon"
             src={AppointIcon}
             alt="Appointment Type"
-          />
+          /> */}
+          
+          {appointmentID == '1' ? <img src={VideoCall} alt="#" /> : '' }
+          {appointmentID == '2' ? <img src={AudioCall} alt="#" /> : '' }
+          {appointmentID == '3' ? <img src={WalkIN} alt="#" /> : '' }
+          {appointmentID == '4' ? <img src={ChatSer} alt="#" /> : '' }
+
           <Typography variant="h5">Appointment Type</Typography>
         </div>
         <div className={styles.appoint_doctor_for}>
           <div className={styles.date_time_book}>
             <div className={styles.appoint_date}>
               <EventIcon />
-              <b>On</b> 05 / Jan /2022
+              
+              <b>On</b> {sss}
             </div>
             <div className={styles.appoint_time}>
               <AccessTimeIcon />
-              <b>At </b> 04 : 00 PM
+              <b>At </b> {startTime} 
             </div>
           </div>
           <div className={styles.changes_date}>
-            <Link href="/">Change Date {'&'} Time</Link>
+            {/* <Link href="/">Change Date {'&'} Time</Link> */}
           </div>
         </div>
         <div className={styles.doctor_details}>
           <Box className={styles.doctor_card_header}>
             <Box component="div" className={styles.doctor_card_avatar}>
-              <CardMedia
+              {/* <CardMedia
                 className={styles.doctor_avatar}
-                image="https://assets.maccarianagency.com/the-front/photos/people/kate-segelson.jpg"
-                title="Som Nath Gupta"
-              />
+                image={doctordetails.avatar_url}
+               
+              /> */}
             </Box>
             <Box className={styles.doctor_card_detail}>
-              <CardHeader
-                className={styles.doctor_name}
-                title="Som Nath Gupta"
-              />
+              <CardHeader className={styles.doctor_name} />
+              <h3>
+                {doctordetails.title} {doctordetails.first_name}{' '}
+                {doctordetails.middle_name} {doctordetails.last_name}
+              </h3>
               <p className={styles.doctor_specialization}>
                 {' '}
                 <img src={DoctorStethoscope} alt="" />
-                General Physicians{' '}
+
+                {/* {Object.keys(doctordetails.appointments).map((el) =><p>{el.patient_id}</p>)} */}
+
+                   
               </p>
               <p className={styles.doctor_expriance}>
-                23 years experience overall
+                {doctordetails.yrs_of_practice} years experience
               </p>
               <p className={styles.doctor_para}>
                 A nephrologist treats diseases and infections of the kidneys and
@@ -110,10 +160,14 @@ const DoctorInformation = props => {
                     <p>(3) Ratings</p>
                   </Box>
                   <Box className={styles.direction}>
-                   <Link target="_blank" rel="noopener"href="https://goo.gl/maps/KVmyD5xrsu7pT5rc6">
-                   <MapIcon />
-                    <p> Get Direction</p>
-                   </Link>
+                    <Link
+                      target="_blank"
+                      rel="noopener"
+                      href="https://goo.gl/maps/KVmyD5xrsu7pT5rc6"
+                    >
+                      <MapIcon />
+                      <p> Get Direction</p>
+                    </Link>
                   </Box>
                 </div>
               </div>

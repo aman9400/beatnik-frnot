@@ -114,11 +114,10 @@ a:hover {
   width: 100%;
   padding: 0;
   background: #fff;
-  -webkit-animation-duration: 1s;
   animation-duration: 1s;
-  -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
   animation-delay: 0.5s;
+  padding: 0 1% !important;
 }
 @-webkit-keyframes fadeInDown {
   from {
@@ -192,27 +191,23 @@ a:hover {
 .content.active-content {
   display: block !important;
 }
-.active-tabs button {
-  background: hsl(7deg 68% 88%) !important;
-}
 .active-tabs button:hover {
   background: hsl(7deg 68% 88%) !important;
-}
-.active-tabs p,
-.active-tabs b {
-  color: red !important;
 }
 .MuiInput-underline:before,
 .MuiInput-underline:after {
   display: none !important;
 }
 
-.breadcrumb_container {
+.breadcrumbs_section {
   position: relative;
-  background-image: url(https://t4.ftcdn.net/jpg/04/74/32/63/360_F_474326354_UJkE9f2uLf5WfsVuUR3tgDqN3FeyoECv.jpg);
+  background-image: url(../../../public/assets/Images/common/breadcrumb-bg.jpg);
   background-size: 100%;
-  padding: 10px 60px;
+  padding: 0 !important;
   border-top: var(--border);
+}
+.breadcrumb_container {
+  padding: 15px 50px ;
 }
 .breadcrumbs {
   position: relative;
@@ -248,10 +243,10 @@ a:hover {
   padding: 3px 10px;
   border-radius: 5px;
 }
-.MuiTableCell-head {
+/* .MuiTableCell-head {
   background-color: #ebeef1 !important;
   padding: 0px !important;
-}
+} */
 .card-product__media {
   height: auto !important;
 }
@@ -483,4 +478,72 @@ a:hover {
   transition-delay: 0.3s;
   -webkit-transition: all 0.5s;
   transition: all 0.5s;
+}
+.doctors,.patients,.corporates {
+  flex: 0 0 auto !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+
+  position: relative !important;
+}
+.patients {
+  color: var(--theme-color) !important;
+}
+.patients:before {
+  content: " ";
+  position: absolute;
+  top: 28px;
+  left: 0;
+  width: 96%;
+  height: 3px;
+  background-color: var(--theme-color);
+  right: 0;
+  margin: 0 auto;
+  border-radius: 10px;
+}
+.search_form {
+  padding: 0px;
+  position: relative;
+  z-index: 99;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  border: 0px solid red;
+  border-radius: 15px;
+  width: 75% !important;
+  box-shadow:0 1px 3px rgb(60 63 66 / 32%), 0 4px 12px rgb(60 63 66 / 15%);
+  overflow: hidden;
+  margin: 0 auto;
+}
+.after_login {
+  display: flex;
+}
+.after_login > p > button {
+  padding:0px;
+}
+.after_login > p > button >span >img {
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  border: var(--border);
+}
+.after_login > p > button >span >img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: var(--border);
+  overflow: hidden;
+  margin-right: 5px;
+  box-shadow: var(--bs-sm);
+}
+/* ==========================================================================
+                            Responsive Area
+=========================================================================  */
+@media only screen and (max-width: 480px) {
+  .breadcrumb_container {
+    padding:10px 0px ;
+  }
+  .search_form { 
+    width:100%;
+  }
 }

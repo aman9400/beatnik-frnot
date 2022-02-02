@@ -29,9 +29,9 @@ const Map = props => {
     const L = require('leaflet');
     delete L.Icon.Default.prototype._getIconUrl;
 
-    const markerIcon2x = require('assets/images/leaflet-assets/marker-icon-2x.png');
-    const markerIcon = require('assets/images/leaflet-assets/marker-icon.png');
-    const markerShadow = require('assets/images/leaflet-assets/marker-shadow.png');
+    const markerIcon2x = require('./../../../../public/assets/Images/common/common.jpg');
+    const markerIcon = require('./../../../../public/assets/Images/common/common.jpg');
+    const markerShadow = require('./../../../../public/assets/Images/common/common.jpg');
 
     L.Icon.Default.mergeOptions({
       iconRetinaUrl:

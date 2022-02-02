@@ -15,7 +15,7 @@ const Main = ({ children, themeToggler, themeMode }) => {
   const classes = useStyles();
 
   const theme = useTheme();
-  const isMd = useMediaQuery(theme.breakpoints.up('md'), {
+  const isMd = useMediaQuery(theme.breakpoints.up('lg'), {
     defaultMatches: true,
   });
 
@@ -223,27 +223,39 @@ const Main = ({ children, themeToggler, themeMode }) => {
     landings: {
       children: {
         services: {
-          groupTitle: 'Online Aarogya',
+          groupTitle: 'Home',
           pages: [
             {
-              title: 'About',
-              // href: '/quick-consultation ',
+              title: 'Find Doctor',
+              href: '/find-doctor ',
             },
             {
-              title: 'Blog',
-              // href: '/in-clinic-appointment',
+              title: 'Video Consultation',
+              href: '/video-consultation ',
             },
             {
-              title: 'Careers',
-              // href: '/Oline-consultation ',
+              title: 'In Clinic Consultation',
+              href: '/clinic-consultation ',
             },
             {
-              title: 'Press',
-              // href: '/Oline-consultation ',
+              title: 'Packages',
+              href: '/packages',
+            },
+            {
+              title: 'Medifiles',
+              href: '/medifiles ',
+            },
+            {
+              title: 'Data Security',
+              href: '/data-security',
             },
             {
               title: 'Contact us',
-              // href: '/Oline-consultation ',
+              href: '/contact-us',
+            },
+            {
+              title: 'Log In / Sign Up',
+              href: '/signin ',
             },
           ],
         },
@@ -268,14 +280,9 @@ const Main = ({ children, themeToggler, themeMode }) => {
               href: 'about-us',
             },
 
-            // {
-            //   title: 'Leadership Team',
-            //   href: 'our-leadership-team',
-            // },
-
             {
               title: 'Search for clinic',
-              // href: '/service',
+              href: '/service',
             },
 
             {
@@ -284,9 +291,9 @@ const Main = ({ children, themeToggler, themeMode }) => {
             },
             {
               title: 'Medifiles',
-              // href: '/contact-us',
+              href: '/contact-us',
             },
-            
+
             {
               title: 'Health Packages',
               href: '/contact-us',
@@ -536,7 +543,8 @@ const Main = ({ children, themeToggler, themeMode }) => {
   };
 
   return (
-    <div style={{overflow:"hidden"}}
+    <div
+      style={{ overflow: 'hidden' }}
       className={clsx({
         [classes.root]: true,
       })}
@@ -553,10 +561,7 @@ const Main = ({ children, themeToggler, themeMode }) => {
         variant="temporary"
         pages={pages}
       />
-      <main>
-     
-        {children}
-      </main>
+      <main>{children}</main>
       <Footer pages={footer_links} themeMode={themeMode} />
     </div>
   );

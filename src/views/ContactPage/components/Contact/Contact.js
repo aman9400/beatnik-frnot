@@ -10,8 +10,7 @@ import {
 } from '@material-ui/core';
 import { SectionHeader } from 'components/molecules';
 import { HeroShaped, Map } from 'components/organisms';
-import MetaTitle from 'components/helper/MetaTitle';
-
+import styles from './Contact.module.css'
 const useStyles = makeStyles(() => ({
   map: {
     zIndex: 9,
@@ -28,11 +27,7 @@ const Contact = props => {
 
   return (
     <div className={className} {...rest}>
-      <MetaTitle
-        title={`Contact Us | OnlineAarogya}`}
-        metaKeyWord="Contact Us, OnlineAarogya"
-        metaDescription="Contact us for anything, Our goal is to be as helpful as possible."
-      />
+  
       <HeroShaped
         leftSide={
           <div>

@@ -9,7 +9,6 @@ import Main from 'layouts/Main';
 import WithLayout from 'WithLayout';
 
 const IndexPage = () => {
-  // console.log('props', 'pravemm1');
   return <WithLayout component={LandingPages} layout={Main} />;
 };
 

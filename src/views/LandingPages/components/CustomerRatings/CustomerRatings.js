@@ -69,6 +69,9 @@ const Hero = props => {
       height: 5,
       width: 183,
       backgroundColor: lighten('#ff6c5c', 0.5),
+      [theme.breakpoints.down('500')]: {
+        width: 100,
+      },
     },
     bar: {
       borderRadius: 20,
@@ -78,7 +81,7 @@ const Hero = props => {
 
   return (
     <div className={className} {...rest}>
-      <Grid container spacing={isMd ? 4 : 2} style={{ height: '280px' }}>
+      <Grid container spacing={isMd ? 4 : 2}>
         <Grid container justifyContent="center">
           <Box>
             <Typography variant="h2" className={classes.rating_title}>
@@ -87,7 +90,7 @@ const Hero = props => {
           </Box>
         </Grid>
 
-        <Grid item xs={12} md={5} spacing={2} data-aos="fade-up">
+        <Grid item xs={12} sm={3} md={4} lg={4} xl={4} spacing={2} data-aos="fade-up">
           <Box
             sx={{
               '& > legend': { mt: 2 },
@@ -117,7 +120,7 @@ const Hero = props => {
             </Box>
           </Box>
         </Grid>
-        <Grid item xs={12} md={2} spacing={2} data-aos="fade-up">
+        <Grid item xs={12} sm={3} md={4} lg={4} xl={4} spacing={2} data-aos="fade-up">
           <Box fontWeight={800} sx={{ textAlign: 'center' }}>
             <Typography variant="h3" style={{ color: 'red' }}>
               <b>4.8</b>
@@ -129,7 +132,7 @@ const Hero = props => {
           </Box>
         </Grid>
 
-        <Grid item xs={12} md={5}>
+        <Grid item xs={12} sm={6} md={4} lg={4} xl={4} spacing={2} data-aos="fade-up">
           <Grid container justifyContent="center">
             <Box style={{ marginLeft: '17px' }}>
               <Rating
@@ -287,20 +290,3 @@ Hero.propTypes = {
 };
 
 export default Hero;
-
-const top100Films = [
-  { title: 'Vapi', year: 1994 },
-  { title: 'Vadodara', year: 1972 },
-  { title: 'Valsad', year: 1974 },
-  { title: 'Surat', year: 2008 },
-  { title: 'Mumbai', year: 1957 },
-  { title: 'Virar', year: 1993 },
-  { title: 'Pune', year: 1994 },
-  { title: 'Bhopal', year: 1995 },
-  { title: 'Indore', year: 1948 },
-  { title: 'GopalGanj', year: 1921 },
-  { title: 'Kolkata', year: 2009 },
-  { title: 'Delhi', year: 2000 },
-  { title: 'Ranikhet', year: 2009 },
-  { title: 'Solapur', year: 1975 },
-];

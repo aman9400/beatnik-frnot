@@ -74,7 +74,7 @@ const Appointment = props => {
     <div className={styles.packages_section} {...rest}>
       <div className={styles.packages_section_bg}></div>
       <Grid container spacing={isMd ? 4 : 2}>
-        <Grid item xl={12}>
+        <Grid item xl={12} style={{marginTop:'50px'}}>
           <div className={styles.packages_mainTitle} >
             <Typography variant="h3" component="h3" gutterBottom>
               Healthcare plans for you and your family
@@ -89,7 +89,7 @@ const Appointment = props => {
 
       <Grid xl={12}>
         <div data-aos="zoom-in-up">
-        <Paper className={styles.packages_table_paper}>
+        <Paper className={styles.packages_table_paper} style={{marginTop:'40px'}}>
           <TableContainer  sx={{ maxHeight: 440 }}>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>

@@ -2,12 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './usersay.module.css';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import {
-  useMediaQuery,
-  Box,
-  Typography,
-  Grid,
-} from '@material-ui/core';
+import { useMediaQuery, Box, Typography, Grid } from '@material-ui/core';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 
@@ -57,18 +52,18 @@ const useStyles = makeStyles(theme => ({
     '& .react-multi-carousel-dot button': {
       borderColor: '#ff230136',
     },
-    '& .react-multi-carousel-dot--active button':{
+    '& .react-multi-carousel-dot--active button': {
       background: 'var(--theme-color)',
     },
   },
   arrowButton: {
     '& .react-multiple-carousel__arrow--right': {
       background: 'var(--white)',
-      color:'red',
+      color: 'red',
     },
     '& .react-multiple-carousel__arrow--left': {
       background: 'var(--white)',
-      color:'red',
+      color: 'red',
     },
     '& .react-multiple-carousel__arrow--left': {
       left: 'calc(4% + -31px)',
@@ -79,7 +74,7 @@ const useStyles = makeStyles(theme => ({
         left: 'calc(4% + 4px)',
       },
       background: 'var(--white)',
-      border:'var(--border)',
+      border: 'var(--border)',
       boxShadow: 'var(--bs-lg)',
     },
     '& .react-multiple-carousel__arrow--right': {
@@ -91,7 +86,7 @@ const useStyles = makeStyles(theme => ({
       minHeight: '27px',
       marginTop: '-150px',
       background: 'var(--white)',
-      border:'var(--border)',
+      border: 'var(--border)',
       boxShadow: 'var(--bs-lg)',
     },
     '.react-multiple-carousel__arrow ': {
@@ -207,7 +202,7 @@ const UserSay = props => {
 
   return (
     <div className={className} {...rest}>
-      <Grid container spacing={isMd ? 4 : 2} className={classes.bottomArea}>
+      <Grid container className={classes.bottomArea}>
         <Grid container justifyContent="center">
           <Box>
             <Typography variant="h2" className={styles.testimonial_title}>
@@ -230,11 +225,7 @@ const UserSay = props => {
         autoPlay={true}
       >
         {data.map(name => (
-          <div
-            className={classes.sliderimg}
-            alt=""
-            style={{ marginRight: '10px', padding: '10px' }}
-          >
+          <div className={classes.sliderimg}>
             <figure className={styles.snip1192}>
               <blockquote>{name.content}</blockquote>
               <div className={styles.author}>

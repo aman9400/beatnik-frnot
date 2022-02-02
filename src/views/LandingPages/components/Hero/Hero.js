@@ -4,38 +4,40 @@ import PropTypes from 'prop-types';
 import { Box, Grid } from '@material-ui/core';
 import Link from 'next/link';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import FindDoctor from './../../../../../public/assets/Images/common/common.jpg';
+import RFindDoctor from './../../../../../public/assets/Images/r-icon/find-doctor.png';
+
 const Hero = props => {
   const { className, ...rest } = props;
   const data = [
     {
       title: 'Find Doctor',
       content: 'Choose best doctor of your choice in your locality',
-      img: process.env.NEXT_PUBLIC_BASE_URL + '/assets/Images/finddoctor.png',
+      img: RFindDoctor,
       pathHref: '/find-doctor',
     },
     {
       title: 'Video Consultation',
       content: 'Join pain arthitis',
-      img: process.env.NEXT_PUBLIC_BASE_URL + '/assets/Images/instant.png',
+      img: FindDoctor,
       pathHref: '/video-consultation',
     },
     {
       title: 'In-Clinic Consultation',
       content: 'Head Aaches, Migrane',
-      img: process.env.NEXT_PUBLIC_BASE_URL + '/assets/Images/consultation.png',
+      img: FindDoctor,
       pathHref: '/clinic-consultation',
     },
     {
       title: 'Package',
       content: 'Eye problem, paid, watery, dryness',
-      img: process.env.NEXT_PUBLIC_BASE_URL + '/assets/Images/package.png',
+      img: FindDoctor,
       pathHref: '/package',
     },
     {
       title: 'Medifiles',
       content: 'Diahorrea, stomach upset, digestion problem',
-      img:
-        process.env.NEXT_PUBLIC_BASE_URL + '/assets/Images/medical-report.png',
+      img:FindDoctor,
       pathHref: '/medifiles',
     },
   ];

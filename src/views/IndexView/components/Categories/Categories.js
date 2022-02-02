@@ -62,7 +62,7 @@ const Categories = props => {
         className={classes.descriptionCta}
         data-aos="fade-up"
       />
-      <Grid item xs={1} sm={1} md={2} container spacing={2}>
+      <Grid item xs={5} sm={5} md={6} container spacing={2}>
         {data.map((item, index) => (
           <Link href="contact-us">
             <Grid  key={index} data-aos="fade-up">

@@ -177,20 +177,11 @@ const SidebarNav = props => {
 
       <ListItem button>
         <Link href="/">
-          <ListItemText primary="Login/Sign-up" />
+          <ListItemText primary="Log In / Sign Up" />
         </Link>
       </ListItem>
 
       <Divider />
-      <ListItem>
-        <Typography
-          variant="body2"
-          color="primary"
-          className={classes.menuGroupTitle}
-        >
-          Services
-        </Typography>
-      </ListItem>
 
       <ListItem button>
         <Link href="coming-soon">

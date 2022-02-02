@@ -1,5 +1,5 @@
 import React from 'react';
-import { Divider } from '@material-ui/core';
+import { Container, Divider } from '@material-ui/core';
 import { Section } from 'components/organisms';
 import { Form, Contact } from './components';
 
@@ -9,15 +9,22 @@ import MetaTitle from 'components/helper/MetaTitle';
 const ContactPageSidebarMap = () => (
   <div>
     <MetaTitle
-      title={`Contact Us | OnlineAarogya}`}
+      title={`Online Aarogya | Contact Us `}
       metaKeyWord="Contact Us, OnlineAarogya"
       metaDescription="Contact us for anything, Our goal is to be as helpful as possible."
     />
-    <Form data={mapData} />
-    <Section>
-      <Contact />
+
+    <Section style={{ borderTop: 'var(--border)' }}>
+      <Container fixed>
+        <Form data={mapData} />
+      </Container>
     </Section>
     <Divider />
+    <Section>
+      <Container fixed>
+        <Contact />
+      </Container>
+    </Section>
   </div>
 );
 

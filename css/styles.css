@@ -45,7 +45,7 @@ th {
 }
 
 td {
-  padding: 12px 6px  !important;
+  padding: 12px 6px !important;
 }
 @media only screen and (max-width: 480px) {
   .mobileContainer {
@@ -269,9 +269,9 @@ img.avatar-xl.rounded-circle.mb-1 {
   width: 280px;
 }
 .oops_no_record_found h6 {
-    color: #ff2301ad;
-    font-size: 32px !important;
-    font-weight: 700 !important;
+  color: #ff2301ad;
+  font-size: 32px !important;
+  font-weight: 700 !important;
 }
 .oops_no_record_found p {
   color: var(--icon-color);
@@ -292,16 +292,16 @@ img.avatar-xl.rounded-circle.mb-1 {
 }
 .breadcrumb_medefile {
   padding: 0 10px 15px;
-    position: relative;
+  position: relative;
 }
-.breadcrumb_medefile ol li a{
+.breadcrumb_medefile ol li a {
   color: var(--heading-color);
   font-size: 14px;
   font-weight: 600;
 }
 .breadcrumb_medefile ol li p {
   color: var(--theme-color);
-  opacity: .7;
+  opacity: 0.7;
   font-size: 14px;
   font-weight: 600;
 }
@@ -311,8 +311,8 @@ img.avatar-xl.rounded-circle.mb-1 {
   border: var(--border);
   border-radius: 5px;
   overflow: hidden;
-  background:#fff;
-  padding:20px !important;
+  background: #fff;
+  padding: 20px !important;
 }
 .MuiTab-textColorPrimary.Mui-selected {
   background: #ff00001c !important;
@@ -322,10 +322,10 @@ img.avatar-xl.rounded-circle.mb-1 {
   height: 0.7em !important;
 }
 .UserTable td button {
-  border:var(--border);
+  border: var(--border);
   padding: 5px;
-    margin: 2px;
-    background: #ff00000d;
+  margin: 2px;
+  background: #ff00000d;
 }
 .log_out_button {
   border: var(--border) !important;
@@ -338,4 +338,155 @@ img.avatar-xl.rounded-circle.mb-1 {
   padding: 0 !important;
   display: flex;
   height: auto;
+}
+
+.oaarogya__bg__shape {
+  transform: rotate(45deg);
+  position: absolute;
+}
+
+.oaarogya__bg__shape1 {
+  height: 520px;
+  width: 520px;
+  background: #fff;
+  top: -50px;
+  right: 120px;
+  border-radius: 0 72px 0 0;
+}
+
+.oaarogya__bg__shape2 {
+  height: 220px;
+  width: 220px;
+  background: var(--theme-color);
+  opacity: 0.8;
+  top: -172px;
+  right: 0;
+  border-radius: 32px;
+}
+
+.oaarogya__bg__shape3 {
+  height: 540px;
+  width: 190px;
+  background: var(--theme-color);
+  opacity: 0.5;
+  top: -24px;
+  right: 0;
+  border-radius: 32px;
+}
+
+.oaarogya__bg__shape4 {
+  height: 400px;
+  width: 200px;
+  background: var(--theme-color);
+  opacity: 0.8;
+  top: 372px;
+  right: 10px;
+  border-radius: 32px;
+}
+.oaarogya__bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  -webkit-clip-path: inset(0 0 0 0);
+  clip-path: inset(0 0 0 0);
+}
+.formContainerMain,
+.if_not_log {
+  position: relative;
+  z-index: 99;
+}
+.formContainerMain h3 {
+  color: var(--heading-color) !important;
+  font-size: 32px !important;
+  font-weight: 700 !important;
+}
+.Privacy_policy_tag {
+  color: var(--sub-heading-color) !important;
+  font-size: 12.5px !important;
+  font-weight: 600 !important;
+}
+.Privacy_policy_tag a {
+  color: var(--theme-color) !important;
+  opacity: 0.6;
+}
+.formContainerMain h6 span {
+  color: var(--inner-heading) !important;
+  font-size: 18px !important;
+  font-weight: 600 !important;
+}
+.formContainerMain h6 span a span {
+  color: var(--theme-color) !important;
+  font-size: 18px !important;
+  font-weight: 600 !important;
+}
+.formContainerMain h6 span a {
+  background: #ffebea;
+  border-radius: 5px;
+  padding: 5px 15px;
+  margin-top: 20px;
+}
+.formContainerMain h6 span a button {
+  position: relative;
+  top: 2px;
+}
+.login_page img {
+  width: 160px;
+}
+.login_info .login_contact p {
+  color: var(--inner-heading) !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+}
+.login_info .login_contact a {
+  color: var(--theme-color) !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+}
+.have_an_account,
+.dont_reacive_code,
+.timer {
+  color: var(--sub-heading-color) !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+}
+.have_an_account a > span,
+.dont_reacive_code a > span {
+  color: var(--heading-color) !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  margin-left: 5px;
+}
+.if_not_log span {
+  color: var(--sub-heading-color) !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  margin-top: 10px;
+}
+.if_not_log span a > span {
+  color: var(--heading-color) !important;
+  margin-left: 10px;
+}
+.formContainerMain h6 {
+  color: var(--heading-color) !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+}
+
+@media only screen and (min-width: 769px) and (max-width: 959px) {
+  .MuiContainer-fixed {
+    max-width: 100% !important;
+  }
+}
+
+@media only screen and (min-width: 960px) and (max-width: 1279px) {
+  .menu-item > p  {
+    font-size: 14px !important;
+    margin:0px !important;
+  }
+  .MuiContainer-fixed {
+    max-width: 100% !important;
+  }
 }

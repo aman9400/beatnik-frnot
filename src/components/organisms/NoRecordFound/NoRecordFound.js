@@ -12,7 +12,7 @@ const NoRecordFound = props => {
           <h6>
             <em>Ooops!</em>
           </h6>
-          <p>No record found codepen</p>
+          <p>No record found.</p>
         </div>
       </div>
     </>
