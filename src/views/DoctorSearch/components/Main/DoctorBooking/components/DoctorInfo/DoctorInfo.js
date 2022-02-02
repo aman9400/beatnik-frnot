@@ -33,14 +33,19 @@ const DoctorInformation = props => {
 
   // To get URL parameter
 
-  const params = new URLSearchParams(location.search);
-  const getData = params.get('doctor_id');
-  const appointmentID =  params.get('appointmentType');
-  const appointmentDate =  params.get('appointmentDate');
+  // const params = new URLSearchParams(location.search);
+  // const getData = params.get('doctor_id');
+  // const appointmentID =  params.get('appointmentType');
+  // const appointmentDate =  params.get('appointmentDate');
   
-  const sss =  moment(appointmentDate).format('MMM DD, YYYY')
+  // const sss =  moment(appointmentDate).format('MMM DD, YYYY')
 
-   const startTime =  params.get('startTime');
+  //  const startTime =  params.get('startTime');
+
+
+  const getData = '214';
+  const appointmentID =  'Video';
+
 
   // useEffect(() => {
 
@@ -75,10 +80,8 @@ const DoctorInformation = props => {
             alt="Appointment Type"
           /> */}
           
-          {appointmentID == '1' ? <img src={VideoCall} alt="#" /> : '' }
-          {appointmentID == '2' ? <img src={AudioCall} alt="#" /> : '' }
-          {appointmentID == '3' ? <img src={WalkIN} alt="#" /> : '' }
-          {appointmentID == '4' ? <img src={ChatSer} alt="#" /> : '' }
+             <img src={VideoCall} alt="#" /> 
+        
 
           <Typography variant="h5">Appointment Type</Typography>
         </div>
@@ -87,11 +90,11 @@ const DoctorInformation = props => {
             <div className={styles.appoint_date}>
               <EventIcon />
               
-              <b>On</b> {sss}
+              <b>On</b> 17th Feb 2022
             </div>
             <div className={styles.appoint_time}>
               <AccessTimeIcon />
-              <b>At </b> {startTime} 
+              <b>At </b> 06:32
             </div>
           </div>
           <div className={styles.changes_date}>

@@ -137,9 +137,11 @@ const Subscriptions = props => {
 
 
 
-  const urlParams = new URLSearchParams(window.location.search);
-  const myParam = urlParams.get('nid');
-  console.log("check Nid",myParam);
+  // const urlParams = new URLSearchParams(window.location.search);
+  // const myParam = urlParams.get('nid');
+  // console.log("check Nid",myParam);
+
+  const myParam = '4';
 
 
 

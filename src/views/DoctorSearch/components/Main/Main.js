@@ -381,7 +381,7 @@ const Main = props => {
   const [slotID, setSlotId] = useState('');
 
   const chooseDate = (slotId, startTime, consultationAmount) => {
-    alert(startTime);
+ 
     setSlotId(slotId);
     setStartTime(startTime);
     setConsultationAmount(consultationAmount);

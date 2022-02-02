@@ -55,8 +55,9 @@ const Form = () => {
     }));
 
     // for for mobile number
-    const urlParams = new URLSearchParams(window.location.search);
-    const myParam = urlParams.get('mob');
+    // const urlParams = new URLSearchParams(window.location.search);
+    const myParam = '8857091889';
+
     setMobile(myParam);
   }, [formState.values]);
 
@@ -179,8 +180,10 @@ const Form = () => {
     ),
   };
 // For Taking mobile no from urlParams
-const params = new URLSearchParams(window.location.search);
-  const mobNumber = params.get('mob');
+// const params = new URLSearchParams(window.location.search);
+//   const mobNumber = params.get('mob');
+
+  const mobNumber = '8857091889';
 
   const INITIAL_COUNT = 10;
   const twoDigits = num => String(num).padStart(2, '0');

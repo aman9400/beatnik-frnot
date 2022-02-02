@@ -146,28 +146,34 @@ const PatientInfo = props => {
 
   // Code to get URL Parameter in var 
 
-  const params = new URLSearchParams(location.search);
-  const getData = params.get('doctor_id');
-  const appointmentID =  params.get('appointmentType');
+  // const params = new URLSearchParams(location.search);
+  // const getData = params.get('doctor_id');
+  // const appointmentID =  params.get('appointmentType');
   
-  const appointmentDate =  params.get('appointmentDate');
-  const consultAmount =  params.get('consultAmount');
+  // const appointmentDate =  params.get('appointmentDate');
+  // const consultAmount =  params.get('consultAmount');
 
-  const startTime =  params.get('startTime');
+  // const startTime =  params.get('startTime');
+
+  
+  const getData = '214';
+  const appointmentID =  'Video';
+  
+
+  const consultAmount =  '500';
+
+ 
+
 
   return (
     <div className={clsx(classes.root, className)} {...rest}>
       <div className={styles.patient_info}>
         <FormControl className={styles.patient_info_data}>
           <FormLabel>Appointment Date & Time</FormLabel>
-          <p>{appointmentDate}, {startTime}</p>
+          <p>17th Feb 2022  06:22</p>
         </FormControl>
         <FormControl className={styles.patient_info_data}>
-          <FormLabel>Consultation Type</FormLabel>
-          {appointmentID == '1' ? <p>Video </p> : '' }
-          {appointmentID == '2' ? <p>Audio</p> : '' }
-          {appointmentID == '3' ? <p>Chat</p> : '' }
-          {appointmentID == '4' ? <p>Walk In</p> : '' }
+                  <p>Video</p> 
         </FormControl>
         <FormControl className={styles.patient_info_data}>
           <FormLabel>Consultation Fee</FormLabel>

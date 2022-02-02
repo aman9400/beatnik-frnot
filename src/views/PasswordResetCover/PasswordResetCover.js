@@ -36,8 +36,8 @@ const PasswordResetCover = () => {
 
   const [mobile, setMobile] = React.useState();
   React.useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const myParam = urlParams.get('mob');
+    // const urlParams = new URLSearchParams(window.location.search);
+    const myParam = '8857091889'
     var msg =
       'Check your Mobile Number for the OTP Verification (' + myParam + ')';
     setMobile(msg);
