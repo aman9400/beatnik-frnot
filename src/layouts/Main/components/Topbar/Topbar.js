@@ -14,14 +14,13 @@ import {
   Box,
   Grid,
   Container,
-
 } from '@material-ui/core';
 import { Image } from 'components/atoms';
 import MenuIcon from '@material-ui/icons/Menu';
 import { useMediaQuery } from '@material-ui/core';
-
 import Cookies from 'js-cookie';
 import { checkToken } from '../../../../components/helper/LoginCheck';
+import { getPatientProfile } from '../../../../components/helper/PatientApi';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import BrandLogo from './../../../../../public/assets/Images/logo/online-aarogya-logo.png';
 const useStyles = makeStyles(theme => ({
@@ -30,6 +29,7 @@ const useStyles = makeStyles(theme => ({
   },
   listName: {
     marginRight: '10px',
+  
     '&  $lastChild': { marginRight: '0px' },
   },
   navigationContainer: {
@@ -92,7 +92,19 @@ const useStyles = makeStyles(theme => ({
     fontWeight: 600,
     fontSize: '15px',
   },
-
+  listName:{
+    height: '65px',
+    verticalAlign: 'middle',
+    margin: '0 auto',
+    textAlign: 'center',
+    alignItems: 'center',
+    display: 'grid',
+    padding: '12px 10px',
+    '&> p': {
+      color: '#000000',
+      fontSize:'12px',
+    }
+  },
   listItemButton: {
     whiteSpace: 'nowrap',
   },
@@ -170,6 +182,16 @@ const Topbar = ({
     const { item } = props;
 
     // Get user Name
+
+    // lOAD Avatar here 
+
+
+
+    // useEffect(() => {
+    //   loadData();
+
+    // });
+
 
     return (
       <List disablePadding>
@@ -311,45 +333,49 @@ const Topbar = ({
   const namMenuBar = [
     {
       _id: 1,
-      navTitle: 'Find Doctor',
-      navPath: '/find-doctor',
+      navTitle: "Home",
+      navPath: '/',
     },
     {
       _id: 2,
-      navTitle: 'Video Consultation',
-      navPath: '/video-consultation',
+      navTitle: "Find Doctor",
+      navSubTitle: <p>In-Clinic, Video, Audio, Chat </p>,
+      navPath: '/find-doctor',
     },
     {
       _id: 3,
-      navTitle: 'In Clinic Consultation',
-      navPath: '/clinic-consultation',
+      navTitle: 'Order Medicine',
+      navPath: '/video-consultation',
     },
     {
       _id: 4,
-      navTitle: 'Packages',
-      navPath: '/packages',
+      navTitle: 'Book Lab Test',
+      navPath: '/clinic-consultation',
     },
     {
       _id: 5,
+      navTitle: 'Care At Home',
+      navPath: '/packages',
+    },
+    {
+      _id: 6,
       navTitle: 'Medifiles',
       navPath: '/medifiles',
     },
     {
-      _id: 6,
-      navTitle: 'Data Security',
-      navPath: '/data-security',
-    },
-    {
       _id: 7,
-      navTitle: 'Contact us',
-      navPath: '/contact-us',
+      navTitle: 'Packages',
+      navPath: '/data-security',
     },
   ];
 
   const myToken = Cookies.get('token');
   const userName = Cookies.get('first_name');
-  const userAvatar = Cookies.get('avatar');
+
   // Code for Right Dropdown menu ends
+
+
+
 
   const logoutData = () => {
     Cookies.remove('token');
@@ -360,6 +386,23 @@ const Topbar = ({
       router.push('/signin', undefined, { shallow: true });
     }
   };
+
+  // Load Avatar URL
+
+  const [userAvtar, setAvatar] = React.useState('');
+
+  const loadData = async () => {
+
+    const res = await getPatientProfile();
+    setAvatar(res.patient_info)
+
+  }
+
+  React.useEffect(() => {
+    loadData();
+  }, []);
+
+
   return (
     <div>
       <Container fixed>
@@ -438,12 +481,14 @@ const Topbar = ({
                         className={clsx(classes.listName)}
                         style={{
                           borderBottom: '2px solid red ',
-                          padding: '20px 10px',
+                          padding: '12px 10px ',
                           color: 'red',
                           background: '#fff4f2',
                         }}
                       >
                         {menuName.navTitle}
+                    
+                        {menuName.navSubTitle}
                       </p>
                     ) : (
                       <p
@@ -451,6 +496,7 @@ const Topbar = ({
                         style={{ color: 'black' }}
                       >
                         {menuName.navTitle}
+                        {menuName.navSubTitle}
                       </p>
                     )}
                   </Typography>
@@ -462,23 +508,26 @@ const Topbar = ({
               {myToken ? (
                 <div className="after_login">
                   <Typography
-                  style={{ color: 'red' }}
-                  className={clsx(
-                    classes.listItemTextMenu,
-                    'menu-item',
-                    classes.pointer,
-                  )}
-                >
-                
-                 
-                  <IconButton >
-                    <img src={userAvatar} alt={userName}/>
-                  </IconButton>
-                  {userName}
-                </Typography>
-               <Typography><IconButton onClick={logoutData}> <PowerSettingsNewIcon/> </IconButton></Typography>
+                    style={{ color: 'red' }}
+                    className={clsx(
+                      classes.listItemTextMenu,
+                      'menu-item',
+                      classes.pointer,
+                    )}
+                  >
+                    {/* {userAvatar.patient_info && Object.keys(userAvatar.patient_info).map(i=><p>{records.email[i]}</p>)} */}
+
+
+
+
+                    <IconButton >
+                      <img src={userAvtar.avatar_url} alt={userName} />
+                    </IconButton>
+                    {userName}
+                  </Typography>
+                  <Typography><IconButton onClick={logoutData}> <PowerSettingsNewIcon /> </IconButton></Typography>
                 </div>
-              
+
               ) : (
                 <Link
                   href="/signin"

@@ -1,3 +1,4 @@
+
 import React from 'react';
 import styles from './paitent-info.module.css';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
@@ -11,7 +12,7 @@ import MuiDialogActions from '@material-ui/core/DialogActions';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
-import MedicalHistory from './medical-history';
+import MedicalHistory from './MedicalHistory';
 import ListIcon from '@material-ui/icons/List';
 import DoneAllIcon from '@material-ui/icons/DoneAll';
 import {
@@ -28,52 +29,7 @@ import AudioCall from '../../../../Images/phone-call.png';
 import WalkIN from '../../../../Images/home.png';
 import ChatSer from '../../../../Images/chat.png';
 
-const lists = [
-  {
-    key: 'inbox',
-    label: 'Medical Problems',
-    icon: ListIcon,
-    items: [
-      { key: 'nerves', label: 'Nerves Weakness', icon: DoneAllIcon },
-      { key: 'hello', label: 'Hello World', icon: DoneAllIcon },
-    ],
-  },
-  {
-    key: 'allergies',
-    label: 'Allergies',
-    icon: ListIcon,
-    items: [
-      { key: 'DrugAllergy', label: 'Drug Allergy', icon: DoneAllIcon },
-      { key: 'FoodAllergy', label: 'Food Allergy', icon: DoneAllIcon },
-      { key: 'InsectAllergy', label: 'Insect Allergy.', icon: DoneAllIcon },
-      { key: 'LatexAllergy', label: 'Latex Allergy', icon: DoneAllIcon },
-      { key: 'MoldAllergy', label: 'Mold Allergy', icon: DoneAllIcon },
-      { key: 'PetAllergy', label: 'Pet Allergy', icon: DoneAllIcon },
-    ],
-  },
-  {
-    key: 'familyHistory',
-    label: 'Family History',
-    icon: ListIcon,
-    items: [
-      { key: 'DrugAllergy', label: 'Drug Allergy', icon: DoneAllIcon },
-      { key: 'FoodAllergy', label: 'Food Allergy', icon: DoneAllIcon },
-      { key: 'InsectAllergy', label: 'Insect Allergy.', icon: DoneAllIcon },
-      { key: 'LatexAllergy', label: 'Latex Allergy', icon: DoneAllIcon },
-      { key: 'MoldAllergy', label: 'Mold Allergy', icon: DoneAllIcon },
-      { key: 'PetAllergy', label: 'Pet Allergy', icon: DoneAllIcon },
-    ],
-  },
-  {
-    key: 'lifestyle',
-    label: 'Life Style',
-    icon: ListIcon,
-    items: [
-      { key: 'nerves', label: 'Nerves Weakness', icon: DoneAllIcon },
-      { key: 'hello', label: 'Hello World', icon: DoneAllIcon },
-    ],
-  },
-];
+
 // const useStyles = makeStyles(theme => ({}));
 const useStyles = theme => ({
   root: {
@@ -155,6 +111,37 @@ const PatientInfo = props => {
 
   // const startTime =  params.get('startTime');
 
+  // useEffect(() => {
+  //   const params = new URLSearchParams(location.search);
+  //   const getData = params.get('name');
+  //   setLanguage(getData);
+  // }, []);
+
+  const [star, setStar] = React.useState(3);
+
+  const [language, setLanguage] = React.useState();
+  const [appointmentDate,setAppointmentDate] = React.useState();
+  const [appointmentType,setAppointmentType] = React.useState();
+  const [doctorId,setDoctorId] = React.useState([]);
+  const [gettime,setTime] = React.useState();
+  const [getdate,setGetDate] = React.useState();
+  const [getAmount,setAmount] = React.useState();
+
+
+  React.useEffect(() => {
+  
+    const params = new URLSearchParams(location.search);
+  
+    const docId = params.get('doctor_id');
+  
+    setDoctorId(docId);
+    setAppointmentType(params.get('appointmentType'));
+    setAppointmentDate(params.get('appointmentDate'));
+    setAmount(params.get('consultAmount'))
+    //const sss =  moment(appointmentDate).format('MMM DD, YYYY')
+  
+    },[]);
+
   
   const getData = '214';
   const appointmentID =  'Video';
@@ -162,23 +149,26 @@ const PatientInfo = props => {
 
   const consultAmount =  '500';
 
- 
+  const datas = 'Data from parent';
 
 
   return (
     <div className={clsx(classes.root, className)} {...rest}>
       <div className={styles.patient_info}>
         <FormControl className={styles.patient_info_data}>
-          <FormLabel>Appointment Date & Time</FormLabel>
+          <FormLabel>Appointment Date & Timess</FormLabel>
           <p>17th Feb 2022  06:22</p>
         </FormControl>
         <FormControl className={styles.patient_info_data}>
-                  <p>Video</p> 
+                  <p>   {appointmentType == '1' ? <p>Video Consultation</p> : '' }
+           {appointmentType == '2'? <p>Audio Call Consultation</p> : '' }
+           {appointmentType == '4' ? <p>In Clinic Call Consultation</p> : '' }
+           {appointmentType  == '3' ? <p>Chat Consultation</p> : '' }</p> 
         </FormControl>
         <FormControl className={styles.patient_info_data}>
           <FormLabel>Consultation Fee</FormLabel>
           <p>
-            <b>₹</b> {consultAmount}
+            <b>₹</b> {getAmount}
           </p>
         </FormControl>
 
@@ -245,11 +235,11 @@ const PatientInfo = props => {
           Medical History
         </DialogTitle>
         <DialogContent dividers>
-          <MedicalHistory lists={lists} />
+          <MedicalHistory  dataParentToChild = {datas} />
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleClose} color="primary">
-            Save changes
+            Close
           </Button>
         </DialogActions>
       </Dialog>

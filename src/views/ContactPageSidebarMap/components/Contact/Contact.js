@@ -33,13 +33,13 @@ const Contact = props => {
         align={isMd ? 'center' : 'left'}
       />
       <Grid container spacing={1}>
-        <Grid item xs={4} spacing={4}>
+        <Grid item xs={12} sm={12} md={4} lg={4} xl={4} spacing={4}>
           <ListItem
             disableGutters
             data-aos="fade-up"
             className={styles.listItem}
           >
-            <Link href="tel:+919760078301">
+            <Link href="tel:+91 8866126777">
               <div className={styles.Contact_data}>
                 <ListItemAvatar className={styles.contact_icon}>
                   <PhoneIcon />
@@ -62,7 +62,7 @@ const Contact = props => {
             </Link>
           </ListItem>
         </Grid>
-        <Grid item xs={4} spacing={4}>
+        <Grid item xs={12} sm={12} md={4} lg={4} xl={4} spacing={4}>
           <ListItem
             disableGutters
             data-aos="fade-up"
@@ -91,7 +91,7 @@ const Contact = props => {
             </Link>
           </ListItem>
         </Grid>
-        <Grid item xs={4} spacing={4}>
+        <Grid item xs={12} sm={12} md={4} lg={4} xl={4} spacing={4}>
           <ListItem
             disableGutters
             data-aos="fade-up"

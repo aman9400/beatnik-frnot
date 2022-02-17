@@ -1,9 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography, Grid, Button, TextField } from '@material-ui/core';
+import { Grid, Button, TextField } from '@material-ui/core';
 import validate, { async } from 'validate.js';
-import { LearnMoreLink } from 'components/atoms';
-import Link from 'next/link';
 import { getPatientLogin } from '../../../../components/helper/PatientApi';
 import AlertMassage from '../../../../components/helper/AlertMessage';
 import Router from 'next/router';
@@ -122,7 +120,7 @@ const Form = () => {
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <TextField
-              placeholder="eg. 9760078301"
+              placeholder="eg. XXXXXXX301"
               label="Mobile Number"
               variant="outlined"
               size="medium"
@@ -144,7 +142,7 @@ const Form = () => {
           </Grid>
           <Grid item xs={12}>
             <Button
-              style={{marginTop:'20px'}}
+              style={{ marginTop: '20px' }}
               size="large"
               variant="contained"
               type="submit"

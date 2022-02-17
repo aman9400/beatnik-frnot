@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './download.module.css';
 import PropTypes from 'prop-types';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+import AppUser from './../../../../../public/assets/Images/r-icon/app_user.jpeg';
 import {
   useMediaQuery,
   colors,
@@ -65,14 +66,14 @@ const Appointment = props => {
   return (
     <div className={styles.download_container} {...rest}>
       <Grid container spacing={isMd ? 4 : 2} justifyContent={'space-between'}>
-        <Grid item xs={12} md={5} data-aos="fade-up">
+        <Grid item sm={5} md={5} lg={5} xl={5} xs={12}  data-aos="fade-up">
           <div className={styles.download_img_holder}>
-            <img src={process.env.NEXT_PUBLIC_BASE_URL + '/assets/app-download.png'}
+            <img src={AppUser}
               alt="Download the Online Aarogya App"/>
           </div>
         </Grid>
 
-        <Grid item xs={12} md={6} data-aos="fade-up">
+        <Grid item xs={12} sm={7} md={7} lg={7} xl={7} data-aos="fade-up">
           <Typography variant="h2" className={styles.download_title}>
             Download the Online Aarogya App
           </Typography>
@@ -120,11 +121,12 @@ const Appointment = props => {
           <Grid container justifyContent={isMd ? 'left' : 'center'}>
             <Box mt={4} style={{ marginBottom: '10px' }}>
               <Button
-                href="#contained-buttons"
+                href="https://play.google.com/store/apps/details?id=com.aarogya"
                 mt={2}
-                style={{ backgroundColor: '#2d2d32', color: 'white' }}
+                style={{ backgroundColor: '#2d2d32', color: 'white',padding:'8px 20px' }}
                 size="large"
                 variant="contained"
+                target="_blank"
               >
                 <i
                   class="fab fa-google-play"
@@ -139,6 +141,7 @@ const Appointment = props => {
                   backgroundColor: '#2d2d32',
                   color: 'white',
                   marginLeft: '10px',
+                  padding:'8px 20px'
                 }}
                 size="large"
                 variant="contained"

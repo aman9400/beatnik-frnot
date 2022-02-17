@@ -7,9 +7,10 @@ const checkToken =  data => {
     if(token){
         data = JSON.decode(token);
         return data;
-    }else{
-        window.location.replace(process.env.NEXT_PUBLIC_BASE_URL+'/signin');
     }
+    // else{
+    //     window.location.replace(process.env.NEXT_PUBLIC_BASE_URL+'/signin');
+    // }
   };
 
   export { checkToken };

@@ -12,7 +12,11 @@ import {
   List,
   Box,
   Container,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails
 } from '@material-ui/core';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import BrandLogo from './../../../../../public/assets/Images/logo/online-aarogya-logo.png';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import MailIcon from '@material-ui/icons/Mail';
@@ -75,7 +79,9 @@ const useStyles = makeStyles(theme => ({
   menuListContainer: {
     padding: '0 !important',
   },
-
+  menu: {
+    marginBottom: '10px',
+  },
   menuItem: {
     margin: '0 0 0 15px !important',
   },
@@ -100,9 +106,9 @@ const useStyles = makeStyles(theme => ({
     color: 'var(--heading-color)',
     fontSize: '14px !important',
     fontWeight: '500',
-    lineHeight:'18px',
+    lineHeight: '18px',
     transition: '0.6s',
-    '&:hover' :{
+    '&:hover': {
       transform: 'translateX(5px)',
     }
   },
@@ -157,53 +163,115 @@ const Footer = props => {
   const CompanyDetails = () => {
     return (
       <div className={styles.company_details}>
-        <div className={styles.company_info}>
-          <Link href="/">
-            <p>
-              <img
-                src={BrandLogo}
-                alt="Online Aarogya Consultant Private Limited"
-              />
-            </p>
-          </Link>
-          <Typography variant="body2">
-            ACPL is a start-up in the field of medical healthcare including
-            tele-medicine.
-          </Typography>
-          <div className={styles.company_add}>
+
+        {isMd ? (
+          <div className={styles.company_info}>
+            <Link href="/">
+              <p>
+                <img
+                  src={BrandLogo}
+                  alt="Online Aarogya Consultant Private Limited"
+                />
+              </p>
+            </Link>
             <Typography variant="body2">
-              <LocationOnIcon />
+              ACPL is a start-up in the field of medical healthcare including
+              tele-medicine.
             </Typography>
-            <Typography variant="body2">
-              <a href="https://goo.gl/maps/yn4HWig6t2tCMF8n9" target="_blank">
-                <p>
-                  175/108, Landmark Business Hub, 1st floor,Tokarkhada Silvassa,
-                  Dadra & Nagar and Daman & Diu, 396230
-                </p>
-              </a>
-            </Typography>
+            <div className={styles.company_add}>
+              <Typography variant="body2">
+                <LocationOnIcon />
+              </Typography>
+              <Typography variant="body2">
+                <a href="https://goo.gl/maps/yn4HWig6t2tCMF8n9" target="_blank">
+                  <p>
+                    175/108, Landmark Business Hub, 1st floor,Tokarkhada Silvassa,
+                    Dadra & Nagar and Daman & Diu, 396230
+                  </p>
+                </a>
+              </Typography>
+            </div>
+            <div className={styles.company_add}>
+              <Typography variant="body2">
+                <MailIcon />
+              </Typography>
+              <Typography variant="body2">
+                <Link href="mailto:hr@oaarogya.com">
+                  <p> hr@oaarogya.com</p>
+                </Link>
+              </Typography>
+            </div>
+            <div className={styles.company_add}>
+              <Typography variant="body2">
+                <PhoneIcon />
+              </Typography>
+              <Typography variant="body2">
+                <Link href="tel:+91 9574882777">
+                  <p>+91 9574882777</p>
+                </Link>
+              </Typography>
+            </div>
           </div>
-          <div className={styles.company_add}>
-            <Typography variant="body2">
-              <MailIcon />
-            </Typography>
-            <Typography variant="body2">
-              <Link href="mailto:hr@oaarogya.com">
-                <p> hr@oaarogya.com</p>
-              </Link>
-            </Typography>
-          </div>
-          <div className={styles.company_add}>
-            <Typography variant="body2">
-              <PhoneIcon />
-            </Typography>
-            <Typography variant="body2">
-              <Link href="tel:+91 9574882777">
-                <p>+91 9574882777</p>
-              </Link>
-            </Typography>
-          </div>
-        </div>
+        ) : (
+          <Accordion className={styles.accordion_main}>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+            >
+              <Typography className={classes.heading}>Online Aarogya</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <div className={styles.company_info}>
+                <Link href="/">
+                  <p>
+                    <img
+                      src={BrandLogo}
+                      alt="Online Aarogya Consultant Private Limited"
+                    />
+                  </p>
+                </Link>
+                <Typography variant="body2">
+                  ACPL is a start-up in the field of medical healthcare including
+                  tele-medicine.
+                </Typography>
+                <div className={styles.company_add}>
+                  <Typography variant="body2">
+                    <LocationOnIcon />
+                  </Typography>
+                  <Typography variant="body2">
+                    <a href="https://goo.gl/maps/yn4HWig6t2tCMF8n9" target="_blank">
+                      <p>
+                        175/108, Landmark Business Hub, 1st floor,Tokarkhada Silvassa,
+                        Dadra & Nagar and Daman & Diu, 396230
+                      </p>
+                    </a>
+                  </Typography>
+                </div>
+                <div className={styles.company_add}>
+                  <Typography variant="body2">
+                    <MailIcon />
+                  </Typography>
+                  <Typography variant="body2">
+                    <Link href="mailto:hr@oaarogya.com">
+                      <p> hr@oaarogya.com</p>
+                    </Link>
+                  </Typography>
+                </div>
+                <div className={styles.company_add}>
+                  <Typography variant="body2">
+                    <PhoneIcon />
+                  </Typography>
+                  <Typography variant="body2">
+                    <Link href="tel:+91 9574882777">
+                      <p>+91 9574882777</p>
+                    </Link>
+                  </Typography>
+                </div>
+              </div>
+            </AccordionDetails>
+          </Accordion>
+        )}
       </div>
     );
   };
@@ -212,9 +280,28 @@ const Footer = props => {
     const { services } = landings.children;
     return (
       <div className={classes.menu}>
-        <div className={styles.fotter_menu_item}>
-          <MenuGroup item={services} />
-        </div>
+        {isMd ? (
+
+          <div className={styles.fotter_menu_item}>
+            <MenuGroup item={services} />
+          </div>
+        ) : (
+          <Accordion className={styles.accordion_main}>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+            >
+              <Typography className={classes.heading}>Home </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <div className={styles.fotter_menu_item}>
+                <MenuGroup item={services} />
+              </div>
+            </AccordionDetails>
+          </Accordion>
+        )}
+
       </div>
     );
   };
@@ -223,9 +310,28 @@ const Footer = props => {
     const { career } = supportedPages.children;
     return (
       <div className={classes.menu}>
-        <div className={styles.fotter_menu_item}>
-          <MenuGroup item={career} />
-        </div>
+        {isMd ? (
+          <div className={styles.fotter_menu_item}>
+            <MenuGroup item={career} />
+          </div>
+        ) : (
+          <Accordion className={styles.accordion_main}>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+            >
+              <Typography className={classes.heading}>For Doctor</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <div className={styles.fotter_menu_item}>
+                <MenuGroup item={career} />
+              </div>
+            </AccordionDetails>
+          </Accordion>
+
+        )}
+
       </div>
     );
   };
@@ -233,10 +339,29 @@ const Footer = props => {
     const { blog, portfolio } = supportedPagesOthers.children;
     return (
       <div className={classes.menu}>
-        <div className={styles.fotter_menu_item}>
-          <MenuGroup item={portfolio} />
-          <MenuGroup item={blog} />
-        </div>
+        {isMd ? (
+          <div className={styles.fotter_menu_item}>
+            <MenuGroup item={portfolio} />
+            <MenuGroup item={blog} />
+          </div>
+        ) : (
+          <Accordion className={styles.accordion_main}>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+            >
+              <Typography className={classes.heading}>For Corporates & Legal Info</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <div className={styles.fotter_menu_item}>
+                <MenuGroup item={portfolio} />
+                <MenuGroup item={blog} />
+              </div>
+            </AccordionDetails>
+          </Accordion>
+        )}
+
       </div>
     );
   };
@@ -244,185 +369,373 @@ const Footer = props => {
     const { web } = landings.children;
     return (
       <div className={classes.menu}>
-        <div className={styles.fotter_menu_item}>
-          <MenuGroup item={web} />
-        </div>
+        {isMd ? (
+          <div className={styles.fotter_menu_item}>
+            <MenuGroup item={web} />
+          </div>
+        ) : (
+          <Accordion className={styles.accordion_main}>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+            >
+              <Typography className={classes.heading}>For Patients</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <div className={styles.fotter_menu_item}>
+                <MenuGroup item={web} />
+              </div>
+            </AccordionDetails>
+          </Accordion>
+        )}
+
       </div>
     );
   };
 
   return (
-    <div container {...rest} className={styles.footerContainer} style={{backgroundImage:`url(${FooterBG})`}}>
+    <div container {...rest} className={styles.footerContainer} style={{ backgroundImage: `url(${FooterBG})` }}>
       <Container fixed>
-        <div container>
+        <div>
           <Grid container spacing={4} className={styles.footerInnerContainer}>
-            <Grid xs={6} sm={3} lg={2} xl={2} md={4} mb={4}>
+            <Grid xs={12} sm={6} lg={2} xl={2} md={2}>
               <CompanyDetails />
             </Grid>
-            <Grid xs={6} sm={3} lg={2} xl={2} md={4}>
+            <Grid xs={12} sm={6} lg={2} xl={2} md={2}>
               <LandingPages />
             </Grid>
-            <Grid xs={6} sm={3} lg={2} xl={2} md={4}>
+            <Grid xs={12} sm={6} lg={2} xl={2} md={2}>
               <SupportedPages />
             </Grid>
-            <Grid xs={6} sm={3} lg={2} xl={2} md={4}>
+            <Grid xs={12} sm={6} lg={2} xl={2} md={2}>
               <SupportedPagesOthers />
             </Grid>
-            <Grid xs={6} sm={3} lg={2} xl={2} md={4}>
+            <Grid xs={12} sm={6} lg={2} xl={2} md={2}>
               <AccountPages />
             </Grid>
-            <Grid xs={6} sm={3} lg={2} xl={2} md={4}>
-              <Box
-                mt={3}
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                style={{marginTop:'0px',}}
-              >
-                <div
-                  style={{
-                    padding: '8px',
-                    backgroundColor: '#ffdede',
-                    color: 'brown',
-                    fontSize: 'medium',
-                  }}
-                >
-                  {' '}
-                  <span style={{ marginRight: '8px' }}>Offer</span>
-                  <i class="fas fa-gift"></i>
+            <Grid xs={12} sm={6} lg={2} xl={2} md={2}>
+              {isMd ? (
+                <div className={styles.download_offer}>
+                  <Box
+                    mt={3}
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    style={{ marginTop: '0px', }}
+                  >
+                    <div
+                      style={{
+                        padding: '8px',
+                        backgroundColor: '#ffdede',
+                        color: 'brown',
+                        fontSize: 'medium',
+                      }}
+                    >
+                      {' '}
+                      <span style={{ marginRight: '8px' }}>Offer</span>
+                      <i class="fas fa-gift"></i>
+                    </div>
+                  </Box>
+
+                  <Box
+                    mt={3}
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                  >
+                    <Typography style={{ textTransform: 'uppercase', color: 'var(--heading-color)', fontWeight: '600', fontSize: '18px', }}>Download App</Typography>
+                    <br />
+                  </Box>
+
+                  <Box
+                    mt={1}
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                  >
+                    <a
+                      style={{
+                        height: '25px',
+                        width: '25px',
+                        padding: '',
+                        borderRadius: '50%',
+                        display: 'inline-block',
+                        border: '1px solid #a3a3a3',
+
+                        marginRight: '5px',
+                      }}
+                      href="https://play.google.com/store/apps/details?id=com.aarogya"
+                      target="_blank"
+                    >
+                      <center>
+                        <i style={{ color: 'var(--heading-color)' }} class="fab fa-apple"></i>
+                      </center>
+                    </a>
+                    <a
+                      style={{
+                        height: '25px',
+                        width: '25px',
+                        padding: '',
+                        borderRadius: '50%',
+                        display: 'inline-block',
+                        border: '1px solid #a3a3a3',
+                      }}
+                      href="https://play.google.com/store/apps/details?id=com.aarogya"
+                    >
+                      <center>
+                        <i style={{ color: 'var(--heading-color)' }} class="fab fa-google-play"></i>
+                      </center>
+                    </a>
+                  </Box>
+
+                  <Box
+                    mt={2}
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                  >
+                    <Typography style={{ textTransform: 'uppercase', color: 'var(--heading-color)', fontWeight: '600', fontSize: '18px', }} >FOLLOW US</Typography>
+                    <br />
+                  </Box>
+
+                  <Box
+                    mt={1}
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                  >
+                    <a
+                      style={{
+                        height: '25px',
+                        width: '25px',
+                        padding: '',
+                        borderRadius: '50%',
+                        display: 'inline-block',
+                        border: '1px solid #a3a3a3',
+                        marginRight: '5px',
+                      }}
+
+                      href="https://play.google.com/store/apps/details?id=com.aarogya"
+                      target="_blank"
+                    >
+                      <center>
+                        <i style={{ color: 'var(--heading-color)' }} class="fab fa-facebook-f"></i>
+                      </center>
+                    </a>
+                    <div
+                      style={{
+                        height: '25px',
+                        width: '25px',
+                        padding: '',
+                        borderRadius: '50%',
+                        display: 'inline-block',
+                        border: '1px solid #a3a3a3',
+                        marginRight: '5px',
+                      }}
+                    >
+                      <center>
+                        <i style={{ color: 'var(--heading-color)' }} class="fab fa-instagram-square"></i>
+                      </center>
+                    </div>
+                    <div
+                      style={{
+                        height: '25px',
+                        width: '25px',
+                        padding: '',
+                        borderRadius: '50%',
+                        display: 'inline-block',
+                        border: '1px solid #a3a3a3',
+                        marginRight: '5px',
+                      }}
+                    >
+                      <center>
+                        <i class="fab fa-twitter"></i>
+                      </center>
+                    </div>
+                    <div
+                      style={{
+                        height: '25px',
+                        width: '25px',
+                        padding: '',
+                        borderRadius: '50%',
+                        display: 'inline-block',
+                        border: '1px solid #a3a3a3',
+                      }}
+                    >
+                      <center>
+                        <i style={{ color: 'var(--heading-color)' }} class="fab fa-google-play"></i>
+                      </center>
+                    </div>
+                  </Box>
                 </div>
-              </Box>
+              ) : (
+                <Accordion className={styles.accordion_main}>
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                  >
+                    <Typography className={classes.heading}>Download App</Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <div className={styles.download_offer}>
+                      <Box
+                        mt={3}
+                        display="flex"
+                        justifyContent="center"
+                        alignItems="center"
+                        style={{ marginTop: '0px', }}
+                      >
+                        <div
+                          style={{
+                            padding: '8px',
+                            backgroundColor: '#ffdede',
+                            color: 'brown',
+                            fontSize: 'medium',
+                          }}
+                        >
+                          {' '}
+                          <span style={{ marginRight: '8px' }}>Offer</span>
+                          <i class="fas fa-gift"></i>
+                        </div>
+                      </Box>
 
-              <Box
-                mt={3}
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-              >
-                <Typography style={{   textTransform: 'uppercase',color: 'var(--heading-color)',fontWeight: '600',fontSize: '18px',}}>Download App</Typography>
-                <br />
-              </Box>
+                      <Box
+                        mt={3}
+                        display="flex"
+                        justifyContent="center"
+                        alignItems="center"
+                      >
+                        <Typography style={{ textTransform: 'uppercase', color: 'var(--heading-color)', fontWeight: '600', fontSize: '18px', }}>Download App</Typography>
+                        <br />
+                      </Box>
 
-              <Box
-                mt={1}
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-              >
-                <a
-                  style={{
-                    height: '25px',
-                    width: '25px',
-                    padding: '',
-                    borderRadius: '50%',
-                    display: 'inline-block',
-                    border: '1px solid #a3a3a3',
+                      <Box
+                        mt={1}
+                        display="flex"
+                        justifyContent="center"
+                        alignItems="center"
+                      >
+                        <a
+                          style={{
+                            height: '25px',
+                            width: '25px',
+                            padding: '',
+                            borderRadius: '50%',
+                            display: 'inline-block',
+                            border: '1px solid #a3a3a3',
 
-                    marginRight: '5px',
-                  }}
-                  href="https://play.google.com/store/apps/details?id=com.aarogya"
-                  target="_blank"
-                >
-                  <center>
-                    <i style={{color: 'var(--heading-color)'}} class="fab fa-apple"></i>
-                  </center>
-                </a>
-                <a
-                  style={{
-                    height: '25px',
-                    width: '25px',
-                    padding: '',
-                    borderRadius: '50%',
-                    display: 'inline-block',
-                    border: '1px solid #a3a3a3',
-                  }}
-                  href="https://play.google.com/store/apps/details?id=com.aarogya"
-                >
-                  <center>
-                    <i style={{color: 'var(--heading-color)'}} class="fab fa-google-play"></i>
-                  </center>
-                </a>
-              </Box>
+                            marginRight: '5px',
+                          }}
+                          href="https://play.google.com/store/apps/details?id=com.aarogya"
+                          target="_blank"
+                        >
+                          <center>
+                            <i style={{ color: 'var(--heading-color)' }} class="fab fa-apple"></i>
+                          </center>
+                        </a>
+                        <a
+                          style={{
+                            height: '25px',
+                            width: '25px',
+                            padding: '',
+                            borderRadius: '50%',
+                            display: 'inline-block',
+                            border: '1px solid #a3a3a3',
+                          }}
+                          href="https://play.google.com/store/apps/details?id=com.aarogya"
+                        >
+                          <center>
+                            <i style={{ color: 'var(--heading-color)' }} class="fab fa-google-play"></i>
+                          </center>
+                        </a>
+                      </Box>
 
-              <Box
-                mt={2}
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-              >
-                <Typography style={{   textTransform: 'uppercase',color: 'var(--heading-color)',fontWeight: '600',fontSize: '18px',}} >FOLLOW US</Typography>
-                <br />
-              </Box>
+                      <Box
+                        mt={2}
+                        display="flex"
+                        justifyContent="center"
+                        alignItems="center"
+                      >
+                        <Typography style={{ textTransform: 'uppercase', color: 'var(--heading-color)', fontWeight: '600', fontSize: '18px', }} >FOLLOW US</Typography>
+                        <br />
+                      </Box>
 
-              <Box
-                mt={1}
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-              >
-                <a
-                  style={{
-                    height: '25px',
-                    width: '25px',
-                    padding: '',
-                    borderRadius: '50%',
-                    display: 'inline-block',
-                    border: '1px solid #a3a3a3',
-                    marginRight: '5px',
-                  }}
-                
-                  href="https://play.google.com/store/apps/details?id=com.aarogya"
-                  target="_blank"
-                >
-                  <center>
-                    <i style={{color: 'var(--heading-color)'}} class="fab fa-facebook-f"></i>
-                  </center>
-                </a>
-                <div
-                  style={{
-                    height: '25px',
-                    width: '25px',
-                    padding: '',
-                    borderRadius: '50%',
-                    display: 'inline-block',
-                    border: '1px solid #a3a3a3',
-                    marginRight: '5px',
-                  }}
-                >
-                  <center>
-                    <i style={{color: 'var(--heading-color)'}} class="fab fa-instagram-square"></i>
-                  </center>
-                </div>
-                <div
-                  style={{
-                    height: '25px',
-                    width: '25px',
-                    padding: '',
-                    borderRadius: '50%',
-                    display: 'inline-block',
-                    border: '1px solid #a3a3a3',
-                    marginRight: '5px',
-                  }}
-                >
-                  <center>
-                    <i class="fab fa-twitter"></i>
-                  </center>
-                </div>
-                <div
-                  style={{
-                    height: '25px',
-                    width: '25px',
-                    padding: '',
-                    borderRadius: '50%',
-                    display: 'inline-block',
-                    border: '1px solid #a3a3a3',
-                  }}
-                >
-                  <center>
-                    <i style={{color: 'var(--heading-color)'}} class="fab fa-google-play"></i>
-                  </center>
-                </div>
-              </Box>
+                      <Box
+                        mt={1}
+                        display="flex"
+                        justifyContent="center"
+                        alignItems="center"
+                      >
+                        <a
+                          style={{
+                            height: '25px',
+                            width: '25px',
+                            padding: '',
+                            borderRadius: '50%',
+                            display: 'inline-block',
+                            border: '1px solid #a3a3a3',
+                            marginRight: '5px',
+                          }}
+
+                          href="https://play.google.com/store/apps/details?id=com.aarogya"
+                          target="_blank"
+                        >
+                          <center>
+                            <i style={{ color: 'var(--heading-color)' }} class="fab fa-facebook-f"></i>
+                          </center>
+                        </a>
+                        <div
+                          style={{
+                            height: '25px',
+                            width: '25px',
+                            padding: '',
+                            borderRadius: '50%',
+                            display: 'inline-block',
+                            border: '1px solid #a3a3a3',
+                            marginRight: '5px',
+                          }}
+                        >
+                          <center>
+                            <i style={{ color: 'var(--heading-color)' }} class="fab fa-instagram-square"></i>
+                          </center>
+                        </div>
+                        <div
+                          style={{
+                            height: '25px',
+                            width: '25px',
+                            padding: '',
+                            borderRadius: '50%',
+                            display: 'inline-block',
+                            border: '1px solid #a3a3a3',
+                            marginRight: '5px',
+                          }}
+                        >
+                          <center>
+                            <i class="fab fa-twitter"></i>
+                          </center>
+                        </div>
+                        <div
+                          style={{
+                            height: '25px',
+                            width: '25px',
+                            padding: '',
+                            borderRadius: '50%',
+                            display: 'inline-block',
+                            border: '1px solid #a3a3a3',
+                          }}
+                        >
+                          <center>
+                            <i style={{ color: 'var(--heading-color)' }} class="fab fa-google-play"></i>
+                          </center>
+                        </div>
+                      </Box>
+                    </div>
+                  </AccordionDetails>
+                </Accordion>
+              )}
+
             </Grid>
           </Grid>
         </div>
@@ -430,11 +743,11 @@ const Footer = props => {
       <div className={styles.bottom_footer}>
         <Grid item xl={12}>
           <p>
-            Copyright @ 2021 All rights reserved.{' '}
+            Copyright @ 2021 All rights reserved.
             <Link
               target="_blank"
               rel="noopener noreferrer"
-              href="http://onlineaarogya.com/"
+              href="https://onlineaarogya.com/"
             >
               Aarogya Consult Pvt. Ltd.
             </Link>{' '}

@@ -53,7 +53,7 @@
   line-height: 25px;
 }
 
-.doctor_name  {
+.doctor_name {
   font-size: 20px;
   font-weight: 600;
   color: var(--heading-color);
@@ -186,7 +186,7 @@
   box-shadow: var(--bs-md);
 }
 .time_line_content .doctor_specialization {
-  line-height:34px;
+  line-height: 34px;
   color: var(--heading-color);
 }
 .time_line_content .doctor_specialization img {
@@ -332,11 +332,20 @@
   color: var(--heading-color) !important;
 }
 
-.quiz_checkbox[type='radio']:checked~.single_quiz_card .quiz_card_content .quiz_card_icon .quiz_icon b {
+.quiz_checkbox[type='radio']:checked
+  ~ .single_quiz_card
+  .quiz_card_content
+  .quiz_card_icon
+  .quiz_icon
+  b {
   color: #ffffff !important;
 }
 
-.quiz_checkbox[type='radio']:checked~.single_quiz_card .quiz_card_content .quiz_card_icon .time_selector {
+.quiz_checkbox[type='radio']:checked
+  ~ .single_quiz_card
+  .quiz_card_content
+  .quiz_card_icon
+  .time_selector {
   background: #fff !important;
 }
 
@@ -361,35 +370,47 @@
   cursor: pointer;
 }
 
-.quiz_checkbox[type='radio']:checked+.single_quiz_card {
+.quiz_checkbox[type='radio']:checked + .single_quiz_card {
   border: 1px solid hsl(0deg 97% 73%);
   background: hsl(0deg 97% 73%);
   box-shadow: var(--bs-sm) !important;
 }
 
-.quiz_checkbox[type='radio']:hover~.single_quiz_card {
+.quiz_checkbox[type='radio']:hover ~ .single_quiz_card {
   border: 1px solid hsl(0deg 97% 73%);
   background: hsl(0deg 97% 73%);
   box-shadow: var(--bs-sm) !important;
 }
 
-.quiz_checkbox[type='radio']:checked ~.single_quiz_card .quiz_card_content .quiz_card_title {
+.quiz_checkbox[type='radio']:checked
+  ~ .single_quiz_card
+  .quiz_card_content
+  .quiz_card_title {
   color: #ffffff !important;
 }
 
-.quiz_checkbox[type='radio']:checked~.single_quiz_card .quiz_card_content .quiz_card_title h3 {
+.quiz_checkbox[type='radio']:checked
+  ~ .single_quiz_card
+  .quiz_card_content
+  .quiz_card_title
+  h3 {
   color: #ffffff !important;
 }
 
-.quiz_checkbox[type='radio']:checked ~.single_quiz_card .quiz_card_content .quiz_card_title h3 i {
+.quiz_checkbox[type='radio']:checked
+  ~ .single_quiz_card
+  .quiz_card_content
+  .quiz_card_title
+  h3
+  i {
   opacity: 1;
 }
 
-.quiz_checkbox[type='radio']:hover +.quiz_card_title {
+.quiz_checkbox[type='radio']:hover + .quiz_card_title {
   border: 1px solid #2575fc;
 }
 
-.shift_indecation>span {
+.shift_indecation > span {
   border: 1.5px solid #dbdbdb;
   padding: 2px;
   border-radius: 5px;
@@ -398,7 +419,7 @@
   display: block;
 }
 
-.shift_indecation>span>i {
+.shift_indecation > span > i {
   position: relative;
   font-size: 12px;
   display: block;
@@ -423,10 +444,10 @@
 }
 .doctor_card_detail h3 {
   font-size: 22px;
-    font-weight: 700;
-    color: var(--heading-color);
-    position: absolute;
-    top: 0;
+  font-weight: 700;
+  color: var(--heading-color);
+  position: absolute;
+  top: 0;
 }
 @media screen and (max-width: 600px) {
   .doctor_card_root {
@@ -448,6 +469,24 @@
   }
   .SearchDoctor_search {
     margin-bottom: 30px;
+  }
+}
+/* For Doctor Details Popup */
+@media screen and (max-width: 650px) {
+
+  
+}
+@media screen and (min-width: 601px) and (max-width: 768px) {
+  .doctor_avatar {
+    width: 110px;
+    height: 110px;
+    border-radius: 10px !important;
+  }
+  .doctor_card_avatar {
+    margin-right: 15px;
+  }
+  .doctor_card_root {
+    padding: 10px !important;
   }
 }
 
@@ -596,7 +635,7 @@
   border-radius: 50%;
   padding: 5px;
   width: 29px;
-  opacity: .6;
+  opacity: 0.6;
 }
 .prace_tag {
   position: relative;

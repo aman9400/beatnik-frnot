@@ -512,7 +512,6 @@ a:hover {
   border-radius: 15px;
   width: 75% !important;
   box-shadow:0 1px 3px rgb(60 63 66 / 32%), 0 4px 12px rgb(60 63 66 / 15%);
-  overflow: hidden;
   margin: 0 auto;
 }
 .after_login {
@@ -539,11 +538,38 @@ a:hover {
 /* ==========================================================================
                             Responsive Area
 =========================================================================  */
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 500px) {
   .breadcrumb_container {
     padding:10px 0px ;
   }
   .search_form { 
-    width:100%;
+    width:95% !important;
+    box-shadow: var(--bs-md) !important;
+    border: var(--border);
+    border-radius: 10px !important;
+  }
+  .search_form button {
+    border-radius: 0px !important;
+    
+  }
+}
+@media screen and (min-width: 501px) and (max-width: 599px) { 
+  .search_form button {
+    border-radius: 0px !important;
+  }
+}
+@media screen and (min-width: 600px) and (max-width: 959px) { 
+  .container_location_input {
+    padding: 0 !important;
+  }
+  .search_form {
+    width: 100% !important;
+  
+  }
+  .search_form button {
+    position: absolute;
+    right: 0;
+    width: 135px !important;
+    
   }
 }

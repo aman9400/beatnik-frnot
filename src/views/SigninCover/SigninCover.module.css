@@ -1,17 +1,20 @@
 .sign_in_cover {
-    width:100%;
-    height:100vh;
+  width: 100%;
+  height: 100vh;
 }
-
 
 .entry_cover_left {
   position: relative;
-}
-.entry_cover_inner {
-  position: absolute;
+  background: #ff4a2f;
   width: 100%;
   height: 100vh;
-  padding: 60px;
+  display: block;
+}
+.entry_cover_inner {
+  position: relative;
+  padding: 20% 0;
+  height: 100vh;
+  width: 100%;
 }
 .entry_cover_inner .cover_bg {
   position: absolute;
@@ -20,21 +23,28 @@
   top: 0;
   left: 0;
 }
+.head_title {
+  text-align: center;
+  display: grid;
+  place-items: center;
+  position: absolute;
+  top: 60%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
 .head_title > h1 {
-  color: var(--heading-color);
-  font-size: 32px ;
-  font-weight: 700 ;
+  color: var(--white);
+  font-size: 40px;
+  font-weight: 700;
   position: relative;
   margin-bottom: 15px;
 }
 .head_title > h6 {
-  color: var(--heading-color);
-  font-size: 18px ;
-  font-weight: 600 ;
+  color: var(--white);
+  font-size: 24px;
+  font-weight: 600;
   opacity: 0.8;
-}
-.head_title {
-  margin-top: 85%;
 }
 .page_title {
   position: relative;
@@ -45,14 +55,14 @@
 }
 .page_title_inner > h5 {
   color: var(--theme-color);
-  font-size: 22px ;
-  font-weight: 800 ;
+  font-size: 22px;
+  font-weight: 800;
 }
 
 .page_title_inner a > span {
   color: var(--heading-color);
-  font-size: 14px ;
-  font-weight: 600 ;
+  font-size: 14px;
+  font-weight: 600;
   opacity: 0.7;
 }
 .page_title_inner a > button > span > svg {
@@ -65,10 +75,12 @@
 }
 .link_up {
   position: relative;
-  font-size: 12px ;
+  font-size: 12px;
 }
 .login_board {
-  padding: 20%;
+  display: grid;
+  height: 100vh;
+  place-items: center;
 }
 .formContainer {
   position: relative;
@@ -79,6 +91,10 @@
   background: #fff;
   border-radius: 5px;
   border: var(--border);
+  min-width: 400px;
+  max-width: 700px;
+  margin: auto;
+  width: 100%;
 }
 .company_info {
   width: 70%;
@@ -93,8 +109,8 @@
 }
 .login_contact p {
   color: var(--heading-color);
-  font-size: 15px ;
-  font-weight: 600 ;
+  font-size: 15px;
+  font-weight: 600;
   margin-bottom: 10px;
 }
 .login_info_support {
@@ -102,8 +118,8 @@
   justify-content: space-evenly;
 }
 .login_info_support > p > svg {
-  width: 0.8em ;
-  height: 0.8em ;
+  width: 0.8em;
+  height: 0.8em;
   opacity: 0.9;
   fill: var(--heading-color);
   position: relative;
@@ -116,10 +132,49 @@
   font-weight: 500;
   cursor: pointer;
 }
-.main_account{
+.main_account {
   display: flex;
 }
 .brand_logo {
   position: relative;
   z-index: 99;
+  background: var(--white);
+  padding: 10px 20px;
+  text-align: center;
+}
+.brand_name_text {
+  color: var(--white);
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+.top_strip_left {
+  text-align: center;
+}
+@media screen and (max-width: 769px) {
+  .left_side_card {
+    display: none;
+  }
+  .login_container {
+    width: 95%;
+    min-width: 300px;
+  }
+  .company_info {
+    width: 90%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+  }
+}
+@media (min-width: 770px) and (max-width: 1200px) {
+  .head_title {
+    top: 50%;
+    left: 0;
+  }
+  .login_container {
+    min-width: 400px;
+    max-width: 460px;
+    margin: auto;
+    width: 100%;
+  }
 }

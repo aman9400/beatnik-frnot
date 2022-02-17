@@ -98,7 +98,6 @@ const Banner = props => {
       <Grid
         container
         justifyContent="center"
-        style={{ position: 'relative', zIndex: '99' }}
       >
         <Box mt={4} style={{ marginBottom: '10px' }}>
           <Box className={classes.download_title}>

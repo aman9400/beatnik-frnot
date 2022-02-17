@@ -490,3 +490,7 @@ img.avatar-xl.rounded-circle.mb-1 {
     max-width: 100% !important;
   }
 }
+
+.type_consultation .Mui-selected {
+  background: #ff000017 !important;
+}

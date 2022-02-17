@@ -4,8 +4,12 @@ import PropTypes from 'prop-types';
 import { Box, Grid } from '@material-ui/core';
 import Link from 'next/link';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import FindDoctor from './../../../../../public/assets/Images/common/common.jpg';
-import RFindDoctor from './../../../../../public/assets/Images/r-icon/find-doctor.png';
+import FindDoctor from './../../../../../public/assets/Images/common/find-doctor.png';
+import VideoConsultation from './../../../../../public/assets/Images/common/video-consultation.png';
+import InClinic from './../../../../../public/assets/Images/common/in-clinic.png';
+import Package from './../../../../../public/assets/Images/common/package.png';
+import Medifiles from './../../../../../public/assets/Images/common/medifiles.png';
+
 
 const Hero = props => {
   const { className, ...rest } = props;
@@ -13,31 +17,31 @@ const Hero = props => {
     {
       title: 'Find Doctor',
       content: 'Choose best doctor of your choice in your locality',
-      img: RFindDoctor,
+      img: FindDoctor,
       pathHref: '/find-doctor',
     },
     {
       title: 'Video Consultation',
       content: 'Join pain arthitis',
-      img: FindDoctor,
+      img: VideoConsultation,
       pathHref: '/video-consultation',
     },
     {
       title: 'In-Clinic Consultation',
       content: 'Head Aaches, Migrane',
-      img: FindDoctor,
+      img: InClinic,
       pathHref: '/clinic-consultation',
     },
     {
       title: 'Package',
       content: 'Eye problem, paid, watery, dryness',
-      img: FindDoctor,
+      img: Package,
       pathHref: '/package',
     },
     {
       title: 'Medifiles',
       content: 'Diahorrea, stomach upset, digestion problem',
-      img:FindDoctor,
+      img:Medifiles,
       pathHref: '/medifiles',
     },
   ];

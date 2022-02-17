@@ -8,13 +8,14 @@ import {
   BannerPage,
   Packages,
   CustomerRatings,
-  News,
+  // News,
+  DownloadApp
 } from './components';
 import MetaTitle from 'components/helper/MetaTitle';
 import Container from '@material-ui/core/Container';
 import Background from './../../../public/assets/Images/banner/package-banner.jpg';
 import DownloadBackground from './../../../public/assets/Images/banner/download-aap-bg.png';
-import DownloadApp from 'views/VideoConsultation/components/DownloadApp';
+// import DownloadApp from 'views/VideoConsultation/components/DownloadApp';
 const useStyles = makeStyles(theme => ({
   root: {
     background: '#f5f5f5',
@@ -119,11 +120,11 @@ const IndexView = ({ themeMode }) => {
         </Container>
       </Section>
 
-      <Section className={classes.sectionTop}>
+      {/* <Section className={classes.sectionTop}>
         <Container fixed>
           <News />
         </Container>
-      </Section>
+      </Section> */}
     </div>
   );
 };

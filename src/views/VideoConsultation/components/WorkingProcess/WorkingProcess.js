@@ -24,8 +24,8 @@ const WorkingProcess = props => {
   return (
     <div className={styles.banner_container}>
       <div className={styles.video_consult_banner}>
-        <Grid container>
-          <Grid item xs={6}>
+        <Grid container >
+          <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
             <Paper className={styles.work_process_step}>
               <div className={styles.steps_section}>
                 <Typography variant="h3">How It Work</Typography>
@@ -61,7 +61,7 @@ const WorkingProcess = props => {
             </Paper>
           </Grid>
         
-          <Grid item xs={6}>
+          <Grid xs={12} sm={12} md={6} lg={6} xl={6}>
             <Paper className={styles.work_data_patch}>
               <Box>
                 <div className={styles.card_container}>
@@ -110,7 +110,7 @@ const WorkingProcess = props => {
                 </div>
                 <div className={styles.card_down_container}>
                 <Grid container spacing={3}>
-                  <Grid item xs={6}>
+                  <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
                     <div className={styles.vc_consultation_box}>
                       <Typography variant="h3">
                         Your data has only one <br />
@@ -133,7 +133,7 @@ const WorkingProcess = props => {
                       </div>
                     </div>
                   </Grid>
-                  <Grid item xs={6}>
+                  <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
                     <div className={styles.data_security_img}>
                       <img src={PNGImage} alt="" />
                     </div>

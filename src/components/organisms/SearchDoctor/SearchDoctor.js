@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import styles from './searchDoctor.module.css';
@@ -15,6 +15,12 @@ import {
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import SearchIcon from '@material-ui/icons/Search';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
+import PlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng
+} from "react-places-autocomplete";
+
+
 const useStyles = makeStyles(theme => ({
   root: {
     maxWidth: theme.layout.contentWidth,
@@ -60,16 +66,77 @@ const SearchDoctor = props => {
     defaultMatches: true,
   });
 
-// Code For Search Doctor According to Patient
-  const searchDoctor = () =>
-  {
-    router.push({
-      pathname: '/doctor-search/',
-      query:{name:searchdoctors}
-    })
-  }
+  // Code For Search Doctor According to Patient
+
+
+  // Code to get Current LOcation Name
+
+  const [getLatitude, setLatitude] = React.useState('');
+  const [getLongitutde, setLongitutde] = React.useState('');
+  const [myresult, setResult] = React.useState([]);
+
+  // useEffect(() => {
+  //   navigator.geolocation.getCurrentPosition(function(position) {
+  //     setLatitude(position.coords.latitude);
+  //     setLongitutde(position.coords.longitude);
+  //   });
+  // }, []);
+
+
+  const [getLocation, setSetLocation] = React.useState('');
+
+  const [getLoc, setSetLoc] = React.useState();
+
+
+
+  // useEffect(() => {
+
+  //   geocodeByLatLng({ lat: getLatitude, lng: getLongitutde })
+  //     .then(results => setResult(results))
+  //     .catch(error => console.error(error));
+  //   },[]);
+
+
+  const [value, setValue] = useState();
+  const [myvaues, setMyValues] = useState();
+  const [data, setData] = useState("");
+  const [addressObj, setAddressObj] = useState();
+
+  const [myLocation, setMyLocation] = React.useState();
+
   const router = useRouter();
   const [searchdoctors, setSearchDoctors] = useState('');
+
+
+
+  ///  Get Latitude with 
+
+
+  const [address, setAddress] = React.useState("");
+  const [coordinates, setCoordinates] = React.useState({
+    lat: null,
+    lng: null
+  });
+
+  const handleSelect = async value => {
+    const results = await geocodeByAddress(value);
+    const latLng = await getLatLng(results[0]);
+    setAddress(value);
+    setCoordinates(latLng);
+  };
+
+  // On Search button click move to another page with search namr name lattitude and longitute
+  const searchDoctor = () => {
+    router.push({
+      pathname: '/doctor-search/',
+      query: {
+        name: searchdoctors,
+        latitudePos: coordinates.lat,
+        longitutePos: coordinates.lng
+      }
+    })
+  }
+
   return (
     <section
       className={clsx(
@@ -82,6 +149,7 @@ const SearchDoctor = props => {
       )}
       {...rest}
     >
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCea7use-zSkFZxumDrado3k8WSHPbUlk&libraries=places&callback=myCallbackFunc"></script>
       <Grid
         container
         className="search_form"
@@ -121,70 +189,57 @@ const SearchDoctor = props => {
         </Grid>
 
         <Grid
-          item
-          xs={12}
-          sm={3}
-          md={4}
+        item
+                  xs={12}
+                   sm={4}
+        //             md={5}
           className={styles.container_location_input}
           style={isMd ? { padding: '0px' } : { padding: '50px' }}
-        >
+        ><div>
+
+          </div>
           <FormControl fullWidth className={styles.input_form_control1}>
-            <Autocomplete
-              freeSolo
-              id="multiple-limit-tags"
-              options={top100Films}
-              ListboxProps={{
-                style: {
-                  maxHeight: 250,
-                  overflowX: 'hidden',
-                  overflowY: 'scroll',
-                  fontSize: '14px',
-                  fontWeight: '600',
-                  borderBottom: '0px dashed  #878787',
-                  boxShadow:
-                    '0 1px 4px hsl(0deg 0% 0% / 9%), 0 3px 8px hsl(0deg 0% 0% / 9%), 0 4px 13px hsl(0deg 0% 0% / 13%)',
-                  position: 'relative',
-                  zIndex: '99999',
-                },
-              }}
-              getOptionLabel={option => option.title}
-              renderInput={params => (
-                <TextField
-                  className={styles.input_field_control}
-                  variant="outlined"
-                  {...params}
-                  placeholder="Location"
-                  InputProps={{
-                    classes: {
-                      root: styles.input,
-                    },
-                    ...params.InputProps,
+            {/* 
+          <GooglePlacesAutocomplete
+            
+            selectProps={{ isClearable: true }}
+            apiKey='AIzaSyBCea7use-zSkFZxumDrado3k8WSHPbUlk'
+            selectProps={{
+              myLocation,
+            
+            }} 
+          /> */}
+            <PlacesAutocomplete
+              value={address}
+              onChange={setAddress}
+              onSelect={handleSelect}
+              googleCallbackName="myCallbackFunc"
+            >
+              {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                <div className={styles.location_field}>
+                  {/* <p>Latitude: {coordinates.lat}</p>
+                  <p>Longitude: {coordinates.lng}</p> */}
 
-                    type: 'Location',
-                  }}
-                />
+                  <input className={styles.location_input} {...getInputProps({ placeholder: "Type address" })} />
+
+                  <div className={styles.location_list}>
+                    {loading ? <div>...loading</div> : null}
+
+                    {suggestions.map(suggestion => {
+                      const style = {
+                        backgroundColor: suggestion.active ? "#41b6e6" : "#fff"
+                      };
+
+                      return (
+                        <div className={styles.location_List_l} {...getSuggestionItemProps(suggestion)}>
+                          {suggestion.description}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
               )}
-              renderOption={option => {
-                return (
-                  <React.Fragment>
-                    <div
-                      style={{
-                        backgroundColor: '#fff4f2',
-                        marginRight: '8px',
-                        width: '30px',
-                        height: '30px',
-                        borderRadius: '50%',
-                        padding: '5px',
-                      }}
-                    >
-                      <SearchIcon color="primary" />
-                    </div>
-
-                    {option.title}
-                  </React.Fragment>
-                );
-              }}
-            />
+            </PlacesAutocomplete>
           </FormControl>
         </Grid>
 
@@ -202,7 +257,7 @@ const SearchDoctor = props => {
               onChange={e => setSearchDoctors(e.target.value)}
               name={'text'}
               variant="outlined"
-              placeholder="Doctor, Specialization, Clinic, Symptoms"
+              placeholder="Doctor, Specialization, Doctor Clinic, Symptoms"
               InputProps={{
                 classes: {
                   root: styles.inputs,
@@ -228,7 +283,7 @@ const SearchDoctor = props => {
                 style={{
                   height: '3.8em',
                   width: '150px',
-                  borderRadius: '0px',
+                  borderRadius: '0px 15px 15px 0',
                   position: 'absolute',
                   right: '0px',
                 }}
@@ -247,7 +302,7 @@ const SearchDoctor = props => {
                 style={{
                   height: '3.8em',
                   width: '100%',
-                  borderRadius: '0px',
+                  borderRadius: '0px 15px 15px 0',
                 }}
                 size="large"
                 color="primary"
@@ -287,19 +342,3 @@ SearchDoctor.propTypes = {
 };
 
 export default SearchDoctor;
-const top100Films = [
-  { title: 'Vapi', year: 1994 },
-  { title: 'Vadodara', year: 1972 },
-  { title: 'Valsad', year: 1974 },
-  { title: 'Surat', year: 2008 },
-  { title: 'Mumbai', year: 1957 },
-  { title: 'Virar', year: 1993 },
-  { title: 'Pune', year: 1994 },
-  { title: 'Bhopal', year: 1995 },
-  { title: 'Indore', year: 1948 },
-  { title: 'GopalGanj', year: 1921 },
-  { title: 'Kolkata', year: 2009 },
-  { title: 'Delhi', year: 2000 },
-  { title: 'Ranikhet', year: 2009 },
-  { title: 'Solapur', year: 1975 },
-];

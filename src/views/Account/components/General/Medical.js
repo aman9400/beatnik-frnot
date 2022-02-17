@@ -10,20 +10,15 @@ import {
   Divider,
   Grid,
   TextField,
-  Snackbar,
   FormControlLabel,
   Radio,
-  FormControl,
-  FormLabel,
   RadioGroup,
 } from '@material-ui/core';
 import Chip from '@material-ui/core/Chip';
 import AlertMassage from 'components/helper/AlertMessage';
-
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { Autocomplete } from '@material-ui/lab';
 
@@ -411,8 +406,6 @@ export default function Medical() {
           {/* </Paper> */}
         </AccordionDetails>
       </Accordion>
-
-      {/* Section For Allergies=================================================== */}
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}

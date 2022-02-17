@@ -45,6 +45,8 @@ const Form = () => {
     errors: {},
   });
   const [mobile, setMobile] = React.useState();
+
+
   React.useEffect(() => {
     const errors = validate(formState.values, schema);
 
@@ -55,9 +57,8 @@ const Form = () => {
     }));
 
     // for for mobile number
-    // const urlParams = new URLSearchParams(window.location.search);
-    const myParam = '8857091889';
-
+    const urlParams = new URLSearchParams(location.search);
+    const myParam = urlParams.get('mob');
     setMobile(myParam);
   }, [formState.values]);
 
@@ -150,14 +151,27 @@ const Form = () => {
 
   // Code for Resend OTP Starts here
 
-  const handleStart = async () => {
+  const [mobilenumber,setMobileNumber] = React.useState('');
+   
+ 
+    useEffect(() => {
+      // const params = new URLSearchParams(window.location.search);
+      // const getData = params.get('mob');
+      // setMobileNumber('Dhhshshh');
+    }, []);
+
+    const handleStart = async () => {
+
+      const params = new URLSearchParams(window.location.search);
+      const getData = params.get('mob');
+      setMobileNumber(getData);
 
     var data = JSON.stringify({
-      mobile: mobNumber,
+      mobile: mobilenumber,
       vtype: 'register_otp',
     });
 
-    const res = await resendOtpRequest();
+    const res = await resendOtpRequest(data);
     if (res.success) {
       setStatusBase('');
       setStatusBase({
@@ -174,16 +188,12 @@ const Form = () => {
     STARTED: 'Started',
     STOPPED: (
       <Typography className="dont_reacive_code" variant="subtitle1" color="textSecondary" align="center">
-        Didn't recieve code ? &nbsp;&nbsp;
+        Didn't recieve codegggg ? &nbsp;&nbsp;
         <LearnMoreLink title="Resent OTP" onClick={handleStart} />
       </Typography>
     ),
   };
-// For Taking mobile no from urlParams
-// const params = new URLSearchParams(window.location.search);
-//   const mobNumber = params.get('mob');
 
-  const mobNumber = '8857091889';
 
   const INITIAL_COUNT = 10;
   const twoDigits = num => String(num).padStart(2, '0');
@@ -236,6 +246,7 @@ const Form = () => {
 
   return (
     <div className={classes.root}>
+      
       {status ? (
         <AlertMassage
           key={status.key}
@@ -271,6 +282,7 @@ const Form = () => {
               Submit
             </Button>
           </Grid>
+      
           <Grid item xs={12}>
             {statuss == STATUS.STARTED ? (
               <Box mt={0}>

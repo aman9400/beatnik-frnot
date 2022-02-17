@@ -139,8 +139,6 @@ const Form = () => {
 
       const res = await getPatientRegister(data);
       if (res.success) {
-        //  setClearform(formState.values.title='',formState.values.firstName='',formState.values.lastName='',formState.values.mobile='',formState.values.email='',)
-        //  setSubmitbtn(true)
         setStatusBase('');
         setStatusBase({
           key: 22,
@@ -151,14 +149,6 @@ const Form = () => {
           Router.push('/signin');
         }, 3000);
       } else {
-        // setStatusBase('');
-        // // console.log('hello error else');
-        // setStatusBase({
-        //   key: 22,
-        //   status: 'error',
-        //   msg:res.message,
-        // });
-
         setStatusBase('');
         setStatusBase({
           key: 22,
@@ -293,6 +283,18 @@ const Form = () => {
             />
           </Grid> */}
           <Grid item xs={12}>
+            <Typography
+              variant="subtitle1"
+              color="textSecondary"
+              align="center"
+              className="Privacy_policy_tag"
+            >
+              By signing up you agree to the{' '}
+              <Link href="#">Terms & Conditions</Link> and our{' '}
+              <Link href="#">Privacy Policy</Link>
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
             <Button
               size="large"
               variant="contained"
@@ -305,31 +307,6 @@ const Form = () => {
               Submit{' '}
             </Button>
             {progress !== false ? <LinearProgress /> : null}
-          </Grid>
-          <Grid item xs={12}>
-            <Typography
-              variant="subtitle1"
-              color="textSecondary"
-              align="center"
-              className="Privacy_policy_tag"
-            >
-              By signing up you agree to the <Link href="#">Terms & Conditions</Link>{' '}
-              and our <Link href="#">Privacy Policy</Link>
-            </Typography>
-          </Grid>
-          <Grid item xs={12}>
-            <Typography
-              variant="subtitle1"
-              color="textSecondary"
-              align="center"
-              className="have_an_account"
-            >
-              Have an account ?
-              <Link href="/signin">
-               <LearnMoreLink title="Login" />
-                
-              </Link>
-            </Typography>
           </Grid>
         </Grid>
       </form>

@@ -29,22 +29,51 @@ const DoctorInformation = props => {
   const [star, setStar] = React.useState(3);
   const classes = useStyles();
   const [language, setLanguage] = React.useState();
+  const [appointmentDate, setAppointmentDate] = React.useState();
+  const [appointmentType, setAppointmentType] = React.useState();
+  const [doctorId, setDoctorId] = React.useState([]);
+  const [gettime, setTime] = React.useState();
+  const [getdate, setGetDate] = React.useState();
+
   const { data, className, ...rest } = props;
 
   // To get URL parameter
+
+  React.useEffect(() => {
+
+    const params = new URLSearchParams(location.search);
+
+    const docId = params.get('doctor_id');
+
+    setDoctorId(docId);
+    setAppointmentType(params.get('appointmentType'));
+    setAppointmentDate(params.get('appointmentDate'));
+
+    //const sss =  moment(appointmentDate).format('MMM DD, YYYY')
+
+
+    const sss = moment(appointmentDate).format('MMM DD, YYYY')
+
+    setTime(params.get('startTime'));
+
+
+    const startTime = params.get('startTime');
+
+
+  }, []);
 
   // const params = new URLSearchParams(location.search);
   // const getData = params.get('doctor_id');
   // const appointmentID =  params.get('appointmentType');
   // const appointmentDate =  params.get('appointmentDate');
-  
+
   // const sss =  moment(appointmentDate).format('MMM DD, YYYY')
 
   //  const startTime =  params.get('startTime');
 
 
-  const getData = '214';
-  const appointmentID =  'Video';
+  // const getData = '214';
+  // const appointmentID =  'Video';
 
 
   // useEffect(() => {
@@ -55,18 +84,19 @@ const DoctorInformation = props => {
   // To get data from API to load single Doctor
   const [doctordetails, setDoctorDetails] = useState([]);
 
-  const loadDoctorDetails = () => {
-    fetch(
-      `https://oaarogyabetaportal.mirakidigital.in/api/patient/home/doctor-details/${getData}`,
-    )
-      .then(response => response.json())
-      .then(result => setDoctorDetails(result.doctor))
-      .catch(error => console.log('errssssssssor', error));
-  };
+  // const loadDoctorDetails = async() => {
+  //   await fetch(`https://oaarogyabetaportal.mirakidigital.in/api/patient/home/doctor-details/${doctorId}`)
+  //     .then(response => response.json())
+  //     .then(result => setDoctorDetails(result.doctor))
+  //     .catch(error => console.log('errssssssssor', error));
+  // };
 
   useEffect(() => {
-    loadDoctorDetails();
-  }, []);
+    fetch(`https://oaarogyabetaportal.mirakidigital.in/api/patient/home/doctor-details/${doctorId}`)
+      .then(response => response.json())
+      .then(result => setDoctorDetails(result.doctor))
+      .catch(error => console.log('error', error));
+  }, [doctorId]);
 
   // To Load Doctor form API
 
@@ -79,22 +109,24 @@ const DoctorInformation = props => {
             src={AppointIcon}
             alt="Appointment Type"
           /> */}
-          
-             <img src={VideoCall} alt="#" /> 
-        
 
-          <Typography variant="h5">Appointment Type</Typography>
+          {appointmentType == '1' ? <img src={VideoCall} alt="#" /> : ''}
+          {appointmentType == '2' ? <img src={AudioCall} alt="#" /> : ''}
+          {appointmentType == '4' ? <img src={WalkIN} alt="#" /> : ''}
+          {appointmentType == '3' ? <img src={ChatSer} alt="#" /> : ''}
+
+          <Typography variant="h5">Appointment Type </Typography>
         </div>
         <div className={styles.appoint_doctor_for}>
           <div className={styles.date_time_book}>
             <div className={styles.appoint_date}>
               <EventIcon />
-              
-              <b>On</b> 17th Feb 2022
+
+              <b>On</b> {appointmentDate}
             </div>
             <div className={styles.appoint_time}>
               <AccessTimeIcon />
-              <b>At </b> 06:32
+              <b>At </b> {gettime}
             </div>
           </div>
           <div className={styles.changes_date}>
@@ -104,17 +136,20 @@ const DoctorInformation = props => {
         <div className={styles.doctor_details}>
           <Box className={styles.doctor_card_header}>
             <Box component="div" className={styles.doctor_card_avatar}>
-              {/* <CardMedia
+              <CardMedia
                 className={styles.doctor_avatar}
                 image={doctordetails.avatar_url}
-               
-              /> */}
+
+              />
             </Box>
             <Box className={styles.doctor_card_detail}>
               <CardHeader className={styles.doctor_name} />
               <h3>
-                {doctordetails.title} {doctordetails.first_name}{' '}
-                {doctordetails.middle_name} {doctordetails.last_name}
+                {doctordetails ? doctordetails.title : ''}{' '}
+                {doctordetails ? doctordetails.first_name : ''}{' '}
+                {doctordetails ? doctordetails.middle_name : ''} {' '}
+                {doctordetails ? doctordetails.last_name : ''}{' '}
+
               </h3>
               <p className={styles.doctor_specialization}>
                 {' '}
@@ -122,20 +157,20 @@ const DoctorInformation = props => {
 
                 {/* {Object.keys(doctordetails.appointments).map((el) =><p>{el.patient_id}</p>)} */}
 
-                   
+
               </p>
               <p className={styles.doctor_expriance}>
-                {doctordetails.yrs_of_practice} years experience
+                {doctordetails ? doctordetails.yrs_of_practice : ''} years experience
               </p>
-              <p className={styles.doctor_para}>
+              {/* <p className={styles.doctor_para}>
                 A nephrologist treats diseases and infections of the kidneys and
                 urinary system.
-              </p>
+              </p> */}
             </Box>
           </Box>
         </div>
-        <div className={styles.doctor_details_address}>
-          <Box className={styles.doctor_card_header}>
+      <div className={styles.doctor_details_address}>
+          {/*   <Box className={styles.doctor_card_header}>
             <div className={styles.box}>
               <div className={styles.section_1}>
                 <p className={styles.p_1}>Chisel Dental</p>
@@ -175,8 +210,8 @@ const DoctorInformation = props => {
                 </div>
               </div>
             </div>
-          </Box>
-        </div>
+          </Box>*/}
+        </div> 
       </div>
     </div>
   );
