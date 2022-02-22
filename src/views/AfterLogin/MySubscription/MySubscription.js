@@ -129,7 +129,7 @@ const Data = props => {
                   <TableCell align="center">{row.dob}</TableCell>
                   <TableCell align="center">{row.address}</TableCell>
                   <TableCell align="center">{row.address}</TableCell>
-                  <TableCell align="center"><Box margin={1}> <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}><i class="fas fa-ellipsis-v"> </i></Button></Box></TableCell>
+                  <TableCell align="center"><Box margin={1}> <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}><i className="fas fa-ellipsis-v"> </i></Button></Box></TableCell>
                 
                   {/* <TableCell align="right">{row.carbs}</TableCell>
                   <TableCell align="right">{row.protein}</TableCell> */}
@@ -148,8 +148,8 @@ const Data = props => {
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
-          <MenuItem onClick={handleClose}><Typography variant="h6" color="primary"><i class="fas fa-ban"></i></Typography><Box ml={0.5}><Button>Cancel Subscription</Button></Box></MenuItem>
-          <MenuItem onClick={handleClose}><Typography  variant="h6" color="primary"><i class="fas fa-file-download"></i></Typography><Box ml={1}><Button>Download Invoice</Button></Box></MenuItem>
+          <MenuItem onClick={handleClose}><Typography variant="h6" color="primary"><i className="fas fa-ban"></i></Typography><Box ml={0.5}><Button>Cancel Subscription</Button></Box></MenuItem>
+          <MenuItem onClick={handleClose}><Typography  variant="h6" color="primary"><i className="fas fa-file-download"></i></Typography><Box ml={1}><Button>Download Invoice</Button></Box></MenuItem>
      </Menu>
     </div>
     </div>

@@ -188,7 +188,7 @@ const Form = () => {
     STARTED: 'Started',
     STOPPED: (
       <Typography className="dont_reacive_code" variant="subtitle1" color="textSecondary" align="center">
-        Didn't recieve codegggg ? &nbsp;&nbsp;
+        Didn't receive OTP ? &nbsp;&nbsp;
         <LearnMoreLink title="Resent OTP" onClick={handleStart} />
       </Typography>
     ),

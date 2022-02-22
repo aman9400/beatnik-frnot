@@ -181,18 +181,6 @@ const Topbar = ({
   const MenuGroup = props => {
     const { item } = props;
 
-    // Get user Name
-
-    // lOAD Avatar here 
-
-
-
-    // useEffect(() => {
-    //   loadData();
-
-    // });
-
-
     return (
       <List disablePadding>
         {item.pages.map((page, i) => (
@@ -360,7 +348,8 @@ const Topbar = ({
     {
       _id: 6,
       navTitle: 'Medifiles',
-      navPath: '/medifiles',
+      navPath: '/sds',
+      // medifiles
     },
     {
       _id: 7,

@@ -76,7 +76,7 @@ const MedicalHistory = ({ dataParentToChild }) => {
     };
 
     var data = await fetch(
-      `https://oaarogyabetaportal.mirakidigital.in/api/patient/profile/index`,
+      `https://admindemo.onlineaarogya.com/api/patient/profile/index`,
       requestOptions,
     )
       .then(response => response.json())

@@ -85,14 +85,14 @@ const DoctorInformation = props => {
   const [doctordetails, setDoctorDetails] = useState([]);
 
   // const loadDoctorDetails = async() => {
-  //   await fetch(`https://oaarogyabetaportal.mirakidigital.in/api/patient/home/doctor-details/${doctorId}`)
+  //   await fetch(`https://admindemo.onlineaarogya.com/api/patient/home/doctor-details/${doctorId}`)
   //     .then(response => response.json())
   //     .then(result => setDoctorDetails(result.doctor))
   //     .catch(error => console.log('errssssssssor', error));
   // };
 
   useEffect(() => {
-    fetch(`https://oaarogyabetaportal.mirakidigital.in/api/patient/home/doctor-details/${doctorId}`)
+    fetch(`https://admindemo.onlineaarogya.com/api/patient/home/doctor-details/${doctorId}`)
       .then(response => response.json())
       .then(result => setDoctorDetails(result.doctor))
       .catch(error => console.log('error', error));
@@ -170,7 +170,7 @@ const DoctorInformation = props => {
           </Box>
         </div>
       <div className={styles.doctor_details_address}>
-          {/*   <Box className={styles.doctor_card_header}>
+            {/* <Box className={styles.doctor_card_header}>
             <div className={styles.box}>
               <div className={styles.section_1}>
                 <p className={styles.p_1}>Chisel Dental</p>
@@ -210,7 +210,7 @@ const DoctorInformation = props => {
                 </div>
               </div>
             </div>
-          </Box>*/}
+          </Box> */}
         </div> 
       </div>
     </div>

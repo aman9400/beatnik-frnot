@@ -13,8 +13,6 @@ const PasswordResetCover = () => {
   const [mobilenumber, setMobilenumber] = React.useState();
   const [mobile, setMobile] = React.useState();
   React.useEffect(() => {
-    // const urlParams = new URLSearchParams(window.location.search);
-    // const myParam = '8857091888'
     const params = new URLSearchParams(window.location.search);
     const getData = params.get('mob');
     setMobilenumber(getData);
@@ -82,8 +80,7 @@ const PasswordResetCover = () => {
                     </div>
                     <div className={styles.formContainer}>
                       <h4 className="formContainerMain" align="center">
-                        {' '}
-                        Check your Mobile Number for the OTP Verification{' '}
+                        Check your Mobile Number for the OTP Verification
                         <b>{mobilenumber}</b>
                       </h4>
                       <br />

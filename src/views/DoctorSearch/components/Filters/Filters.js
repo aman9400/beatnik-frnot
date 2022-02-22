@@ -86,7 +86,7 @@ const DoctorFilter = props => {
     <Grid item xs={12} sm={4} md={3}>
       <Grid container direction="column">
         <Grid item xs={12}>
-          <div className={styles.doctor_filterBox}>
+          {/* <div className={styles.doctor_filterBox}>
             <Typography
               variant="h5"
               gutterBottom
@@ -107,7 +107,7 @@ const DoctorFilter = props => {
                 }}
               />
             </FormGroup>
-          </div>
+          </div> */}
           <div className={styles.doctor_filterBox}>
             <Typography
               variant="h5"

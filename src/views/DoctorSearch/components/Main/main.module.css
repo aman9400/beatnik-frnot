@@ -279,6 +279,7 @@
 
 .quiz_card_area {
   position: relative;
+  margin: 4px;
 }
 
 .single_quiz_card {
@@ -441,6 +442,7 @@
 .consultation_content_part {
   position: relative;
   padding: 10px;
+  margin: 0 !important;
 }
 .doctor_card_detail h3 {
   font-size: 22px;
@@ -653,4 +655,90 @@
   font-size: 13.5px;
   font-weight: 500;
   top: 1px;
+}
+.appointment_date {
+  position: relative;
+  border: var(--border);
+  padding: 10px;
+  border-radius: 56px;
+  margin: 0 auto;
+  text-align: center;
+  width: 40%;
+  background-color: #fff3f1;
+  margin-bottom: 30px;
+  height: 50px;
+  overflow: hidden;
+}
+.appointment_date label {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--heading-color);
+}
+.appointment_date  > div {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  margin: 0 auto;
+  text-align: center;
+  left: 0;
+  right: 0;
+  display: block;
+}
+.appointment_date  input {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: var(--theme-color) !important;
+}
+.appointment_date button{
+  position: absolute;
+  width: 100%;
+  left: 0;
+  height: auto;
+  border-radius: 0;
+  top: -10.5px;
+  padding: 12px 35px ;
+}
+.appointment_date > div > div {
+  position:absolute;
+  width: 100%;
+  left: 0;
+  padding: 0 35px;
+}
+.appointment_date button > span {
+  justify-content: end;
+}
+.appointment_date button > span > svg {
+  fill: var(--theme-color) !important;
+}
+.clinic_address {
+  position: relative !important;
+  width: 100%;
+  border: var(--border);
+  background: #fff;
+  -webkit-box-shadow: var(--bs-sm);
+  box-shadow: var(--bs-sm);
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.clinic_address:hover {
+  background: #efefef;
+}
+.clinic_address_card {
+  position: relative;
+}
+.address_data_card{
+  width: 100%;
+  position: relative;
+}
+.consultation_content_part >div {
+  width: 100%;
+  position: relative;
+}
+.doctor_card_header_address {
+  display: block;
+}
+.dialog_doctor_p {
+  width: 600px !important;
 }

@@ -62,7 +62,7 @@
 //     };
 // 
 //     fetch(
-//       `https://oaarogyabetaportal.mirakidigital.in/api/patient/home/doctor-details/${language}`,
+//       `https://admindemo.onlineaarogya.com/api/patient/home/doctor-details/${language}`,
 //     )
 //       .then(response => response.json())
 //       .then(result => setDoctorDetails(result.doctor))
@@ -275,7 +275,7 @@ const PatientSummery = props => {
         redirect: 'follow'
       };
       
-      fetch(`https://oaarogyabetaportal.mirakidigital.in/api/patient/appointments/paymentDetails/${getSlotId}`, requestOptions)
+      fetch(`https://admindemo.onlineaarogya.com/api/patient/appointments/paymentDetails/${getSlotId}`, requestOptions)
         .then(response => response.json())
         .then(result => setSummary(result))
         .catch(error => console.log('error', error));
@@ -307,7 +307,7 @@ const PatientSummery = props => {
         redirect: 'follow'
       };
             
-      fetch(`https://oaarogyabetaportal.mirakidigital.in/api/patient/appointments/paymentDetails/${getSlotId}`, requestOptions)
+      fetch(`https://admindemo.onlineaarogya.com/api/patient/appointments/paymentDetails/${getSlotId}`, requestOptions)
         .then(response => response.json())
         .then(result => setSummary(result))
         .catch(error => console.log('error', error));

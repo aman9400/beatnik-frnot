@@ -113,7 +113,7 @@ const Navbar = ({ onMobileClose, openMobile }) => {
         <List>
           <ListItem className={classes.nav_link} button onClick={handleClick}>
             <ListItemIcon className={classes.iconWidth}>
-              <i class="fas fa-file-download"></i>
+              <i className="fas fa-file-download"></i>
             </ListItemIcon>
             <ListItemText primary="Medifiles" />
             {open ? <ExpandLess /> : <ExpandMore />}
@@ -128,7 +128,7 @@ const Navbar = ({ onMobileClose, openMobile }) => {
                   style={{ marginLeft: '14px' }}
                 >
                   <ListItemIcon className={classes.iconWidth}>
-                    <i class="far fa-file-alt"></i>
+                    <i className="far fa-file-alt"></i>
                   </ListItemIcon>
                   <ListItemText
                     className={classes.nav_link_name}
@@ -145,7 +145,7 @@ const Navbar = ({ onMobileClose, openMobile }) => {
                   button
                 >
                   <ListItemIcon className={classes.iconWidth}>
-                    <i class="fas fa-user-alt"></i>
+                    <i className="fas fa-user-alt"></i>
                   </ListItemIcon>
                   <ListItemText
                     className={classes.nav_link_name}
@@ -160,7 +160,7 @@ const Navbar = ({ onMobileClose, openMobile }) => {
                   style={{ marginLeft: '14px' }}
                 >
                   <ListItemIcon className={classes.iconWidth}>
-                    <i class="fas fa-cog"></i>
+                    <i className="fas fa-cog"></i>
                   </ListItemIcon>
                   <ListItemText
                     className={classes.nav_link_name}
@@ -179,7 +179,7 @@ const Navbar = ({ onMobileClose, openMobile }) => {
                   style={{ marginLeft: '14px' }}
                 >
                   <ListItemIcon className={classes.iconWidth}>
-                    <i class="fas fa-handshake-slash"></i>
+                    <i className="fas fa-handshake-slash"></i>
                   </ListItemIcon>
                   <ListItemText
                     className={classes.nav_link_name}

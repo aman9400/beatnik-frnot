@@ -119,7 +119,7 @@ export default function ConsultSlider() {
     };
 
     fetch(
-      'https://oaarogyabetaportal.mirakidigital.in/api/patient/home/search',
+      'https://admindemo.onlineaarogya.com/api/patient/home/search',
       requestOptions,
     )
       .then(response => response.json())

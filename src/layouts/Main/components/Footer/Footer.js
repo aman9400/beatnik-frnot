@@ -434,7 +434,7 @@ const Footer = props => {
                     >
                       {' '}
                       <span style={{ marginRight: '8px' }}>Offer</span>
-                      <i class="fas fa-gift"></i>
+                      <i className="fas fa-gift"></i>
                     </div>
                   </Box>
 
@@ -469,7 +469,7 @@ const Footer = props => {
                       target="_blank"
                     >
                       <center>
-                        <i style={{ color: 'var(--heading-color)' }} class="fab fa-apple"></i>
+                        <i style={{ color: 'var(--heading-color)' }} className="fab fa-apple"></i>
                       </center>
                     </a>
                     <a
@@ -484,7 +484,7 @@ const Footer = props => {
                       href="https://play.google.com/store/apps/details?id=com.aarogya"
                     >
                       <center>
-                        <i style={{ color: 'var(--heading-color)' }} class="fab fa-google-play"></i>
+                        <i style={{ color: 'var(--heading-color)' }} className="fab fa-google-play"></i>
                       </center>
                     </a>
                   </Box>
@@ -520,7 +520,7 @@ const Footer = props => {
                       target="_blank"
                     >
                       <center>
-                        <i style={{ color: 'var(--heading-color)' }} class="fab fa-facebook-f"></i>
+                        <i style={{ color: 'var(--heading-color)' }} className="fab fa-facebook-f"></i>
                       </center>
                     </a>
                     <div
@@ -535,7 +535,7 @@ const Footer = props => {
                       }}
                     >
                       <center>
-                        <i style={{ color: 'var(--heading-color)' }} class="fab fa-instagram-square"></i>
+                        <i style={{ color: 'var(--heading-color)' }} className="fab fa-instagram-square"></i>
                       </center>
                     </div>
                     <div
@@ -550,7 +550,7 @@ const Footer = props => {
                       }}
                     >
                       <center>
-                        <i class="fab fa-twitter"></i>
+                        <i className="fab fa-twitter"></i>
                       </center>
                     </div>
                     <div
@@ -564,7 +564,7 @@ const Footer = props => {
                       }}
                     >
                       <center>
-                        <i style={{ color: 'var(--heading-color)' }} class="fab fa-google-play"></i>
+                        <i style={{ color: 'var(--heading-color)' }} className="fab fa-google-play"></i>
                       </center>
                     </div>
                   </Box>
@@ -597,7 +597,7 @@ const Footer = props => {
                         >
                           {' '}
                           <span style={{ marginRight: '8px' }}>Offer</span>
-                          <i class="fas fa-gift"></i>
+                          <i className="fas fa-gift"></i>
                         </div>
                       </Box>
 
@@ -632,7 +632,7 @@ const Footer = props => {
                           target="_blank"
                         >
                           <center>
-                            <i style={{ color: 'var(--heading-color)' }} class="fab fa-apple"></i>
+                            <i style={{ color: 'var(--heading-color)' }} className="fab fa-apple"></i>
                           </center>
                         </a>
                         <a
@@ -647,7 +647,7 @@ const Footer = props => {
                           href="https://play.google.com/store/apps/details?id=com.aarogya"
                         >
                           <center>
-                            <i style={{ color: 'var(--heading-color)' }} class="fab fa-google-play"></i>
+                            <i style={{ color: 'var(--heading-color)' }} className="fab fa-google-play"></i>
                           </center>
                         </a>
                       </Box>
@@ -683,7 +683,7 @@ const Footer = props => {
                           target="_blank"
                         >
                           <center>
-                            <i style={{ color: 'var(--heading-color)' }} class="fab fa-facebook-f"></i>
+                            <i style={{ color: 'var(--heading-color)' }} className="fab fa-facebook-f"></i>
                           </center>
                         </a>
                         <div
@@ -698,7 +698,7 @@ const Footer = props => {
                           }}
                         >
                           <center>
-                            <i style={{ color: 'var(--heading-color)' }} class="fab fa-instagram-square"></i>
+                            <i style={{ color: 'var(--heading-color)' }} className="fab fa-instagram-square"></i>
                           </center>
                         </div>
                         <div
@@ -713,7 +713,7 @@ const Footer = props => {
                           }}
                         >
                           <center>
-                            <i class="fab fa-twitter"></i>
+                            <i className="fab fa-twitter"></i>
                           </center>
                         </div>
                         <div
@@ -727,7 +727,7 @@ const Footer = props => {
                           }}
                         >
                           <center>
-                            <i style={{ color: 'var(--heading-color)' }} class="fab fa-google-play"></i>
+                            <i style={{ color: 'var(--heading-color)' }} className="fab fa-google-play"></i>
                           </center>
                         </div>
                       </Box>
