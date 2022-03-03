@@ -17,7 +17,7 @@ const PasswordResetCover = () => {
     const getData = params.get('mob');
     setMobilenumber(getData);
     var msg =
-      'Check your Mobile Number for the OTP Verification (' +
+      'Check your Mobile Number for the OTP Verification  (' +
       mobilenumber +
       ')';
     setMobile(msg);
@@ -44,7 +44,6 @@ const PasswordResetCover = () => {
               <div className={styles.entry_cover_left}>
                 <div className={styles.entry_cover_inner}>
                   <div className={styles.top_strip_left}>
-                    <h4 className={styles.brand_name_text}> Online Aarogya </h4>
                     <div className={styles.brand_logo}>
                       <Link href="/">
                         <img src={BrandLogo} alt="" />
@@ -80,7 +79,7 @@ const PasswordResetCover = () => {
                     </div>
                     <div className={styles.formContainer}>
                       <h4 className="formContainerMain" align="center">
-                        Check your Mobile Number for the OTP Verification
+                        Check your Mobile Number for the OTP Verification{' '}
                         <b>{mobilenumber}</b>
                       </h4>
                       <br />

@@ -86,7 +86,7 @@ const Banner = props => {
         spacing={isMd ? 5 : 5}
         className={classes.search_container}
         style={{
-          padding: '120px 100px 30px',
+          padding: '120px 0px 30px',
           position: 'relative',
           zIndex: '99',
           width: '100%',

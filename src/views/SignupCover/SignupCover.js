@@ -30,7 +30,6 @@ const SignupCover = () => {
             <div className={styles.entry_cover_left}>
               <div className={styles.entry_cover_inner}>
                 <div className={styles.top_strip_left}>
-                  <h4 className={styles.brand_name_text}> Online Aarogya </h4>
                   <div className={styles.brand_logo}>
                     <Link href="/">
                       <img src={BrandLogo} alt="" />
@@ -58,7 +57,7 @@ const SignupCover = () => {
                       <h5>Register</h5>
                       <Link className={styles.link_up} href="/signin">
                         <LearnMoreLink
-                          title="Sign In"
+                          title="User Login"
                           typographyProps={{ variant: 'h6' }}
                         ></LearnMoreLink>
                       </Link>

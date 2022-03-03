@@ -1,9 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import {
   Button,
@@ -13,15 +8,19 @@ import {
   FormControlLabel,
   Radio,
   RadioGroup,
+  makeStyles,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  Typography,
+  Chip,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle
 } from '@material-ui/core';
-import Chip from '@material-ui/core/Chip';
 import AlertMassage from 'components/helper/AlertMessage';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import { Autocomplete } from '@material-ui/lab';
-
 const useStyles = makeStyles(theme => ({
   heading: {
     fontSize: theme.typography.pxToRem(15),
@@ -89,11 +88,6 @@ export default function Medical() {
     setOpenMedicalDialog(true);
   };
 
-  // useEffect(() => {
-  //   alert('changed');
-  // }, [chipDataAdded]);
-  // console.log(chipDataAdded);
-
   const [addNewMedicalProblem, setAddNewMedicalProblem] = useState('');
 
   const [status, setStatusBase] = React.useState('');
@@ -138,8 +132,8 @@ export default function Medical() {
               aria-label="gender"
               name="gender1"
               style={{ flexDirection: 'inherit' }}
-              // value={value}
-              // onChange={handleChange}
+            // value={value}
+            // onChange={handleChange}
             >
               <FormControlLabel
                 control={
@@ -225,8 +219,8 @@ export default function Medical() {
               aria-label="gender"
               name="gender1"
               style={{ flexDirection: 'inherit' }}
-              // value={value}
-              // onChange={handleChange}
+            // value={value}
+            // onChange={handleChange}
             >
               <FormControlLabel
                 control={
@@ -308,7 +302,7 @@ export default function Medical() {
                   label="Add New"
                   fullWidth="true"
                   placeholder="Medical Problems"
-                  // style={{ width: '400px' }}
+                // style={{ width: '400px' }}
                 />
               )}
             />
@@ -327,10 +321,10 @@ export default function Medical() {
 
       <Grid item xs={12}>
         <Typography variant="h6" color="textPrimary">
-          Medical History
+          Medical History For <br/>
+          <p>Mr. Som Gupta</p>
         </Typography>
       </Grid>
-      <br></br>
       <Accordion defaultExpanded>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
 import styles from './General.module.css';
 import {
   useMediaQuery,
+  makeStyles,
+  useTheme,
   Grid,
   Typography,
   TextField,
@@ -10,19 +11,15 @@ import {
   Divider,
   LinearProgress,
   MenuItem,
-  FormControlLabel,
-  Checkbox,
-  FormGroup,
   IconButton,
   Avatar,
-  Radio,
+  AppBar,
+  Tabs,
+  Tab,
+  Box,
 } from '@material-ui/core';
 
 import PropTypes from 'prop-types';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Box from '@material-ui/core/Box';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import DateFnsUtils from '@date-io/date-fns';
@@ -33,10 +30,8 @@ import {
   DateTimePicker,
 } from '@material-ui/pickers';
 import Medical from './Medical';
-// import FamilyMembers from '../Reusable/FamilyMembers';
+import FamilyMember from './FamilyMember';
 import MetaTitle from '../../../../../components/helper/MetaTitle';
-
-
 
 const useStyles = makeStyles(theme => ({
   inputTitle: {
@@ -46,9 +41,6 @@ const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
     width: '100%',
-    // backgroundColor: theme.palette.background.paper,
-    // position: 'relative',
-    // left: '100px',
   },
   tabHeader: {
     boxShadow: '0px 2px 4px -1px rgb(0 0 0 / 20%)',
@@ -115,7 +107,11 @@ const General = props => {
   return (
     // <div className={className} {...rest}>
     <div className={styles.som_account_info}>
-       <MetaTitle title={`Account Info | OnlineAarogya`} metaKeyWord="" metaDescription="" />
+      <MetaTitle
+        title={`Account Info | OnlineAarogya`}
+        metaKeyWord=""
+        metaDescription=""
+      />
       <AppBar position="static" color="" className={classes.tabHeader}>
         <Tabs
           value={value}
@@ -127,21 +123,14 @@ const General = props => {
           aria-label="scrollable auto tabs example"
           className="account_info_profile"
         >
-          <Tab label="Profile" {...a11yProps(0)} />
-          <Tab label="Medial" {...a11yProps(1)} />
+          <Tab label="Basic Info" {...a11yProps(0)} />
+          <Tab label="Medical History" {...a11yProps(1)} />
           <Tab label="Family Members" {...a11yProps(2)} />
           <Tab label="Family Doctor" {...a11yProps(3)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
         <Grid container spacing={isMd ? 4 : 2}>
-          {/* <Grid item xs={12}>
-              <Typography variant="h6" color="textPrimary">
-                Basic Information for Profile
-              </Typography>
-            </Grid>
-            <br></br>
-            <br></br> */}
           <Formik
             initialValues={{
               title: '',
@@ -265,8 +254,11 @@ const General = props => {
                       variant="outlined"
                       select
                     >
-                      <MenuItem value="Dr.">Dr.</MenuItem>
                       <MenuItem value="Mr.">Mr.</MenuItem>
+                      <MenuItem value="Ms.">Ms.</MenuItem>
+                      <MenuItem value="Mrs.">Mrs.</MenuItem>
+                      <MenuItem value="Dr.">Dr.</MenuItem>
+                      <MenuItem value="Dr(Mrs).">Dr(Mrs).</MenuItem>
                     </TextField>
                   </Grid>
                   <Grid item md={5} xs={12}>
@@ -297,23 +289,56 @@ const General = props => {
                     />
                   </Grid>
                   <Grid item md={6} xs={12}>
-                    <FormGroup row>
-                      <FormControlLabel
-                        control={<Checkbox color="primary" />}
-                        label="Male"
-                      />
-
-                      <FormControlLabel
-                        control={<Checkbox color="primary" />}
-                        label="Female"
-                      />
-                      <FormControlLabel
-                        control={<Checkbox color="primary" />}
-                        label="Others"
-                      />
-                    </FormGroup>
+                    <TextField
+                      error={Boolean(touched.last_name && errors.last_name)}
+                      fullWidth
+                      helperText={touched.last_name && errors.last_name}
+                      label="Mobile Number *"
+                      name="last_name"
+                      onBlur={handleBlur}
+                      onChange={handleChange}
+                      value={values.last_name}
+                      variant="outlined"
+                    />
                   </Grid>
-
+                  <Grid item md={6} xs={12}>
+                    <TextField
+                      id="blood_group"
+                      error={Boolean(touched.blood_group && errors.blood_group)}
+                      fullWidth
+                      helperText={touched.blood_group && errors.blood_group}
+                      label="Gender *"
+                      name="blood_group"
+                      onBlur={handleBlur}
+                      onChange={handleChange}
+                      value={values.blood_group}
+                      variant="outlined"
+                      select
+                    >
+                      <MenuItem value="male">Male</MenuItem>
+                      <MenuItem value="female">Female</MenuItem>
+                      <MenuItem value="others">Others</MenuItem>
+                    </TextField>
+                  </Grid>
+                  <Grid item md={6} xs={12}>
+                    <TextField
+                      id="blood_group"
+                      error={Boolean(touched.blood_group && errors.blood_group)}
+                      fullWidth
+                      helperText={touched.blood_group && errors.blood_group}
+                      label="Blood Group *"
+                      name="blood_group"
+                      onBlur={handleBlur}
+                      onChange={handleChange}
+                      value={values.blood_group}
+                      variant="outlined"
+                      select
+                    >
+                      <MenuItem value="male">A<sup>+ve</sup></MenuItem>
+                      <MenuItem value="female">B<sup>+ve</sup></MenuItem>
+                      <MenuItem value="others">C<sup>+ve</sup></MenuItem>
+                    </TextField>
+                  </Grid>
                   <Grid item md={6} xs={12}>
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
                       <KeyboardDatePicker
@@ -356,7 +381,7 @@ const General = props => {
                       error={Boolean(touched.blood_group && errors.blood_group)}
                       fullWidth
                       helperText={touched.blood_group && errors.blood_group}
-                      label="Blood Group *"
+                      label="Height *"
                       name="blood_group"
                       onBlur={handleBlur}
                       onChange={handleChange}
@@ -375,7 +400,7 @@ const General = props => {
                       error={Boolean(touched.height && errors.height)}
                       fullWidth
                       helperText={touched.height && errors.height}
-                      label="Height(Ft) *"
+                      label="Weight(Ft) *"
                       // margin="normal"
                       name="height"
                       type="number"
@@ -386,32 +411,16 @@ const General = props => {
                     />
                   </Grid>
 
-                  <Grid item md={6} xs={12}>
-                    <TextField
-                      error={Boolean(touched.weight && errors.weight)}
-                      fullWidth
-                      helperText={touched.weight && errors.weight}
-                      label="Weight(Kg) *"
-                      // margin="normal"
-                      name="weight"
-                      type="number"
-                      onBlur={handleBlur}
-                      onChange={handleChange}
-                      value={values.weight}
-                      variant="outlined"
-                    />
-                  </Grid>
-
                   <Grid item xs={12}>
                     <Divider />
                   </Grid>
 
-                  <Grid item md={12} xs={12}>
+                  <Grid item md={6} xs={6}>
                     <TextField
                       error={Boolean(touched.address && errors.address)}
                       fullWidth
                       helperText={touched.address && errors.address}
-                      label="Address"
+                      label="Address Line 1"
                       // margin="normal"
                       name="address"
                       onBlur={handleBlur}
@@ -419,7 +428,23 @@ const General = props => {
                       value={values.address}
                       variant="outlined"
                       multiline
-                      rows={4}
+                      rows={2}
+                    />
+                  </Grid>
+                  <Grid item md={6} xs={6}>
+                    <TextField
+                      error={Boolean(touched.address && errors.address)}
+                      fullWidth
+                      helperText={touched.address && errors.address}
+                      label="Address Line 2"
+                      // margin="normal"
+                      name="address"
+                      onBlur={handleBlur}
+                      onChange={handleChange}
+                      value={values.address}
+                      variant="outlined"
+                      multiline
+                      rows={2}
                     />
                   </Grid>
 
@@ -429,7 +454,7 @@ const General = props => {
                       error={Boolean(touched.state && errors.state)}
                       fullWidth
                       helperText={touched.state && errors.state}
-                      label="State *"
+                      label="Pincode  *"
                       name="state"
                       onBlur={handleBlur}
                       onChange={handleChange}
@@ -449,7 +474,7 @@ const General = props => {
                       error={Boolean(touched.district && errors.district)}
                       fullWidth
                       helperText={touched.district && errors.district}
-                      label="District *"
+                      label="State *"
                       name="district"
                       onBlur={handleBlur}
                       onChange={handleChange}
@@ -469,7 +494,7 @@ const General = props => {
                       error={Boolean(touched.city && errors.city)}
                       fullWidth
                       helperText={touched.city && errors.city}
-                      label="City *"
+                      label="District *"
                       name="city"
                       onBlur={handleBlur}
                       onChange={handleChange}
@@ -488,7 +513,7 @@ const General = props => {
                       error={Boolean(touched.pinCode && errors.pinCode)}
                       fullWidth
                       helperText={touched.pinCode && errors.pinCode}
-                      label="pinCode(Kg) *"
+                      label="City*"
                       // margin="normal"
                       name="pinCode"
                       type="number"
@@ -520,10 +545,10 @@ const General = props => {
         </Grid>
       </TabPanel>
       <TabPanel value={value} index={1}>
-   <Medical/>
+        <Medical />
       </TabPanel>
       <TabPanel value={value} index={2}>
-       dsds
+        <FamilyMember/>
       </TabPanel>
       <TabPanel value={value} index={3}>
         Item four

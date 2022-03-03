@@ -174,10 +174,10 @@ const Footer = props => {
                 />
               </p>
             </Link>
-            <Typography variant="body2">
+            {/* <Typography variant="body2">
               ACPL is a start-up in the field of medical healthcare including
               tele-medicine.
-            </Typography>
+            </Typography> */}
             <div className={styles.company_add}>
               <Typography variant="body2">
                 <LocationOnIcon />
@@ -231,10 +231,10 @@ const Footer = props => {
                     />
                   </p>
                 </Link>
-                <Typography variant="body2">
+                {/* <Typography variant="body2">
                   ACPL is a start-up in the field of medical healthcare including
                   tele-medicine.
-                </Typography>
+                </Typography> */}
                 <div className={styles.company_add}>
                   <Typography variant="body2">
                     <LocationOnIcon />
@@ -292,7 +292,7 @@ const Footer = props => {
               aria-controls="panel1a-content"
               id="panel1a-header"
             >
-              <Typography className={classes.heading}>Home </Typography>
+              <Typography className={classes.heading}>ONLINE AAROGYA </Typography>
             </AccordionSummary>
             <AccordionDetails>
               <div className={styles.fotter_menu_item}>

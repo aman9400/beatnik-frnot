@@ -69,7 +69,7 @@ const Appointment = props => {
         <Grid item sm={5} md={5} lg={5} xl={5} xs={12}  data-aos="fade-up">
           <div className={styles.download_img_holder}>
             <img src={AppUser}
-              alt="Download the Online Aarogya App"/>
+              alt="Book Consultation with the Qualified Doctors of your choice "/>
           </div>
         </Grid>
 
@@ -80,8 +80,7 @@ const Appointment = props => {
 
           <Box mt={2}>
             <Typography variant="body2" className={styles.download_sub_title}>
-              Book consultation with the best of the Doctors of your choice.
-              Also choose the mode of consultation Video or in Clinic walk in
+            Book Consultation with the Qualified Doctors of your choice 
             </Typography>
           </Box>
 

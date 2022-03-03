@@ -157,7 +157,7 @@ const TopBar = ({
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const handleClick = event => {
-    setAnchorEl(event.currentTarget);
+    router.push('/account/account-info', undefined, { shallow: true });
   };
   const handleClose = () => {
     setAnchorEl(null);

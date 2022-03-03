@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import {
-  Button,
+  Button, makeStyles, Accordion, AccordionSummary, AccordionDetails, Typography, Chip, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle,
   Divider,
   Grid,
   TextField,
@@ -17,16 +12,9 @@ import {
   FormLabel,
   RadioGroup,
 } from '@material-ui/core';
-import Chip from '@material-ui/core/Chip';
 import AlertMassage from 'components/helper/AlertMessage';
-
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import { Autocomplete } from '@material-ui/lab';
-
+import styles from './General.module.css';
 const useStyles = makeStyles(theme => ({
   heading: {
     fontSize: theme.typography.pxToRem(15),
@@ -94,11 +82,6 @@ export default function Medical() {
     setOpenMedicalDialog(true);
   };
 
-  // useEffect(() => {
-  //   alert('changed');
-  // }, [chipDataAdded]);
-  // console.log(chipDataAdded);
-
   const [addNewMedicalProblem, setAddNewMedicalProblem] = useState('');
 
   const [status, setStatusBase] = React.useState('');
@@ -136,15 +119,15 @@ export default function Medical() {
       >
         <div>
           <DialogTitle id="form-dialog-title">
-            {addNewMedicalProblem ? addNewMedicalProblem : null} - Duration
+            {addNewMedicalProblem ? addNewMedicalProblem : null} - Since
           </DialogTitle>
           <DialogContent>
             <RadioGroup
               aria-label="gender"
               name="gender1"
               style={{ flexDirection: 'inherit' }}
-              // value={value}
-              // onChange={handleChange}
+            // value={value}
+            // onChange={handleChange}
             >
               <FormControlLabel
                 control={
@@ -223,37 +206,19 @@ export default function Medical() {
               />
             </RadioGroup>
             <Divider />
-            <Typography variant="h6">
-              {addNewMedicalProblem ? addNewMedicalProblem : null} - Medication
+            <Typography variant="h6" style={{marginBottom:'10px'}}>
+              {addNewMedicalProblem ? addNewMedicalProblem : null} - Notes
             </Typography>
-            <RadioGroup
-              aria-label="gender"
-              name="gender1"
-              style={{ flexDirection: 'inherit' }}
-              // value={value}
-              // onChange={handleChange}
-            >
-              <FormControlLabel
-                control={
-                  <Radio
-                    // checked={selectedValue === 'a'}
-                    // onChange={handleChange}
-                    color="primary"
-                    value="yes"
-                    name="radio-button-demo"
-                    inputProps={{ 'aria-label': 'Yes' }}
-                  />
-                }
-                label="Yes"
-              />
-              <FormControlLabel
-                control={<Radio color="primary" />}
-                label="No"
-                value="no"
-                name="radio-button-demo"
-                inputProps={{ 'aria-label': 'No' }}
-              />
-            </RadioGroup>
+            <TextField
+            fullWidth
+          id="outlined-multiline-static"
+          label="Multiline"
+          multiline
+          rows={4}
+          placeholder="Default Value"
+          variant="outlined"
+          
+        />
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose_m_dialog} color="primary">
@@ -313,7 +278,7 @@ export default function Medical() {
                   label="Add New"
                   fullWidth="true"
                   placeholder="Medical Problems"
-                  // style={{ width: '400px' }}
+                // style={{ width: '400px' }}
                 />
               )}
             />
@@ -331,18 +296,29 @@ export default function Medical() {
       {/* End======================================================================= */}
 
       <Grid item xs={12}>
-        <Typography variant="h6" color="textPrimary">
-          Medical History
-        </Typography>
+        <div className={styles.p_medical_d}>
+          <div className={styles.p_data}>
+            <Typography variant="h6" color="textPrimary">
+              Medical History For<br />
+              <p>Mr. Som Gupta</p>
+            </Typography>
+          </div>
+          <div className={styles.last_update}>
+            <Typography variant="h6" color="textPrimary">
+              Updated On<br />
+              <p>28 Jan 2022 08:56</p>
+            </Typography>
+          </div>
+        </div>
       </Grid>
-      <br></br>
-      <Accordion defaultExpanded>
+      {/* Medicals Problem */}
+      <Accordion defaultExpanded className={styles.accordian_tab}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="medicalProblem"
           id="medicalProblem"
         >
-          <Typography className={classes.heading}>Medial Problem</Typography>
+          <Typography className={classes.heading}>Medical Problems </Typography>
           {chipDataAdded.length !== 0 ? (
             <Typography className={classes.secondaryHeading}>
               {chipDataAdded
@@ -411,9 +387,8 @@ export default function Medical() {
           {/* </Paper> */}
         </AccordionDetails>
       </Accordion>
-
-      {/* Section For Allergies=================================================== */}
-      <Accordion>
+      {/* Allergies */}
+      <Accordion className={styles.accordian_tab}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="allergies"
@@ -488,31 +463,28 @@ export default function Medical() {
           {/* </Paper> */}
         </AccordionDetails>
       </Accordion>
-      {/* End======================================================================= */}
-      {/* Section for listStyle===================================================== */}
-      <Accordion>
+      {/* Family History */}
+      <Accordion className={styles.accordian_tab}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="allergies"
           id="allergies"
         >
-          <Typography className={classes.heading}>Life Style</Typography>
+          <Typography className={classes.heading}>Family History</Typography>
         </AccordionSummary>
       </Accordion>
-      {/* End======================================================================== */}
-      {/* Section for Family History===================================================== */}
-      <Accordion>
+    {/* Life Style */}
+      <Accordion className={styles.accordian_tab}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="family-history"
           id="family-history"
         >
-          <Typography className={classes.heading}>Family History</Typography>
+          <Typography className={classes.heading}>Life Style</Typography>
         </AccordionSummary>
       </Accordion>
-      {/* End======================================================================== */}
-      {/* Section for Procedure===================================================== */}
-      <Accordion>
+    {/* Procedure */}
+      <Accordion className={styles.accordian_tab}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="procedure"
@@ -521,9 +493,8 @@ export default function Medical() {
           <Typography className={classes.heading}>Procedure</Typography>
         </AccordionSummary>
       </Accordion>
-      {/* End======================================================================== */}
-      {/* Section for Risk Factor===================================================== */}
-      <Accordion>
+    {/* Risk Factors */}
+      <Accordion className={styles.accordian_tab}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="risk-factor"
@@ -534,7 +505,7 @@ export default function Medical() {
       </Accordion>
       {/* End======================================================================== */}
       {/* Section for Other===================================================== */}
-      <Accordion>
+      <Accordion className={styles.accordian_tab}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="Other"

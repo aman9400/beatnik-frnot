@@ -212,8 +212,7 @@ img.avatar-xl.rounded-circle.mb-1 {
   padding: 20px !important;
   height: 100% !important;
   position: relative;
-  min-height: 750px;
-  max-height: 750px;
+
 }
 .medifile_profie {
   padding: 0 30px !important;

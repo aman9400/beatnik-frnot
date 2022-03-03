@@ -25,86 +25,98 @@ const PatientConsult = props => {
   const data = [
     {
       _id:1,
-      content: 'Fever, Cold, Shaking Chills',
-      imgAttribute: 'Fever, Cold, Shaking Chills',
+      title:'GENERAL PHYSICIAN',
+      content: 'Fever, Cough, Runny Nose,Throat Pain, Headache, Vomiting, Loose Motion, Cold, Chills',
+      imgAttribute: 'Fever, Cough, Runny Nose,Throat Pain, Headache, Vomiting, Loose Motion, Cold, Chills',
       img: Fever,
       pathLink:'/find-doctor'
     },
     {
       _id:2,
-      content: 'Join Pain Arthritis ',
-      imgAttribute: 'Join Pain Arthritis ',
+      title:'ORTHODONTICS',
+      content: 'Back pain,Knee pain,Shoulder pain,Fracture,Sprain,Joint pain,Arthristis ',
+      imgAttribute: 'Back pain,Knee pain,Shoulder pain,Fracture,Sprain,Joint pain,Arthristis',
       img: JoinPain,
       pathLink:'/find-doctor'
       
     },
     {
       _id:3,
-      content: 'Headache, Migraine',
-      imgAttribute: 'Headache, Migraine',
+      title:'PSHYCHATRIST',
+      content: 'Mental health issues,Depression,Anxiety,Stress,Panic attack',
+      imgAttribute: 'Mental health issues,Depression,Anxiety,Stress,Panic attack',
       img:Headache,
         pathLink:'/find-doctor'
     },
     {
       _id:4,
-      content: 'Diarrhea , Stomach Upset, Digestion Problem',
-      imgAttribute: 'Diarrhea , stomach upset, digestion problem',
+      title:'DIABETOLOGIST',
+      content: 'Fluctuating blood sugars,Insulin related concerns,Diabetic Ulcers,Oral Antidiabetic Medications',
+      imgAttribute: 'Fluctuating blood sugars,Insulin related concerns,Diabetic Ulcers,Oral Antidiabetic Medications',
       img:Diarrhea,
         pathLink:'/find-doctor'
     },
     {
       _id:5,
-      content: 'Eye Problem, Paid, Watery, Dryness',
-      imgAttribute: 'Eye problem, paid, watery, dryness',
+      title:'OPTHALMOLOGIST',
+      content: 'Eye related issues,Redness of eyes,Itching of eyes,Discharge from eyes,Watering of eyes',
+      imgAttribute: 'Eye related issues,Redness of eyes,Itching of eyes,Discharge from eyes,Watering of eyes',
       img: EyeProblem,
       pathLink:'/find-doctor'
     },
     {
       _id:6,
-      content: 'Obesity, Thyroid ',
-      imgAttribute: 'Obesity, Thyroid',
+      title:'GYNECOLOGY',
+      content: 'Period related issues,White Discharge,Pregnancy related issues,Excessive Bleeding',
+      imgAttribute: 'Period related issues,White Discharge,Pregnancy related issues,Excessive Bleeding',
       img:Thyroid,
         pathLink:'/find-doctor'
     },
     {
       _id:7,
-      content: 'Dental Issues, Tooth Ache, Gum Bleeding',
-      imgAttribute: 'Dental issues, Tooth Ache, Gum Bleeding',
+      title:'DENTISTRY',
+      content: 'Tooth sensitivity,Jaw pain,Toothache,Mouth ulcer,Swollen gums,Bleeding gums',
+      imgAttribute: 'Tooth sensitivity,Jaw pain,Toothache,Mouth ulcer,Swollen gums,Bleeding gums',
       img:Dental,
         pathLink:'/find-doctor'
     },
     {
       _id:8,
-      content: 'Overweight or Under weight problem in children',
-      imgAttribute: 'Overweight or Under weight problem in children',
+      title:'DIET & NUTRITIONIST',
+      content: 'Diet for gaining weight,Weight loss,Diet for Hypertension,Diet for Diabetes',
+      imgAttribute: 'Diet for gaining weight,Weight loss,Diet for Hypertension,Diet for Diabetes',
       img: Overweight,
       pathLink:'/find-doctor'
     },
     {
       _id:9,
-      content: 'Period Doubts or Pregnancy',
-      imgAttribute: 'Period Doubts or Pregnancy',
+      title:'UROLOGIST',
+      content: 'Urinary bladder problems,Urinary stream issues,Frequent Urinary tract infection',
+      imgAttribute: 'Urinary bladder problems,Urinary stream issues,Frequent Urinary tract infection',
       img:Pregnancy,
         pathLink:'/find-doctor'
     },
     {
       _id:10,
-      content: 'Acne, Pimple or Skin Issue',
-      imgAttribute: 'Acne,Pimple or Skin Issue',
+      title:'DERMATOLOGY',
+      content: 'Pimples/Acne,Hairfall,Dry Scalp,Pigmentation & Melasma,Dark Circles',
+      imgAttribute: 'Pimples/Acne,Hairfall,Dry Scalp,Pigmentation & Melasma,Dark Circles',
       img: Pimple,
       pathLink:'/find-doctor'
     },
     {   _id:11,
-      content: 'Depression or Anxiety',
-      imgAttribute: 'Depression or Anxiety',
+      title:'SEXOLOGIST',
+      content: 'Premature ejaculation,Painful Ejaculation,Decreased Sexual Drive,Testicular Pain,Erectile Dysfunction',
+      imgAttribute: 'Premature ejaculation,Painful Ejaculation,Decreased Sexual Drive,Testicular Pain,Erectile Dysfunction',
       img:Depression,
         pathLink:'/find-doctor'
     },
 
     {
       _id:12,
-      content: 'Child not feeling well',
-      imgAttribute: 'Child not feeling well',
+      title:'PEDIATRICIAN',
+      content: 'Child not feeling well,Cough in Children,Stomach pain,Skin rashes,Fever',
+      imgAttribute: 'Child not feeling well,Cough in Children,Stomach pain,Skin rashes,Fever',
       img:Child,
         pathLink:'/find-doctor'
     },
@@ -118,14 +130,14 @@ const PatientConsult = props => {
             <Typography
               className={styles.patientConsult_title}
             >
-              Consult top doctors online for any health concern
+              Consult online with our verified Doctors for any health related issues
             </Typography>
-            <Typography
+            {/* <Typography
               className={styles.patientConsult_subtitle}
             >
               Private online consultations with verified doctors in all
               specialists
-            </Typography>
+            </Typography> */}
           </div>
         </Grid>
       </Grid>
@@ -148,7 +160,10 @@ const PatientConsult = props => {
                   <Box className={styles.img_card}>
                     <img src={name.img} alt={name.imgAttribute} />
                   </Box>
-                  <Box className={styles.patient_content}>{name.content}</Box>
+                  <Box className={styles.patient_content}>
+                    <h6>{name.title}</h6>
+                    <p>{name.content}</p>
+                    </Box>
                 </div>
               </Link>
             </Box>

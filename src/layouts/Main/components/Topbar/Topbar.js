@@ -14,22 +14,29 @@ import {
   Box,
   Grid,
   Container,
+  ListItemIcon,
+  ListItemText,
+  useMediaQuery
 } from '@material-ui/core';
 import { Image } from 'components/atoms';
 import MenuIcon from '@material-ui/icons/Menu';
-import { useMediaQuery } from '@material-ui/core';
 import Cookies from 'js-cookie';
 import { checkToken } from '../../../../components/helper/LoginCheck';
 import { getPatientProfile } from '../../../../components/helper/PatientApi';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import BrandLogo from './../../../../../public/assets/Images/logo/online-aarogya-logo.png';
+import PermIdentityIcon from '@material-ui/icons/PermIdentity';
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import TabletMacIcon from '@material-ui/icons/TabletMac';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+
 const useStyles = makeStyles(theme => ({
   flexGrow: {
     flexGrow: 4,
   },
   listName: {
     marginRight: '10px',
-  
+
     '&  $lastChild': { marginRight: '0px' },
   },
   navigationContainer: {
@@ -92,7 +99,7 @@ const useStyles = makeStyles(theme => ({
     fontWeight: 600,
     fontSize: '15px',
   },
-  listName:{
+  listName: {
     height: '65px',
     verticalAlign: 'middle',
     margin: '0 auto',
@@ -102,7 +109,7 @@ const useStyles = makeStyles(theme => ({
     padding: '12px 10px',
     '&> p': {
       color: '#000000',
-      fontSize:'12px',
+      fontSize: '12px',
     }
   },
   listItemButton: {
@@ -333,7 +340,7 @@ const Topbar = ({
     {
       _id: 3,
       navTitle: 'Order Medicine',
-      navPath: '/video-consultation',
+      navPath: '/medicine-order',
     },
     {
       _id: 4,
@@ -347,12 +354,6 @@ const Topbar = ({
     },
     {
       _id: 6,
-      navTitle: 'Medifiles',
-      navPath: '/sds',
-      // medifiles
-    },
-    {
-      _id: 7,
       navTitle: 'Packages',
       navPath: '/data-security',
     },
@@ -360,6 +361,7 @@ const Topbar = ({
 
   const myToken = Cookies.get('token');
   const userName = Cookies.get('first_name');
+
 
   // Code for Right Dropdown menu ends
 
@@ -386,7 +388,16 @@ const Topbar = ({
     setAvatar(res.patient_info)
 
   }
+  // Dropdown After Login 
+  const [open, setOpen] = React.useState(false);
 
+  const handleClick = () => {
+    setOpen((prev) => !prev);
+  };
+
+  const handleClickAway = () => {
+    setOpen(false);
+  };
   React.useEffect(() => {
     loadData();
   }, []);
@@ -476,7 +487,7 @@ const Topbar = ({
                         }}
                       >
                         {menuName.navTitle}
-                    
+
                         {menuName.navSubTitle}
                       </p>
                     ) : (
@@ -495,7 +506,9 @@ const Topbar = ({
               {/* Show user name if user logged in */}
 
               {myToken ? (
-                <div className="after_login">
+                <div className="after_login" mouseEvent="onMouseDown"
+                  touchEvent="onTouchStart"
+                  onClickAway={handleClickAway}>
                   <Typography
                     style={{ color: 'red' }}
                     className={clsx(
@@ -503,18 +516,44 @@ const Topbar = ({
                       'menu-item',
                       classes.pointer,
                     )}
+                    onClick={handleClick}
                   >
                     {/* {userAvatar.patient_info && Object.keys(userAvatar.patient_info).map(i=><p>{records.email[i]}</p>)} */}
-
-
-
 
                     <IconButton >
                       <img src={userAvtar.avatar_url} alt={userName} />
                     </IconButton>
                     {userName}
                   </Typography>
-                  <Typography><IconButton onClick={logoutData}> <PowerSettingsNewIcon /> </IconButton></Typography>
+                  {open ? (
+                    <List className='after_login_list' component="nav">
+                      <Link href="/account" >
+                        <p className='user_feature'>
+                          <PermIdentityIcon className='user_icon' />
+                          <span>Profile </span>
+                        </p>
+                      </Link>
+                      <Link href="/medifiles">
+                        <p className='user_feature'>
+                          <DashboardIcon className='user_icon' />
+                          <span>Dashboard</span>
+                        </p>
+                      </Link>
+                      <Link href="/medifiles">
+                        <p className='user_feature'>
+                          <TabletMacIcon className='user_icon' />
+                          <span>Appointments</span>
+                        </p>
+                      </Link>
+                      <ListItem className='user_feature' button onClick={logoutData}>
+                        <ListItemIcon className='user_icon'>
+                          <ExitToAppIcon />
+                        </ListItemIcon>
+                        <ListItemText className='user_f_title' primary="Log Out" />
+                      </ListItem>
+                    </List>
+                  ) : null}
+
                 </div>
 
               ) : (

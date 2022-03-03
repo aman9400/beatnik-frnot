@@ -397,7 +397,7 @@ const getPatientRegister = async data => {
 };
 
 const getPatientLogin = async data => {
-  var raw = JSON.stringify({ mobile: '8520021995' });
+  var raw = JSON.stringify({ mobile: '9760078301' });
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

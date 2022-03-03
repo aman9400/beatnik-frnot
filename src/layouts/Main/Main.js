@@ -223,40 +223,34 @@ const Main = ({ children, themeToggler, themeMode }) => {
     landings: {
       children: {
         services: {
-          groupTitle: 'Home',
+          groupTitle: 'ONLINE AAROGYA',
           pages: [
             {
-              title: 'Find Doctor',
-              href: '/find-doctor ',
+              title: 'About ',
+              href: '/about ',
             },
             {
-              title: 'Video Consultation',
-              href: '/video-consultation ',
+              title: 'Careers',
+              href: '/careers',
             },
             {
-              title: 'In Clinic Consultation',
-              href: '/clinic-consultation ',
+              title: 'Terms of Use',
+              href: '/terms-of-Use ',
             },
             {
-              title: 'Packages',
-              href: '/packages',
-            },
-            {
-              title: 'Medifiles',
-              href: '/medifiles ',
+              title: 'Privacy Policy',
+              href: '/privacy-policy',
             },
             {
               title: 'Data Security',
-              href: '/data-security',
+              href: '/data-security ',
             },
             {
               title: 'Contact us',
               href: '/contact-us',
-            },
-            {
-              title: 'Log In / Sign Up',
-              href: '/signin ',
-            },
+            }
+      
+        
           ],
         },
         apps: {
@@ -273,34 +267,11 @@ const Main = ({ children, themeToggler, themeMode }) => {
           ],
         },
         web: {
-          groupTitle: 'For Patients',
+          groupTitle: 'CORPORATES ',
           pages: [
             {
-              title: 'Search for Doctors',
-              href: 'about-us',
-            },
-
-            {
-              title: 'Search for clinic',
-              href: '/service',
-            },
-
-            {
-              title: 'Book Appointment',
-              href: '/contact-us',
-            },
-            {
-              title: 'Medifiles',
-              href: '/contact-us',
-            },
-
-            {
-              title: 'Health Packages',
-              href: '/contact-us',
-            },
-            {
-              title: 'Online Aarogya App',
-              href: '/contact-us',
+              title: 'Corporates wellness',
+              href: '#',
             },
           ],
         },
@@ -339,40 +310,37 @@ const Main = ({ children, themeToggler, themeMode }) => {
       id: 'supported-pages',
       children: {
         career: {
-          groupTitle: 'For Doctors',
+          groupTitle: 'FOR PATIENTS',
           pages: [
             {
-              title: 'Register',
-              href: '/career-listing',
+              title: 'Search for doctors',
+              href: '/doctor-search',
             },
             {
-              title: 'Lising Minimal',
-              href: '/career-listing-minimal',
+              title: 'Search for clinics',
+              href: '/doctor-search',
             },
             {
-              title: 'Online Consultation',
-              href: '/career-opening',
+              title: 'Order a Medicine',
+              href: '/medicine-order',
             },
             {
-              title: 'In-Clinic Consultations',
-              href: '/career-opening',
+              title: 'Book a Lab Test',
+              href: '/book-lab-test',
             },
             {
-              title: 'Online Appointment Management',
-              href: '/career-opening',
+              title: 'Care at home',
+              href: '/care-at-home',
             },
             {
-              title: 'Online Consultation Management',
-              href: '/career-opening',
+              title: 'Medifiles',
+              href: '/medifiles',
             },
             {
-              title: 'Communication',
-              href: '/career-opening',
+              title: 'Packages',
+              href: '/packages',
             },
-            {
-              title: 'Management',
-              href: '/career-opening',
-            },
+        
           ],
         },
         helpCenter: {
@@ -438,24 +406,33 @@ const Main = ({ children, themeToggler, themeMode }) => {
           ],
         },
         blog: {
-          groupTitle: 'Legal',
+          groupTitle: ' ',
           pages: [
             {
-              title: 'Privacy Policy',
-              href: '/about',
+              title: '',
+              href: '#',
             },
-            {
-              title: 'Terms of Condition',
-              href: '/about-side-cover',
-            },
+          
           ],
         },
         portfolio: {
-          groupTitle: 'For Corporates',
+          groupTitle: 'FOR DOCTORS',
           pages: [
             {
-              title: 'Employee Health Management',
-              href: '/portfolio-page',
+              title: 'Online Aarogya Profile',
+              href: '#',
+            },
+            {
+              title: 'Online Doctor Consultation',
+              href: '#',
+            },
+            {
+              title: 'In-Clinic Consultation',
+              href: '#',
+            },
+            {
+              title: 'Join Us',
+              href: '#',
             },
           ],
         },

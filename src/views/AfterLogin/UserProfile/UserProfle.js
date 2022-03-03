@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import {
-  Typography,
+  Typography, makeStyles,
   Box,
   Grid,
   Button,
@@ -14,22 +13,23 @@ import {
   TableRow,
   Dialog,
   DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
+  Tooltip
 } from '@material-ui/core';
 import { getPatientProfile } from '../../../components/helper/PatientApi';
 import Breadcrumb from '../Reusable/MediBreadcrumb';
 import MetaTitle from '../../../components/helper/MetaTitle';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-// Picker
 import Link from 'next/link';
 import { getFamilyDependentByUid } from '../../../components/helper/PatientApi';
 import { checkToken } from '../../../components/helper/LoginCheck';
 import MedicalHistory from '../UserProfile/components/GetMedicalHistory/MedicalHistory';
 import { useRouter } from 'next/router';
 import NoRecordFound from 'components/organisms/NoRecordFound';
+import styles from './UserProfile.module.css';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import AddIcon from '@material-ui/icons/Add';
+import DependentDetails from './DependentDetails';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -144,23 +144,16 @@ function UserProfile(props) {
 
   // Code for Open Model Box for Viewing Medical History
 
-  const [open, setOpen] = React.useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
+
+  const [dependentDetails, setDependentDetails] = React.useState(false);
+
+  const OpenDependentDetails = () => {
+    setDependentDetails(true);
   };
-
-  const handleClose = () => {
-    setOpen(false);
+  const CloseDependentDetails = () => {
+    setDependentDetails(false);
   };
-
-  //
-
-  // // Set Cookies
-  // var profile_completion_progress = Cookies.get('profile_completion_progress');
-  // var newStr = Cookies.get('profile_completion_progress');
-  // var  profile_completion_progress = newStr.replace(/%/g,'');
-  // =====================================
 
   return (
     <div className="medifile_profie">
@@ -170,7 +163,7 @@ function UserProfile(props) {
         metaDescription=""
       />
 
-      <div className="medifiles_pannel">
+      <div className="medifiles_pannel" stickyHeader aria-label="sticky table" >
         <div className="medifile_dashboard">
           <h3 className="medifile_head">Hi! Welcome to Medifiles </h3>
           <Breadcrumb url="User Profile" />
@@ -179,7 +172,7 @@ function UserProfile(props) {
       <Grid container style={{ justifyContent: 'space-between' }}>
         <Grid spacing={3} item xs={4}>
           <div className="profile_details">
-            <Box p={3}>
+            <Box  p={3}>
               <div elevation={0}>
                 <Avatar
                   className="profile_avatar"
@@ -209,7 +202,7 @@ function UserProfile(props) {
               </TableRow>
 
               <Box className="profile_view_history">
-                <Button size="small" onClick={handleClickOpen} color="primary">
+                <Button size="small" onClick={OpenDependentDetails} color="primary">
                   View Medical History
                 </Button>
               </Box>
@@ -228,9 +221,10 @@ function UserProfile(props) {
         <Grid spacing={3} item xs={8}>
           <Box className="profile_progress" p={0}>
             <Box alignContent="flex-end" mb={2}>
-              <Grid container>
-                <Grid item xs={12} lg={2}>
+              <Grid className={styles.progress_profile}>
+                <Grid className={styles.progress_status}>
                   <CircularProgressbar
+                    className={styles.circular_profile}
                     value={patientDetails.profile_completion}
                     text={`${patientDetails.profile_completion}%`}
                     styles={buildStyles({
@@ -246,12 +240,12 @@ function UserProfile(props) {
                     })}
                   />
                 </Grid>
-                <Grid xs={12} lg={10}>
+                <Grid className={styles.progress_status_data}>
                   <Box ml={3}>
                     <Typography
                       align="left"
                       variant="h6"
-                      className="profile_progress_head"
+                      className={styles.title}
                     >
                       <b>Profile Progress</b>
                     </Typography>
@@ -268,7 +262,7 @@ function UserProfile(props) {
             </Box>
 
             <Box mb={2}>
-              <Typography variant="h6">
+              <Typography variant="h6" className={styles.title}>
                 <b>Dependent Details</b>
               </Typography>
             </Box>
@@ -279,33 +273,42 @@ function UserProfile(props) {
               >
                 <TableHead>
                   <TableRow>
-                    <TableCell component="th">Image</TableCell>
-                    <TableCell component="th">First Name</TableCell>
-                    <TableCell>Last Name</TableCell>
-                    <TableCell>Gender</TableCell>
+                    <TableCell>Image</TableCell>
+                    <TableCell>Full Name</TableCell>
+                    <TableCell>Age</TableCell>
                     <TableCell>Dob</TableCell>
-                    <TableCell>Address</TableCell>
+                    <TableCell>Action</TableCell>
                   </TableRow>
                 </TableHead>
 
                 {data == '' ? (
                   <NoRecordFound />
                 ) : (
-                  
+
                   <TableBody>
                     {data.map(row => (
                       <TableRow key={row.id}>
                         <TableCell>
                           <Avatar
+                            src={row.avatar_url}
                             variant="square"
                             className={classess.square}
                           ></Avatar>
                         </TableCell>
-                        <TableCell>{row.first_name}</TableCell>
-                        <TableCell>{row.last_name}</TableCell>
-                        <TableCell>{row.gender}</TableCell>
+                        <TableCell>{row.title} {row.first_name} {row.last_name}</TableCell>
+                        <TableCell>{row.age}</TableCell>
                         <TableCell>{row.dob}</TableCell>
-                        <TableCell>{row.address}</TableCell>
+                        <TableCell>
+                          <div className={styles.action_button}>
+                            <Tooltip title="View Details" aria-label="add">
+                              <Button onClick={OpenDependentDetails}><VisibilityIcon /></Button>
+                            </Tooltip>
+                            <Tooltip title="Add Medical History" aria-label="add">
+                              <Button><AddIcon /></Button>
+                            </Tooltip>
+                          </div>
+                        </TableCell>
+
                       </TableRow>
                     ))}
                   </TableBody>
@@ -314,26 +317,14 @@ function UserProfile(props) {
             </TableContainer>
           </Box>
         </Grid>
+      
       </Grid>
-
-      {/* Model Box to view Medical History */}
-
-      <Dialog
-        maxWidth={'md'} // 'sm' || 'md' || 'lg' || 'xl'
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">{''}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            <MedicalHistory />
-          </DialogContentText>
-        </DialogContent>
+      <Dialog onClose={CloseDependentDetails} aria-labelledby="customized-dialog-title" open={dependentDetails}>
+        <DependentDetails />
         <DialogActions>
-          <Button onClick={handleClose} color="primary" autoFocus>
-            Close
+
+          <Button autoFocus onClick={CloseDependentDetails} color="primary">
+            Save changes
           </Button>
         </DialogActions>
       </Dialog>

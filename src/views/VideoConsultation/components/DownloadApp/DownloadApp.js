@@ -16,7 +16,7 @@ const DownloadApp = () => {
           </Grid>
           <Grid item xs={7}>
             <div className={styles.download_app_title}>
-              <h3>Download the Online Aarogya App</h3>
+              <h3>Book Consultation with the Qualified Doctors of your choice  </h3>
               <p>
                 Book consultation with the best of the Doctors of your choice.
                 Also choose the mode of consultation Video or in Clinic walk in

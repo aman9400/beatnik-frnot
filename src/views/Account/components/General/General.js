@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
 import {
+  makeStyles, useTheme,
   useMediaQuery,
   Grid,
   Typography,
@@ -14,14 +14,12 @@ import {
   FormGroup,
   IconButton,
   Avatar,
-  Radio,
+  AppBar,
+  Tabs,
+  Tab,
+  Box,
 } from '@material-ui/core';
-
 import PropTypes from 'prop-types';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Box from '@material-ui/core/Box';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import DateFnsUtils from '@date-io/date-fns';

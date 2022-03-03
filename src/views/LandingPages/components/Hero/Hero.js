@@ -16,34 +16,40 @@ const Hero = props => {
   const data = [
     {
       title: 'Find Doctor',
-      content: 'Choose best doctor of your choice in your locality',
+      content: 'Online Aarogya connects you with the doctor of your choice',
       img: FindDoctor,
       pathHref: '/find-doctor',
     },
     {
       title: 'Video Consultation',
-      content: 'Join pain arthitis',
+      content: 'Now you can have live,on demand a private video consultations, with the doctor of your choice',
       img: VideoConsultation,
       pathHref: '/video-consultation',
     },
     {
-      title: 'In-Clinic Consultation',
-      content: 'Head Aaches, Migrane',
+      title: 'In- Clinic Consultation',
+      content: 'Get quick appointments with no wait time ',
       img: InClinic,
       pathHref: '/clinic-consultation',
     },
     {
-      title: 'Package',
-      content: 'Eye problem, paid, watery, dryness',
+      title: 'Care at home',
+      content: 'Highly qualified healthcare professionals to take care of you and your loved ones at home.',
       img: Package,
       pathHref: '/package',
     },
     {
-      title: 'Medifiles',
-      content: 'Diahorrea, stomach upset, digestion problem',
+      title: 'Order Medicines',
+      content: '100% Safe, Secure and Contactless delivery at your doorsteps',
       img:Medifiles,
       pathHref: '/medifiles',
     },
+    // {
+    //   title: 'Book a lab test',
+    //   content: 'Home sample collection from NABL Accredited Labs.',
+    //   img:Medifiles,
+    //   pathHref: '/medifiles',
+    // },
   ];
 
   return (

@@ -30,7 +30,6 @@ const SigninCover = () => {
             <div className={styles.entry_cover_left}>
               <div className={styles.entry_cover_inner}>
                 <div className={styles.top_strip_left}>
-                  <h4 className={styles.brand_name_text}> Online Aarogya </h4>
                   <div className={styles.brand_logo}>
                     <Link href="/">
                       <img src={BrandLogo} alt="" />
@@ -55,7 +54,7 @@ const SigninCover = () => {
                 <div className={styles.login_container}>
                   <div className={styles.page_title}>
                     <div className={styles.page_title_inner}>
-                      <h5>Sign In</h5>
+                      <h5>User Login</h5>
                       <Link className={styles.link_up} href="/signup">
                         <LearnMoreLink
                           title="Create An Account"

@@ -13,12 +13,12 @@ import {
   Tooltip,
 } from '@material-ui/core';
 import { getPatientProfile } from '../../../../components/helper/PatientApi';
-
+import styles from './Navbar.module.css';
 import Collapse from '@material-ui/core/Collapse';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import Link from 'next/link';
-
+import DashboardIcon from '@material-ui/icons/Dashboard';
 const useStyles = makeStyles(theme => ({
   mobileDrawer: {
     width: 256,
@@ -110,7 +110,18 @@ const Navbar = ({ onMobileClose, openMobile }) => {
             <h5 className="mb-1">{patientDetails.name} </h5>
           </div>
         </div>
-        <List>
+        <List className={styles.list_item}>
+          <ListItem className={styles.nav_link} >
+            <Link href="/account">
+              <p className={styles.dashboard_data}>
+              <ListItemIcon className={classes.iconWidth}>
+                <DashboardIcon />
+              </ListItemIcon>
+              <ListItemText className={styles.page_title} primary="Dashboard"/>
+              </p>
+            </Link>
+          </ListItem>
+
           <ListItem className={classes.nav_link} button onClick={handleClick}>
             <ListItemIcon className={classes.iconWidth}>
               <i className="fas fa-file-download"></i>
@@ -191,6 +202,7 @@ const Navbar = ({ onMobileClose, openMobile }) => {
           </Collapse>
 
           <Divider />
+
         </List>
       </Box>
       <Box flexGrow={1} />
@@ -231,7 +243,7 @@ Navbar.propTypes = {
 };
 
 Navbar.defaultProps = {
-  onMobileClose: () => {},
+  onMobileClose: () => { },
   openMobile: false,
 };
 

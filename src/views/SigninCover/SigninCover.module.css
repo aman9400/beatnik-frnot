@@ -9,12 +9,14 @@
   width: 100%;
   height: 100vh;
   display: block;
+  
 }
 .entry_cover_inner {
   position: relative;
   padding: 20% 0;
   height: 100vh;
   width: 100%;
+  display: grid;
 }
 .entry_cover_inner .cover_bg {
   position: absolute;
@@ -27,10 +29,6 @@
   text-align: center;
   display: grid;
   place-items: center;
-  position: absolute;
-  top: 60%;
-  left: 0;
-  right: 0;
   margin: 0 auto;
 }
 .head_title > h1 {
@@ -55,8 +53,9 @@
 }
 .page_title_inner > h5 {
   color: var(--theme-color);
-  font-size: 22px;
-  font-weight: 800;
+  font-size: 20px;
+  font-weight: 700;
+  opacity: .85;
 }
 
 .page_title_inner a > span {
@@ -178,4 +177,7 @@
     margin: auto;
     width: 100%;
   }
+}
+.second_title_box{
+  position: relative;
 }
