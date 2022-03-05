@@ -9,7 +9,6 @@
 // Medicine Form
 .medicine_form {
   position: relative;
-
   .medicine_prescription {
     position: relative;
     padding: 20px;
@@ -17,13 +16,23 @@
     box-shadow: 0px 0px 8px #0000001a;
     min-height: 488px;
     border-radius: 5px;
-
+    .root {
+      position: relative;
+      .header {
+        position: relative;
+        display: flex;
+        margin-bottom: 10px;
+        justify-content: space-between;
+        > div {
+          padding: 0;
+        }
+      }
+    }
     .medicine_p_upload {
       border: var(--border);
       border-radius: 5px;
       padding: 15px;
       text-align: center;
-
       p {
         font-size: 16.5px;
         font-weight: 600;
@@ -31,7 +40,6 @@
         margin-bottom: 10px;
         opacity: 0.8;
       }
-
       .medicine_file {
         border: 1px solid #ffd0d0;
         border-radius: 3px;
@@ -49,7 +57,6 @@
         font-weight: bold;
         border-radius: 5px;
         margin-bottom: 23px;
-
         input {
           top: 0;
           left: 0;
@@ -60,7 +67,6 @@
           z-index: 9;
           position: absolute;
         }
-
         label {
           top: 0;
           left: 0;
@@ -72,12 +78,10 @@
           position: absolute;
           align-items: center;
           justify-content: center;
-
           svg {
             margin-right: 30px;
             fill: var(--theme-color);
           }
-
           p {
             font-size: 16px;
             font-weight: 500;
@@ -109,10 +113,8 @@
           height: 74px;
           display: flex;
           align-items: start;
-
           a {
             display: contents;
-
             img {
               height: 36px;
               width: 52px;
@@ -192,14 +194,35 @@
   .grid {
     grid-auto-flow: column;
     grid-template-rows: auto;
-
+    height: 175px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    &::-webkit-scrollbar {
+      width: 2px;
+      background: rgba(255, 0, 0, 0.242);
+    }
+    
+    &::-webkit-scrollbar-track {
+      box-shadow: 0 0 5px grey;
+      border-radius: 5px;
+    }
+    /* hsl(0deg 0% 51%) */
+    &::-webkit-scrollbar-thumb {
+      background: #828282;
+      border-radius: 5px;
+    }
+    
+    &::-webkit-scrollbar-thumb:hover {
+      background: #828282;
+    }
     label.radio_card {
       cursor: pointer;
 
       .card_content_wrapper {
         background: #fff;
         border-radius: 5px;
-        width: 100%;
+        width: 98%;
+        margin: 0 auto;
         padding: 10px;
         display: flex;
         text-align: start;
@@ -274,4 +297,69 @@
       }
     }
   }
+}
+
+.fetch_pin_code {
+  display: flex;
+  justify-content: space-between;
+  .pin_code {
+    margin-bottom: 0px;
+    input {
+      padding: 12px;
+    }
+    label {
+      top: -6px;
+    }
+  }
+
+}
+.div_or {
+  margin: 10px 0 ;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--heading-color);
+  opacity: .6;
+}
+.fetch_btn {
+  display: block !important;
+  background: #ffefef !important;
+  border: var(--border) !important;
+  height: 40px !important;
+  margin: auto !important;
+}
+.location_list {
+  p {
+    text-align: start;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--heading-color);
+    opacity: .8;
+  }
+}
+.MuiInputLabel-outlined.MuiInputLabel-shrink {
+  top: 0 !important;
+} 
+.others{
+  .file_type_label {
+    p {
+      font-weight: 600 !important;
+      font-size: 12px !important;
+      opacity: .6 !important;
+    }
+  }
+}
+.add_prescription {
+  width: 100%;
+  .prescription_data {
+    width: 100%;
+  }
+}
+.title_page h2{
+  color: var(--heading-color);
+  display: block;
+  font-size: 32px;
+  font-weight: 700 !important;
+  text-align: center;
+  margin-bottom: 30px;
 }

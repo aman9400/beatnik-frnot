@@ -345,17 +345,17 @@ const Topbar = ({
     {
       _id: 4,
       navTitle: 'Book Lab Test',
-      navPath: '/clinic-consultation',
+      navPath: '/book-lab-test',
     },
     {
       _id: 5,
       navTitle: 'Care At Home',
-      navPath: '/packages',
+      navPath: '/care-at-home',
     },
     {
       _id: 6,
       navTitle: 'Packages',
-      navPath: '/data-security',
+      navPath: '/packages',
     },
   ];
 

@@ -9,7 +9,7 @@ export default function Benefit() {
         <Grid md={6} style={{ margin: '0 auto' }}>
           <div className={styles.benefit_title}>
             <Typography gutterBottom variant="h2">
-              Benefit Of Online Aarogya
+            BENEFITS OF ONLINE CONSULTATIONS
             </Typography>
             <Typography gutterBottom variant="div">
               Aliquam et dolor tincidunt odio consequat posuere et non purus.
@@ -115,8 +115,8 @@ export default function Benefit() {
                   <div class={styles.icons_box}>
                     <div class={styles.step}>
                       <div><h4>1. </h4></div>
-                      <div><h2>Sign up for free</h2>
-                        <p>Nam rhoncus nisl purus, ac lobortisamet dapibus malesuada</p> </div>
+                      <div><h2>Sign-up for free</h2>
+                        <p>Create your profile for free with us</p> </div>
                     </div>
                   </div>
                 </div>
@@ -127,7 +127,7 @@ export default function Benefit() {
                     <div class={styles.step}>
                       <div><h4>2. </h4></div>
                       <div><h2>Search Doctor</h2>
-                        <p>Nam rhoncus nisl purus, ac lobortisamet dapibus malesuada</p> </div>
+                        <p>Consult online with our verified Doctors</p> </div>
                     </div>
                   </div>
                 </div>
@@ -137,8 +137,8 @@ export default function Benefit() {
                   <div class={styles.icons_box}>
                     <div class={styles.step}>
                       <div><h4>3. </h4></div>
-                      <div><h2>Book Slots</h2>
-                        <p>Nam rhoncus nisl purus, ac lobortisamet dapibus malesuada</p> </div>
+                      <div><h2>Schedule your time</h2>
+                        <p>Book your appointment at your convenient time</p> </div>
                     </div>
                   </div>
                 </div>
@@ -148,8 +148,8 @@ export default function Benefit() {
                   <div class={styles.icons_box}>
                     <div class={styles.step}>
                       <div><h4>4. </h4></div>
-                      <div><h2>Conform Appointments</h2>
-                        <p>Nam rhoncus nisl purus, ac lobortisamet dapibus malesuada</p> </div>
+                      <div><h2>Pay doctor consultation fee</h2>
+                        <p>Appointment gets booked at your</p> </div>
                     </div>
                   </div>
                 </div>

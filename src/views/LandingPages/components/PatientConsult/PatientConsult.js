@@ -26,7 +26,7 @@ const PatientConsult = props => {
     {
       _id:1,
       title:'GENERAL PHYSICIAN',
-      content: 'Fever, Cough, Runny Nose,Throat Pain, Headache, Vomiting, Loose Motion, Cold, Chills',
+      content: 'Fever, Cough, Runny Nose, Throat Pain, Headache, Vomiting, Loose Motion',
       imgAttribute: 'Fever, Cough, Runny Nose,Throat Pain, Headache, Vomiting, Loose Motion, Cold, Chills',
       img: Fever,
       pathLink:'/find-doctor'
@@ -34,91 +34,91 @@ const PatientConsult = props => {
     {
       _id:2,
       title:'ORTHODONTICS',
-      content: 'Back pain,Knee pain,Shoulder pain,Fracture,Sprain,Joint pain,Arthristis ',
-      imgAttribute: 'Back pain,Knee pain,Shoulder pain,Fracture,Sprain,Joint pain,Arthristis',
+      content: 'Back pain, Knee pain, Shoulder pain, Fracture, Sprain, Joint pain, Arthritis ',
+      imgAttribute: 'Back pain, Knee pain, Shoulder pain, Fracture, Sprain, Joint pain, Arthritis',
       img: JoinPain,
       pathLink:'/find-doctor'
       
     },
     {
       _id:3,
-      title:'PSHYCHATRIST',
-      content: 'Mental health issues,Depression,Anxiety,Stress,Panic attack',
-      imgAttribute: 'Mental health issues,Depression,Anxiety,Stress,Panic attack',
+      title:'PSYCHIATRIST',
+      content: 'Mental health issues, Depression, Anxiety, Stress, Panic attack',
+      imgAttribute: 'Mental health issues, Depression, Anxiety, Stress, Panic attack',
       img:Headache,
-        pathLink:'/find-doctor'
+      pathLink:'/find-doctor'
     },
     {
       _id:4,
       title:'DIABETOLOGIST',
-      content: 'Fluctuating blood sugars,Insulin related concerns,Diabetic Ulcers,Oral Antidiabetic Medications',
-      imgAttribute: 'Fluctuating blood sugars,Insulin related concerns,Diabetic Ulcers,Oral Antidiabetic Medications',
+      content: 'Fluctuating blood sugars, Insulin related concerns, Diabetic Ulcers',
+      imgAttribute: 'Fluctuating blood sugars,Insulin related concerns,Diabetic Ulcers',
       img:Diarrhea,
-        pathLink:'/find-doctor'
+      pathLink:'/find-doctor'
     },
     {
       _id:5,
-      title:'OPTHALMOLOGIST',
-      content: 'Eye related issues,Redness of eyes,Itching of eyes,Discharge from eyes,Watering of eyes',
-      imgAttribute: 'Eye related issues,Redness of eyes,Itching of eyes,Discharge from eyes,Watering of eyes',
+      title:'OPHTHALMOLOGIST',
+      content: 'Eye related issues, Redness of eyes, Itching of eyes, Discharge from eyes, Watering of eyes',
+      imgAttribute: 'Eye related issues, Redness of eyes, Itching of eyes, Discharge from eyes, Watering of eyes',
       img: EyeProblem,
       pathLink:'/find-doctor'
     },
     {
       _id:6,
       title:'GYNECOLOGY',
-      content: 'Period related issues,White Discharge,Pregnancy related issues,Excessive Bleeding',
-      imgAttribute: 'Period related issues,White Discharge,Pregnancy related issues,Excessive Bleeding',
+      content: 'Period related issues, White Discharge, Pregnancy related issues, Excessive Bleeding',
+      imgAttribute: 'Period related issues, White Discharge, Pregnancy related issues, Excessive Bleeding',
       img:Thyroid,
-        pathLink:'/find-doctor'
+      pathLink:'/find-doctor'
     },
     {
       _id:7,
       title:'DENTISTRY',
-      content: 'Tooth sensitivity,Jaw pain,Toothache,Mouth ulcer,Swollen gums,Bleeding gums',
-      imgAttribute: 'Tooth sensitivity,Jaw pain,Toothache,Mouth ulcer,Swollen gums,Bleeding gums',
+      content: 'Tooth sensitivity, Jaw pain, Toothache, Mouth ulcer, Swollen gums, Bleeding gums',
+      imgAttribute: 'Tooth sensitivity, Jaw pain, Toothache, Mouth ulcer, Swollen gums, Bleeding gums',
       img:Dental,
-        pathLink:'/find-doctor'
+      pathLink:'/find-doctor'
     },
     {
       _id:8,
       title:'DIET & NUTRITIONIST',
-      content: 'Diet for gaining weight,Weight loss,Diet for Hypertension,Diet for Diabetes',
-      imgAttribute: 'Diet for gaining weight,Weight loss,Diet for Hypertension,Diet for Diabetes',
+      content: 'Diet for gaining weight, Weight loss, Diet for Hypertension, Diet for Diabetes',
+      imgAttribute: 'Diet for gaining weight, Weight loss, Diet for Hypertension, Diet for Diabetes',
       img: Overweight,
       pathLink:'/find-doctor'
     },
     {
       _id:9,
       title:'UROLOGIST',
-      content: 'Urinary bladder problems,Urinary stream issues,Frequent Urinary tract infection',
-      imgAttribute: 'Urinary bladder problems,Urinary stream issues,Frequent Urinary tract infection',
+      content: 'Urinary bladder problems, Urinary stream issues, Urinary tract infection',
+      imgAttribute: 'Urinary bladder problems, Urinary stream issues, Urinary tract infection',
       img:Pregnancy,
-        pathLink:'/find-doctor'
+      pathLink:'/find-doctor'
     },
     {
       _id:10,
       title:'DERMATOLOGY',
-      content: 'Pimples/Acne,Hairfall,Dry Scalp,Pigmentation & Melasma,Dark Circles',
-      imgAttribute: 'Pimples/Acne,Hairfall,Dry Scalp,Pigmentation & Melasma,Dark Circles',
+      content: 'Pimples / Acne, Hair fall, Dry Scalp, Pigmentation & Melasma, Dark Circles',
+      imgAttribute: 'Pimples / Acne, Hair fall, Dry Scalp, Pigmentation & Melasma, Dark Circles',
       img: Pimple,
       pathLink:'/find-doctor'
     },
     {   _id:11,
       title:'SEXOLOGIST',
-      content: 'Premature ejaculation,Painful Ejaculation,Decreased Sexual Drive,Testicular Pain,Erectile Dysfunction',
-      imgAttribute: 'Premature ejaculation,Painful Ejaculation,Decreased Sexual Drive,Testicular Pain,Erectile Dysfunction',
+      content: 'Premature ejaculation, Painful Ejaculation, Decreased Sexual Drive, Testicular Pain, Erectile Dysfunction',
+      imgAttribute: 'Premature ejaculation, Painful Ejaculation, Decreased Sexual Drive, Testicular Pain, Erectile Dysfunction',
       img:Depression,
-        pathLink:'/find-doctor'
+      pathLink:'/find-doctor'
     },
 
     {
       _id:12,
       title:'PEDIATRICIAN',
-      content: 'Child not feeling well,Cough in Children,Stomach pain,Skin rashes,Fever',
-      imgAttribute: 'Child not feeling well,Cough in Children,Stomach pain,Skin rashes,Fever',
+      content: 'Child not feeling well, Cough in Children, Stomach pain, Skin rashes, Fever',
+      imgAttribute: 'Child not feeling well, Cough in Children, Stomach pain, Skin rashes, Fever',
       img:Child,
-        pathLink:'/find-doctor'
+      pathLink:'/find-doctor'
     },
   ];
 

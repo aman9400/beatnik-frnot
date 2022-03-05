@@ -73,10 +73,38 @@ const WorkingProcess = props => {
                         alt=""
                       />
                       <Typography variant="h6" gutterBottom>
-                        256 - bit
+                      ISO 27001
                       </Typography>
 
-                      <Typography>Encryption</Typography>
+
+                    </CardContent>
+                  </Card>
+                  <Card className={styles.card_container_inner}>
+                    <CardContent className={styles.card_inner_holder}>
+                      <img
+                        className={styles.image_symbol}
+                        src={FolderData}
+                        alt=""
+                      />
+                      <Typography variant="h6" gutterBottom>
+                      ISO 10002: 2018
+                      </Typography>
+
+                    
+                    </CardContent>
+                  </Card>
+                  <Card className={styles.card_container_inner}>
+                    <CardContent className={styles.card_inner_holder}>
+                      <img
+                        className={styles.image_symbol}
+                        src={FolderData}
+                        alt=""
+                      />
+                      <Typography variant="h6" gutterBottom>
+                      ISO 9001: 2015
+                      </Typography>
+
+                    
                     </CardContent>
                   </Card>
                   <Card className={styles.card_container_inner}>
@@ -87,10 +115,10 @@ const WorkingProcess = props => {
                         alt=""
                       />
                       <Typography variant="h6" gutterBottom>
-                        256 - bit
+                      HIPPA COMPLIANT
                       </Typography>
 
-                      <Typography>Encryption</Typography>
+                    
                     </CardContent>
                   </Card>
                   <Card className={styles.card_container_inner}>
@@ -101,10 +129,10 @@ const WorkingProcess = props => {
                         alt=""
                       />
                       <Typography variant="h6" gutterBottom>
-                        256 - bit
+                      DSCI
                       </Typography>
 
-                      <Typography>Encryption</Typography>
+                
                     </CardContent>
                   </Card>
                 </div>
@@ -113,22 +141,17 @@ const WorkingProcess = props => {
                   <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
                     <div className={styles.vc_consultation_box}>
                       <Typography variant="h3">
-                        Your data has only one <br />
-                        owner.YOU!
+                      Your Security, Our Responsibility !
                       </Typography>
                       <div className={styles.list_item}>
                         <ul>
                           <li><img src={DataSecurity} alt=""/>
-                            Online Aarogya does not have access to your data.
+                          Doctor and Patient are the sole owner of their data
                           </li>
                           <li><img src={DataSecurity} alt=""/>
-                            Online Aarogya does not sell or share your data with
-                            third party.
+                          At Online Aarogya we do not share your data to any third party thus, maintaning 100% privacy.
                           </li>
-                          <li><img src={DataSecurity} alt=""/>
-                            Online Aarogya follow stringent policies so that
-                            data isn't comprised at any step.
-                          </li>
+                        
                         </ul>
                       </div>
                     </div>

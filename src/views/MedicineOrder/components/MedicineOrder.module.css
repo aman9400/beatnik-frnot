@@ -20,6 +20,25 @@
   border-radius: 5px;
 }
 
+.medicine_form .medicine_prescription .root {
+  position: relative;
+}
+
+.medicine_form .medicine_prescription .root .header {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 10px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.medicine_form .medicine_prescription .root .header > div {
+  padding: 0;
+}
+
 .medicine_form .medicine_prescription .medicine_p_upload {
   border: var(--border);
   border-radius: 5px;
@@ -209,6 +228,30 @@
   grid-auto-flow: column;
   -ms-grid-rows: auto;
       grid-template-rows: auto;
+  height: 175px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  /* hsl(0deg 0% 51%) */
+}
+
+.location_list .grid::-webkit-scrollbar {
+  width: 2px;
+  background: rgba(255, 0, 0, 0.242);
+}
+
+.location_list .grid::-webkit-scrollbar-track {
+  -webkit-box-shadow: 0 0 5px grey;
+          box-shadow: 0 0 5px grey;
+  border-radius: 5px;
+}
+
+.location_list .grid::-webkit-scrollbar-thumb {
+  background: #828282;
+  border-radius: 5px;
+}
+
+.location_list .grid::-webkit-scrollbar-thumb:hover {
+  background: #828282;
 }
 
 .location_list .grid label.radio_card {
@@ -218,7 +261,8 @@
 .location_list .grid label.radio_card .card_content_wrapper {
   background: #fff;
   border-radius: 5px;
-  width: 100%;
+  width: 98%;
+  margin: 0 auto;
   padding: 10px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -293,5 +337,78 @@
   font-weight: 500;
   text-align: start;
   color: var(--heading-color);
+}
+
+.fetch_pin_code {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.fetch_pin_code .pin_code {
+  margin-bottom: 0px;
+}
+
+.fetch_pin_code .pin_code input {
+  padding: 12px;
+}
+
+.fetch_pin_code .pin_code label {
+  top: -6px;
+}
+
+.div_or {
+  margin: 10px 0;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--heading-color);
+  opacity: .6;
+}
+
+.fetch_btn {
+  display: block !important;
+  background: #ffefef !important;
+  border: var(--border) !important;
+  height: 40px !important;
+  margin: auto !important;
+}
+
+.location_list p {
+  text-align: start;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--heading-color);
+  opacity: .8;
+}
+
+.MuiInputLabel-outlined.MuiInputLabel-shrink {
+  top: 0 !important;
+}
+
+.others .file_type_label p {
+  font-weight: 600 !important;
+  font-size: 12px !important;
+  opacity: .6 !important;
+}
+
+.add_prescription {
+  width: 100%;
+}
+
+.add_prescription .prescription_data {
+  width: 100%;
+}
+
+.title_page h2 {
+  color: var(--heading-color);
+  display: block;
+  font-size: 32px;
+  font-weight: 700 !important;
+  text-align: center;
+  margin-bottom: 30px;
 }
 /*# sourceMappingURL=MedicineOrder.module.css.map */

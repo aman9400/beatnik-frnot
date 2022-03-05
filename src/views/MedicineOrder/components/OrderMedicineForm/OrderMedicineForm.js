@@ -1,8 +1,17 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles, useTheme, TextField } from '@material-ui/core';
 import styles from './../MedicineOrder.module.css';
-import { Grid, Paper, Typography, MobileStepper, Button } from '@material-ui/core';
+import {
+  Grid,
+  Paper,
+  Typography,
+  MobileStepper,
+  Button,
+  makeStyles,
+  useTheme,
+  TextField,
+  Box
+} from '@material-ui/core';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
@@ -11,42 +20,104 @@ const CurrentLocation = props => {
   return (
     <div className="App">
       <form noValidate autoComplete="off">
-        <TextField id="standard-basic" label="Enter PIN Code" />
-        <Button>Fetch</Button>
-        <div>OR</div>
-        <Button>Geo Current Location </Button>
-        <div>OR</div>
-        <div><p>Location List </p>
-          <div className={styles.location_list}>
+        <div className={styles.fetch_pin_code}>
+          <TextField
+            className={styles.pin_code}
+            id="outlined-secondary"
+            variant="outlined"
+            color="secondary"
+            label="Enter PIN Code"
+          />
+          <Button className={styles.fetch_btn}>Fetch</Button>
+        </div>
 
+        <div className={styles.div_or}>OR</div>
+        <Button className={styles.fetch_btn}>Geo Current Location </Button>
+        <div className={styles.div_or}>OR</div>
+        <div className={styles.location_list}>
+          <p>Location List </p>
+          <div className={styles.location_list}>
             <div className={styles.grid}>
               <label for="radio-card-1" className={styles.radio_card}>
-                <input type="radio" name="radio-card" id="radio-card-1" checked />
+                <input
+                  type="radio"
+                  name="radio-card"
+                  id="radio-card-1"
+                  checked
+                />
                 <div className={styles.card_content_wrapper}>
                   <span className={styles.check_icon}></span>
                   <div className={styles.card_content}>
-                    <p>175/108, Landmark Business Hub, 1st floor,Tokarkhada Silvassa, Dadra & Nagar and Daman & Diu, 396230</p>
-
+                    <p>
+                      175/108, Landmark Business Hub, 1st floor,Tokarkhada
+                      Silvassa, Dadra & Nagar and Daman & Diu, 396230
+                    </p>
                   </div>
                 </div>
               </label>
-
 
               <label for="radio-card-2" className={styles.radio_card}>
                 <input type="radio" name="radio-card" id="radio-card-2" />
                 <div className={styles.card_content_wrapper}>
                   <span className={styles.check_icon}></span>
                   <div className={styles.card_content}>
-                    <p>175/108, Landmark Business Hub, 1st floor,Tokarkhada Silvassa, Dadra & Nagar and Daman & Diu, 396230</p>
-
+                    <p>
+                      175/108, Landmark Business Hub, 1st floor,Tokarkhada
+                      Silvassa, Dadra & Nagar and Daman & Diu, 396230
+                    </p>
                   </div>
                 </div>
               </label>
-
+              <label for="radio-card-2" className={styles.radio_card}>
+                <input type="radio" name="radio-card" id="radio-card-2" />
+                <div className={styles.card_content_wrapper}>
+                  <span className={styles.check_icon}></span>
+                  <div className={styles.card_content}>
+                    <p>
+                      175/108, Landmark Business Hub, 1st floor,Tokarkhada
+                      Silvassa, Dadra & Nagar and Daman & Diu, 396230
+                    </p>
+                  </div>
+                </div>
+              </label>
+              <label for="radio-card-2" className={styles.radio_card}>
+                <input type="radio" name="radio-card" id="radio-card-2" />
+                <div className={styles.card_content_wrapper}>
+                  <span className={styles.check_icon}></span>
+                  <div className={styles.card_content}>
+                    <p>
+                      175/108, Landmark Business Hub, 1st floor,Tokarkhada
+                      Silvassa, Dadra & Nagar and Daman & Diu, 396230
+                    </p>
+                  </div>
+                </div>
+              </label>
+              <label for="radio-card-2" className={styles.radio_card}>
+                <input type="radio" name="radio-card" id="radio-card-2" />
+                <div className={styles.card_content_wrapper}>
+                  <span className={styles.check_icon}></span>
+                  <div className={styles.card_content}>
+                    <p>
+                      175/108, Landmark Business Hub, 1st floor,Tokarkhada
+                      Silvassa, Dadra & Nagar and Daman & Diu, 396230
+                    </p>
+                  </div>
+                </div>
+              </label>
+              <label for="radio-card-2" className={styles.radio_card}>
+                <input type="radio" name="radio-card" id="radio-card-2" />
+                <div className={styles.card_content_wrapper}>
+                  <span className={styles.check_icon}></span>
+                  <div className={styles.card_content}>
+                    <p>
+                      175/108, Landmark Business Hub, 1st floor,Tokarkhada
+                      Silvassa, Dadra & Nagar and Daman & Diu, 396230
+                    </p>
+                  </div>
+                </div>
+              </label>
             </div>
-
           </div>
-
         </div>
       </form>
     </div>
@@ -56,42 +127,45 @@ const CurrentLocation = props => {
 const UploadDOC = props => {
   return (
     <>
-
       <div className={styles.medicine_p_upload}>
         <p>Choose from the following to upload prescription:</p>
         <div className={styles.medicine_file}>
           <input type="file" id="icon-button-file" />
-          <label for="icon-button-file" class={styles.file_type_label}>
+          <label for="icon-button-file" className={styles.file_type_label}>
             <FileCopyIcon />
             <p>Choose from gallery</p>
           </label>
         </div>
         <div className={styles.others}>
-          <label for="icon-button-file" class={styles.file_type_label}>
+          <label for="icon-button-file" className={styles.file_type_label}>
             <p>OR</p>
           </label>
         </div>
         <div className={styles.medicine_file}>
           <input type="file" id="icon-button-file" />
-          <label for="icon-button-file" class={styles.file_type_label}>
+          <label for="icon-button-file" className={styles.file_type_label}>
             <FileCopyIcon />
-            <p>Choose from gallery</p>
+            <p>RX</p>
           </label>
         </div>
         <div className={styles.others}>
-          <label for="icon-button-file" class={styles.file_type_label}>
+          <label for="icon-button-file" className={styles.file_type_label}>
             <p>OR</p>
           </label>
         </div>
-        <div className={styles.medicine_file}>
-          <input type="file" id="icon-button-file" />
-          <label for="icon-button-file" class={styles.file_type_label}>
-            <FileCopyIcon />
-            <p>Choose from gallery</p>
-          </label>
+        <div className={styles.add_prescription}>
+          <TextField 
+            className={styles.prescription_data}
+            id="outlined-secondary"
+            variant="outlined"
+            color="secondary"
+            multiline
+            label="Enter Prescription in Details" 
+            aria-label="minimum height" 
+            minRows={3} 
+             />
         </div>
       </div>
-
     </>
   );
 };
@@ -121,7 +195,7 @@ const tutorialSteps = [
   },
 ];
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     maxWidth: 400,
     flexGrow: 1,
@@ -149,28 +223,42 @@ const OrderMedicineForm = props => {
   const maxSteps = tutorialSteps.length;
 
   const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    setActiveStep(prevActiveStep => prevActiveStep + 1);
   };
 
   const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    setActiveStep(prevActiveStep => prevActiveStep - 1);
   };
   return (
     <div className={styles.medicine_form}>
+      <Box item xl={12} direction="column">
+                <div className={styles.title_page}>
+                    <Typography gutterBottom variant="h2">
+                        Order Medicine 
+                    </Typography>
+                </div>
+            </Box>
       <Grid container spacing={3}>
         <Grid item xs={4}>
           <div className={styles.medicine_prescription}>
-            <div className={classes.root}>
-              <Paper square elevation={0} className={classes.header}>
+            <div className={styles.root}>
+              <Paper square elevation={0} className={styles.header}>
                 <MobileStepper
                   steps={maxSteps}
                   position="static"
                   variant="text"
                   activeStep={activeStep}
-
                   backButton={
-                    <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
-                      {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+                    <Button
+                      size="small"
+                      onClick={handleBack}
+                      disabled={activeStep === 0}
+                    >
+                      {theme.direction === 'rtl' ? (
+                        <KeyboardArrowRight />
+                      ) : (
+                        <KeyboardArrowLeft />
+                      )}
                       Back
                     </Button>
                   }
@@ -185,12 +273,19 @@ const OrderMedicineForm = props => {
                 variant="text"
                 activeStep={activeStep}
                 nextButton={
-                  <Button size="small" onClick={handleNext} disabled={activeStep === maxSteps - 1}>
+                  <Button
+                    size="small"
+                    onClick={handleNext}
+                    disabled={activeStep === maxSteps - 1}
+                  >
                     Next
-                    {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+                    {theme.direction === 'rtl' ? (
+                      <KeyboardArrowLeft />
+                    ) : (
+                      <KeyboardArrowRight />
+                    )}
                   </Button>
                 }
-
               />
             </div>
           </div>
@@ -205,47 +300,81 @@ const OrderMedicineForm = props => {
               <div className={styles.medicine_points}>
                 <div className={styles.item_sure}>
                   <div className={styles.item_icon}>
-                    <img src="https://newassets.apollo247.com/images/upload_prescription/ic_doctor2.svg" alt="Doctor" height="100%" width="100%" />
+                    <img
+                      src="https://newassets.apollo247.com/images/upload_prescription/ic_doctor2.svg"
+                      alt="Doctor"
+                      height="100%"
+                      width="100%"
+                    />
                   </div>
                   <p> Doctor Details </p>
                 </div>
                 <div className={styles.item_sure}>
                   <div className={styles.item_icon}>
-                    <img src="https://newassets.apollo247.com/images/upload_prescription/ic_doctor2.svg" alt="Doctor" height="100%" width="100%" />
+                    <img
+                      src="https://newassets.apollo247.com/images/upload_prescription/ic_doctor2.svg"
+                      alt="Doctor"
+                      height="100%"
+                      width="100%"
+                    />
                   </div>
                   <p> Doctor Details </p>
                 </div>
                 <div className={styles.item_sure}>
                   <div className={styles.item_icon}>
-                    <img src="https://newassets.apollo247.com/images/upload_prescription/ic_doctor2.svg" alt="Doctor" height="100%" width="100%" />
+                    <img
+                      src="https://newassets.apollo247.com/images/upload_prescription/ic_doctor2.svg"
+                      alt="Doctor"
+                      height="100%"
+                      width="100%"
+                    />
                   </div>
                   <p> Doctor Details </p>
                 </div>
                 <div className={styles.item_sure}>
                   <div className={styles.item_icon}>
-                    <img src="https://newassets.apollo247.com/images/upload_prescription/ic_doctor2.svg" alt="Doctor" height="100%" width="100%" />
+                    <img
+                      src="https://newassets.apollo247.com/images/upload_prescription/ic_doctor2.svg"
+                      alt="Doctor"
+                      height="100%"
+                      width="100%"
+                    />
                   </div>
                   <p> Doctor Details </p>
                 </div>
                 <div className={styles.item_sure}>
                   <div className={styles.item_icon}>
-                    <img src="https://newassets.apollo247.com/images/upload_prescription/ic_doctor2.svg" alt="Doctor" height="100%" width="100%" />
+                    <img
+                      src="https://newassets.apollo247.com/images/upload_prescription/ic_doctor2.svg"
+                      alt="Doctor"
+                      height="100%"
+                      width="100%"
+                    />
                   </div>
                   <p> Doctor Details </p>
                 </div>
                 <div className={styles.item_sure}>
                   <div className={styles.item_icon}>
-                    <img src="https://newassets.apollo247.com/images/upload_prescription/ic_doctor2.svg" alt="Doctor" height="100%" width="100%" />
+                    <img
+                      src="https://newassets.apollo247.com/images/upload_prescription/ic_doctor2.svg"
+                      alt="Doctor"
+                      height="100%"
+                      width="100%"
+                    />
                   </div>
                   <p> Doctor Details </p>
                 </div>
                 <div className={styles.item_sure}>
                   <div className={styles.item_icon}>
-                    <img src="https://newassets.apollo247.com/images/upload_prescription/ic_doctor2.svg" alt="Doctor" height="100%" width="100%" />
+                    <img
+                      src="https://newassets.apollo247.com/images/upload_prescription/ic_doctor2.svg"
+                      alt="Doctor"
+                      height="100%"
+                      width="100%"
+                    />
                   </div>
                   <p> Doctor Details </p>
                 </div>
-
               </div>
             </div>
           </div>

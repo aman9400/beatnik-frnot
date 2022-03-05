@@ -85,7 +85,7 @@ const Hero = props => {
         <Grid container justifyContent="center">
           <Box>
             <Typography variant="h2" className={classes.rating_title}>
-              Our Customer Rating
+              Our Customer Ratings
             </Typography>
           </Box>
         </Grid>

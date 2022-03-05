@@ -39,56 +39,8 @@ const Appointment = props => {
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
     defaultMatches: true,
   });
-  function createData(name, calories, fat, carbs, protein) {
-    return { name, calories, fat, carbs, protein };
-  }
-  const package_datas = [
-    createData(
-      'Unlimited Book appointment with doctor of your choice for In-clinic, Video, Audio, Chat consultations from a single application ',
-      <CheckIcon />,
-    ),
-    createData(
-      'Add Up too 6 family members',
-      <CheckIcon />,
-    ),
-    createData(
-      `Medifiles (5 GB storage space) <br/>
-      - Incase of Medical emergency, your family member can access and share your medical records.
-      - Upload the file category-wise
-      - All medical records at one place`,
-      <CheckIcon />,
-    ),
-    createData(
-      `Order Medicine
-      - Get your medicine delivered at your doorstep at discounted price`,
-      <CheckIcon />,
-    ),
-    createData(
-      `Book a Lab Test <br/>
-      - Free Home Sample Collection and get the reports directly on the Online Aarogya application without stepping out from your home.`,
-      <CheckIcon />,
-    ),
-    createData(
-      `Care at Home <br/>
-      - Book professional care for:
-      A. Elderly
-      B. Children
-      C.. Accidental Care
-      D. Physiotherapist
-      All at discounted price.
-      `,
-      <CheckIcon />,
-    ),
-    createData(
-      `Consult for full family by adding the patient name before the consultation. If the family member is verified by OTP, then the family member can independently book consultations.`,
-      <CheckIcon />,
-    ),
-    createData(
-      `Subscription Charges for 1 Year(PLUS 18% GST)`,
-      <CheckIcon />,
-    ),
-  ];
-  // First Plan Set
+
+
 
   return (
     <div className={styles.packages_section} {...rest}>
@@ -133,41 +85,118 @@ const Appointment = props => {
                     </TableCell>
                     <TableCell align="center">
                       <b>ANNUAL PLAN</b>
-                
-                    
                     </TableCell>
-                    {/* <TableCell align="center">
-                    <b>3 months plan</b>
-                    <br />
-                    <small>Covers 1 Adult</small>
-                  </TableCell> */}
-                    {/* <TableCell align="center">
-                    <b>Annual Plan</b>
-                    <br />
-                    <small>Covers 1 Adult</small>
-                  </TableCell> */}
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {package_datas.map(package_data => (
-                    <TableRow key={package_data.name}>
-                      <TableCell>
-                        <p>{package_data.name}</p>
-                      </TableCell>
-                      <TableCell align="center">
-                        <span className={styles.packages_span}>
-                          {package_data.calories}
-                        </span>
-                      </TableCell>
-              
-            
-                    </TableRow>
-                  ))}
-                  <TableRow>
+                
+                  <TableRow >
+                    <TableCell>
+                      <p>Unlimited Book appointment with doctor of your choice for <b>In-clinic</b>, <b>Video</b>, <b>Audio</b>, <b>Chat Consultations</b> from a single application</p>
+                    </TableCell>
+                    <TableCell align="center">
+                      <span className={styles.packages_span}>
+                        <CheckIcon />
+                      </span>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow >
+                    <TableCell>
+                      <p>Add Up to 6 family members</p>
+                    </TableCell>
+                    <TableCell align="center">
+                      <span className={styles.packages_span}>
+                        <CheckIcon />
+                      </span>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow className={styles.table_list}>
+                    <TableCell>
+                      <p>Medifiles <small>(5 GB storage space)</small> </p>
+                      <ul>
+                        <li>Incase of Medical emergency, your family member can access and share your medical records.</li>
+                        <li>Upload the file category-wise</li>
+                        <li>All medical records at one place</li>
+                      </ul>
+                    </TableCell>
+                    <TableCell align="center">
+                      <span className={styles.packages_span}>
+                        <CheckIcon />
+                      </span>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow className={styles.table_list}>
+                    <TableCell>
+                      <p>Order Medicine </p>
+                      <ul>
+                        <li>Get your medicine delivered at your doorstep at discounted price</li>
+
+                      </ul>
+                    </TableCell>
+                    <TableCell align="center">
+                      <span className={styles.packages_span}>
+                        <CheckIcon />
+                      </span>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow className={styles.table_list}>
+                    <TableCell>
+                      <p>Book a Lab Test</p>
+                      <ul>
+                        <li>Free Home Sample Collection and get the reports directly on the Online Aarogya application without stepping out from your home.</li>
+
+                      </ul>
+                    </TableCell>
+                    <TableCell align="center">
+                      <span className={styles.packages_span}>
+                        <CheckIcon />
+                      </span>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow className={styles.table_list}>
+                    <TableCell>
+                      <p>Care at Home</p>
+                      <small><b>Book professional care for:</b></small>
+                      <ul>
+                        <li>Elderly</li>
+                        <li>Children</li>
+                        <li>Accidental Care</li>
+                        <li>Physiotherapist</li>
+                      </ul>
+                      <small><b>All at discounted price.</b></small>
+                    </TableCell>
+                    <TableCell align="center">
+                      <span className={styles.packages_span}>
+                        <CheckIcon />
+                      </span>
+                    </TableCell>
+                  </TableRow>
+                
+                  <TableRow className={styles.table_list}>
+                    <TableCell>
+                      <p>Consult for full family by adding the patient name before the consultation. If the family member is verified by OTP, then the family member can independently book consultations.</p>
+
+                    </TableCell>
+                    <TableCell align="center">
+                      <span className={styles.packages_span}>
+                        <CheckIcon />
+                      </span>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow className={styles.table_list}>
+                    <TableCell>
+                      <p>Subscription Charges for 1 Year <small><b>(<i>PLUS 18% GST</i>)</b></small></p>
+
+                    </TableCell>
+                    <TableCell align="center">
+                      <span className={styles.packages_span}>
+                        <CheckIcon />
+                      </span>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow >
                     <TableCell component="th" scope="row"></TableCell>
-
-
-                    <TableCell align="left" className="text_decoration">
+                    <TableCell style={{width:'200px'}} align="left" className="text_decoration">
                       <b className={styles.packages_cut_price_tag}>₹1,300</b>
                       <b className={styles.packages_original_tag}>₹100/ Year</b>
                       <h6 className={styles.packages_save}>Save 92%</h6>
@@ -176,14 +205,14 @@ const Appointment = props => {
                       </p>
                       <Button
                         className={styles.packages_buy_plan}
-                        variant="contained"
-                      >
+                        variant="contained">
                         Buy Plan
                       </Button>
                     </TableCell>
 
 
                   </TableRow>
+
                 </TableBody>
               </Table>
             </TableContainer>

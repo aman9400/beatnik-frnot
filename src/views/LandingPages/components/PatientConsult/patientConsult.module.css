@@ -10,7 +10,7 @@
   border-radius: 10px;
   cursor: pointer;
   background: #fff;
-  height: 210px;
+  height: 100%;
   transition: 0.6s;
   text-align: center;
   width: 100%;
@@ -64,7 +64,8 @@ margin-bottom: 5px;
   margin-bottom: 20px;
 }
 @media only screen and (max-width: 450px) {
-    .patientConsult_inner_card {
-        height: 210px;
-      }
+    .patientConsult_inner_card .img_card img {
+      width: 100%;
+      height: auto;
+        }
   }

@@ -79,7 +79,6 @@
 }
 .packages_table_paper th, .packages_table_paper td {
     border: 1px solid #ebf5ea75;
-    width:250px;
 }
 .packages_table_title {
     color:var(--heading-color) !important;
@@ -91,4 +90,11 @@
     font-weight: 500 !important;
     font-size: 15px !important;
     margin-bottom: 30px !important;
+}
+.table_list ul {
+    margin-left: 20px;
+    list-style: disc;
+}
+.table_list ul li {
+    font-size: 12px;
 }
