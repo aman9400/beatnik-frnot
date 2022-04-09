@@ -91,3 +91,16 @@ justify-content: space-between;
     display:grid;
     float: right;
 }
+.button_list button span svg {
+width: .8em;
+height: .8em;
+}
+.button_list button  {
+    padding: 5px !important;
+    }
+.user_profile img {
+    width: 50px;
+    height: 50px;
+    border: 2px solid #efefee;
+    border-radius: 50%;
+}

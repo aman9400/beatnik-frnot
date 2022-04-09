@@ -226,8 +226,8 @@ const Main = ({ children, themeToggler, themeMode }) => {
           groupTitle: 'ONLINE AAROGYA',
           pages: [
             {
-              title: 'About ',
-              href: '/about ',
+              title: 'About Us',
+              href: '/about-us ',
             },
             {
               title: 'Careers',

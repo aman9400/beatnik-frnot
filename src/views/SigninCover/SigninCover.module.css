@@ -9,7 +9,6 @@
   width: 100%;
   height: 100vh;
   display: block;
-  
 }
 .entry_cover_inner {
   position: relative;
@@ -55,7 +54,7 @@
   color: var(--theme-color);
   font-size: 20px;
   font-weight: 700;
-  opacity: .85;
+  opacity: 0.85;
 }
 
 .page_title_inner a > span {
@@ -87,14 +86,10 @@
   width: 100%;
 }
 .login_container {
-  padding: 20px 30px;
-  background: #fff;
-  border-radius: 5px;
-  border: var(--border);
   margin: auto;
   width: 100%;
-  max-width: 400px;
-  min-width: 450px;
+  max-width: 600px;
+  min-width: 650px;
 }
 .company_info {
   width: 70%;
@@ -178,6 +173,188 @@
     width: 100%;
   }
 }
-.second_title_box{
+.second_title_box {
   position: relative;
+}
+
+/* Form Cover Design  */
+.signup__area {
+  position: relative;
+  text-align: center;
+  margin: 0 auto;
+}
+.page__title h2 {
+  color: #696f79;
+  font-weight: 600;
+  font-size: 40px;
+}
+.login_mode {
+  margin: 12px 0;
+}
+.google_mode {
+  padding: 10px 100px !important;
+  box-shadow: var(--bs-sm) !important;
+  border-radius: 5px !important;
+  margin: 0 10px !important;
+  background: #efefef !important;
+}
+.google_mode img {
+  width: 32px;
+}
+.facebook_mode {
+  padding: 10px 100px !important;
+  box-shadow: var(--bs-sm) !important;
+  border-radius: 5px !important;
+  margin: 0 10px !important;
+  background: #4267b2 !important;
+}
+.facebook_mode img {
+  width: 32px;
+}
+.divider {
+    width: 100%;
+    padding: 20px 0;
+    margin: 0 auto;
+}
+.divider span {
+  width: 100%;
+  height: 1.5px;
+  background: #1b2838;
+  display: block;
+  position: relative;
+  margin: 0 auto;
+  top: 14px;
+  opacity: .8;
+}
+.divider b {
+  background: #fef6e8;
+  position: relative;
+  padding: 10px;
+}
+
+.sign__input_wrapper {
+  margin-bottom: 15px;
+  width: 100%;
+  text-align: left;
+}
+.sign__input_wrapper h5 {
+  font-size: 18px;
+  opacity: .9;
+  font-weight: 600;
+  color: #021937;
+  margin-bottom: 5px;
+}
+.sign__input input {
+  width: 100%;
+  height: 52px;
+  line-height: 52px;
+  padding: 10px 15px;
+  font-size: 14px;
+  border: 1px solid #8692a6;
+  background: #fff;
+  color: #222222;
+  border-radius: 6px;
+}
+.sign__action {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.m_check_label {
+  cursor: pointer;
+  padding-left: 10px;
+  font-size: 16px;
+  margin-top: 4px;
+}
+.sign__forgot p:hover {
+  color: #1c7df8;
+}
+
+.sign__forgot p {
+  color: #7a797f;
+  font-size: 16px;
+  line-height: 40px;
+  cursor: pointer;
+  margin: 0 !important;
+}
+.w_btn {
+  font-size: 18px  !important;
+  color: #ffffff !important;
+  background: #6b705a !important;
+  height: 48px !important;
+  line-height: 40px  !important;
+  border: 2px solid #6b705a !important;
+  text-align: center  !important;
+  padding: 0 20px  !important;
+  display: inline-block  !important;
+  font-weight: 400  !important;
+  border-radius: 5px  !important;
+  text-transform: capitalize  !important;
+  position: relative  !important;
+  z-index: 1  !important;
+  overflow: hidden  !important;
+}
+.sign__new {
+  margin-top: 20px;
+  text-align: center;
+}
+.sign__new p {
+  color: #7a797f;
+  margin-bottom: 0;
+  display: flex;
+  justify-content: center;
+}
+.sign__new p > p {
+  color: #1c7df8;
+  font-weight: 600;
+  margin-left: 10px;
+  cursor: pointer;
+      text-decoration: underline;
+}
+.img_section img{
+    width: 100%;
+    height: 110vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+.brand_name {
+    position: absolute;
+    bottom: 4%;
+    left: 10%;
+}
+.longin_container {
+  margin-top: 50px;
+  padding: 30px 50px;
+  border-radius: 10px;
+  background: rgba(250, 166, 26, 0.1);
+  z-index: 11;
+  border: 1px solid #efe4d2;
+}
+.sign__input > div {
+  width: 100%;
+  height: 52px;
+  line-height: 52px;
+  padding: 10px 15px;
+  font-size: 14px;
+  border: 1px solid #8692a6;
+  background: #fff;
+  color: #222222;
+  border-radius: 6px;
+  font-size: 16px;
+  overflow: hidden;
+}
+.sign__input textarea {
+  width: 100%;
+  height: 70px;
+  padding: 10px 15px;
+  font-size: 14px;
+  border: 1px solid #8692a6;
+  background: #fff;
+  color: #222222;
+  border-radius: 6px;
+  font-size: 16px;
+  overflow: hidden;
 }

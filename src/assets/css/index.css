@@ -10,7 +10,9 @@
   --bs-lg: 0 1px 4px hsla(0, 0%, 0%, 0.09), 0 3px 8px hsla(0, 0%, 0%, 0.09),
     0 4px 13px hsla(0, 0%, 0%, 0.13);
   --icon-color: #878787;
-  --theme-color: #ff2301;
+  --theme-color: #f9a630;
+  --theme-color-op: rgb(19 9 142 / 5%);
+
   --white: white;
 }
 
@@ -28,7 +30,7 @@ html {
 }
 body::-webkit-scrollbar {
   width: 10px;
-  background: rgba(255, 0, 0, 0.342);
+  background: var(--theme-color-op);
 }
 
 body::-webkit-scrollbar-track {
@@ -53,7 +55,7 @@ a {
   text-decoration: none;
 }
 a:hover {
-  color: red;
+  color: var(--theme-color);
   text-decoration: none !important;
 }
 #root {
@@ -201,13 +203,13 @@ a:hover {
 
 .breadcrumbs_section {
   position: relative;
-  background-image: url(../../../public/assets/Images/common/breadcrumb-bg.jpg);
+  background-image: url(../../../public/assets/Images/common/default.jpg);
   background-size: 100%;
   padding: 0 !important;
   border-top: var(--border);
 }
 .breadcrumb_container {
-  padding: 15px 50px ;
+  padding: 15px 50px;
 }
 .breadcrumbs {
   position: relative;
@@ -479,7 +481,9 @@ a:hover {
   -webkit-transition: all 0.5s;
   transition: all 0.5s;
 }
-.doctors,.patients,.corporates {
+.doctors,
+.patients,
+.corporates {
   flex: 0 0 auto !important;
   font-size: 15px !important;
   font-weight: 600 !important;
@@ -490,7 +494,7 @@ a:hover {
   color: var(--theme-color) !important;
 }
 .patients:before {
-  content: " ";
+  content: ' ';
   position: absolute;
   top: 28px;
   left: 0;
@@ -508,25 +512,25 @@ a:hover {
   background: #fff;
   display: flex;
   justify-content: center;
-  border: 0px solid red;
+  border: 0px solid var(--theme-color);
   border-radius: 15px;
   width: 75% !important;
-  box-shadow:0 1px 3px rgb(60 63 66 / 32%), 0 4px 12px rgb(60 63 66 / 15%);
+  box-shadow: 0 1px 3px rgb(60 63 66 / 32%), 0 4px 12px rgb(60 63 66 / 15%);
   margin: 0 auto;
 }
 .after_login {
   display: flex;
 }
 .after_login > p > button {
-  padding:0px;
+  padding: 0px;
 }
-.after_login > p > button >span >img {
-  width:60px;
-  height:60px;
-  border-radius:50%;
+.after_login > p > button > span > img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
   border: var(--border);
 }
-.after_login > p > button >span >img {
+.after_login > p > button > span > img {
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -540,42 +544,38 @@ a:hover {
 =========================================================================  */
 @media only screen and (max-width: 500px) {
   .breadcrumb_container {
-    padding:10px 0px ;
+    padding: 10px 0px;
   }
-  .search_form { 
-    width:95% !important;
+  .search_form {
+    width: 95% !important;
     box-shadow: var(--bs-md) !important;
     border: var(--border);
     border-radius: 10px !important;
   }
   .search_form button {
     border-radius: 0px !important;
-    
   }
 }
-@media screen and (min-width: 501px) and (max-width: 599px) { 
+@media screen and (min-width: 501px) and (max-width: 599px) {
   .search_form button {
     border-radius: 0px !important;
   }
 }
-@media screen and (min-width: 600px) and (max-width: 959px) { 
+@media screen and (min-width: 600px) and (max-width: 959px) {
   .container_location_input {
     padding: 0 !important;
   }
   .search_form {
     width: 100% !important;
-  
   }
   .search_form button {
     position: absolute;
     right: 0;
     width: 135px !important;
-    
   }
 }
-.after_login{
+.after_login {
   position: relative;
-
 }
 .after_login_list {
   position: absolute !important;
@@ -596,32 +596,32 @@ a:hover {
 .user_feature:hover {
   background: #ff000014;
 }
-.user_feature  .user_icon {
+.user_feature .user_icon {
   min-width: auto !important;
   margin-right: 10px !important;
-
 }
 .user_feature span {
-line-height: 20px;
+  line-height: 20px;
   font-size: 16px;
   font-weight: 500;
   color: var(--heading-color);
 }
-.user_feature  .user_icon svg, .user_feature svg {
+.user_feature .user_icon svg,
+.user_feature svg {
   fill: var(--heading-color) !important;
-  width: .8em;
-  height: .8em;
+  width: 0.8em;
+  height: 0.8em;
 }
-.user_f_title  {
-margin: 0 !important;
+.user_f_title {
+  margin: 0 !important;
 }
 .user_f_title span {
   font-size: 16px;
   color: var(--heading-color);
   font-weight: 500;
 }
-.after_login_list:after{
-  content: "";
+.after_login_list:after {
+  content: '';
   display: block;
   height: 0;
   position: absolute;
@@ -632,17 +632,56 @@ margin: 0 !important;
   right: 10px;
   top: -12px;
 }
-.after_login_list:before{
+.after_login_list:before {
   border-bottom-style: solid;
-    content: '';
-    display: block;
-    height: 0;
-    position: absolute;
-    width: 0;
-    border: 7px solid;
-    border-color: transparent transparent #dadce0 transparent;
-    z-index: 98;
-    left: auto;
-    right: 10px;
-    top: -14px;
+  content: '';
+  display: block;
+  height: 0;
+  position: absolute;
+  width: 0;
+  border: 7px solid;
+  border-color: transparent transparent #dadce0 transparent;
+  z-index: 98;
+  left: auto;
+  right: 10px;
+  top: -14px;
+}
+th,
+td {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+table thead tr > th {
+  border-bottom: 2px solid var(--theme-color) !important;
+}
+.table_container tbody tr th,
+.table_container tbody tr td {
+  width: 100%;
+  position: relative;
+  border: thin solid #c1c1c145;
+}
+.table_container {
+  width: 100%;
+  position: relative;
+  overflow-x: scroll;
+  margin-bottom: 20px;
+}
+.table_container::-webkit-scrollbar {
+  border-radius: 10px !important;
+  height: 8px;
+  background: var(--theme-color-op);
+}
+
+.table_container::-webkit-scrollbar-track {
+  box-shadow: 0 0 5px grey;
+  border-radius: 5px;
+}
+/* hsl(0deg 0% 51%) */
+.table_container::-webkit-scrollbar-thumb {
+  background: #828282;
+  border-radius: 5px;
+}
+
+.table_container::-webkit-scrollbar-thumb:hover {
+  background: #828282;
 }

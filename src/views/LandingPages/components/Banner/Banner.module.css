@@ -1,0 +1,86 @@
+.banner_container {
+  position: relative;
+  width: 100%;
+  height: 900px;
+  top: -90px;
+}
+.img_section img {
+  width: 100%;
+}
+.header_container {
+  position: relative;
+}
+.header_container {
+  position: relative;
+}
+.sliderimg {
+  position: relative;
+}
+.img_section img {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+}
+.content_section {
+  position: relative;
+  z-index: 9999;
+  padding: 100px;
+}
+.title_part h5 {
+  font-size: 70px;
+  color: #fff;
+  font-weight: 500;
+}
+.title_part h1 span {
+  font-size: 90px;
+  color: #fff;
+  font-weight: 700;
+}
+.title_part p {
+  font-size: 25px;
+  color: #fff;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+}
+.horizontal_content {
+  font-size: 35px;
+  display: flex;
+  position: absolute;
+  bottom: -370px;
+  left: 0;
+}
+.horizontal_content h4 {
+  border-top: 2px solid #ffffff36;
+  border-bottom: 2px solid #ffffff36;
+  transform: rotate(-90deg);
+  height: 115px;
+  color: #fff;
+}
+.horizontal_content h4 b {
+  color: var(--theme-color);
+}
+.cont_letter {
+  font-size: 25px;
+  color: #fff;
+  position: relative;
+  left: -30px;
+  top: 25px;
+}
+.horizontalBbrand {
+  position: absolute;
+  right: 70px;
+  bottom: -370px;
+}
+.community_btn {
+  position: absolute !important;
+  bottom: -75%;
+  background: #f9a630 !important;
+  left: 60%;
+  color: #fff !important;
+  padding: 10px 60px !important;
+  border-radius: 40px !important;
+}
+

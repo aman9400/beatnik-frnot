@@ -93,8 +93,8 @@ td {
 }
 .react-multiple-carousel__arrow::before {
   font-size: 14px !important;
-
-  color: #ff2301 !important;
+font-weight: 800;
+  color:var(--theme-color) !important;
   display: block;
   text-align: center;
   z-index: 2;
@@ -492,4 +492,28 @@ img.avatar-xl.rounded-circle.mb-1 {
 
 .type_consultation .Mui-selected {
   background: #ff000017 !important;
+}
+.react-multi-carousel-dot-list {
+  bottom: 45px !important;
+}
+.left_portion {
+  display: flex;
+  float: left;
+  width: 100%;
+  margin-left: 40px;
+}
+.right_side {
+  display: flex;
+}
+.letsTalk {
+  color: #fff !important;
+  align-items: center;
+  display: flex;
+}
+.login_Header {
+  padding: 12px 45px;
+  border-radius: 25px;
+  background: #6b705a !important;
+  color: #fff;
+  margin-left: 20px !important;
 }

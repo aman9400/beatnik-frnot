@@ -1,8 +1,3 @@
-/**
- * Caution: Consider this file when using NextJS
- *
- * You may delete this file and its occurrences from the project filesystem if you are using GatsbyJS or react-scripts version
- */
 import React from 'react';
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheets } from '@material-ui/core/styles';
@@ -17,7 +12,7 @@ export default class MyDocument extends Document {
           <meta name="theme-color" content="#ffffff" />
           <meta
             name="description"
-            content="ACPL is a start-up in the field of medical healthcare including tele-medicine. The software platform will enable patients to search doctors for various specialties, check their profile, book appointment, and take consultation. The company is going to start the pilot launch by end of Aug 2021 and a full-scale launch of services by end of Oct 2021. The company’s mission is to create medical healthcare eco-system accessible, easier and better in terms of quality especially serving to the rural and non-metro geographies, which constitutes more than 75% of the population."
+            content="Welcome to Beatnik World "
           />
           <meta
             name="robots"

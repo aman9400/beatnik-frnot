@@ -75,12 +75,6 @@ const SearchDoctor = props => {
   const [getLongitutde, setLongitutde] = React.useState('');
   const [myresult, setResult] = React.useState([]);
 
-  // useEffect(() => {
-  //   navigator.geolocation.getCurrentPosition(function(position) {
-  //     setLatitude(position.coords.latitude);
-  //     setLongitutde(position.coords.longitude);
-  //   });
-  // }, []);
 
 
   const [getLocation, setSetLocation] = React.useState('');
@@ -88,13 +82,6 @@ const SearchDoctor = props => {
   const [getLoc, setSetLoc] = React.useState();
 
 
-
-  // useEffect(() => {
-
-  //   geocodeByLatLng({ lat: getLatitude, lng: getLongitutde })
-  //     .then(results => setResult(results))
-  //     .catch(error => console.error(error));
-  //   },[]);
 
 
   const [value, setValue] = useState();
@@ -149,7 +136,7 @@ const SearchDoctor = props => {
       )}
       {...rest}
     >
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCea7use-zSkFZxumDrado3k8WSHPbUlk&libraries=places&callback=myCallbackFunc"></script>
+      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCea7use-zSkFZxumDrado3k8WSHPbUlk&libraries=places&callback=myCallbackFunc"></script>
       <Grid
         container
         className="search_form"
@@ -189,10 +176,10 @@ const SearchDoctor = props => {
         </Grid>
 
         <Grid
-        item
-                  xs={12}
-                   sm={4}
-        //             md={5}
+          item
+          xs={12}
+          sm={4}
+          //             md={5}
           className={styles.container_location_input}
           style={isMd ? { padding: '0px' } : { padding: '50px' }}
         ><div>

@@ -1,159 +1,106 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Button, TextField } from '@material-ui/core';
-import validate, { async } from 'validate.js';
-import { getPatientLogin } from '../../../../components/helper/PatientApi';
-import AlertMassage from '../../../../components/helper/AlertMessage';
-import Router from 'next/router';
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    width: '100%',
-  },
-}));
-
-const schema = {
-  mobile: {
-    presence: { allowEmpty: false, message: 'is required' },
-    length: {
-      maximum: 10,
-      message: 'must be 10 digit',
-      minimum: 10,
-      message: 'must be 10 digit',
-    },
-  },
-};
+import React, { useState } from 'react';
+import styles from './../../../SigninCover/SigninCover.module.css';
+import Link from 'next/link';
+import { Button } from '@material-ui/core';
 
 const Form = () => {
-  const classes = useStyles();
-
-  const [formState, setFormState] = React.useState({
-    isValid: false,
-    values: {},
-    touched: {},
-    errors: {},
-  });
-
-  const [subming, setSubiting] = React.useState(false);
-  const [status, setStatusBase] = React.useState('');
-
-  React.useEffect(() => {
-    const errors = validate(formState.values, schema);
-
-    setFormState(formState => ({
-      ...formState,
-      isValid: errors ? false : true,
-      errors: errors || {},
-    }));
-  }, [formState.values]);
-
-  const handleChange = event => {
-    event.persist();
-
-    setFormState(formState => ({
-      ...formState,
-      values: {
-        ...formState.values,
-        [event.target.name]:
-          event.target.type === 'checkbox'
-            ? event.target.checked
-            : event.target.value,
-      },
-      touched: {
-        ...formState.touched,
-        [event.target.name]: true,
-      },
-    }));
-  };
-
-  const handleSubmit = async event => {
-    event.preventDefault();
-
-    if (formState.isValid) {
-      var data = JSON.stringify({ mobile: formState.values.mobile });
-
-      const res = await getPatientLogin(data);
-      if (res.success) {
-        setStatusBase('');
-        setStatusBase({
-          key: 22,
-          status: 'success',
-          msg: 'Check your mobile for the OTP',
-        });
-        Router.push(`/signin-otp?mob=${formState.values.mobile}`, undefined, {
-          shallow: true,
-        });
-      } else {
-        setStatusBase('');
-        setStatusBase({
-          key: 22,
-          status: 'error',
-          msg: res.message,
-        });
-      }
-      console.log('res', res);
-      setSubiting(false);
+  const [email, setEmail] = useState();
+  const [passsword, setPasssword] = useState();
+  const [message, setMessage] = useState();
+  var myHeaders = new Headers();
+  myHeaders.append(
+    'Cookie',
+    'ci_session=49fe10b4cceee7e74b43eb3c532e8afda6658230',
+  );
+  const UserLogin = async e => {
+    var formdata = new FormData();
+    formdata.append('email', email);
+    formdata.append('passsword', passsword);
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: formdata,
+      redirect: 'follow',
+    };
+    e.preventDefault();
+    try {
+      const res = await fetch(
+        'https://app.whyuru.com/api/beatnikLogin',
+        requestOptions,
+      )
+        .then(response => response.json())
+      setMessage(res.result.message);
+    } catch (err) {
+      console.log(err);
     }
-
-    setFormState(formState => ({
-      ...formState,
-      touched: {
-        ...formState.touched,
-        ...formState.errors,
-      },
-    }));
   };
-
-  const hasError = field =>
-    formState.touched[field] && formState.errors[field] ? true : false;
-
   return (
-    <div className={classes.root} className="formContainerMain">
-      {status ? (
-        <AlertMassage
-          key={status.key}
-          message={status.msg}
-          status={status.status}
-        />
-      ) : null}
-      <form name="password-reset-form" method="post" onSubmit={handleSubmit}>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <TextField
-              placeholder="eg. XXXXXXX301"
-              label="Mobile Number"
+    <div>
+      <div className={styles.sign__wrapper}>
+        <div className={styles.sign__input_wrapper}>
+          <h5>Email Address</h5>
+          <div className={styles.sign__input}>
+            <input
               variant="outlined"
-              size="medium"
-              name="mobile"
-              onInput={e => {
-                e.target.value = Math.max(0, parseInt(e.target.value))
-                  .toString()
-                  .slice(0, 10);
-              }}
+              margin="normal"
+              required
               fullWidth
-              helperText={
-                hasError('mobile') ? formState.errors.mobile[0] : null
-              }
-              error={hasError('mobile')}
-              onChange={handleChange}
-              type="number"
-              value={formState.values.mobile || ''}
+              name="email"
+              placeholder="Enter Email"
+              onChange={e => setEmail(e.target.value)}
             />
-          </Grid>
-          <Grid item xs={12}>
-            <Button
-              style={{ marginTop: '20px' }}
-              size="large"
-              variant="contained"
-              type="submit"
-              color="primary"
+          </div>
+        </div>
+        <div className={styles.sign__input_wrapper}>
+          <h5>Password</h5>
+          <div className={styles.sign__input}>
+            <input
+              variant="outlined"
+              margin="normal"
+              required
               fullWidth
-            >
-              LOGIN
-            </Button>
-          </Grid>
-        </Grid>
-      </form>
+              name="password"
+              placeholder="Enter Password"
+              type="password"
+              onChange={e => setPasssword(e.target.value)}
+            />
+          </div>
+        </div>
+        <p>{message}</p>
+        <div className={styles.sign__action}>
+          <div className={styles.sign__agree}>
+            <input className="m-check-input" type="checkbox" id="m-agree" />
+            <label className={styles.m_check_label} htmlFor="m-agree">
+              Remember Me
+            </label>
+          </div>
+          <div className={styles.sign__forgot}>
+            <Link href="/forgot-password">
+              <p>Forgot password?</p>
+            </Link>
+          </div>
+        </div>
+     
+       
+        <Button
+          fullWidth
+          variant="contained"
+          color="primary"
+          className={styles.w_btn}
+          onClick={UserLogin}
+          
+        >
+          <span></span> Log In
+        </Button>
+        <div className={styles.sign__new}>
+          <p>
+            Don't have an account ?
+            <Link href="/signup">
+              <p>Sign Up</p>
+            </Link>
+          </p>
+        </div>
+      </div>
     </div>
   );
 };

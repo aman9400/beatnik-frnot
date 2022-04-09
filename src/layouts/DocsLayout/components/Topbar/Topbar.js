@@ -26,7 +26,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import Cookies from 'js-cookie';
 import { checkToken } from '../../../../components/helper/LoginCheck';
 import { useRouter } from 'next/router';
-import BrandLogo from './../../../../../public/assets/Images/logo/online-aarogya-logo.png';
+import BrandLogo from './../../../../../public/assets/Images/logo/logo.svg';
 const useStyles = makeStyles(theme => ({
   root_som: {
     padding: '10px',

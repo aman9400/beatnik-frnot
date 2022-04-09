@@ -1,8 +1,4 @@
-/**
- * Caution: Consider this file when using NextJS
- *
- * You may delete this file and its occurrences from the project filesystem if you are using GatsbyJS or react-scripts version
- */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';

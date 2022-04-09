@@ -19,6 +19,7 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import Link from 'next/link';
 import DashboardIcon from '@material-ui/icons/Dashboard';
+import PermIdentityIcon from '@material-ui/icons/PermIdentity';
 const useStyles = makeStyles(theme => ({
   mobileDrawer: {
     width: 256,
@@ -76,13 +77,13 @@ const Navbar = ({ onMobileClose, openMobile }) => {
   };
   const getPatientProfileDetails = async () => {
     var doctorDatas = await getPatientProfile();
-    console.log('User Details', doctorDatas.patient_info.name);
+    // console.log('User Details', doctorDatas.patient_info.name);
     setPatientDetails(doctorDatas.patient_info);
   };
   React.useEffect(() => {
-    //console.log('ssssssssssssssss',user)
+  
     getPatientProfileDetails();
-    console.log('ssssssssssssssss');
+  
   }, []);
   // Set Sidebar Menu Icon Color
   // MEdifiles Data sta
@@ -114,15 +115,15 @@ const Navbar = ({ onMobileClose, openMobile }) => {
           <ListItem className={styles.nav_link} >
             <Link href="/account">
               <p className={styles.dashboard_data}>
-              <ListItemIcon className={classes.iconWidth}>
-                <DashboardIcon />
-              </ListItemIcon>
-              <ListItemText className={styles.page_title} primary="Dashboard"/>
+                <ListItemIcon className={classes.iconWidth}>
+                  <DashboardIcon />
+                </ListItemIcon>
+                <ListItemText className={styles.page_title} primary="Dashboard" />
               </p>
             </Link>
           </ListItem>
 
-          <ListItem className={classes.nav_link} button onClick={handleClick}>
+          {/* <ListItem className={classes.nav_link} button onClick={handleClick}>
             <ListItemIcon className={classes.iconWidth}>
               <i className="fas fa-file-download"></i>
             </ListItemIcon>
@@ -201,8 +202,57 @@ const Navbar = ({ onMobileClose, openMobile }) => {
             </List>
           </Collapse>
 
-          <Divider />
-
+          <Divider /> */}
+          <ListItem className={styles.nav_link} >
+            <Link href="/account/all-consultations">
+              <p className={styles.dashboard_data}>
+                <ListItemIcon className={classes.iconWidth}>
+                  <PermIdentityIcon />
+                </ListItemIcon>
+                <ListItemText className={styles.page_title} primary="Appointment" />
+              </p>
+            </Link>
+          </ListItem>
+          <ListItem className={styles.nav_link} >
+            <Link href="/account/medifiles">
+              <p className={styles.dashboard_data}>
+                <ListItemIcon className={classes.iconWidth}>
+                  <PermIdentityIcon />
+                </ListItemIcon>
+                <ListItemText className={styles.page_title} primary="Medifiles" />
+              </p>
+            </Link>
+          </ListItem>
+          <ListItem className={styles.nav_link} >
+            <Link href="/account/visited-doctors">
+              <p className={styles.dashboard_data}>
+                <ListItemIcon className={classes.iconWidth}>
+                  <PermIdentityIcon />
+                </ListItemIcon>
+                <ListItemText className={styles.page_title} primary="Visited Doctor" />
+              </p>
+            </Link>
+          </ListItem>
+          <ListItem className={styles.nav_link} >
+            <Link href="/account/offers">
+              <p className={styles.dashboard_data}>
+                <ListItemIcon className={classes.iconWidth}>
+                  <PermIdentityIcon />
+                </ListItemIcon>
+                <ListItemText className={styles.page_title} primary="Offers" />
+              </p>
+            </Link>
+          </ListItem>
+          <ListItem className={styles.nav_link} >
+            <Link href="/account/my-subscription">
+              <p className={styles.dashboard_data}>
+                <ListItemIcon className={classes.iconWidth}>
+                  <PermIdentityIcon />
+                </ListItemIcon>
+                <ListItemText className={styles.page_title} primary="My Subscription" />
+              </p>
+            </Link>
+          </ListItem>
         </List>
       </Box>
       <Box flexGrow={1} />
