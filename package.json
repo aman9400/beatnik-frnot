@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "next dev",
     "start": "next start -p ${PORT:=3000}",
-    "build": "cross-env GENERATE_SOURCEMAP=false next build",
+    "build": "next build",
     "prettier": "prettier --write '**/*.{js,css,html}'",
     "clear-all": "rimraf ./.cache ./.next ./node_modules"
   },
