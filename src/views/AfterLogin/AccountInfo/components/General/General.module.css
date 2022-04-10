@@ -1,0 +1,106 @@
+.som_account_info {
+    position: relative;
+}
+.som_account_info header {
+    box-shadow: none !important;
+    border-bottom:0px solid red ;
+}
+/* Medical History  */
+.p_medical_d {
+margin-bottom: 20px;
+display: flex;
+justify-content: space-between;
+}
+.p_medical_d h6 {
+    font-size: 18px;
+    color: var(--heading-color);
+    font-weight: 600;
+}
+.p_medical_d h6 p{
+    font-size: 16px;
+    color: var(--heading-color);
+    font-weight: 500;
+    opacity: .8;
+}
+.accordian_tab {
+    border: 1px solid #8f8f8f  !important;
+    margin-bottom: 15px !important;
+    box-shadow:var(--bs-sm) !important;
+    border-radius: 5px !important;
+    overflow: hidden;
+}
+/* Family Members  */
+.family_member_list {
+    position: relative;
+    width: 100%;
+    border: var(--border);
+    background: #ffccc421;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding: 15px;
+    display: flex;
+}
+.member_avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-right: 10px;
+    border: var(--border);
+    flex: 1;
+
+}
+.member_details {
+    flex: 2;
+}
+.view_data .button {
+    background: #ff898926 !important;
+    font-size: 12px !important;
+    padding: 6px 20px !important;
+    line-height: normal !important;
+    height: auto !important;
+}
+.view_data {
+    flex:1;
+    display: grid;
+    place-items: center;
+    align-items: center;
+    vertical-align: middle;
+}
+.member_avatar img {
+    width: 100%;
+}
+.member_full_name {
+    display: flex;
+}
+.member_full_name p {
+    color: var(--heading-color);
+    font-size:18px;
+    font-weight: 600;
+    opacity: .8;
+    margin-bottom: 5px;
+} 
+.member_relations p, .member_age p{
+    color: var(--heading-color);
+    font-size:15px;
+    font-weight: 500;
+    opacity: .8;
+    margin-bottom: 5px;
+}
+.view_data {
+    display:grid;
+    float: right;
+}
+.button_list button span svg {
+width: .8em;
+height: .8em;
+}
+.button_list button  {
+    padding: 5px !important;
+    }
+.user_profile img {
+    width: 50px;
+    height: 50px;
+    border: 2px solid #efefee;
+    border-radius: 50%;
+}

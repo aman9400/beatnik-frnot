@@ -1,0 +1,18 @@
+.dashboard_data {
+    width: 100%;
+    display: flex;
+    
+}
+.list_item {
+    position: relative;
+}
+.nav_link {
+    border-bottom: var(--border);
+    cursor: pointer;
+}
+.nav_link:hover {
+    background: #ffebeb;
+}
+.page_title{
+    margin: 0 !important;
+}
