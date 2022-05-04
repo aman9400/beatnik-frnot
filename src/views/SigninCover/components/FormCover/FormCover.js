@@ -19,14 +19,17 @@ const FormCover = () => {
                   <div className={styles.login_mode}>
                     <Button className={styles.google_mode}>
                       <img
-                        src="https://icon-library.com/images/google-g-icon/google-g-icon-12.jpg"
+                        // src="https://icon-library.com/images/google-g-icon/google-g-icon-12.jpg"
+                        src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-suite-everything-you-need-know-about-google-newest-0.png"
                         alt="Google Mode Of Login "
                       />
                     </Button>
                     <Button className={styles.facebook_mode}>
                       <img
-                        src="https://icon-library.com/images/google-g-icon/google-g-icon-12.jpg"
+                        // src="https://icon-library.com/images/google-g-icon/google-g-icon-12.jpg"
+                        src="https://image.similarpng.com/very-thumbnail/2020/04/Facebook-logo-with-white-circle-PNG.png"
                         alt="Google Mode Of Facebook "
+                        style={{borderRadius: '50%'}}
                       />
                     </Button>
                   </div>

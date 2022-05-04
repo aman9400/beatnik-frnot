@@ -18,7 +18,7 @@ const Minimal = ({ themeMode, children, className }) => {
 
   return (
     <div className={clsx(classes.root, className)}>
-      <Topbar  />
+      <Topbar />
       <Divider />
       <main className={classes.content}>{children}</main>
     </div>

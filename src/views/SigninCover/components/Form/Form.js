@@ -2,8 +2,14 @@ import React, { useState } from 'react';
 import styles from './../../../SigninCover/SigninCover.module.css';
 import Link from 'next/link';
 import { Button } from '@material-ui/core';
+import { useRouter } from 'next/router';
+
 
 const Form = () => {
+
+  const router = useRouter();
+
+
   const [email, setEmail] = useState();
   const [passsword, setPasssword] = useState();
   const [message, setMessage] = useState();
@@ -13,6 +19,10 @@ const Form = () => {
     'ci_session=49fe10b4cceee7e74b43eb3c532e8afda6658230',
   );
   const UserLogin = async e => {
+    /* Temperory redirection to dashboard for now! just add line 22 to 25 after successfully login! */
+    return router.push({
+      pathname: '/dashboard',
+    })
     var formdata = new FormData();
     formdata.append('email', email);
     formdata.append('passsword', passsword);
@@ -80,15 +90,15 @@ const Form = () => {
             </Link>
           </div>
         </div>
-     
-       
+
+
         <Button
           fullWidth
           variant="contained"
           color="primary"
           className={styles.w_btn}
           onClick={UserLogin}
-          
+
         >
           <span></span> Log In
         </Button>
