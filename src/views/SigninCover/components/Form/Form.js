@@ -20,9 +20,9 @@ const Form = () => {
   );
   const UserLogin = async e => {
     /* Temperory redirection to dashboard for now! just add line 22 to 25 after successfully login! */
-    return router.push({
-      pathname: '/dashboard',
-    })
+    // return router.push({
+    //   pathname: '/dashboard',
+    // })
     var formdata = new FormData();
     formdata.append('email', email);
     formdata.append('passsword', passsword);
@@ -40,6 +40,10 @@ const Form = () => {
       )
         .then(response => response.json())
       setMessage(res.result.message);
+      return router.push({
+          pathname: '/dashboard',
+        })
+      
     } catch (err) {
       console.log(err);
     }
