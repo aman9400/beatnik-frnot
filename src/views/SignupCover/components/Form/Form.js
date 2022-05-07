@@ -59,8 +59,14 @@ const Form = () => {
         requestOptions,
       ).then(response => response.json());
       setMessage(res.result.message);
+      return router.push({
+        pathname: '/dashboard',
+      })
     } catch (err) {
       console.log(err);
+      return router.push({
+        pathname: '/dashboard',
+      })
     }
   };
   return (
